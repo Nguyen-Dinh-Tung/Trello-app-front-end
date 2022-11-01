@@ -1,3 +1,4 @@
+
 module.exports = {
   content: ["./src/**/*.{js,jsx,ts,tsx}"],
   theme: {
@@ -13,5 +14,5 @@ module.exports = {
       center: true,
     },
   },
-  plugins: [require("daisyui")],
+  plugins: [],
 };
