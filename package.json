@@ -8,7 +8,7 @@
     "@testing-library/react": "^13.4.0",
     "@testing-library/user-event": "^13.5.0",
     "axios": "^1.1.2",
-    "daisyui": "^2.33.0",
+    "daisyui": "^2.37.0",
     "dotenv": "^16.0.3",
     "firebase": "^9.12.1",
     "formik": "^2.2.9",
@@ -32,7 +32,9 @@
     "start": "react-scripts start",
     "build": "react-scripts build",
     "test": "react-scripts test",
-    "eject": "react-scripts eject"
+    "eject": "react-scripts eject",
+    "dev": "set PORT=3001 && react-scripts start",
+    "dev-linux": "export PORT=3001 && react-scripts start"
   },
   "eslintConfig": {
     "extends": [
@@ -51,5 +53,8 @@
       "last 1 firefox version",
       "last 1 safari version"
     ]
+  },
+  "devDependencies": {
+    "tailwindcss": "^3.2.1"
   }
 }
