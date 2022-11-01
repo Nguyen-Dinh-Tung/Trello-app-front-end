@@ -8,7 +8,7 @@
   padding: 2px;
   background-color: #026aa7;
 }
-a:hover {
+.a1:hover {
   background-color: #3588b9;
 }
 .btn1 {
@@ -66,8 +66,9 @@ li:hover > button svg {
     color: #dcdfe4;
     margin: 15px 30px;
 }
-.button-create{
-    background-color: #172b4d;
+.button-create:hover{
+    background-color: #3588b9;
+    
 }
 
 
