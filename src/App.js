@@ -1,16 +1,16 @@
-import Navbar from './page/navbar/Navbar';
-
+import Navbar from "./page/navbar/Navbar";
 import { Route, Routes } from "react-router-dom";
-import { Login } from "./page/home/Home";
-import Sidebar from './page/sidebar/Sidebar';
+import Sidebar from "./page/sidebar/Sidebar";
+import { Login } from "./page/home/login/Login";
 
 function App() {
   return (
     <div>
-      <Sidebar/>
-      <Navbar/>
       <Routes>
         <Route path="/login" element={<Login />} />
+        <Route path="/" element={<Navbar />}>
+          <Route path="/home" element={<Sidebar />} />
+        </Route>
       </Routes>
     </div>
   );
