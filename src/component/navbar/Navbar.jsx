@@ -48,17 +48,21 @@ export default function Navbar() {
                   </svg>
                 </span>
               </button>
-              
+
               <ul
                 className=" border rounded-sm transform scale-0 group-hover:scale-100 absolute 
   transition duration-150 ease-in-out origin-top min-w-32 w-80 mt-4"
               >
-                <li className="li1 color-text-li text-center justify-center bg-inherit hover:bg-inherit ">Các không gian làm việc</li>
-                <hr className="hr-navbar" ></hr>
+                <li className="li1 color-text-li text-center justify-center bg-inherit hover:bg-inherit ">
+                  Các không gian làm việc
+                </li>
+                <hr className="hr-navbar"></hr>
                 <li className="li1 rounded-sm px-3 py-1 hover:bg-gray-100">
                   ...
                 </li>
-                <li className="li1 rounded-sm px-3 py-1 hover:bg-gray-100">...</li>
+                <li className="li1 rounded-sm px-3 py-1 hover:bg-gray-100">
+                  ...
+                </li>
               </ul>
             </div>
             <div className="group inline-block ">
@@ -75,17 +79,21 @@ export default function Navbar() {
                   </svg>
                 </span>
               </button>
-              
+
               <ul
                 className="bg-white border rounded-sm transform scale-0 group-hover:scale-100 absolute 
   transition duration-150 ease-in-out origin-top min-w-32 w-80 mt-4"
               >
-                <li className="li1 color-text-li text-center justify-center bg-inherit hover:bg-inherit ">Gần đây</li>
-                <hr className="hr-navbar" ></hr>
+                <li className="li1 color-text-li text-center justify-center bg-inherit hover:bg-inherit ">
+                  Gần đây
+                </li>
+                <hr className="hr-navbar"></hr>
                 <li className="li1 rounded-sm px-3 py-1 hover:bg-gray-100">
                   ...
                 </li>
-                <li className="li1 rounded-sm px-3 py-1 hover:bg-gray-100">...</li>
+                <li className="li1 rounded-sm px-3 py-1 hover:bg-gray-100">
+                  ...
+                </li>
               </ul>
             </div>
             <div className="group inline-block ">
@@ -102,12 +110,14 @@ export default function Navbar() {
                   </svg>
                 </span>
               </button>
-              
-              <ul 
+
+              <ul
                 className="bg-white border rounded-sm transform scale-0 group-hover:scale-100 absolute 
   transition duration-150 ease-in-out origin-top min-w-32 w-80 mt-4"
               >
-                <li className="li1 color-text-li text-center justify-center bg-inherit hover:bg-inherit ">Đã đánh dấu sao</li>
+                <li className="li1 color-text-li text-center justify-center bg-inherit hover:bg-inherit ">
+                  Đã đánh dấu sao
+                </li>
                 <hr className="hr-navbar"></hr>
                 <li className="li1 rounded-sm px-3 py-1 hover:bg-gray-100">
                   ...
@@ -117,23 +127,24 @@ export default function Navbar() {
             </div>
             <div className="group inline-block ">
               <button className="button-create flex items-center bg-sky-800 rounded p-1 ml-2 px-2">
-              Tạo mới
+                Tạo mới
               </button>
-              
-              <ul 
+
+              <ul
                 className="bg-white border rounded-sm transform scale-0 group-hover:scale-100 absolute 
   transition duration-150 ease-in-out origin-top min-w-32 w-80 mt-4"
               >
-                <li className="li1 color-text-li text-center justify-center bg-inherit hover:bg-inherit ">Tạo mới</li>
+                <li className="li1 color-text-li text-center justify-center bg-inherit hover:bg-inherit ">
+                  Tạo mới
+                </li>
                 <hr className="hr-navbar"></hr>
                 <li className="li1 rounded-sm px-3 py-1 hover:bg-gray-100">
                   Tạo bảng
                 </li>
               </ul>
             </div>
-            
           </div>
-          
+
           {/* This is an example component */}
           <div className="relative mx-auto text-gray-600 lg:block hidden">
             <input
@@ -148,7 +159,6 @@ export default function Navbar() {
                 xmlns="http://www.w3.org/2000/svg"
                 version="1.1"
                 id="Capa_1"
-                
                 viewBox="0 0 56.966 56.966"
                 style={{ enableBackground: "new 0 0 56.966 56.966" }}
                 xmlSpace="preserve"
