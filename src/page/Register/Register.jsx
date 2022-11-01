@@ -117,7 +117,6 @@ export default function Register() {
 
                     <div className="flex w-full px-6 py-4 my-2 rounded-xl shadow-md font-semibold text-md bg-yellow-50 text-red-700">
                       <span className="h-6 w-6 mr-4">
-
                         <svg
                           xmlns="http://www.w3.org/2000/svg"
                           fill="none"
