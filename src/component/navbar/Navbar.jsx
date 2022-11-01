@@ -36,7 +36,7 @@ export default function Navbar() {
           <div className="text-md flex-row lg:flex-grow">
             <div className="group inline-block ">
               <button className="btn1 rounded-sm flex items-center min-w-32">
-                <span className="pr-1 font-semibold flex-1 ">Các không gian làm việc</span>
+                <span className="pr-1  flex-1 ">Các không gian làm việc</span>
                 <span>
                   <svg
                     className="fill-current h-4 w-4 transform group-hover:-rotate-180
