@@ -4,7 +4,7 @@ import "./navbar.css";
 export default function Navbar() {
   return (
     <div>
-      <nav className="navbar flex items-center justify-between justify-center flex-wrap  py-2 lg:px-2 shadow text-white  border-blue-700 text-white-700">
+      <nav className="navbar flex items-center justify-between justify-center flex-wrap py-0.5 lg:px-2 shadow text-white  border-blue-700 text-white-700">
         <button className="btn1">
           <span
             role="img"
@@ -30,16 +30,14 @@ export default function Navbar() {
         </button>
         <div className="flex justify-between lg:w-auto w-full lg:border-b-0 ml-2 text-center justify-center  border-solid border-b-2 border-gray-300  lg:pb-0">
           <div className="flex items-center flex-shrink-0 text-gray-800 ">
-            <span className="font-semibold text-xl tracking-tight">Trello</span>
+            <span className=" font-bold text-xl tracking-tight">Trello</span>
           </div>
         </div>
         <div className="menu w-full lg:block flex-grow lg:flex lg:items-center lg:w-auto">
-          <div className="text-md font-bold flex-row lg:flex-grow">
+          <div className="text-md flex-row lg:flex-grow">
             <div className="group inline-block ">
               <button className="btn1 rounded-sm flex items-center min-w-32">
-                <span className="pr-1 font-semibold flex-1 ">
-                  Các không gian làm việc
-                </span>
+                <span className="pr-1  flex-1 ">Các không gian làm việc</span>
                 <span>
                   <svg
                     className="fill-current h-4 w-4 transform group-hover:-rotate-180
@@ -70,7 +68,7 @@ export default function Navbar() {
             </div>
             <div className="group inline-block ">
               <button className="btn1 rounded-sm flex items-center min-w-32">
-                <span className="pr-1 font-semibold flex-1 ">Gần đây</span>
+                <span className="pr-1  flex-1 ">Gần đây</span>
                 <span>
                   <svg
                     className="fill-current h-4 w-4 transform group-hover:-rotate-180
@@ -101,9 +99,7 @@ export default function Navbar() {
             </div>
             <div className="group inline-block ">
               <button className="btn1 rounded-sm flex items-center min-w-32">
-                <span className="pr-1 font-semibold flex-1 ">
-                  Đã đánh dấu sao
-                </span>
+                <span className="pr-1  flex-1 ">Đã đánh dấu sao</span>
                 <span>
                   <svg
                     className="fill-current h-4 w-4 transform group-hover:-rotate-180
@@ -131,7 +127,7 @@ export default function Navbar() {
               </ul>
             </div>
             <div className="group inline-block ">
-              <button className="btn1 flex items-center button-create">
+              <button className="button-create flex items-center bg-sky-800 rounded p-1 ml-2 px-2">
                 Tạo mới
               </button>
 
@@ -153,19 +149,17 @@ export default function Navbar() {
           {/* This is an example component */}
           <div className="relative mx-auto text-gray-600 lg:block hidden">
             <input
-              className="border-2 border-gray-300 bg-white h-10 pl-2 pr-8 rounded-lg text-sm focus:outline-none"
+              className="border-2 border-gray-300 bg-white h-8 pl-2 pr-8 rounded-lg text-sm focus:outline-none"
               type="search"
               name="search"
               placeholder="Search"
             />
             <button type="submit" className="absolute right-0 top-0 mt-3 mr-2">
               <svg
-                className="text-gray-600 h-4 w-4 "
+                className="text-gray-600 h-4 w-4"
                 xmlns="http://www.w3.org/2000/svg"
                 version="1.1"
                 id="Capa_1"
-                x="0px"
-                y="0px"
                 viewBox="0 0 56.966 56.966"
                 style={{ enableBackground: "new 0 0 56.966 56.966" }}
                 xmlSpace="preserve"
@@ -178,16 +172,16 @@ export default function Navbar() {
           </div>
           <div className="flex">
             <a
-              href="/register"
-              className="block text-md px-4 py-2 rounded  ml-2 font-bold hover:text-white mt-4 lg:mt-0 "
+              href="#"
+              className="block text-md px-4 py-2 rounded  ml-2 hover:text-white mt-4 lg:mt-0 "
             >
-              Đăng ký
+              Sign in
             </a>
             <a
-              href="/login"
-              className=" block text-md px-4  ml-2 py-2 rounded font-bold hover:text-white mt-4 lg:mt-0"
+              href="#"
+              className=" block text-md px-4  ml-2 py-2 rounded hover:text-white mt-4 lg:mt-0"
             >
-              Đăng nhập
+              login
             </a>
           </div>
         </div>
