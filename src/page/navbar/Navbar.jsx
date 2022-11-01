@@ -35,7 +35,9 @@ export default function Navbar() {
         <div className="menu w-full lg:block flex-grow lg:flex lg:items-center lg:w-auto">
           <div className="text-md font-bold flex-row lg:flex-grow">
             <div className="group inline-block ">
+
               <button className="btn1 rounded-sm flex items-center min-w-32">
+
                 <span className="pr-1 font-semibold flex-1 ">Các không gian làm việc</span>
                 <span>
                   <svg
@@ -53,6 +55,7 @@ export default function Navbar() {
                 className=" border rounded-sm transform scale-0 group-hover:scale-100 absolute 
   transition duration-150 ease-in-out origin-top min-w-32 w-80 mt-4"
               >
+
                 <li className="li1 color-text-li text-center justify-center bg-inherit hover:bg-inherit ">Các không gian làm việc</li>
                 <hr className="hr-navbar" ></hr>
                 <li className="li1 rounded-sm px-3 py-1 hover:bg-gray-100">
@@ -63,6 +66,7 @@ export default function Navbar() {
             </div>
             <div className="group inline-block ">
               <button className="btn1 rounded-sm flex items-center min-w-32">
+
                 <span className="pr-1 font-semibold flex-1 ">Gần đây</span>
                 <span>
                   <svg
@@ -80,6 +84,7 @@ export default function Navbar() {
                 className="bg-white border rounded-sm transform scale-0 group-hover:scale-100 absolute 
   transition duration-150 ease-in-out origin-top min-w-32 w-80 mt-4"
               >
+
                 <li className="li1 color-text-li text-center justify-center bg-inherit hover:bg-inherit ">Gần đây</li>
                 <hr className="hr-navbar" ></hr>
                 <li className="li1 rounded-sm px-3 py-1 hover:bg-gray-100">
@@ -90,6 +95,7 @@ export default function Navbar() {
             </div>
             <div className="group inline-block ">
               <button className="btn1 rounded-sm flex items-center min-w-32">
+
                 <span className="pr-1 font-semibold flex-1 ">Đã đánh dấu sao</span>
                 <span>
                   <svg
@@ -107,16 +113,20 @@ export default function Navbar() {
                 className="bg-white border rounded-sm transform scale-0 group-hover:scale-100 absolute 
   transition duration-150 ease-in-out origin-top min-w-32 w-80 mt-4"
               >
+
                 <li className="li1 color-text-li text-center justify-center bg-inherit hover:bg-inherit ">Đã đánh dấu sao</li>
                 <hr className="hr-navbar"></hr>
                 <li className="li1 rounded-sm px-3 py-1 hover:bg-gray-100">
+
                   ...
                 </li>
                 <li className="rounded-sm px-3 py-1 hover:bg-gray-100">...</li>
               </ul>
             </div>
             <div className="group inline-block ">
+
               <button className="btn1 flex items-center button-create">
+
               Tạo mới
               </button>
               
@@ -124,11 +134,13 @@ export default function Navbar() {
                 className="bg-white border rounded-sm transform scale-0 group-hover:scale-100 absolute 
   transition duration-150 ease-in-out origin-top min-w-32 w-80 mt-4"
               >
+
                 <li className="li1 color-text-li text-center justify-center bg-inherit hover:bg-inherit ">Tạo mới</li>
                 <hr className="hr-navbar"></hr>
                 <li className="li1 rounded-sm px-3 py-1 hover:bg-gray-100">
                   Tạo bảng
                 </li>
+
               </ul>
             </div>
             
