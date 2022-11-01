@@ -1,3 +1,4 @@
+import { Outlet } from "react-router-dom";
 import "./navbar.css";
 
 export default function Navbar() {
@@ -35,10 +36,10 @@ export default function Navbar() {
         <div className="menu w-full lg:block flex-grow lg:flex lg:items-center lg:w-auto">
           <div className="text-md font-bold flex-row lg:flex-grow">
             <div className="group inline-block ">
-
               <button className="btn1 rounded-sm flex items-center min-w-32">
-
-                <span className="pr-1 font-semibold flex-1 ">Các không gian làm việc</span>
+                <span className="pr-1 font-semibold flex-1 ">
+                  Các không gian làm việc
+                </span>
                 <span>
                   <svg
                     className="fill-current h-4 w-4 transform group-hover:-rotate-180
@@ -50,23 +51,25 @@ export default function Navbar() {
                   </svg>
                 </span>
               </button>
-              
+
               <ul
                 className=" border rounded-sm transform scale-0 group-hover:scale-100 absolute 
   transition duration-150 ease-in-out origin-top min-w-32 w-80 mt-4"
               >
-
-                <li className="li1 color-text-li text-center justify-center bg-inherit hover:bg-inherit ">Các không gian làm việc</li>
-                <hr className="hr-navbar" ></hr>
+                <li className="li1 color-text-li text-center justify-center bg-inherit hover:bg-inherit ">
+                  Các không gian làm việc
+                </li>
+                <hr className="hr-navbar"></hr>
                 <li className="li1 rounded-sm px-3 py-1 hover:bg-gray-100">
                   ...
                 </li>
-                <li className="li1 rounded-sm px-3 py-1 hover:bg-gray-100">...</li>
+                <li className="li1 rounded-sm px-3 py-1 hover:bg-gray-100">
+                  ...
+                </li>
               </ul>
             </div>
             <div className="group inline-block ">
               <button className="btn1 rounded-sm flex items-center min-w-32">
-
                 <span className="pr-1 font-semibold flex-1 ">Gần đây</span>
                 <span>
                   <svg
@@ -79,24 +82,28 @@ export default function Navbar() {
                   </svg>
                 </span>
               </button>
-              
+
               <ul
                 className="bg-white border rounded-sm transform scale-0 group-hover:scale-100 absolute 
   transition duration-150 ease-in-out origin-top min-w-32 w-80 mt-4"
               >
-
-                <li className="li1 color-text-li text-center justify-center bg-inherit hover:bg-inherit ">Gần đây</li>
-                <hr className="hr-navbar" ></hr>
+                <li className="li1 color-text-li text-center justify-center bg-inherit hover:bg-inherit ">
+                  Gần đây
+                </li>
+                <hr className="hr-navbar"></hr>
                 <li className="li1 rounded-sm px-3 py-1 hover:bg-gray-100">
                   ...
                 </li>
-                <li className="li1 rounded-sm px-3 py-1 hover:bg-gray-100">...</li>
+                <li className="li1 rounded-sm px-3 py-1 hover:bg-gray-100">
+                  ...
+                </li>
               </ul>
             </div>
             <div className="group inline-block ">
               <button className="btn1 rounded-sm flex items-center min-w-32">
-
-                <span className="pr-1 font-semibold flex-1 ">Đã đánh dấu sao</span>
+                <span className="pr-1 font-semibold flex-1 ">
+                  Đã đánh dấu sao
+                </span>
                 <span>
                   <svg
                     className="fill-current h-4 w-4 transform group-hover:-rotate-180
@@ -108,44 +115,41 @@ export default function Navbar() {
                   </svg>
                 </span>
               </button>
-              
-              <ul 
+
+              <ul
                 className="bg-white border rounded-sm transform scale-0 group-hover:scale-100 absolute 
   transition duration-150 ease-in-out origin-top min-w-32 w-80 mt-4"
               >
-
-                <li className="li1 color-text-li text-center justify-center bg-inherit hover:bg-inherit ">Đã đánh dấu sao</li>
+                <li className="li1 color-text-li text-center justify-center bg-inherit hover:bg-inherit ">
+                  Đã đánh dấu sao
+                </li>
                 <hr className="hr-navbar"></hr>
                 <li className="li1 rounded-sm px-3 py-1 hover:bg-gray-100">
-
                   ...
                 </li>
                 <li className="rounded-sm px-3 py-1 hover:bg-gray-100">...</li>
               </ul>
             </div>
             <div className="group inline-block ">
-
               <button className="btn1 flex items-center button-create">
-
-              Tạo mới
+                Tạo mới
               </button>
-              
-              <ul 
+
+              <ul
                 className="bg-white border rounded-sm transform scale-0 group-hover:scale-100 absolute 
   transition duration-150 ease-in-out origin-top min-w-32 w-80 mt-4"
               >
-
-                <li className="li1 color-text-li text-center justify-center bg-inherit hover:bg-inherit ">Tạo mới</li>
+                <li className="li1 color-text-li text-center justify-center bg-inherit hover:bg-inherit ">
+                  Tạo mới
+                </li>
                 <hr className="hr-navbar"></hr>
                 <li className="li1 rounded-sm px-3 py-1 hover:bg-gray-100">
                   Tạo bảng
                 </li>
-
               </ul>
             </div>
-            
           </div>
-          
+
           {/* This is an example component */}
           <div className="relative mx-auto text-gray-600 lg:block hidden">
             <input
@@ -174,20 +178,21 @@ export default function Navbar() {
           </div>
           <div className="flex">
             <a
-              href="#"
+              href="/register"
               className="block text-md px-4 py-2 rounded  ml-2 font-bold hover:text-white mt-4 lg:mt-0 "
             >
-              Sign in
+              Đăng ký
             </a>
             <a
-              href="#"
+              href="/login"
               className=" block text-md px-4  ml-2 py-2 rounded font-bold hover:text-white mt-4 lg:mt-0"
             >
-              login
+              Đăng nhập
             </a>
           </div>
         </div>
       </nav>
+      <Outlet></Outlet>
     </div>
   );
 }
