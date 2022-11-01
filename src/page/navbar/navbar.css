@@ -3,7 +3,7 @@
   color: aliceblue;
 }
 
-a {
+.a1 {
   border-radius: 5px;
   padding: 2px;
   background-color: #026aa7;
@@ -11,13 +11,14 @@ a {
 a:hover {
   background-color: #3588b9;
 }
-button {
+.btn1 {
   border-radius: 5px;
-  padding: 2px;
+  padding: 5px 12px;
   background-color: #026aa7;
   margin-left: 5px;
+  font-style: normal;
 }
-button:hover {
+.btn1:hover {
   background-color: #3588b9;
 }
 
@@ -52,7 +53,7 @@ li:hover > button svg {
 .min-w-32 {
   min-width: 8rem;
 }
-li{
+.li1{
     color: rgb(41 37 36);
 }
 
@@ -61,13 +62,12 @@ li{
     margin-top: 10px;
     
 }
-hr{
+.hr-navbar{
     color: #dcdfe4;
     margin: 15px 30px;
 }
 .button-create{
     background-color: #172b4d;
-    padding: 3px;
 }
 
 
