@@ -1,8 +1,8 @@
-import Navbar from "./page/navbar/Navbar";
+import Navbar from "./components/navbar/Navbar";
 import { Route, Routes } from "react-router-dom";
 import Register from "./page/Register/Register";
-import Sidebar from "./page/sidebar/Sidebar";
-import { Login } from "./page/home/login/Login";
+import Sidebar from "./components/sidebar/Sidebar";
+import { Login } from "./page/login/Login";
 
 
 function App() {
