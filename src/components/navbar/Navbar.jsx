@@ -13,6 +13,7 @@ export default function Navbar() {
   return (
     <div>
     <Modals/>
+
       <nav className="navbar flex items-center justify-between justify-center flex-wrap  py-2 lg:px-2 shadow text-white  border-blue-700 text-white-700">
         <button className="btn1">
           <span
@@ -62,7 +63,9 @@ export default function Navbar() {
               </button>
 
               <ul
+
                 className=" border rounded-sm transform scale-0 group-hover:scale-100 absolute
+
   transition duration-150 ease-in-out origin-top min-w-32 w-80 mt-4"
               >
                 <li className="li1 color-text-li text-center justify-center bg-inherit hover:bg-inherit ">
@@ -93,7 +96,9 @@ export default function Navbar() {
               </button>
 
               <ul
+
                 className="bg-white border rounded-sm transform scale-0 group-hover:scale-100 absolute
+
   transition duration-150 ease-in-out origin-top min-w-32 w-80 mt-4"
               >
                 <li className="li1 color-text-li text-center justify-center bg-inherit hover:bg-inherit ">
@@ -126,7 +131,9 @@ export default function Navbar() {
               </button>
 
               <ul
+
                 className="bg-white border rounded-sm transform scale-0 group-hover:scale-100 absolute
+
   transition duration-150 ease-in-out origin-top min-w-32 w-80 mt-4"
               >
                 <li className="li1 color-text-li text-center justify-center bg-inherit hover:bg-inherit ">
@@ -139,13 +146,17 @@ export default function Navbar() {
                 <li className="rounded-sm px-3 py-1 hover:bg-gray-100">...</li>
               </ul>
             </div>
+
             <div className="group inline-block " >
               <button className="btn1 flex items-center button-create" onClick={handleCreateBroad} >
+
                 Tạo mới
               </button>
 
               <ul
+
                 className="bg-white border rounded-sm transform scale-0 group-hover:scale-100 absolute
+
   transition duration-150 ease-in-out origin-top min-w-32 w-80 mt-4"
               >
                 <li className="li1 color-text-li text-center justify-center bg-inherit hover:bg-inherit ">
