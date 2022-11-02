@@ -99,7 +99,7 @@ export default function Sidebar() {
                 </svg>
               </li>
               <li>
-                <a
+                <div
                   href="#"
                   className=" relative flex items-center h-11 focus:outline-none hover:bg-stone-300 text-gray-600 pr-6"
                 >
@@ -123,7 +123,7 @@ export default function Sidebar() {
                     Dự án...
                     {/* <BiChevronDown size={20} /> */}
                   </span>
-                </a>
+                </div>
                 <ul className="bg-red mr-96 text-stone-200 display-on">
                   <li>
                     <a>
