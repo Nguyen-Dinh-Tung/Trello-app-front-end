@@ -15,6 +15,7 @@ export const Login = () => {
   const navigate = useNavigate();
   const [passwordType, setPasswordType] = useState("password");
   const [errorsMessage, setErrorsMessage] = useState("");
+  const [dataGoogle, setDataGoogle] = useState();
 
   const handleShowPass = () => {
     if (passwordType === "password") {
@@ -25,6 +26,9 @@ export const Login = () => {
   };
   const login = async (data) => {
     return await axios.post("http://localhost:8080/login", data);
+  };
+  const sendDataGGApi = async (data) => {
+    return await axios.post("http://localhost:8080/google", data);
   };
   const loginGoogle = useGoogleLogin({
     onSuccess: async (respose) => {
@@ -38,7 +42,18 @@ export const Login = () => {
           }
         );
 
-        console.log(res.data);
+        sendDataGGApi(res.data)
+          .then((res) => {
+            let data = res.data.message;
+            if (data === "Đăng nhập thành công !") {
+              localStorage.setItem("token", res.data.data.token);
+              localStorage.setItem("refreshToken", res.data.data.refreshToken);
+              navigate("/home");
+            }
+          })
+          .catch((e) => {
+            console.log(e);
+          });
       } catch (err) {
         console.log(err);
       }
