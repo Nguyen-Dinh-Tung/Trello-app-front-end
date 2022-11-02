@@ -15,7 +15,6 @@ function App() {
         <Routes>
           <Route path="/register" element={<Register />} />
           <Route path="/login" element={<Login />} />
-
           <Route path="/user" element={<Home />} />
           <Route path="/" element={<Navbar />}>
             <Route path="/home" element={<Sidebar />} />
