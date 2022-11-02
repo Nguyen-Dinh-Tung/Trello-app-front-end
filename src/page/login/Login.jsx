@@ -4,6 +4,7 @@ import * as Yup from "yup";
 import Swal from "sweetalert2";
 import { Link, useNavigate } from "react-router-dom";
 import { Formik, Form, Field, ErrorMessage } from "formik";
+import { useGoogleLogin } from "@react-oauth/google";
 
 const LoginSchema = Yup.object().shape({
   email: Yup.string().email("Invalid email").required("Required"),
@@ -11,6 +12,7 @@ const LoginSchema = Yup.object().shape({
 });
 
 export const Login = () => {
+  const navigate = useNavigate();
   const [passwordType, setPasswordType] = useState("password");
   const [errorsMessage, setErrorsMessage] = useState("");
 
@@ -24,6 +26,24 @@ export const Login = () => {
   const login = async (data) => {
     return await axios.post("http://localhost:8080/login", data);
   };
+  const loginGoogle = useGoogleLogin({
+    onSuccess: async (respose) => {
+      try {
+        const res = await axios.get(
+          "https://www.googleapis.com/oauth2/v3/userinfo",
+          {
+            headers: {
+              Authorization: `Bearer ${respose.access_token}`,
+            },
+          }
+        );
+
+        console.log(res.data);
+      } catch (err) {
+        console.log(err);
+      }
+    },
+  });
 
   return (
     <>
@@ -46,7 +66,7 @@ export const Login = () => {
           </div>
           <div className="flex flex-row justify-center items-center space-x-3">
             <span className="w-11 h-11 items-center justify-center inline-flex rounded-full font-bold text-lg  text-white  bg-emerald-600 hover:shadow-lg cursor-pointer transition ease-in duration-300">
-              <a>
+              <a onClick={loginGoogle}>
                 {" "}
                 <i className="fa-brands fa-google fa-2xl"></i>
               </a>
@@ -72,10 +92,6 @@ export const Login = () => {
               login(data)
                 .then((res) => {
                   let data = res.data.message;
-                  console.log(
-                    "🚀 ~ file: Login.jsx ~ line 75 ~ .then ~ data",
-                    data
-                  );
                   if (data === "Đăng nhập thất bại! Vui lòng thử lại !") {
                     setErrorsMessage(data);
                   } else if (data === "Sai mật khẩu ! Vui lòng thử lại !") {
@@ -87,15 +103,19 @@ export const Login = () => {
                     setErrorsMessage(data);
                   } else {
                     console.log(res.data.data);
-                    let token = JSON.stringify(res.data.data);
+                    let token = JSON.stringify(res.data.data.token);
+                    let refreshToken = JSON.stringify(
+                      res.data.data.refreshToken
+                    );
                     localStorage.setItem("token", token);
+                    localStorage.setItem("refreshToken", refreshToken);
                     Swal.fire("Đăng nhập thành công !").then((result) => {
-                      // navigate("/home");
+                      navigate("/user");
                     });
                   }
                 })
                 .catch((e) => {
-                  setErrorsMessage(e.response.data.message);
+                  // setErrorsMessage(e.response.data.message);
                 });
             }}
           >
@@ -110,23 +130,38 @@ export const Login = () => {
                 <input type="hidden" name="remember" defaultValue="true" />
                 <div className="relative">
                   {errorsMessage ? (
-                    <div className="alert alert-error shadow-lg">
-                      <div>
+                    <div className="flex w-full px-6 py-4 my-2 rounded-xl shadow-md font-semibold text-md bg-white text-red-700">
+                      <span className="h-6 w-6 mr-4">
                         <svg
                           xmlns="http://www.w3.org/2000/svg"
-                          className="stroke-current flex-shrink-0 h-6 w-6"
                           fill="none"
                           viewBox="0 0 24 24"
+                          stroke="currentColor"
                         >
                           <path
                             strokeLinecap="round"
                             strokeLinejoin="round"
-                            strokeWidth="2"
-                            d="M10 14l2-2m0 0l2-2m-2 2l-2-2m2 2l2 2m7-2a9 9 0 11-18 0 9 9 0 0118 0z"
+                            strokeWidth={2}
+                            d="M15 17h5l-1.405-1.405A2.032 2.032 0 0118 14.158V11a6.002 6.002 0 00-4-5.659V5a2 2 0 10-4 0v.341C7.67 6.165 6 8.388 6 11v3.159c0 .538-.214 1.055-.595 1.436L4 17h5m6 0v1a3 3 0 11-6 0v-1m6 0H9"
                           />
                         </svg>
-                        <span>{errorsMessage}</span>
-                      </div>
+                      </span>
+                      {errorsMessage}
+                      <button className="h-6 w-6 ml-auto">
+                        <svg
+                          xmlns="http://www.w3.org/2000/svg"
+                          fill="none"
+                          viewBox="0 0 24 24"
+                          stroke="currentColor"
+                        >
+                          <path
+                            strokeLinecap="round"
+                            strokeLinejoin="round"
+                            strokeWidth={2}
+                            d="M6 18L18 6M6 6l12 12"
+                          />
+                        </svg>
+                      </button>
                     </div>
                   ) : null}
                   <div className="absolute right-0 mt-4">
@@ -163,18 +198,20 @@ export const Login = () => {
                   <label className="text-sm font-bold text-gray-700 tracking-wide">
                     Password
                   </label>
-                  <div className="grid grid-cols-2">
-                    <input
-                      className="w-full content-center text-base py-2 border-b text-black border-gray-300 focus:outline-none focus:border-indigo-500"
-                      type={passwordType}
-                      name="password"
-                      onChange={handleChange}
-                      placeholder="Enter your password"
-                    />
+                  <div className="grid grid-cols-12">
+                    <div className="col-span-11">
+                      <input
+                        className="w-full content-center text-base py-2 border-b text-black border-gray-300 focus:outline-none focus:border-indigo-500"
+                        type={passwordType}
+                        name="password"
+                        onChange={handleChange}
+                        placeholder="Enter your password"
+                      />
+                    </div>
 
-                    <a onClick={handleShowPass}>
+                    <div onClick={handleShowPass} className="col-span-1">
                       <i className="fa-solid fa-eye"></i>
-                    </a>
+                    </div>
                   </div>
                   {errors.password && touched.password ? (
                     <div style={{ color: "red" }}>{errors.password}</div>
