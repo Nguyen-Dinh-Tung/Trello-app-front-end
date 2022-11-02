@@ -196,15 +196,15 @@ export default function Navbar() {
           <div className="flex">
             <a
               href="#"
-              className="block text-md px-4 py-2 rounded  ml-2 hover:text-white mt-4 lg:mt-0 "
+              className="block text-md px-2 py-2 rounded  ml-2 hover:text-white mt-4 lg:mt-0 "
             >
-              Sign in
+              Đăng ký
             </a>
             <a
               href="#"
-              className=" block text-md px-4  ml-2 py-2 rounded hover:text-white mt-4 lg:mt-0"
+              className=" block text-md px-2  ml-2 py-2 rounded hover:text-white mt-4 lg:mt-0"
             >
-              login
+              Đăng nhập
             </a>
           </div>
         </div>
