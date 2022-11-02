@@ -1,7 +1,9 @@
+import { BiChevronDown } from "react-icons/bi";
+
 export default function Sidebar() {
   return (
-    <div class="flex flex-cols gap-12 justify-center mt-8">
-      <div className="flex flex-col ">
+    <div class="flex flex-cols gap-12 justify-center mt-8 ">
+      <div className="flex flex-col">
         <div className=" top-14 left-0 md:w-64 bg-white-900 h-full text-white transition-all duration-300 border-none z-10 sidebar">
           <div className="divide-stone-300">
             <ul className="text-stone-900 ">
@@ -75,8 +77,8 @@ export default function Sidebar() {
             <hr className="mt-5"></hr>
           </div>
 
-          <div className="overflow-y-auto overflow-x-hidden flex flex-col justify-between flex-grow">
-            <ul className="flex flex-col py-4 space-y-1 ">
+          <div className="overflow-y-auto overflow-x-hidden flex flex-col justify-between ">
+            <ul className="flex flex-col py-4 space-y-1 h-72">
               <li className="text-slate-500 mb-2 text-xs flex items-start">
                 <span className="pr-8 pl-1">Các không gian công việc</span>
                 <svg
@@ -96,9 +98,9 @@ export default function Sidebar() {
                 </svg>
               </li>
               <li>
-                <a
+                <div
                   href="#"
-                  className="a1 relative flex flex-row items-center h-11 focus:outline-none hover:bg-gray-800  text-white-600 hover:text-white-800 border-l-4 border-transparent hover:border-blue-500 dark:hover:border-gray-800 pr-6"
+                  className=" relative flex flex-row items-center h-11 focus:outline-none  text-gray-600  pr-6"
                 >
                   <span className="inline-flex justify-center items-center ml-4">
                     <svg
@@ -116,16 +118,18 @@ export default function Sidebar() {
                       />
                     </svg>
                   </span>
-                  <span className="ml-2 text-sm tracking-wide truncate">
-                    Trang chủ
-                  </span>
-                </a>
+                  <div className="ml-2 text-sm tracking-wide truncate flex gap-28 ">
+                  Dự án...
+                  <BiChevronDown size={20} />
+                  </div>
+                  <ul >
+                    <li>Bảng</li>
+                    <li>Thành viên</li>
+                    <li>Cài đặt</li>
+                  </ul>
+                </div>
               </li>
-              <li></li>
             </ul>
-            <p className="mb-14 px-5 py-3 hidden md:block text-center text-xs">
-              Copyright @2022
-            </p>
           </div>
         </div>
       </div>
@@ -213,10 +217,10 @@ export default function Sidebar() {
             <a
               href="#"
               class="block p-2 text-left max-w-sm bg-white rounded-lg border border-gray-200 shadow-md hover:bg-gray-100 dark:bg-gray-800 dark:border-gray-700 dark:hover:bg-gray-700"
-              style={{height:150+'px',width:300+'px'}}
+              style={{ height: 150 + "px", width: 300 + "px" }}
             >
               <span class="text-left text-2xl font-bold tracking-tight text-gray-900 dark:text-white">
-               Trello
+                Trello
               </span>
             </a>
           </div>
@@ -224,17 +228,14 @@ export default function Sidebar() {
             <a
               href="#"
               class="block text-center justify-center max-w-sm bg-white rounded-lg border border-gray-200 shadow-md hover:bg-gray-100 dark:bg-gray-800 dark:border-gray-700 dark:hover:bg-gray-700"
-              style={{height:150+'px',width:300+'px'}}
+              style={{ height: 150 + "px", width: 300 + "px" }}
             >
               <div className="flex flex-col">
                 <span class="text-center text-base tracking-tight text-gray-600 dark:text-white">
-               Tạo bảng mới 
-              </span>
-              <span className="text-xs text-gray-600  ">
-                5 còn lại
-              </span>
+                  Tạo bảng mới
+                </span>
+                <span className="text-xs text-gray-600  ">5 còn lại</span>
               </div>
-              
             </a>
           </div>
         </div>
