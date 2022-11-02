@@ -1,4 +1,5 @@
 import Navbar from "./components/navbar/Navbar";
+
 import { Route, Routes } from "react-router-dom";
 import Register from "./page/Register/Register";
 import Sidebar from "./components/sidebar/Sidebar";
@@ -6,6 +7,7 @@ import { Login } from "./page/login/Login";
 import { Home } from "./page/home/Home";
 import axios from "axios";
 import { GoogleOAuthProvider } from "@react-oauth/google";
+
 
 function App() {
   return (
