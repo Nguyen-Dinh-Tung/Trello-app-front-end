@@ -30,7 +30,6 @@ instance.setToken = (token) => {
   window.localStorage.setItem("token", token);
 };
 
-
 instance.interceptors.response.use(
   (response) => {
     const err = response.data;
@@ -61,14 +60,28 @@ instance.interceptors.response.use(
 );
 
 export const Home = () => {
-  let token = JSON.parse(localStorage.getItem("token"));
-  let data = {
-    token: token,
-  };
-  testApi();
+  // useEffect(() => {
+  //   testApi();
+  // }, []);
 
-  const testApi = async (data) => {
-    return await instance.post("http://localhost:8080/user/test", data);
+  // const testApi = async () => {
+  //   try {
+  //     await getData().then((res) => {
+  //       console.log(res);
+  //     });
+  //   } catch (error) {}
+  // };
+  // useEffect(() => {
+  //   testApi();
+  // }, []);
+
+  const testApi = async () => {
+    let token = localStorage.getItem("token");
+    let data = {
+      token: token,
+    };
+    const response = await instance.post("/user/test", data);
+    console.log("response", response);
   };
   testApi();
 
