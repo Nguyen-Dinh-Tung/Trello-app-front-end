@@ -1,12 +1,23 @@
+import axios from "axios";
 import { Outlet } from "react-router-dom";
 import "./navbar.css";
-
+import Modals from '../Modals/Modals'
+import { useState } from 'react';
+import { useSelector } from 'react-redux';
+import { useDispatch } from 'react-redux';
+import { setShowModal } from "../../redux/features/showModal.slice";
 export default function Navbar() {
+
+  const dispatch = useDispatch()
+  const handleCreateBroad = () =>{
+    dispatch(setShowModal('block'))
+  }
   return (
     <div>
+    <Modals/>
       <nav className="navbar flex items-center justify-between justify-center flex-wrap  py-2 lg:px-2 shadow text-white  border-blue-700 text-white-700">
         <button className="btn1">
-          <span
+          <span 
             role="img"
             aria-label="ApplicationSwitcherIcon"
             className="css-snhnyn "
@@ -53,7 +64,7 @@ export default function Navbar() {
               </button>
 
               <ul
-                className=" border rounded-sm transform scale-0 group-hover:scale-100 absolute 
+                className=" border rounded-sm transform scale-0 group-hover:scale-100 absolute
   transition duration-150 ease-in-out origin-top min-w-32 w-80 mt-4"
               >
                 <li className="li1 color-text-li text-center justify-center bg-inherit hover:bg-inherit ">
@@ -84,7 +95,7 @@ export default function Navbar() {
               </button>
 
               <ul
-                className="bg-white border rounded-sm transform scale-0 group-hover:scale-100 absolute 
+                className="bg-white border rounded-sm transform scale-0 group-hover:scale-100 absolute
   transition duration-150 ease-in-out origin-top min-w-32 w-80 mt-4"
               >
                 <li className="li1 color-text-li text-center justify-center bg-inherit hover:bg-inherit ">
@@ -117,7 +128,7 @@ export default function Navbar() {
               </button>
 
               <ul
-                className="bg-white border rounded-sm transform scale-0 group-hover:scale-100 absolute 
+                className="bg-white border rounded-sm transform scale-0 group-hover:scale-100 absolute
   transition duration-150 ease-in-out origin-top min-w-32 w-80 mt-4"
               >
                 <li className="li1 color-text-li text-center justify-center bg-inherit hover:bg-inherit ">
@@ -131,12 +142,12 @@ export default function Navbar() {
               </ul>
             </div>
             <div className="group inline-block ">
-              <button className="btn1 flex items-center button-create">
+              <button className="btn1 flex items-center button-create"  onClick={handleCreateBroad}>
                 Tạo mới
               </button>
 
               <ul
-                className="bg-white border rounded-sm transform scale-0 group-hover:scale-100 absolute 
+                className="bg-white border rounded-sm transform scale-0 group-hover:scale-100 absolute
   transition duration-150 ease-in-out origin-top min-w-32 w-80 mt-4"
               >
                 <li className="li1 color-text-li text-center justify-center bg-inherit hover:bg-inherit ">
@@ -176,6 +187,7 @@ export default function Navbar() {
               </svg>
             </button>
           </div>
+          {/* login-logout */}
           <div className="flex">
             <a
               href="/register"

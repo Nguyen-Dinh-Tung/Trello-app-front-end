@@ -10,10 +10,9 @@
   padding: 2px;
   background-color: #026aa7;
 }
-a:hover {
+.a1:hover {
   background-color: #3588b9;
 }
-
 .btn1 {
   border-radius: 5px;
   padding: 5px 12px;
@@ -22,7 +21,6 @@ a:hover {
   font-style: normal;
 }
 .btn1:hover {
-
   background-color: #3588b9;
 }
 
@@ -57,9 +55,7 @@ li:hover > button svg {
 .min-w-32 {
   min-width: 8rem;
 }
-
 .li1{
-
     color: rgb(41 37 36);
 }
 
@@ -74,8 +70,8 @@ li:hover > button svg {
     color: #dcdfe4;
     margin: 15px 30px;
 }
-.button-create{
-    background-color: #172b4d;
+.button-create:hover{
+    background-color: #3588b9;
+    
 }
-
 
