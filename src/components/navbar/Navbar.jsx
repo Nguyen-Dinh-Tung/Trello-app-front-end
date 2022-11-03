@@ -1,4 +1,3 @@
-import axios from "axios";
 import { Outlet } from "react-router-dom";
 import "./navbar.css";
 import Modals from "../Modals/Modals";
@@ -20,7 +19,7 @@ export default function Navbar() {
     <Modals/>
       <nav className="navbar flex items-center justify-between justify-center flex-wrap  py-2 lg:px-2 shadow text-white  border-blue-700 text-white-700">
         <button className="btn1">
-          <span
+          <span 
             role="img"
             aria-label="ApplicationSwitcherIcon"
             className="css-snhnyn "
@@ -68,7 +67,6 @@ export default function Navbar() {
 
               <ul
                 className=" border rounded-sm transform scale-0 group-hover:scale-100 absolute
-
   transition duration-150 ease-in-out origin-top min-w-32 w-80 mt-4"
               >
                 <li className="li1 color-text-li text-center justify-center bg-inherit hover:bg-inherit ">
@@ -100,7 +98,6 @@ export default function Navbar() {
 
               <ul
                 className="bg-white border rounded-sm transform scale-0 group-hover:scale-100 absolute
-
   transition duration-150 ease-in-out origin-top min-w-32 w-80 mt-4"
               >
                 <li className="li1 color-text-li text-center justify-center bg-inherit hover:bg-inherit ">
@@ -134,7 +131,6 @@ export default function Navbar() {
 
               <ul
                 className="bg-white border rounded-sm transform scale-0 group-hover:scale-100 absolute
-
   transition duration-150 ease-in-out origin-top min-w-32 w-80 mt-4"
               >
                 <li className="li1 color-text-li text-center justify-center bg-inherit hover:bg-inherit ">
@@ -155,7 +151,6 @@ export default function Navbar() {
 
               <ul
                 className="bg-white border rounded-sm transform scale-0 group-hover:scale-100 absolute
-
   transition duration-150 ease-in-out origin-top min-w-32 w-80 mt-4"
               >
                 <li className="li1 color-text-li text-center justify-center bg-inherit hover:bg-inherit ">
