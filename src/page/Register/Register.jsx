@@ -12,7 +12,7 @@ const registerSchema = Yup.object().shape({
   password: Yup.string().required("Required"),
   confirmpassword: Yup.string()
     .oneOf([Yup.ref("password")], "Password done not match !")
-    .required("Required !"),
+    .required("Required"),
 });
 
 export default function Register() {
@@ -96,10 +96,27 @@ export default function Register() {
                     Register
                   </div>
                   {errorsMessage ? (
+                    // <div className="alert alert-error shadow-lg">
+                    //   <div>
+                    //     <svg
+                    //       xmlns="http://www.w3.org/2000/svg"
+                    //       className="stroke-current flex-shrink-0 h-6 w-6"
+                    //       fill="none"
+                    //       viewBox="0 0 24 24"
+                    //     >
+                    //       <path
+                    //         strokeLinecap="round"
+                    //         strokeLinejoin="round"
+                    //         strokeWidth="2"
+                    //         d="M10 14l2-2m0 0l2-2m-2 2l-2-2m2 2l2 2m7-2a9 9 0 11-18 0 9 9 0 0118 0z"
+                    //       />
+                    //     </svg>
+                    //     <span>{errorsMessage}</span>
+                    //   </div>
+                    // </div>
 
                     <div className="flex w-full px-6 py-4 my-2 rounded-xl shadow-md font-semibold text-md bg-yellow-50 text-red-700">
                       <span className="h-6 w-6 mr-4">
-
                         <svg
                           xmlns="http://www.w3.org/2000/svg"
                           fill="none"
@@ -110,7 +127,6 @@ export default function Register() {
                             strokeLinecap="round"
                             strokeLinejoin="round"
                             strokeWidth={2}
-
                             d="M15 17h5l-1.405-1.405A2.032 2.032 0 0118 14.158V11a6.002 6.002 0 00-4-5.659V5a2 2 0 10-4 0v.341C7.67 6.165 6 8.388 6 11v3.159c0 .538-.214 1.055-.595 1.436L4 17h5m6 0v1a3 3 0 11-6 0v-1m6 0H9"
                           />
                         </svg>
@@ -130,7 +146,6 @@ export default function Register() {
                             d="M6 18L18 6M6 6l12 12"
                           />
                         </svg>
-
                       </button>
                     </div>
                   ) : null}
