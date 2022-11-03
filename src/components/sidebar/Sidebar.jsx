@@ -1,5 +1,4 @@
 import { useState } from "react";
-import { BiChevronDown } from "react-icons/bi";
 
 export default function Sidebar() {
   const [onCreate, setOnCreate] = useState(true);

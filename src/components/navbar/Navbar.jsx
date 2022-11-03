@@ -17,11 +17,10 @@ export default function Navbar() {
 
   return (
     <div>
-      <Modals />
-
+    <Modals/>
       <nav className="navbar flex items-center justify-between justify-center flex-wrap  py-2 lg:px-2 shadow text-white  border-blue-700 text-white-700">
         <button className="btn1">
-          <span
+          <span 
             role="img"
             aria-label="ApplicationSwitcherIcon"
             className="css-snhnyn "
