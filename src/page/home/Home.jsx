@@ -1,5 +1,5 @@
 import axios from "axios";
-import React, { useEffect } from "react";
+import React, { useEffect, useState } from "react";
 import { getData } from "../../services/dataset";
 
 function getLocalRefreshToken() {
@@ -14,7 +14,7 @@ const instance = axios.create({
     "Content-Type": "application/json",
   },
   validateStatus: function (status) {
-    return (status >= 200 && status < 300) || status === 401;
+    return (status >= 200 && status < 300) || status === 401 || status === 403;
   },
 });
 const refreshToken = async () => {
@@ -42,7 +42,7 @@ instance.interceptors.response.use(
           const config = response.config;
           config.headers["x-access-token"] = token;
           config.baseURL = "http://localhost:8080/";
-          return instance(config);
+          return config;
         })
         .catch((e) => {
           console.log(e.message);
@@ -60,20 +60,11 @@ instance.interceptors.response.use(
 );
 
 export const Home = () => {
-  // useEffect(() => {
-  //   testApi();
-  // }, []);
-
-  // const testApi = async () => {
-  //   try {
-  //     await getData().then((res) => {
-  //       console.log(res);
-  //     });
-  //   } catch (error) {}
-  // };
-  // useEffect(() => {
-  //   testApi();
-  // }, []);
+  const [databaclk, setDatabaclk] = useState();
+  const [loading, setloading] = useState(true);
+  useEffect(() => {
+    testApi();
+  }, []);
 
   const testApi = async () => {
     let token = localStorage.getItem("token");
@@ -81,9 +72,23 @@ export const Home = () => {
       token: token,
     };
     const response = await instance.post("/user/test", data);
-    console.log("response", response);
+    // console.log("response", response);
+    setloading(false);
+    setDatabaclk(response.data.status);
   };
-  testApi();
 
-  return <div>Home</div>;
+  return (
+    <>
+      <div>Home</div>
+      {loading ? (
+        <div class="grid min-h-screen place-content-center">
+          <div class="flex items-center gap-2 text-gray-500">
+            <span class="h-6 w-6 block rounded-full border-4 border-t-blue-300 animate-spin"></span>
+            loading...
+          </div>
+        </div>
+      ) : null}
+      <div>{databaclk}</div>
+    </>
+  );
 };
