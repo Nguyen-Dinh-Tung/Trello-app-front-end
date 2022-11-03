@@ -1,3 +1,4 @@
+import axios from "axios";
 import { Outlet } from "react-router-dom";
 import "./navbar.css";
 import Modals from '../Modals/Modals'
@@ -16,7 +17,7 @@ export default function Navbar() {
     <Modals/>
       <nav className="navbar flex items-center justify-between justify-center flex-wrap  py-2 lg:px-2 shadow text-white  border-blue-700 text-white-700">
         <button className="btn1">
-          <span
+          <span 
             role="img"
             aria-label="ApplicationSwitcherIcon"
             className="css-snhnyn "
@@ -186,6 +187,7 @@ export default function Navbar() {
               </svg>
             </button>
           </div>
+          {/* login-logout */}
           <div className="flex">
             <a
               href="/register"
