@@ -122,7 +122,7 @@ export default function Sidebar() {
                   </span>
                   <span className="ml-2 text-sm tracking-wide  flex gap-28 ">
                     Dự án...
-                    <BiChevronDown size={20} />
+                    {/* <BiChevronDown size={20} /> */}
                   </span>
                 </a>
                 <ul className="bg-red mr-96 text-stone-200 display-on">
