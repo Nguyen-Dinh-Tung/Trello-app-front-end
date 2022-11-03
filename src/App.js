@@ -10,7 +10,6 @@ import UserInfo from "./components/UserInfo/UserInfo";
 import ChangePassword from "./components/ChangePassword/ChangePassword";
 
 
-
 function App() {
   return (
     <div>

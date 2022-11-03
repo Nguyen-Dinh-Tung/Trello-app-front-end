@@ -1,16 +1,7 @@
 import axios from "axios";
-import React from "react";
+import React, { useEffect } from "react";
+import { getData } from "../../services/dataset";
 
-// response parse
-
-//get token o localStorage
-function getLocalToken() {
-  const token = window.localStorage.getItem("token");
-  console.log("token >>>", token);
-  return token;
-}
-
-//get token o refreshToken
 function getLocalRefreshToken() {
   const token = window.localStorage.getItem("refreshToken");
   return JSON.parse(token);
@@ -21,6 +12,9 @@ const instance = axios.create({
   timeout: 300000,
   headers: {
     "Content-Type": "application/json",
+  },
+  validateStatus: function (status) {
+    return (status >= 200 && status < 300) || status === 401;
   },
 });
 const refreshToken = async () => {
@@ -52,15 +46,12 @@ instance.interceptors.response.use(
           return instance(config);
         })
         .catch((e) => {
-          console.log(2);
+          console.log(e.message);
         });
     }
-    // console.log(11);
     return response;
   },
   (error) => {
-    console.log("Error status");
-    //return Promise.reject(error)
     if (error.response) {
       return error;
     } else {
@@ -81,12 +72,5 @@ export const Home = () => {
   };
   testApi();
 
-  testApi(data)
-    .then((res) => {
-      console.log("🚀 ~ file: Home.jsx ~ line 75 ~ .then ~ res", res);
-    })
-    .catch((e) => {
-      //   console.log(e);
-    });
   return <div>Home</div>;
 };
