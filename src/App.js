@@ -7,7 +7,6 @@ import { Home } from "./page/home/Home";
 import axios from "axios";
 import { GoogleOAuthProvider } from "@react-oauth/google";
 
-
 function App() {
   return (
     <div>
