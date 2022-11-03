@@ -1,3 +1,4 @@
+import axios from "axios";
 import { Outlet } from "react-router-dom";
 import "./navbar.css";
 import Modals from "../Modals/Modals";
