@@ -1,7 +1,13 @@
+import axios from "axios";
 import { Outlet } from "react-router-dom";
 import "./navbar.css";
+import jwt_decode from "jwt-decode";
 
 export default function Navbar() {
+  const isLogin = localStorage.getItem('token')
+  const decode = jwt_decode(isLogin);
+  console.log(isLogin);
+  // console.log(decode);
   return (
     <div className="block h-screen">
       <nav className="navbar flex items-center justify-between justify-center flex-wrap py-0.5 lg:px-2 shadow text-white  border-blue-700 text-white-700">
@@ -170,15 +176,16 @@ export default function Navbar() {
               </svg>
             </button>
           </div>
+          {/* login-logout */}
           <div className="flex">
             <a
-              href="#"
+              href="/register"
               className="block text-md px-2 py-2 rounded  ml-2 hover:text-white mt-4 lg:mt-0 "
             >
               Đăng ký
             </a>
             <a
-              href="#"
+              href="/login"
               className=" block text-md px-2  ml-2 py-2 rounded hover:text-white mt-4 lg:mt-0"
             >
               Đăng nhập

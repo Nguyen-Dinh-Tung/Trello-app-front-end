@@ -1,6 +1,8 @@
+import { useState } from "react";
 import { BiChevronDown } from "react-icons/bi";
 
 export default function Sidebar() {
+  const [onCreate, setOnCreate] = useState(true);
   return (
     <div class="flex flex-cols gap-12 justify-center mt-8 ">
       <div className="flex flex-col">
@@ -78,7 +80,7 @@ export default function Sidebar() {
           </div>
 
           <div className="overflow-y-auto overflow-x-hidden flex flex-col justify-between ">
-            <ul className="flex flex-col py-4 space-y-1 h-72">
+            <ul className="flex flex-col py-4 space-y-1 w-80 h-96 ">
               <li className="text-slate-500 mb-2 text-xs flex items-start">
                 <span className="pr-8 pl-1">Các không gian công việc</span>
                 <svg
@@ -98,9 +100,9 @@ export default function Sidebar() {
                 </svg>
               </li>
               <li>
-                <div
+                <a
                   href="#"
-                  className=" relative flex flex-row items-center h-11 focus:outline-none  text-gray-600  pr-6"
+                  className=" relative flex items-center h-11 focus:outline-none hover:bg-stone-300 text-gray-600 pr-6"
                 >
                   <span className="inline-flex justify-center items-center ml-4">
                     <svg
@@ -118,16 +120,19 @@ export default function Sidebar() {
                       />
                     </svg>
                   </span>
-                  <div className="ml-2 text-sm tracking-wide truncate flex gap-28 ">
-                  Dự án...
-                  <BiChevronDown size={20} />
-                  </div>
-                  <ul >
-                    <li>Bảng</li>
-                    <li>Thành viên</li>
-                    <li>Cài đặt</li>
-                  </ul>
-                </div>
+                  <span className="ml-2 text-sm tracking-wide  flex gap-28 ">
+                    Dự án...
+                    <BiChevronDown size={20} />
+                  </span>
+                </a>
+                <ul className="bg-red mr-96 text-stone-200 display-on">
+                  <li>
+                    <a>
+                      <span >Bảng</span>
+                      <span></span>
+                    </a>
+                  </li>
+                </ul>
               </li>
             </ul>
           </div>
