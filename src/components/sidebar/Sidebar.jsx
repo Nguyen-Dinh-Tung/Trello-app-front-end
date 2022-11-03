@@ -1,4 +1,5 @@
 import { useState } from "react";
+import { BiChevronDown } from "react-icons/bi";
 
 export default function Sidebar() {
   const [onCreate, setOnCreate] = useState(true);
@@ -99,7 +100,7 @@ export default function Sidebar() {
                 </svg>
               </li>
               <li>
-                <div
+                <a
                   href="#"
                   className=" relative flex items-center h-11 focus:outline-none hover:bg-stone-300 text-gray-600 pr-6"
                 >
@@ -123,7 +124,7 @@ export default function Sidebar() {
                     Dự án...
                     {/* <BiChevronDown size={20} /> */}
                   </span>
-                </div>
+                </a>
                 <ul className="bg-red mr-96 text-stone-200 display-on">
                   <li>
                     <a>
