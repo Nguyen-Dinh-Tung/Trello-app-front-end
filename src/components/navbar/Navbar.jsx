@@ -6,15 +6,13 @@ import { useState } from "react";
 import { useSelector } from "react-redux";
 import { useDispatch } from "react-redux";
 import { setShowModal } from "../../redux/features/showModal.slice";
-import jwt_decode from "jwt-decode";
+import IsLogin from "./IsLogin";
 export default function Navbar() {
   const dispatch = useDispatch();
   const handleCreateBroad = () => {
     dispatch(setShowModal("block"));
   };
-  const isLogin = localStorage.getItem("token");
-  // const decode = jwt_decode(isLogin);
-
+ 
   return (
     <div>
     <Modals/>
@@ -49,11 +47,9 @@ export default function Navbar() {
         </div>
         <div className="menu w-full lg:block flex-grow lg:flex lg:items-center lg:w-auto">
           <div className="text-md font-bold flex-row lg:flex-grow">
-            <div className="group inline-block ">
+          <div className="group inline-block ">
               <button className="btn1 rounded-sm flex items-center min-w-32">
-                <span className="pr-1 font-semibold flex-1 ">
-                  Các không gian làm việc
-                </span>
+                <span className="pr-1 font-semibold flex-1 ">Các không gian việc làm</span>
                 <span>
                   <svg
                     className="fill-current h-4 w-4 transform group-hover:-rotate-180
@@ -67,12 +63,12 @@ export default function Navbar() {
               </button>
 
               <ul
-                className=" border rounded-sm transform scale-0 group-hover:scale-100 absolute
+                className="bg-white border rounded-sm transform scale-0 group-hover:scale-100 absolute
 
   transition duration-150 ease-in-out origin-top min-w-32 w-80 mt-4"
               >
                 <li className="li1 color-text-li text-center justify-center bg-inherit hover:bg-inherit ">
-                  Các không gian làm việc
+                  Các không gian việc làm
                 </li>
                 <hr className="hr-navbar"></hr>
                 <li className="li1 rounded-sm px-3 py-1 hover:bg-gray-100">
@@ -150,25 +146,12 @@ export default function Navbar() {
 
             <div className="group inline-block ">
               <button
-                className="btn1 flex items-center button-create"
+                className="btn1 flex items-center"
                 onClick={handleCreateBroad}
               >
                 Tạo mới
               </button>
 
-              <ul
-                className="bg-white border rounded-sm transform scale-0 group-hover:scale-100 absolute
-
-  transition duration-150 ease-in-out origin-top min-w-32 w-80 mt-4"
-              >
-                <li className="li1 color-text-li text-center justify-center bg-inherit hover:bg-inherit ">
-                  Tạo mới
-                </li>
-                <hr className="hr-navbar"></hr>
-                <li className="li1 rounded-sm px-3 py-1 hover:bg-gray-100">
-                  Tạo bảng
-                </li>
-              </ul>
             </div>
           </div>
 
@@ -199,43 +182,35 @@ export default function Navbar() {
             </button>
           </div>
           {/* login-logout */}
-          {/* {!isLogin && isLogin ? (
-            <div className="flex flex-row gap-2 ml-3 ">
-              {decode['name']}
-              <svg
-                xmlns="http://www.w3.org/2000/svg"
-                fill="none"
-                viewBox="0 0 24 24"
-                strokeWidth={1.5}
-                stroke="currentColor"
-                className="w-6 h-6 mr-2"
-              >
-                <path
-                  strokeLinecap="round"
-                  strokeLinejoin="round"
-                  d="M17.982 18.725A7.488 7.488 0 0012 15.75a7.488 7.488 0 00-5.982 2.975m11.963 0a9 9 0 10-11.963 0m11.963 0A8.966 8.966 0 0112 21a8.966 8.966 0 01-5.982-2.275M15 9.75a3 3 0 11-6 0 3 3 0 016 0z"
-                />
-              </svg>
-            
-            </div>
-          ) : ( */}
-            <div className="flex">
-              <a
-                href="/register"
-                className="block text-md px-4 py-2 rounded  ml-2 font-bold hover:text-white mt-4 lg:mt-0 "
-              >
-                Đăng ký
-              </a>
-              <a
-                href="/login"
-                className=" block text-md px-4  ml-2 py-2 rounded font-bold hover:text-white mt-4 lg:mt-0"
-              >
-                Đăng nhập
-              </a>
-            </div>
-          
+          <IsLogin/>
         </div>
       </nav>
+      <ul id="dropdown-user" className="fixed mt-2 w-60 bg-gray-50  rounded-lg" style={{marginLeft:1290+'px',color:'#e34687'}}>
+                  <li className="flex">
+                    <a
+                      href="#"
+                      className="flex w-full p-2 text-base font-normal text-gray-900 transition duration-75 rounded-lg group hover:bg-gray-100 dark:text-white dark:hover:bg-gray-700 pl-11 "
+                    >
+                      <span>
+                        <svg
+                          xmlns="http://www.w3.org/2000/svg"
+                          fill="none"
+                          viewBox="0 0 24 24"
+                          strokeWidth={1.5}
+                          stroke="currentColor"
+                          className="w-4 h-4 mt-1"
+                        >
+                          <path
+                            strokeLinecap="round"
+                            strokeLinejoin="round"
+                            d="M3 13.125C3 12.504 3.504 12 4.125 12h2.25c.621 0 1.125.504 1.125 1.125v6.75C7.5 20.496 6.996 21 6.375 21h-2.25A1.125 1.125 0 013 19.875v-6.75zM9.75 8.625c0-.621.504-1.125 1.125-1.125h2.25c.621 0 1.125.504 1.125 1.125v11.25c0 .621-.504 1.125-1.125 1.125h-2.25a1.125 1.125 0 01-1.125-1.125V8.625zM16.5 4.125c0-.621.504-1.125 1.125-1.125h2.25C20.496 3 21 3.504 21 4.125v15.75c0 .621-.504 1.125-1.125 1.125h-2.25a1.125 1.125 0 01-1.125-1.125V4.125z"
+                          />
+                        </svg>
+                      </span>
+                      <span className="ml-2">Bảng</span>
+                    </a>
+                  </li>
+                </ul>
       <Outlet></Outlet>
     </div>
   );

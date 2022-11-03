@@ -3,6 +3,7 @@
   "version": "0.1.0",
   "private": true,
   "dependencies": {
+    "@headlessui/react": "^1.7.4",
     "@material-tailwind/react": "^1.2.4",
     "@react-icons/all-files": "^4.1.0",
     "@react-oauth/google": "^0.4.0",
