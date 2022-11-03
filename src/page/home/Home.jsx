@@ -22,7 +22,7 @@ const refreshToken = async () => {
   let reftoken = {
     refreshToken: ref,
   };
-  return await axios.post("http://localhost:8080/token", reftoken);
+  return await instance.post("http://localhost:8080/token", reftoken);
 };
 
 instance.setToken = (token) => {
@@ -30,13 +30,14 @@ instance.setToken = (token) => {
   window.localStorage.setItem("token", token);
 };
 
+
 instance.interceptors.response.use(
   (response) => {
     const err = response.data;
     if (err.message == "Unauthorized access.") {
-      console.log(1);
       refreshToken()
         .then((rs) => {
+          console.log(rs);
           const { token } = rs.data;
           instance.setToken(token);
           const config = response.config;
@@ -71,9 +72,9 @@ export const Home = () => {
   //     });
   //   } catch (error) {}
   // };
-  useEffect(() => {
-    testApi();
-  }, []);
+  // useEffect(() => {
+  //   testApi();
+  // }, []);
 
   const testApi = async () => {
     let token = localStorage.getItem("token");
@@ -83,6 +84,7 @@ export const Home = () => {
     const response = await instance.post("/user/test", data);
     console.log("response", response);
   };
+  testApi();
 
   return <div>Home</div>;
 };
