@@ -1,23 +1,26 @@
 import axios from "axios";
 import { Outlet } from "react-router-dom";
 import "./navbar.css";
-import Modals from '../Modals/Modals'
-import { useState } from 'react';
-import { useSelector } from 'react-redux';
-import { useDispatch } from 'react-redux';
+import Modals from "../Modals/Modals";
+import { useState } from "react";
+import { useSelector } from "react-redux";
+import { useDispatch } from "react-redux";
 import { setShowModal } from "../../redux/features/showModal.slice";
+import jwt_decode from "jwt-decode";
 export default function Navbar() {
+  const dispatch = useDispatch();
+  const handleCreateBroad = () => {
+    dispatch(setShowModal("block"));
+  };
+  const isLogin = localStorage.getItem("token");
+  // const decode = jwt_decode(isLogin);
 
-  const dispatch = useDispatch()
-  const handleCreateBroad = () =>{
-    dispatch(setShowModal('block'))
-  }
   return (
     <div>
     <Modals/>
       <nav className="navbar flex items-center justify-between justify-center flex-wrap  py-2 lg:px-2 shadow text-white  border-blue-700 text-white-700">
         <button className="btn1">
-          <span 
+          <span
             role="img"
             aria-label="ApplicationSwitcherIcon"
             className="css-snhnyn "
@@ -64,7 +67,6 @@ export default function Navbar() {
               </button>
 
               <ul
-
                 className=" border rounded-sm transform scale-0 group-hover:scale-100 absolute
 
   transition duration-150 ease-in-out origin-top min-w-32 w-80 mt-4"
@@ -97,7 +99,6 @@ export default function Navbar() {
               </button>
 
               <ul
-
                 className="bg-white border rounded-sm transform scale-0 group-hover:scale-100 absolute
 
   transition duration-150 ease-in-out origin-top min-w-32 w-80 mt-4"
@@ -132,7 +133,6 @@ export default function Navbar() {
               </button>
 
               <ul
-
                 className="bg-white border rounded-sm transform scale-0 group-hover:scale-100 absolute
 
   transition duration-150 ease-in-out origin-top min-w-32 w-80 mt-4"
@@ -154,7 +154,6 @@ export default function Navbar() {
               </button>
 
               <ul
-
                 className="bg-white border rounded-sm transform scale-0 group-hover:scale-100 absolute
 
   transition duration-150 ease-in-out origin-top min-w-32 w-80 mt-4"
@@ -197,20 +196,41 @@ export default function Navbar() {
             </button>
           </div>
           {/* login-logout */}
-          <div className="flex">
-            <a
-              href="/register"
-              className="block text-md px-4 py-2 rounded  ml-2 font-bold hover:text-white mt-4 lg:mt-0 "
-            >
-              Đăng ký
-            </a>
-            <a
-              href="/login"
-              className=" block text-md px-4  ml-2 py-2 rounded font-bold hover:text-white mt-4 lg:mt-0"
-            >
-              Đăng nhập
-            </a>
-          </div>
+          {/* {!isLogin && isLogin ? (
+            <div className="flex flex-row gap-2 ml-3 ">
+              {decode['name']}
+              <svg
+                xmlns="http://www.w3.org/2000/svg"
+                fill="none"
+                viewBox="0 0 24 24"
+                strokeWidth={1.5}
+                stroke="currentColor"
+                className="w-6 h-6 mr-2"
+              >
+                <path
+                  strokeLinecap="round"
+                  strokeLinejoin="round"
+                  d="M17.982 18.725A7.488 7.488 0 0012 15.75a7.488 7.488 0 00-5.982 2.975m11.963 0a9 9 0 10-11.963 0m11.963 0A8.966 8.966 0 0112 21a8.966 8.966 0 01-5.982-2.275M15 9.75a3 3 0 11-6 0 3 3 0 016 0z"
+                />
+              </svg>
+            
+            </div>
+          ) : ( */}
+            <div className="flex">
+              <a
+                href="/register"
+                className="block text-md px-4 py-2 rounded  ml-2 font-bold hover:text-white mt-4 lg:mt-0 "
+              >
+                Đăng ký
+              </a>
+              <a
+                href="/login"
+                className=" block text-md px-4  ml-2 py-2 rounded font-bold hover:text-white mt-4 lg:mt-0"
+              >
+                Đăng nhập
+              </a>
+            </div>
+          
         </div>
       </nav>
       <Outlet></Outlet>
