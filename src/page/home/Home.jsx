@@ -23,11 +23,13 @@ const instance = axios.create({
     "Content-Type": "application/json",
   },
 });
-function refreshToken() {
-  return instance.post("/token", {
-    refreshToken: getLocalRefreshToken(),
-  });
-}
+const refreshToken = async () => {
+  let ref = getLocalRefreshToken();
+  let reftoken = {
+    refreshToken: ref,
+  };
+  return await instance.post("http://localhost:8080/token", reftoken);
+};
 
 instance.setToken = (token) => {
   instance.defaults.headers["x-access-token"] = token;
@@ -37,14 +39,11 @@ instance.setToken = (token) => {
 
 instance.interceptors.response.use(
   (response) => {
-    const err = response.data.err;
-    // console.log("🚀 ~ file: Home.jsx ~ line 40 ~ err", err);
-    console.log("🚀 ~ file: Home.jsx ~ line 39 ~ response", err.name);
-    if (err.name == "TokenExpiredError") {
-      console.log(1);
-      return refreshToken()
+    const err = response.data;
+    if (err.message == "Unauthorized access.") {
+      refreshToken()
         .then((rs) => {
-          console.log("🚀 ~ file: Home.jsx ~ line 47 ~ .then ~ rs", rs);
+          console.log(rs);
           const { token } = rs.data;
           instance.setToken(token);
           const config = response.config;
@@ -75,6 +74,7 @@ export const Home = () => {
   let data = {
     token: token,
   };
+  testApi();
 
   const testApi = async (data) => {
     return await instance.post("http://localhost:8080/user/test", data);
