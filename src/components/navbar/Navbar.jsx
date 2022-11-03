@@ -195,13 +195,13 @@ export default function Navbar() {
           {/* login-logout */}
           <div className="flex">
             <a
-              href="#"
+              href="/register"
               className="block text-md px-2 py-2 rounded  ml-2 hover:text-white mt-4 lg:mt-0 "
             >
               Đăng ký
             </a>
             <a
-              href="#"
+              href="/login"
               className=" block text-md px-2  ml-2 py-2 rounded hover:text-white mt-4 lg:mt-0"
             >
               Đăng nhập
