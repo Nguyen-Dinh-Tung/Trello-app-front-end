@@ -49,7 +49,7 @@ export default function Navbar() {
           <div className="text-md font-bold flex-row lg:flex-grow">
           <div className="group inline-block ">
               <button className="btn1 rounded-sm flex items-center min-w-32">
-                <span className="pr-1 font-semibold flex-1 ">Các không gian việc làm</span>
+                <span className="pr-1 font-semibold flex-1 ">Các không gian làm việc</span>
                 <span>
                   <svg
                     className="fill-current h-4 w-4 transform group-hover:-rotate-180
@@ -63,11 +63,11 @@ export default function Navbar() {
               </button>
 
               <ul
-                className=" border rounded-sm transform scale-0 group-hover:scale-100 absolute
+                className="bg-white border rounded-sm transform scale-0 group-hover:scale-100 absolute
   transition duration-150 ease-in-out origin-top min-w-32 w-80 mt-4"
               >
                 <li className="li1 color-text-li text-center justify-center bg-inherit hover:bg-inherit ">
-                  Các không gian việc làm
+                Các không gian làm việc
                 </li>
                 <hr className="hr-navbar"></hr>
                 <li className="li1 rounded-sm px-3 py-1 hover:bg-gray-100">
