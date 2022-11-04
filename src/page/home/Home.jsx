@@ -1,90 +1,96 @@
-import axios from "axios";
-import React, { useEffect } from "react";
-import { getData } from "../../services/dataset";
+import React from 'react';
+import Broad from '../broad/Broad';
+import {DragDropContext, Draggable, Droppable} from "react-beautiful-dnd";
+import  {useState} from "react";
+const itemData = [
+  {
+    id: 0,
 
-function getLocalRefreshToken() {
-  const token = window.localStorage.getItem("refreshToken");
-  return JSON.parse(token);
+    title: "Breakfast",
+    author: "@bkristastucchio",
+  },
+  {
+    id: 1,
+
+    title: "Burger",
+    author: "@rollelflex_graphy726",
+  },
+  {
+    id: 2,
+
+    title: "Camera",
+    author: "@helloimnik",
+  },
+  {
+    id: 3,
+
+    title: "Coffee",
+    author: "@nolanissac",
+  },
+  {
+    id: 4,
+
+    title: "Hats",
+    author: "@hjrc33",
+  },
+];
+function Home(props) {
+  const [data, setData] = useState(itemData);
+   const handleDragEnd = (result) => {
+    if (!result.destination) return;
+    const items = Array.from(data);
+    const [reorderedItem] = items.splice(result.source.index, 1);
+    items.splice(result.destination.index, 0, reorderedItem);
+    console.log(items);
+    setData(items);
+  };
+  return (
+    <DragDropContext onDragEnd={handleDragEnd}>
+    <div >
+      <div style={{width: "100%", backgroundColor: "#ccc", }}>
+          <Droppable droppableId="list">
+            {(provided) => (
+              <div
+                {...provided.droppableProps}
+                ref={provided.innerRef}
+                style={{
+                  width: "400px",
+                  backgroundColor: "green",
+                  border: "1px solid #ccc",
+                  margin: "40px",
+                  display: "flex"
+                }}
+              >
+                {data &&
+                  data.map((item, index) => {
+                    return (
+                      <Draggable
+                        key={item.id}
+                        draggableId={item.id.toString()}
+                        index={index}
+                      >
+                        {(provided) => (
+                          <Broad
+                            ref={provided.innerRef}
+                            {...provided.draggableProps}
+                            {...provided.dragHandleProps}
+                            elevation={2}
+                            sx={{marginBottom: "10px"}}
+                          >
+                          </Broad>
+                        )}
+                      </Draggable>
+                    );
+                  })}
+                {provided.placeholder}
+              </div>
+            )}
+          </Droppable>
+      </div>
+    </div>
+    </DragDropContext>
+  );
 }
 
-const instance = axios.create({
-  baseURL: "http://localhost:8080/",
-  timeout: 300000,
-  headers: {
-    "Content-Type": "application/json",
-  },
-  validateStatus: function (status) {
-    return (status >= 200 && status < 300) || status === 401;
-  },
-});
-const refreshToken = async () => {
-  let ref = getLocalRefreshToken();
-  let reftoken = {
-    refreshToken: ref,
-  };
-  return await instance.post("http://localhost:8080/token", reftoken);
-};
 
-instance.setToken = (token) => {
-  instance.defaults.headers["x-access-token"] = token;
-  window.localStorage.setItem("token", token);
-};
-
-
-instance.interceptors.response.use(
-  (response) => {
-    const err = response.data;
-    if (err.message == "Unauthorized access.") {
-      refreshToken()
-        .then((rs) => {
-          console.log(rs);
-          const { token } = rs.data;
-          instance.setToken(token);
-          const config = response.config;
-          config.headers["x-access-token"] = token;
-          config.baseURL = "http://localhost:8080/";
-          return instance(config);
-        })
-        .catch((e) => {
-          console.log(e.message);
-        });
-    }
-    return response;
-  },
-  (error) => {
-    if (error.response) {
-      return error;
-    } else {
-      return Promise.reject(error);
-    }
-  }
-);
-
-export const Home = () => {
-  // useEffect(() => {
-  //   testApi();
-  // }, []);
-
-  // const testApi = async () => {
-  //   try {
-  //     await getData().then((res) => {
-  //       console.log(res);
-  //     });
-  //   } catch (error) {}
-  // };
-  // useEffect(() => {
-  //   testApi();
-  // }, []);
-
-  const testApi = async () => {
-    let token = localStorage.getItem("token");
-    let data = {
-      token: token,
-    };
-    const response = await instance.post("/user/test", data);
-    console.log("response", response);
-  };
-  testApi();
-
-  return <div>Home</div>;
-};
+export default Home;
