@@ -1,6 +1,5 @@
-import jwt_decode from "jwt-decode";
-import { Dialog } from "@headlessui/react";
 import { useState } from "react";
+import jwt_decode from "jwt-decode";
 
 export default function IsLogin() {
   const isLogin = localStorage.getItem("token");
@@ -11,27 +10,99 @@ export default function IsLogin() {
     str = decode.name;
     str.split(" ");
   }
-  console.log(str);
-  const [isOpen, setIsOpen] = useState(true);
+  const [open, setOpen] = useState(false);
 
   return (
     <>
       {isLogin ? (
-        <div>
-          <div className="flex flex-row gap-2 ml-3">
-            {/* <button className="rounded-full bg-sky-400 py-1.5 px-4 text-2xl">{str[0]}</button> */}
-            <button
-                  type="button"
-                  className="flex items-center w-full p-2 text-base font-normal text-gray-900 transition duration-75 rounded-lg group hover:bg-gray-100 dark:text-white dark:hover:bg-gray-700"
-                  aria-controls="dropdown-user"
-                  data-collapse-toggle="dropdown-user"
+        <div className="flex items-center relative">
+          <div>
+            <a
+              className="flex items-center hover:bg-sky-400  cursor-pointer hover:text-white bg-sky-300 rounded-full px-3 py-2 ml-2 text-lg"
+              href="#"
+              role="button"
+              data-bs-toggle="dropdown"
+              aria-expanded="false"
+            >
+              {str[0]}
+            </a>
+            <ul
+            style={{top : 131+'%',left :-283+'%'}}
+              className="
+        w-48
+   dropdown-menu
+   absolute
+   hidden
+   bg-white
+   text-base
+   list-none
+   shadow-lg
+   hidden
+   bg-clip-padding
+   border-none
+
+ "
+              aria-labelledby="dropdownMenuButton2"
+            >
+              <li className="hover:bg-stone-300" >
+                <a
+                  className="
+       dropdown-item
+       text-sm
+       font-normal
+       block
+       whitespace-nowrap
+       bg-transparent
+       text-gray-700
+       hover:bg-gray-100
+       text-center
+     "
+                  href="#"
                 >
-                {str[0]}
-                </button>
-                {/* <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#exampleModal" data-bs-whatever="@mdo">{str[0]}</button> */}
-          </div>
-         
+                 Tài khoản
+                </a>
+                <hr></hr>
+              </li>
+              <li  className="hover:bg-stone-300 ">
+                <a
+                  className="
+       dropdown-item
+       text-sm
       
+       font-normal
+       block
+       w-full
+       whitespace-nowrap
+       bg-transparent
+       text-gray-700
+       hover:bg-gray-100
+     "
+                  href="#"
+                >
+                  Hồ sơ tài khoản
+                </a>
+                <hr></hr>
+              </li>
+              <li  className="hover:bg-stone-300">
+                <a
+                  className="
+       dropdown-item
+       text-sm
+       font-normal
+       block
+       w-full
+       whitespace-nowrap
+       bg-transparent
+       text-gray-700
+       hover:bg-gray-100
+     "
+                  href="#"
+                >
+                  Đăng xuất khỏ trái đất
+                </a>
+              </li>
+            </ul>
+          </div>
         </div>
       ) : (
         <div className="flex">
