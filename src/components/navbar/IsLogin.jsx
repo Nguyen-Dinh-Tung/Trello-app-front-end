@@ -11,7 +11,10 @@ export default function IsLogin() {
     str.split(" ");
   }
   const [open, setOpen] = useState(false);
-
+  const handleLogout = () => {
+    localStorage.removeItem("token");
+    setOpen(false);
+  };
   return (
     <>
       {isLogin ? (
@@ -27,7 +30,7 @@ export default function IsLogin() {
               {str[0]}
             </a>
             <ul
-            style={{top : 131+'%',left :-283+'%'}}
+              style={{ top: 131 + "%", left: -283 + "%" }}
               className="
         w-48
    dropdown-menu
@@ -44,7 +47,7 @@ export default function IsLogin() {
  "
               aria-labelledby="dropdownMenuButton2"
             >
-              <li className="hover:bg-stone-300" >
+              <li className="hover:bg-stone-300">
                 <a
                   className="
        dropdown-item
@@ -59,11 +62,11 @@ export default function IsLogin() {
      "
                   href="#"
                 >
-                 Tài khoản
+                  Tài khoản
                 </a>
                 <hr></hr>
               </li>
-              <li  className="hover:bg-stone-300 ">
+              <li className="hover:bg-stone-300 ">
                 <a
                   className="
        dropdown-item
@@ -83,8 +86,9 @@ export default function IsLogin() {
                 </a>
                 <hr></hr>
               </li>
-              <li  className="hover:bg-stone-300">
+              <li className="hover:bg-stone-300">
                 <a
+                  onClick={()=>handleLogout()}
                   className="
        dropdown-item
        text-sm
@@ -96,9 +100,9 @@ export default function IsLogin() {
        text-gray-700
        hover:bg-gray-100
      "
-                  href="#"
+                  href="/home"
                 >
-                  Đăng xuất khỏ trái đất
+                  Đăng xuất khỏi trái đất
                 </a>
               </li>
             </ul>
@@ -108,13 +112,13 @@ export default function IsLogin() {
         <div className="flex">
           <a
             href="/register"
-            className="block text-md px-4 py-2 rounded  ml-2 font-bold hover:text-white mt-4 lg:mt-0 "
+            className="block text-md px-4 py-2 rounded  ml-2 font-bold hover:text-white lg:mt-0 "
           >
             Đăng ký
           </a>
           <a
             href="/login"
-            className=" block text-md px-4  ml-2 py-2 rounded font-bold hover:text-white mt-4 lg:mt-0"
+            className=" block text-md px-4  ml-2 py-2 rounded font-bold hover:text-white lg:mt-0"
           >
             Đăng nhập
           </a>
