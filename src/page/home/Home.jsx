@@ -91,6 +91,4 @@ function Home(props) {
     </DragDropContext>
   );
 }
-
-
 export default Home;
