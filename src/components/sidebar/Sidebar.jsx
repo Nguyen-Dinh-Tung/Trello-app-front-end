@@ -1,12 +1,11 @@
 import { useState } from "react";
 
 export default function Sidebar() {
-  const handleClick = () => {};
-
+  const [onCreate, setOnCreate] = useState(true);
   return (
-    <div className="flex flex-cols gap-12 justify-center mt-8 ">
+    <div class="flex flex-cols gap-12 justify-center mt-8 ">
       <div className="flex flex-col">
-        <div className=" top-14 left-0 md:w-64 bg-white-900 h-full text-white transition-all duration-300 border-none">
+        <div className=" top-14 left-0 md:w-64 bg-white-900 h-full text-white transition-all duration-300 border-none z-10 sidebar">
           <div className="divide-stone-300">
             <ul className="text-stone-900 ">
               <li className="flex-row rounded hover:bg-gray-200 mb-2">
@@ -79,8 +78,8 @@ export default function Sidebar() {
             <hr className="mt-5"></hr>
           </div>
 
-          <div className="overflow-y-auto overflow-x-hidden flex flex-col justify-between">
-            <ul className="flex flex-col py-4 space-y-1 h-96 ">
+          <div className="overflow-y-auto overflow-x-hidden flex flex-col justify-between ">
+            <ul className="flex flex-col py-4 space-y-1 w-80 h-96 ">
               <li className="text-slate-500 mb-2 text-xs flex items-start">
                 <span className="pr-8 pl-1">Các không gian công việc</span>
                 <svg
@@ -100,76 +99,39 @@ export default function Sidebar() {
                 </svg>
               </li>
               <li>
-                <button
-                  type="button"
-                  className="flex items-center w-full p-2 text-base font-normal text-gray-900 transition duration-75 rounded-lg group hover:bg-gray-100 dark:text-white dark:hover:bg-gray-700"
-                  aria-controls="dropdown-example"
-                  data-collapse-toggle="dropdown-example"
+                <a
+                  href="#"
+                  className=" relative flex items-center h-11 focus:outline-none hover:bg-stone-300 text-gray-600 pr-6"
                 >
-                  <svg
-                    xmlns="http://www.w3.org/2000/svg"
-                    fill="none"
-                    viewBox="0 0 24 24"
-                    strokeWidth={1.5}
-                    stroke="currentColor"
-                    className="w-5 h-5"
-                  >
-                    <path
-                      strokeLinecap="round"
-                      strokeLinejoin="round"
-                      d="M12 6.042A8.967 8.967 0 006 3.75c-1.052 0-2.062.18-3 .512v14.25A8.987 8.987 0 016 18c2.305 0 4.408.867 6 2.292m0-14.25a8.966 8.966 0 016-2.292c1.052 0 2.062.18 3 .512v14.25A8.987 8.987 0 0018 18a8.967 8.967 0 00-6 2.292m0-14.25v14.25"
-                    />
-                  </svg>
-
-                  <span
-                    className="flex-1 ml-3 text-left whitespace-nowrap"
-                    sidebar-toggle-item
-                  >
-                    Dự án...
-                  </span>
-                  <svg
-                    sidebar-toggle-item
-                    className="w-6 h-6"
-                    fill="currentColor"
-                    viewBox="0 0 20 20"
-                    xmlns="http://www.w3.org/2000/svg"
-                  >
-                    <path
-                      fill-rule="evenodd"
-                      d="M5.293 7.293a1 1 0 011.414 0L10 10.586l3.293-3.293a1 1 0 111.414 1.414l-4 4a1 1 0 01-1.414 0l-4-4a1 1 0 010-1.414z"
-                      clip-rule="evenodd"
-                    ></path>
-                  </svg>
-                </button>
-                <ul id="dropdown-example" className="hidden py-2 space-y-2">
-                  <li className="flex">
-                    <a
-                      href="#"
-                      className="flex w-full p-2 text-base font-normal text-gray-900 transition duration-75 rounded-lg group hover:bg-gray-100 dark:text-white dark:hover:bg-gray-700 pl-11 "
+                  <span className="inline-flex justify-center items-center ml-4">
+                    <svg
+                      className="w-5 h-5"
+                      fill="none"
+                      stroke="currentColor"
+                      viewBox="0 0 24 24"
+                      xmlns="http://www.w3.org/2000/svg"
                     >
-                      <span>
-                        <svg
-                          xmlns="http://www.w3.org/2000/svg"
-                          fill="none"
-                          viewBox="0 0 24 24"
-                          strokeWidth={1.5}
-                          stroke="currentColor"
-                          className="w-4 h-4 mt-1"
-                        >
-                          <path
-                            strokeLinecap="round"
-                            strokeLinejoin="round"
-                            d="M3 13.125C3 12.504 3.504 12 4.125 12h2.25c.621 0 1.125.504 1.125 1.125v6.75C7.5 20.496 6.996 21 6.375 21h-2.25A1.125 1.125 0 013 19.875v-6.75zM9.75 8.625c0-.621.504-1.125 1.125-1.125h2.25c.621 0 1.125.504 1.125 1.125v11.25c0 .621-.504 1.125-1.125 1.125h-2.25a1.125 1.125 0 01-1.125-1.125V8.625zM16.5 4.125c0-.621.504-1.125 1.125-1.125h2.25C20.496 3 21 3.504 21 4.125v15.75c0 .621-.504 1.125-1.125 1.125h-2.25a1.125 1.125 0 01-1.125-1.125V4.125z"
-                          />
-                        </svg>
-                      </span>
-                      <span className="ml-2">Bảng</span>
+                      <path
+                        strokeLinecap="round"
+                        strokeLinejoin="round"
+                        strokeWidth={2}
+                        d="M3 12l2-2m0 0l7-7 7 7M5 10v10a1 1 0 001 1h3m10-11l2 2m-2-2v10a1 1 0 01-1 1h-3m-6 0a1 1 0 001-1v-4a1 1 0 011-1h2a1 1 0 011 1v4a1 1 0 001 1m-6 0h6"
+                      />
+                    </svg>
+                  </span>
+                  <span className="ml-2 text-sm tracking-wide  flex gap-28 ">
+                    Dự án...
+                    {/* <BiChevronDown size={20} /> */}
+                  </span>
+                </a>
+                <ul className="bg-red mr-96 text-stone-200 display-on">
+                  <li>
+                    <a>
+                      <span >Bảng</span>
+                      <span></span>
                     </a>
                   </li>
                 </ul>
-              </li>
-              <li>
-                
               </li>
             </ul>
           </div>
@@ -179,7 +141,7 @@ export default function Sidebar() {
       {/* oulet */}
 
       <div className="pl-5 w-fit ">
-        <div className="text-slate-400 text-xl pb-5 ">
+        <div className="text-slate-400 text-xl pb-5">
           Các không gian làm việc của bạn
         </div>
         <div className="flex px-2">
@@ -258,10 +220,10 @@ export default function Sidebar() {
           <div>
             <a
               href="#"
-              className="block p-2 text-left max-w-sm bg-white rounded-lg border border-gray-200 shadow-md hover:bg-gray-100 dark:bg-gray-800 dark:border-gray-700 dark:hover:bg-gray-700"
+              class="block p-2 text-left max-w-sm bg-white rounded-lg border border-gray-200 shadow-md hover:bg-gray-100 dark:bg-gray-800 dark:border-gray-700 dark:hover:bg-gray-700"
               style={{ height: 150 + "px", width: 300 + "px" }}
             >
-              <span className="text-left text-2xl font-bold tracking-tight text-gray-900 dark:text-white">
+              <span class="text-left text-2xl font-bold tracking-tight text-gray-900 dark:text-white">
                 Trello
               </span>
             </a>
@@ -269,11 +231,11 @@ export default function Sidebar() {
           <div>
             <a
               href="#"
-              className="block text-center justify-center max-w-sm bg-white rounded-lg border border-gray-200 shadow-md hover:bg-gray-100 dark:bg-gray-800 dark:border-gray-700 dark:hover:bg-gray-700"
+              class="block text-center justify-center max-w-sm bg-white rounded-lg border border-gray-200 shadow-md hover:bg-gray-100 dark:bg-gray-800 dark:border-gray-700 dark:hover:bg-gray-700"
               style={{ height: 150 + "px", width: 300 + "px" }}
             >
-              <div className="flex flex-col mt-12">
-                <span className="text-center text-base tracking-tight text-gray-600 dark:text-white">
+              <div className="flex flex-col">
+                <span class="text-center text-base tracking-tight text-gray-600 dark:text-white">
                   Tạo bảng mới
                 </span>
                 <span className="text-xs text-gray-600  ">5 còn lại</span>
@@ -281,7 +243,6 @@ export default function Sidebar() {
             </a>
           </div>
         </div>
-        {/* <Content/> */}
       </div>
     </div>
   );
