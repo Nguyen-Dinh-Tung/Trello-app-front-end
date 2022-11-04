@@ -10,10 +10,9 @@
   padding: 2px;
   background-color: #026aa7;
 }
-a:hover {
+.a1:hover {
   background-color: #3588b9;
 }
-
 .btn1 {
   border-radius: 5px;
   padding: 5px 12px;
@@ -22,11 +21,10 @@ a:hover {
   font-style: normal;
 }
 .btn1:hover {
-
   background-color: #3588b9;
 }
 
-li > ul {
+/* li > ul {
   transform: translatex(100%) scale(0);
 }
 li:hover > ul {
@@ -37,7 +35,7 @@ li > button svg {
 }
 li:hover > button svg {
   transform: rotate(-270deg);
-}
+} */
 
 /* Below styles fake what can be achieved with the tailwind config
      you need to add the group-hover variant to scale and define your custom
@@ -57,9 +55,7 @@ li:hover > button svg {
 .min-w-32 {
   min-width: 8rem;
 }
-
 .li1{
-
     color: rgb(41 37 36);
 }
 
@@ -74,8 +70,46 @@ li:hover > button svg {
     color: #dcdfe4;
     margin: 15px 30px;
 }
-.button-create{
-    background-color: #172b4d;
+.button-create:hover{
+    background-color: #3588b9;
+    
+}
+.App {
+  text-align: center;
 }
 
+.App-logo {
+  height: 40vmin;
+  pointer-events: none;
+}
+
+@media (prefers-reduced-motion: no-preference) {
+  .App-logo {
+    animation: App-logo-spin infinite 20s linear;
+  }
+}
+
+.App-header {
+  background-color: #282c34;
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  font-size: calc(10px + 2vmin);
+  color: white;
+}
+
+.App-link {
+  color: #61dafb;
+}
+
+@keyframes App-logo-spin {
+  from {
+    transform: rotate(0deg);
+  }
+  to {
+    transform: rotate(360deg);
+  }
+}
 
