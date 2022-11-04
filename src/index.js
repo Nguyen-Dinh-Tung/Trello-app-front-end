@@ -6,7 +6,6 @@ import App from "./App";
 import axios from "axios";
 import store from "../src/redux/store";
 import {Provider} from "react-redux";
-import "./index.css"
 ReactDOM.render(
   <React.StrictMode>
     <Router>

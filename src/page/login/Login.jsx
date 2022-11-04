@@ -130,7 +130,7 @@ export const Login = () => {
                     localStorage.setItem("token", token);
                     localStorage.setItem("refreshToken", refreshToken);
                     Swal.fire("Đăng nhập thành công !").then((result) => {
-                      navigate("/home");
+                      navigate("/user");
                     });
                   }
                 })
