@@ -13,6 +13,7 @@ import Broad from "./page/broad/Broad";
 function App() {
   return (
     <div>
+
       <GoogleOAuthProvider clientId="911041045826-05asjep9lakm58r23ckriuusu8mv38mp.apps.googleusercontent.com">
         <Routes>
           <Route path="/register" element={<Register />} />
