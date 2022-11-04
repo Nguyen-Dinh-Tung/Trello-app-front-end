@@ -1,21 +1,21 @@
 import axios from "axios";
 import { Outlet } from "react-router-dom";
 import "./navbar.css";
-import Modals from '../Modals/Modals'
-import { useState } from 'react';
-import { useSelector } from 'react-redux';
-import { useDispatch } from 'react-redux';
+import Modals from "../Modals/Modals";
+import { useState } from "react";
+import { useSelector } from "react-redux";
+import { useDispatch } from "react-redux";
 import { setShowModal } from "../../redux/features/showModal.slice";
+import IsLogin from "./IsLogin";
 export default function Navbar() {
-
-  const dispatch = useDispatch()
-  const handleCreateBroad = () =>{
-    dispatch(setShowModal('block'))
-  }
+  const dispatch = useDispatch();
+  const handleCreateBroad = () => {
+    dispatch(setShowModal("block"));
+  };
+ 
   return (
     <div>
     <Modals/>
-
       <nav className="navbar flex items-center justify-between justify-center flex-wrap  py-2 lg:px-2 shadow text-white  border-blue-700 text-white-700">
         <button className="btn1">
           <span 
@@ -47,11 +47,9 @@ export default function Navbar() {
         </div>
         <div className="menu w-full lg:block flex-grow lg:flex lg:items-center lg:w-auto">
           <div className="text-md font-bold flex-row lg:flex-grow">
-            <div className="group inline-block ">
+          <div className="group inline-block ">
               <button className="btn1 rounded-sm flex items-center min-w-32">
-                <span className="pr-1 font-semibold flex-1 ">
-                  Các không gian làm việc
-                </span>
+                <span className="pr-1 font-semibold flex-1 ">Các không gian làm việc</span>
                 <span>
                   <svg
                     className="fill-current h-4 w-4 transform group-hover:-rotate-180
@@ -65,13 +63,11 @@ export default function Navbar() {
               </button>
 
               <ul
-
-                className=" border rounded-sm transform scale-0 group-hover:scale-100 absolute
-
+                className="bg-white border rounded-sm transform scale-0 group-hover:scale-100 absolute
   transition duration-150 ease-in-out origin-top min-w-32 w-80 mt-4"
               >
                 <li className="li1 color-text-li text-center justify-center bg-inherit hover:bg-inherit ">
-                  Các không gian làm việc
+                Các không gian làm việc
                 </li>
                 <hr className="hr-navbar"></hr>
                 <li className="li1 rounded-sm px-3 py-1 hover:bg-gray-100">
@@ -98,9 +94,7 @@ export default function Navbar() {
               </button>
 
               <ul
-
                 className="bg-white border rounded-sm transform scale-0 group-hover:scale-100 absolute
-
   transition duration-150 ease-in-out origin-top min-w-32 w-80 mt-4"
               >
                 <li className="li1 color-text-li text-center justify-center bg-inherit hover:bg-inherit ">
@@ -133,9 +127,7 @@ export default function Navbar() {
               </button>
 
               <ul
-
                 className="bg-white border rounded-sm transform scale-0 group-hover:scale-100 absolute
-
   transition duration-150 ease-in-out origin-top min-w-32 w-80 mt-4"
               >
                 <li className="li1 color-text-li text-center justify-center bg-inherit hover:bg-inherit ">
@@ -150,15 +142,12 @@ export default function Navbar() {
             </div>
 
             <div className="group inline-block ">
-              <button className="btn1 flex items-center button-create"  onClick={handleCreateBroad}>
-
+              <button className="btn1 flex items-center button-create"  >
                 Tạo mới
               </button>
 
               <ul
-
                 className="bg-white border rounded-sm transform scale-0 group-hover:scale-100 absolute
-
   transition duration-150 ease-in-out origin-top min-w-32 w-80 mt-4"
               >
                 <li className="li1 color-text-li text-center justify-center bg-inherit hover:bg-inherit ">
@@ -199,20 +188,7 @@ export default function Navbar() {
             </button>
           </div>
           {/* login-logout */}
-          <div className="flex">
-            <a
-              href="/register"
-              className="block text-md px-4 py-2 rounded  ml-2 font-bold hover:text-white mt-4 lg:mt-0 "
-            >
-              Đăng ký
-            </a>
-            <a
-              href="/login"
-              className=" block text-md px-4  ml-2 py-2 rounded font-bold hover:text-white mt-4 lg:mt-0"
-            >
-              Đăng nhập
-            </a>
-          </div>
+          <IsLogin/>
         </div>
       </nav>
       <Outlet></Outlet>
