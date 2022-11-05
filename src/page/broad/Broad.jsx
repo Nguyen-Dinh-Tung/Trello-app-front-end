@@ -12,8 +12,13 @@ import { useDispatch } from 'react-redux';
 import { setDataBroad } from '../../redux/features/broad.slice';
 import { Button } from '@mui/material';
 import Navbar from '../../components/navbar/Navbar';
+import { useLocation } from 'react-router';
+import getDataBroad from './../../api/getDataBroad';
 function Broad(props) {
-  let initial = useSelector(state => state.broad.data)
+  let initial = useSelector(state => state.broad.data) ;
+  const location = useLocation()
+  const dataByStore = useSelector(state => state.broad.data) ;
+  const idBroad = location.state.broad._id
   const dispatch = useDispatch()
   const [isTitleColumn , setIseTitleColumn] = useState(true) ;
   const [titleColumn , setTitleColumn] = useState() ;
@@ -25,20 +30,20 @@ function Broad(props) {
 
     if (result.type === "column") {
       const columnOrder = reorderList(
-        data.columnOrder,
+        dataByStore.columnOrder,
         result.source.index,
         result.destination.index
       );
-      setData({
-        ...data,
+      dispatch(setDataBroad({
+        ...dataByStore,
         columnOrder
-      });
+      }))
       return;
     }
 
     // reordering in same list
     if (result.source.droppableId === result.destination.droppableId) {
-      const column = data.columns[result.source.droppableId];
+      const column = dataByStore.columns[result.source.droppableId];
       const items = reorderList(
         column.items,
         result.source.index,
@@ -47,22 +52,22 @@ function Broad(props) {
 
       // updating column entry
       const newState = {
-        ...data,
+        ...dataByStore,
         columns: {
-          ...data.columns,
+          ...dataByStore.columns,
           [column.id]: {
             ...column,
             items
           }
         }
       };
-      setData(newState);
+      dispatch(setDataBroad(newState));
       return;
     }
 
     // moving between lists
-    const sourceColumn = data.columns[result.source.droppableId];
-    const destinationColumn = data.columns[result.destination.droppableId];
+    const sourceColumn = dataByStore.columns[result.source.droppableId];
+    const destinationColumn = dataByStore.columns[result.destination.droppableId];
     const item = sourceColumn.items[result.source.index];
 
     // 1. remove item from source column
@@ -81,14 +86,14 @@ function Broad(props) {
     newDestinationColumn.items.splice(result.destination.index, 0, item);
 
     const newState = {
-      ...data,
+      ...dataByStore,
       columns: {
         ...data.columns,
         [newSourceColumn.id]: newSourceColumn,
         [newDestinationColumn.id]: newDestinationColumn
       }
     };
-    setData(newState);
+    dispatch(setDataBroad(newState))
   }
   const handleShowCreateColumn = () =>{
     setIseTitleColumn(false)
@@ -101,18 +106,19 @@ function Broad(props) {
     setIseTitleColumn(true)
     if(titleColumn){
       const idColum = uuidv4() ;
-      dispatch(setDataBroad({
-        ...data ,
+      let newData = {
+        ...dataByStore ,
         columns :{
-          ...data.columns ,
+          ...dataByStore.columns ,
           [`${idColum}`] : {
             id : idColum ,
             title : titleColumn ,
             items : []
           }
         },
-        columnOrder : [...data.columnOrder , `${idColum}`]
-      }))
+        columnOrder : [...dataByStore.columnOrder , `${idColum}`]
+      }
+      dispatch(setDataBroad(newData))
       setTitleColumn('')
     }
   }
@@ -122,8 +128,20 @@ function Broad(props) {
   //   .catch(e => console.log(e.message))
   // },[data.columnOrder])
   useEffect(() =>{
-    setData({...initial})
-  }, [initial])
+    getDataBroad(idBroad)
+    .then(res => {
+      dispatch(setDataBroad(res.data.broad))
+    })
+    .catch(e => console.log(e.message))
+  }, [])
+  useEffect(() =>{
+    if(dataByStore && dataByStore.columnOrder.length > 0){
+      UpdateBroad(dataByStore)
+      .then(res => console.log(res))
+      .catch(e => console.log(e.message))
+    }
+
+  },[dataByStore])
   return (
       <DragDropContext onDragEnd={onDragEnd}>
     <Navbar></Navbar>
@@ -162,14 +180,14 @@ function Broad(props) {
               {...provided.droppableProps}
               ref={provided.innerRef}
               >
-                {data && data.columnOrder.map((column , index) =>(
+                {dataByStore && dataByStore.columns && dataByStore.columnOrder.map((column , index) =>(
                   <Column className="column"
                   key={column}
-                  column={data.columns[column]}
+                  column={dataByStore.columns[column]}
                   index={index}
                   />
-                ))}
-                   {provided.placeholder}
+                  ))}
+                  {provided.placeholder}
               </div>
             )}
           </Droppable>

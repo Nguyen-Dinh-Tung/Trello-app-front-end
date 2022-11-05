@@ -1,9 +1,10 @@
 import { useState } from "react";
 import MediaCard from "../Card/Card";
 import { useSelector } from 'react-redux';
-export default function Sidebar() {
+export default function Sidebar(props) {
+  const columnsOrder = props.columnsOrder
   const [onCreate, setOnCreate] = useState(true);
-  const data = useSelector(state => state.broad.data) ;
+  const data = useSelector(state => state.broad) ;
   return (
     <div class="flex flex-cols gap-12 justify-center mt-8 ">
       <div className="flex flex-col">
@@ -219,10 +220,9 @@ export default function Sidebar() {
           </div>
         </div>
         <div className="flex flex-row gap-4">
-          {data && data.map(broad =>{
+          {columnsOrder ? columnsOrder.map(broad =>{
             return <MediaCard broad={broad}/>
-          })}
-
+          }) : <h2>Hiện chưa có dữ liệu</h2>}
         </div>
       </div>
     </div>

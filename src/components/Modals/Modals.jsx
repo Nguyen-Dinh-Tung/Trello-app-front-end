@@ -16,9 +16,7 @@ function Modals(props) {
     mode : '',
     idUser : idUser
   })
-  console.log(idUser);
   const [isCreateBroad , setCreateBroad] = useState(true)
-  console.log(isShowModal);
   const handleHiddenModals = () =>{
     dispath(setShowModal('none'))
   }
@@ -31,13 +29,13 @@ function Modals(props) {
   },[newBroad])
   const handleClick = () =>{
     if(isCreateBroad === false){
-      console.log(newBroad);
       createBroad(newBroad)
-      .then(res =>{ console.log(res)})
+      .then(res =>{})
       .catch(e => console.log(e.message))
     }
+
+    dispath(setShowModal('none'))
   }
-  console.log(isShowModal);
   return (
     <>
      <div className="modals" style={{display : isShowModal}}>
