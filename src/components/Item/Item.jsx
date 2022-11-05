@@ -1,4 +1,6 @@
 import React from 'react';
+import ListItem from '@mui/material/ListItem';
+import ListItemButton from '@mui/material/ListItemButton';
 
 function Item({ provided, item, isDragging }) {
   return (
@@ -8,8 +10,13 @@ function Item({ provided, item, isDragging }) {
         ref={provided.innerRef}
         className={`item ${isDragging ? "is-dragging" : ""} item-task`}
       >
-        {item.text}
+        <ListItem disablePadding>
+      <ListItemButton>
+      {item.text}
+      </ListItemButton>
+    </ListItem>
       </div>
+
   );
 }
 

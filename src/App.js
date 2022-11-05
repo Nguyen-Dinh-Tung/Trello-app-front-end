@@ -3,13 +3,12 @@ import {Route, Routes} from "react-router-dom";
 import Register from "./page/Register/Register";
 import Sidebar from "./components/sidebar/Sidebar";
 import {Login} from "./page/login/Login";
-import Home from "./page/home/Home";
 import axios from "axios";
 import {GoogleOAuthProvider} from "@react-oauth/google";
 import UserInfo from "./components/UserInfo/UserInfo";
 import ChangePassword from "./components/ChangePassword/ChangePassword";
 import Broad from "./page/broad/Broad";
-
+import Home from "./page/home/Home";
 function App() {
   return (
     <div>
@@ -20,10 +19,8 @@ function App() {
           <Route path="/userinfo" element={<UserInfo />} />
           <Route path="/changepassword" element={<ChangePassword />} />
           <Route path="/user" element={<Home />} />
-          <Route path="/" element={<Navbar />}>
-            <Route path="/home" element={<Sidebar />} />
-            <Route path="/broad" element={<Broad />} />
-          </Route>
+          <Route path="/" element={<Home />}></Route>
+          <Route path="/broad" element={<Broad />} />
         </Routes>
       </GoogleOAuthProvider>
     </div>
