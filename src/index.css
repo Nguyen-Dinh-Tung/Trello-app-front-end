@@ -14,6 +14,8 @@
   padding: 6px 0;
   height: 40px;
   background-color: green;
+  position: relative;
+  top: -9px;
 }
 .item-task{
   padding: 8px;
@@ -29,9 +31,13 @@
 }
 
 .Broad{
-  background-image: url('../public/assets/image/wallpaper-4k-hinh-nen-4k-con-duong-day-tuyet-dep_101306165.jpg');
+  /* background-image: url('../public/assets/image/wallpaper-4k-hinh-nen-4k-con-duong-day-tuyet-dep_101306165.jpg'); */
   padding-bottom: 110px;
 }
 .asslsss:hover{
   background-color: #026aa7;
+}
+.btn-my-trell{
+  position: relative;
+  bottom: -6px;
 }

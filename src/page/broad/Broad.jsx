@@ -10,7 +10,8 @@ import UpdateBroad from '../../api/UpdateBroad';
 import { useSelector } from 'react-redux';
 import { useDispatch } from 'react-redux';
 import { setDataBroad } from '../../redux/features/broad.slice';
-
+import { Button } from '@mui/material';
+import Navbar from '../../components/navbar/Navbar';
 function Broad(props) {
   let initial = useSelector(state => state.broad.data)
   const dispatch = useDispatch()
@@ -125,6 +126,7 @@ function Broad(props) {
   }, [initial])
   return (
       <DragDropContext onDragEnd={onDragEnd}>
+    <Navbar></Navbar>
         <div className="Broad">
           <div className="add-column" style={{
             display : 'flex',
@@ -134,7 +136,7 @@ function Broad(props) {
           }}>
           {isTitleColumn
            ?
-          <button className="asslsss" style={{margin : '20px' , padding : '8px' , width : '300px' , backgroundColor: 'white' , color : 'black' , borderRadius : '6px'}} onClick={handleShowCreateColumn}
+          <button  className="asslsss" style={{margin : '10px' , padding : '8px' , width : '300px' , backgroundColor: '#b2b2b2' , color : 'black' , borderRadius : '6px'}} onClick={handleShowCreateColumn}
           >Thêm cột</button>
           :
           (
@@ -147,9 +149,7 @@ function Broad(props) {
           </>
 
           )
-
         }
-
           </div>
           <Droppable
           droppableId='broad'
@@ -158,7 +158,7 @@ function Broad(props) {
           >
             {provided =>(
               <div className="columns"
-              style={{display : 'flex' ,marginTop : '100px'}}
+              style={{display : 'flex'}}
               {...provided.droppableProps}
               ref={provided.innerRef}
               >
