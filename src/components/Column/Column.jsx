@@ -35,7 +35,6 @@ function Column(props) {
       }
     }
     if(item.id !== '' && item.text){
-      console.log(data);
       let newData = {
         ...data , columns : {
           ...data.columns ,

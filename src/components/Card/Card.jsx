@@ -6,13 +6,12 @@ import CardMedia from '@mui/material/CardMedia';
 import Button from '@mui/material/Button';
 import Typography from '@mui/material/Typography';
 import { useNavigate } from 'react-router-dom';
-
+import { useSelector } from 'react-redux';
 export default function MediaCard(props) {
   const broad = props.broad ;
   const navigate = useNavigate()
-  console.log(broad);
   const handleCLick = ()=>{
-    navigate('/broad' , {state : { id : broad._id}})
+    navigate('/broad' , {state : { broad : broad}})
   }
   return (
     <div onClick={handleCLick}>
