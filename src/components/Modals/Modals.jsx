@@ -5,13 +5,16 @@ import { useSelector } from "react-redux";
 import { setShowModal } from "../../redux/features/showModal.slice";
 import { useDispatch } from "react-redux";
 import jwtDecode from "jwt-decode";
-
 function Modals(props) {
   const isShowModal = useSelector((state) => state.isShowModal.isShowModal);
+  let token = localStorage.getItem('token') ;
+  let idUser = jwtDecode(token).id
+  console.log(idUser)
   const dispath = useDispatch();
   const [newBroad, setNewBroad] = useState({
     title: "",
     mode: "",
+    idUser : idUser
   });
   const [isCreateBroad, setCreateBroad] = useState(true);
   console.log(isShowModal);
@@ -27,7 +30,6 @@ function Modals(props) {
   }, [newBroad]);
   const handleClick = () => {
     if (isCreateBroad === false) {
-      console.log(newBroad);
       createBroad(newBroad)
         .then((res) => {
           console.log(res);
@@ -35,7 +37,6 @@ function Modals(props) {
         .catch((e) => console.log(e.message));
     }
   };
-  console.log(isShowModal);
   return (
     <>
       <div className="modals" style={{ display: isShowModal }}>
