@@ -6,14 +6,6 @@
     "@emotion/react": "^11.10.5",
     "@emotion/styled": "^11.10.5",
     "@material-tailwind/react": "^1.2.4",
-<<<<<<< HEAD
-=======
-    "@react-icons/all-files": "^4.1.0",
-    "@react-oauth/google": "^0.4.0",
-    "@mui/material": "^5.10.12",
-    "@mui/styled-engine-sc": "^5.10.6",
-    "@mui/x-data-grid": "^5.17.9",
->>>>>>> 6ba2429219488b7b468f1a31954c89f1162d14a6
     "@reduxjs/toolkit": "^1.8.6",
     "@testing-library/jest-dom": "^5.16.5",
     "@testing-library/react": "^13.4.0",
@@ -30,11 +22,6 @@
     "react-dnd": "^16.0.1",
     "react-dnd-html5-backend": "^10.0.2",
     "react-dom": "^18.2.0",
-<<<<<<< HEAD
-=======
-    "react-icons": "^4.6.0",
-    "react-modal": "^3.16.1",
->>>>>>> 6ba2429219488b7b468f1a31954c89f1162d14a6
     "react-redux": "^8.0.4",
     "react-router-dom": "^6.4.2",
     "react-scripts": "5.0.1",
