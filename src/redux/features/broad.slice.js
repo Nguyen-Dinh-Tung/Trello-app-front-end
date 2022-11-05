@@ -1,23 +1,8 @@
 import {createSlice} from "@reduxjs/toolkit";
 
 const initial = {
-  columns: {
-    "column-0": {
-      id: "column-0",
-      title: "First column",
-      items: [
-        {
-          id: "1",
-          text: "Tung",
-        },
-        {
-          id: "2",
-          text: "Tung",
-        },
-      ],
-    },
-  },
-  columnOrder: ["column-0"],
+  columns: {},
+  columnOrder: [],
 };
 
 const broadSlice = createSlice({
@@ -30,9 +15,7 @@ const broadSlice = createSlice({
       state.data = actions.payload;
     },
     setItemBroad: (state, action) => {
-      // console.log(action.payload);
       state.data = action.payload;
-      // console.log();
     },
   },
 });
