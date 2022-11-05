@@ -20,26 +20,33 @@ export default function IsLogin() {
     <>
       {isLogin ? (
         <div className="flex items-center relative">
-          <div className="flex items-center text ml-2  text-stone-700">
+          <div className=" items-center text ml-2  text-stone-700">
             <a
-              className="flex items-center text ml-2 "
+              className="flex items-center text ml-2 rounded-full  hover:text-white "
               href="#"
               data-bs-toggle="dropdown"
               aria-expanded="false"
+              style={{
+                background:
+                  "url('data:image/jpeg;base64,/9j/4AAQSkZJRgABAQAAAQABAAD/2wCEAAkGBwcICAgIBwcHBwcIBwoHBwcHBw8ICQcKFREWFhQRExMYKCggGBolGxMTITEhMSkrLi4uFx8zODMsNygtLisBCgoKDg0OFRAPFzcdFR0rMis3LTcrKy03KysrNys3LS0rNy0tKysrKy0tKystKysrLSsrKy0tNysrKysrKy0tK//AABEIASwAqAMBIgACEQEDEQH/xAAYAAEBAQEBAAAAAAAAAAAAAAAAAQIDB//EABoQAQEBAAMBAAAAAAAAAAAAAAABEQIxQQP/xAAVAQEBAAAAAAAAAAAAAAAAAAAAAf/EABYRAQEBAAAAAAAAAAAAAAAAAAABEf/aAAwDAQACEQMRAD8A9xAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAS1UBQAAAAAAAAAAAAASkUAAABICstAAAAAAAAAAAAAAJQUAAAAAAAAAAAAAAAAAAAAAAAASKAAAAAAAAAAAAAAAAAAAigAACeqkgKAAAAAAAAAAAAAAAAAAAAAAAAACRSAAAAAAAAAAAAAAAAAAAAAAAAAAAAACKAAAAAAAAAAAAAAAAAnqpO1AAAAAAAAAAAAAAAAAAABKBFAAAAAAEoFEtyWnARoAUAAAAAAAARQAAAAAABFAY+nWLxmRrATAAUAAAAAAAAEUAAAAAAAAAYvONSgomqAAAAAAAAAAAAAAAAAxzt8bTBK4cfnd2u3UaAkxym66syNJFAFAAAAAAAAAAAAAAAABLVSgkrSRQAAAAAAf//Z')",
+              }}
             >
               <span
-                className=" rounded-full bg-sky-400 text-center text-white text-lg hover:bg-sky-300 cursor-pointer hover:text-white"
+                title={str[0]}
+                className="  text-center overflow-visible rounded-full bg-sky-400 hover:bg-sky-300  "
                 style={{
-                  height: 32 + "px",
-                  width: 32 + "px",
-                  lineHeight: 32 + "px",
+                  height: 35 + "px",
+                  width: 35 + "px",
+                  lineHeight: 35 + "px",
+                  cursor: "pointer"
                 }}
               >
-                {str[0]}
+                <span className="overflow-visible text-black text-lg cursor-pointer">
+                  {str[0]}
+                </span>
               </span>
             </a>
             <ul
-              // style={{ top: 131 + "%", left: -183 + "%" }}
               style={{
                 position: "fixed",
                 width: 250 + "px",
@@ -60,6 +67,7 @@ export default function IsLogin() {
               <li className=" flex flex-row">
                 <a
                   className="
+                  focus:text-gray-700
                   w-10-12
        dropdown-item
        text-sm
@@ -74,25 +82,23 @@ export default function IsLogin() {
                 >
                   Tài khoản
                 </a>
-                <span className="cursor:pointer w-2/12 mt-1">
-                   <svg
-                  xmlns="http://www.w3.org/2000/svg"
-                  fill="none"
-                  viewBox="0 0 24 24"
-                  strokeWidth={1.5}
-                  stroke="currentColor"
-                  className="w-5 h-5"
-                  
-                  style={{cursor: "pointer"}}
-                >
-                  <path
-                    strokeLinecap="round"
-                    strokeLinejoin="round"
-                    d="M6 18L18 6M6 6l12 12"
-                  />
-                </svg>
+                <span className=" w-2/12 mt-1">
+                  <svg
+                    xmlns="http://www.w3.org/2000/svg"
+                    fill="none"
+                    viewBox="0 0 24 24"
+                    strokeWidth={1.5}
+                    stroke="currentColor"
+                    className="w-5 h-5"
+                    style={{ cursor: "pointer" }}
+                  >
+                    <path
+                      strokeLinecap="round"
+                      strokeLinejoin="round"
+                      d="M6 18L18 6M6 6l12 12"
+                    />
+                  </svg>
                 </span>
-               
               </li>
 
               <li>

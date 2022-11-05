@@ -9,6 +9,7 @@ import {GoogleOAuthProvider} from "@react-oauth/google";
 import UserInfo from "./components/UserInfo/UserInfo";
 import ChangePassword from "./components/ChangePassword/ChangePassword";
 import Broad from "./page/broad/Broad";
+import Account from "./components/Account/Account";
 
 function App() {
   return (
@@ -23,6 +24,7 @@ function App() {
           <Route path="/" element={<Navbar />}>
             <Route path="/home" element={<Sidebar />} />
             <Route path="/broad" element={<Broad />} />
+            <Route path="/account" element={<Account />} />
           </Route>
         </Routes>
       </GoogleOAuthProvider>
