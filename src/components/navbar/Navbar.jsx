@@ -142,7 +142,6 @@ export default function Navbar() {
             </div>
 
             <div className="group inline-block ">
-
               <button className="btn1 flex items-center button-create"  onClick={handleCreateBroad}>
                 Tạo mới
               </button>
