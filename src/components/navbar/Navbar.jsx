@@ -142,22 +142,11 @@ export default function Navbar() {
             </div>
 
             <div className="group inline-block ">
-              <button className="btn1 flex items-center button-create"  >
+              <button className="btn1 flex items-center button-create" onClick={handleCreateBroad} >
                 Tạo mới
               </button>
 
-              <ul
-                className="bg-white border rounded-sm transform scale-0 group-hover:scale-100 absolute
-  transition duration-150 ease-in-out origin-top min-w-32 w-80 mt-4"
-              >
-                <li className="li1 color-text-li text-center justify-center bg-inherit hover:bg-inherit ">
-                  Tạo mới
-                </li>
-                <hr className="hr-navbar"></hr>
-                <li className="li1 rounded-sm px-3 py-1 hover:bg-gray-100">
-                  Tạo bảng
-                </li>
-              </ul>
+             
             </div>
           </div>
 
