@@ -7,7 +7,6 @@ import { useSelector } from 'react-redux';
 import { useDispatch } from 'react-redux';
 import { setShowModal } from "../../redux/features/showModal.slice";
 export default function Navbar() {
-
   const dispatch = useDispatch()
   const handleCreateBroad = () =>{
     dispatch(setShowModal('block'))
@@ -15,10 +14,9 @@ export default function Navbar() {
   return (
     <div>
     <Modals/>
-
       <nav className="navbar flex items-center justify-between justify-center flex-wrap  py-2 lg:px-2 shadow text-white  border-blue-700 text-white-700">
         <button className="btn1">
-          <span 
+          <span
             role="img"
             aria-label="ApplicationSwitcherIcon"
             className="css-snhnyn "
@@ -151,7 +149,6 @@ export default function Navbar() {
 
             <div className="group inline-block ">
               <button className="btn1 flex items-center button-create"  onClick={handleCreateBroad}>
-
                 Tạo mới
               </button>
 

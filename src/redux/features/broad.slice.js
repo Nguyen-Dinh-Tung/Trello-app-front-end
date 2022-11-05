@@ -30,9 +30,7 @@ const broadSlice = createSlice({
       state.data = actions.payload;
     },
     setItemBroad: (state, action) => {
-      // console.log(action.payload);
       state.data = action.payload;
-      // console.log();
     },
   },
 });

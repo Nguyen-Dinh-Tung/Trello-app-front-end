@@ -53,7 +53,7 @@ export const Login = () => {
             if (data === "Đăng nhập thành công !") {
               localStorage.setItem("token", res.data.data.token);
               localStorage.setItem("refreshToken", res.data.data.refreshToken);
-              navigate("/home");
+              navigate("/");
             }
           })
           .catch((e) => {
@@ -130,7 +130,7 @@ export const Login = () => {
                     localStorage.setItem("token", token);
                     localStorage.setItem("refreshToken", refreshToken);
                     Swal.fire("Đăng nhập thành công !").then((result) => {
-                      navigate("/user");
+                      navigate("/");
                     });
                   }
                 })

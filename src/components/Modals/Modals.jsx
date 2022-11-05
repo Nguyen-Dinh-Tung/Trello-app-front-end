@@ -4,13 +4,19 @@ import createBroad from "../../api/CreateBroad.api";
 import { useSelector } from "react-redux";
 import { setShowModal } from "../../redux/features/showModal.slice";
 import { useDispatch } from "react-redux";
+import jwtDecode from "jwt-decode";
+
 function Modals(props) {
   const isShowModal = useSelector(state => state.isShowModal.isShowModal)
   const dispath = useDispatch()
+  const token = localStorage.getItem('token') ;
+  const idUser = jwtDecode(token).id
   const [newBroad , setNewBroad] = useState({
     title : '' ,
-    mode : ''
+    mode : '',
+    idUser : idUser
   })
+  console.log(idUser);
   const [isCreateBroad , setCreateBroad] = useState(true)
   console.log(isShowModal);
   const handleHiddenModals = () =>{
@@ -35,7 +41,7 @@ function Modals(props) {
   return (
     <>
      <div className="modals" style={{display : isShowModal}}>
-  <div className="py-12 bg-gray-700 dark:bg-gray-900 transition duration-150 ease-in-out z-10 absolute top-0 right-0 bottom-0 left-0" id="modal">
+  <div className="py-12 bg-gray-700 dark:bg-gray-900 transition duration-150 ease-in-out z-20 absolute top-0 right-0 bottom-0 left-0" id="modal">
     <div role="alert" className="container mx-auto w-11/12 md:w-2/3 max-w-lg">
       <div className="relative py-8 px-5 md:px-10 bg-white dark:bg-gray-800 dark:border-gray-700 shadow-md rounded border border-gray-400">
         <h1 className="text-gray-800 dark:text-white  font-lg font-bold tracking-normal leading-tight mb-4">Thêm bảng mới</h1>

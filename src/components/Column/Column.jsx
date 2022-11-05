@@ -6,6 +6,8 @@ import { useSelector } from 'react-redux';
 import {v4 as uuidv4} from 'uuid'
 import { useDispatch } from 'react-redux';
 import { setItemBroad } from '../../redux/features/broad.slice';
+import List from '@mui/material/List';
+
 function Column(props) {
   const dispatch = useDispatch();
   const data = useSelector(state => state.broad.data);
@@ -46,13 +48,15 @@ function Column(props) {
       dispatch(setItemBroad(newData));
     }
     setItemInput(true)
+    setValueItem('')
   }
   return (
     <Draggable
     draggableId={column.id} index={index}
     >
       {provided =>(
-        <div className="column"
+        <List className="column"
+        sx={{ m: 2 ,boxShadow: 3  }}
         {...provided.draggableProps}
         ref={provided.innerRef}
         >
@@ -70,7 +74,9 @@ function Column(props) {
             width : '100%'  ,
             backgroundColor : 'white' ,
             borderRadius : '4px',
-            color : 'black'
+            color : 'black' ,
+            position : 'relative',
+            bottom : '-6px'
           }}
           className='btn-my-trello'
           onClick={handleCLick}
@@ -79,7 +85,7 @@ function Column(props) {
           <>
           <input type="text"
           style={{width : '100%' , height :'40px' , borderRadius : '4px'
-          , border : '1px solid #ccc' , paddingLeft : '4px'}} placeholder={'Nhiệm vụ'}
+          , border : '1px solid #ccc' , paddingLeft : '4px' }} placeholder={'Nhiệm vụ'}
           onChange={handleSetItemValue}
           />
           <button
@@ -88,8 +94,9 @@ function Column(props) {
             width : '100%' ,
             backgroundColor : 'white' ,
             borderRadius : '4px',
-            color : 'black'
-
+            color : 'black',
+            position : 'relative',
+            bottom : '-6px'
           }}
           className={'btn-my-trello'}
           onClick={handleAddItem}
@@ -99,7 +106,7 @@ function Column(props) {
           )
          }
           </div>
-        </div>
+        </List>
       )}
     </Draggable>
   );
