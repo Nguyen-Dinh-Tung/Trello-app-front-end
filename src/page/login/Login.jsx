@@ -56,7 +56,7 @@ export const Login = () => {
               setLoading(false);
               localStorage.setItem("token", res.data.data.token);
               localStorage.setItem("refreshToken", res.data.data.refreshToken);
-              navigate("/home");
+              navigate("/");
             }
           })
           .catch((e) => {

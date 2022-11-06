@@ -1,8 +1,10 @@
 import { useState } from "react";
-
-export default function Sidebar() {
-  const handleClick = () => {};
-
+import MediaCard from "../Card/Card";
+import { useSelector } from 'react-redux';
+export default function Sidebar(props) {
+  const columnsOrder = props.columnsOrder
+  const [onCreate, setOnCreate] = useState(true);
+  const data = useSelector(state => state.broad) ;
   return (
     <div className="flex flex-cols gap-12 justify-center mt-8 ">
       <div className="flex flex-col">
@@ -169,7 +171,6 @@ export default function Sidebar() {
                 </ul>
               </li>
               <li>
-                
               </li>
             </ul>
           </div>
@@ -255,31 +256,9 @@ export default function Sidebar() {
           </div>
         </div>
         <div className="flex flex-row gap-4">
-          <div>
-            <a
-              href="#"
-              className="block p-2 text-left max-w-sm bg-white rounded-lg border border-gray-200 shadow-md hover:bg-gray-100 dark:bg-gray-800 dark:border-gray-700 dark:hover:bg-gray-700"
-              style={{ height: 150 + "px", width: 300 + "px" }}
-            >
-              <span className="text-left text-2xl font-bold tracking-tight text-gray-900 dark:text-white">
-                Trello
-              </span>
-            </a>
-          </div>
-          <div>
-            <a
-              href="#"
-              className="block text-center justify-center max-w-sm bg-white rounded-lg border border-gray-200 shadow-md hover:bg-gray-100 dark:bg-gray-800 dark:border-gray-700 dark:hover:bg-gray-700"
-              style={{ height: 150 + "px", width: 300 + "px" }}
-            >
-              <div className="flex flex-col mt-12">
-                <span className="text-center text-base tracking-tight text-gray-600 dark:text-white">
-                  Tạo bảng mới
-                </span>
-                <span className="text-xs text-gray-600  ">5 còn lại</span>
-              </div>
-            </a>
-          </div>
+          {columnsOrder ? columnsOrder.map(broad =>{
+            return <MediaCard broad={broad}/>
+          }) : <h2>Hiện chưa có dữ liệu</h2>}
         </div>
         {/* <Content/> */}
       </div>
