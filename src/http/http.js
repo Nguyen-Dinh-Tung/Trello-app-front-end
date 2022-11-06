@@ -28,9 +28,6 @@ Http.setToken = (token) => {
   Http.defaults.headers["x-access-token"] = token;
   window.localStorage.setItem("token", token);
 };
-function setRefreshToken(refreshToken) {
-  const token = window.localStorage.setItem("refreshToken", refreshToken);
-}
 
 // Http.interceptors.request.use(
 //   function (config) {
@@ -66,9 +63,9 @@ Http.interceptors.response.use(
         .then((rs) => {
           console.log(rs);
           const { token } = rs.data;
-          const { refreshToken } = rs.data;
+          // const { refreshToken } = rs.data;
           Http.setToken(token);
-          setRefreshToken(refreshToken);
+          // setRefreshToken(refreshToken);
           const config = response.config;
           config.headers["x-access-token"] = token;
           config.baseURL = "http://localhost:8080/";
