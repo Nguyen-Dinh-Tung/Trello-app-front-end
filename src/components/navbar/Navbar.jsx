@@ -1,6 +1,4 @@
-import axios from "axios";
 import { Outlet } from "react-router-dom";
-import "./navbar.css";
 import Modals from "../Modals/Modals";
 import { useState } from "react";
 import { useSelector } from "react-redux";
@@ -12,13 +10,13 @@ export default function Navbar() {
   const handleCreateBroad = () => {
     dispatch(setShowModal("block"));
   };
- 
+
   return (
     <div>
-    <Modals/>
-      <nav className="navbar flex items-center justify-between justify-center flex-wrap  py-2 lg:px-2 shadow text-white  border-blue-700 text-white-700">
-        <button className="btn1">
-          <span 
+      <Modals />
+      <nav className="navbar flex items-center bg-sky-600 justify-between justify-center flex-wrap  py-2 lg:px-2 shadow text-white  border-blue-700 text-white-700">
+        <a href="/home" className="cursor-pointer hover:text-white">
+          <span
             role="img"
             aria-label="ApplicationSwitcherIcon"
             className="css-snhnyn "
@@ -39,84 +37,177 @@ export default function Navbar() {
               />
             </svg>
           </span>
-        </button>
+        </a>
         <div className="flex justify-between lg:w-auto w-full lg:border-b-0 ml-2 text-center justify-center  border-solid border-b-2 border-gray-300  lg:pb-0">
           <div className="flex items-center flex-shrink-0 text-gray-800 ">
-            <span className="font-semibold text-xl tracking-tight">Trello</span>
+            <span className="font-semibold text-xl tracking-tight mr-3">
+              Trello
+            </span>
           </div>
         </div>
         <div className="menu w-full lg:block flex-grow lg:flex lg:items-center lg:w-auto">
-          <div className="text-md font-bold flex-row lg:flex-grow">
-          <div className="group inline-block ">
-              <button className="btn1 rounded-sm flex items-center min-w-32">
-                <span className="pr-1 font-semibold flex-1 ">Các không gian làm việc</span>
-                <span>
-                  <svg
-                    className="fill-current h-4 w-4 transform group-hover:-rotate-180
-        transition duration-150 ease-in-out"
-                    xmlns="http://www.w3.org/2000/svg"
-                    viewBox="0 0 20 20"
+          <div className=" font-bold flex gap-3 flex-row lg:flex-grow">
+            <div className="group inline-block hover:bg-sky-500 rounded px-2  text-white ">
+              <div className="max-w-2xl mx-auto">
+                <div>
+                  <button
+                    id="dropdownNavbarLink1"
+                    data-dropdown-toggle="dropdownNavbar1"
+                    className="  md:hover:bg-transparent md:border-0 pl-3 pr-4 py-2 md:p-0 font-medium flex items-center justify-between w-full md:w-auto"
                   >
-                    <path d="M9.293 12.95l.707.707L15.657 8l-1.414-1.414L10 10.828 5.757 6.586 4.343 8z" />
-                  </svg>
-                </span>
-              </button>
-
-              <ul
-                className="bg-white border rounded-sm transform scale-0 group-hover:scale-100 absolute
-  transition duration-150 ease-in-out origin-top min-w-32 w-80 mt-4"
+                    Các không gian làm việc của bạn
+                    <svg
+                      className="w-4 h-4 ml-1 focus:transition"
+                      fill="currentColor"
+                      viewBox="0 0 20 20"
+                      xmlns="http://www.w3.org/2000/svg"
+                    >
+                      <path
+                        fillRule="evenodd"
+                        d="M5.293 7.293a1 1 0 011.414 0L10 10.586l3.293-3.293a1 1 0 111.414 1.414l-4 4a1 1 0 01-1.414 0l-4-4a1 1 0 010-1.414z"
+                        clipRule="evenodd"
+                      />
+                    </svg>
+                  </button>
+                  {/* Dropdown menu */}
+                  <div
+                    id="dropdownNavbar1"
+                    className="hidden bg-white text-base z-10 list-none divide-y divide-gray-100 rounded shadow my-4 w-44"
+                  >
+                    <ul className="py-1" aria-labelledby="dropdownLargeButton1">
+                      <li>
+                        <a
+                          href="#"
+                          className="text-sm hover:bg-gray-100 text-gray-700 block px-4 py-2"
+                        >
+                          111
+                        </a>
+                      </li>
+                      <li>
+                        <a
+                          href="#"
+                          className="text-sm hover:bg-gray-100 text-gray-700 block px-4 py-2"
+                        >
+                          11
+                        </a>
+                      </li>
+                      <li>
+                        <a
+                          href="#"
+                          className="text-sm hover:bg-gray-100 text-gray-700 block px-4 py-2"
+                        >
+                          Earnings
+                        </a>
+                      </li>
+                    </ul>
+                    <div className="py-1">
+                      <a
+                        href="#"
+                        className="text-sm hover:bg-gray-100 text-gray-700 block px-4 py-2"
+                      >
+                        Sign out
+                      </a>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+            <div className="group inline-block">
+              <button
+                id="dropdownNavbarLink"
+                data-dropdown-toggle="dropdownNavbar"
+                className="text-gray-700 hover:bg-gray-50 border-b border-gray-100 md:hover:bg-transparent md:border-0 pl-3 pr-4 py-2 md:hover:text-blue-700 md:p-0 font-medium flex items-center justify-between w-full md:w-auto"
               >
-                <li className="li1 color-text-li text-center justify-center bg-inherit hover:bg-inherit ">
-                Các không gian làm việc
-                </li>
-                <hr className="hr-navbar"></hr>
-                <li className="li1 rounded-sm px-3 py-1 hover:bg-gray-100">
-                  ...
-                </li>
-                <li className="li1 rounded-sm px-3 py-1 hover:bg-gray-100">
-                  ...
-                </li>
-              </ul>
+                Gần đây
+                <svg
+                  className="w-4 h-4 ml-1 transform focus:-rotate-180
+                  transition duration-150 ease-in-out"
+                  fill="currentColor"
+                  viewBox="0 0 20 20"
+                  xmlns="http://www.w3.org/2000/svg"
+                >
+                  <path
+                    fillRule="evenodd"
+                    d="M5.293 7.293a1 1 0 011.414 0L10 10.586l3.293-3.293a1 1 0 111.414 1.414l-4 4a1 1 0 01-1.414 0l-4-4a1 1 0 010-1.414z"
+                    clipRule="evenodd"
+                  />
+                </svg>
+              </button>
+              <div
+                id="dropdownNavbar"
+                className="hidden bg-white text-base z-10 list-none divide-y-2 divide-gray-100 rounded py-2 shadow my-4 w-44 w-64"
+              >
+                <div className="py-1">
+                  <a
+                    href="#"
+                    className="text-sm  text-gray-700 block text-center p-2 flex flex-row"
+                  >
+                    <span className="text-center w-11/12">
+                      Sign out
+                    </span>
+                    
+                    <svg 
+                      xmlns="http://www.w3.org/2000/svg"
+                      fill="none"
+                      viewBox="0 0 24 24"
+                      strokeWidth={1.5}
+                      stroke="currentColor"
+                      className="w-5 h-5 hover:bg-gray-100 w-2/12"
+                    >
+                      <path
+                        strokeLinecap="round"
+                        strokeLinejoin="round"
+                        d="M6 18L18 6M6 6l12 12"
+                      />
+                    </svg>
+                    
+                  </a>
+                </div>
+                <div>
+                  <ul
+                    className="py-1 rounded-sm "
+                    aria-labelledby="dropdownLargeButton"
+                  >
+                    <li>
+                      <a
+                        href="#"
+                        className="text-sm hover:bg-gray-100 text-gray-700 block px-4 py-2"
+                      >
+                        222
+                      </a>
+                    </li>
+                    <li>
+                      <a
+                        href="#"
+                        className="text-sm hover:bg-gray-100 text-gray-700 block px-4 py-2"
+                      >
+                        222
+                      </a>
+                    </li>
+                    <li>
+                      <a
+                        href="#"
+                        className="text-sm hover:bg-gray-100 text-gray-700 block px-4 py-2"
+                      >
+                        cccc
+                      </a>
+                    </li>
+                  </ul>
+                </div>
+              </div>
             </div>
             <div className="group inline-block ">
-              <button className="btn1 rounded-sm flex items-center min-w-32">
-                <span className="pr-1 font-semibold flex-1 ">Gần đây</span>
-                <span>
-                  <svg
-                    className="fill-current h-4 w-4 transform group-hover:-rotate-180
-        transition duration-150 ease-in-out"
-                    xmlns="http://www.w3.org/2000/svg"
-                    viewBox="0 0 20 20"
-                  >
-                    <path d="M9.293 12.95l.707.707L15.657 8l-1.414-1.414L10 10.828 5.757 6.586 4.343 8z" />
-                  </svg>
-                </span>
-              </button>
-
-              <ul
-                className="bg-white border rounded-sm transform scale-0 group-hover:scale-100 absolute
-  transition duration-150 ease-in-out origin-top min-w-32 w-80 mt-4"
+              <button
+                className="btn1 rounded-sm flex items-center min-w-32"
+                id="dropdownNavbarLink1"
+                data-dropdown-toggle="dropdownNavbar1"
               >
-                <li className="li1 color-text-li text-center justify-center bg-inherit hover:bg-inherit ">
-                  Gần đây
-                </li>
-                <hr className="hr-navbar"></hr>
-                <li className="li1 rounded-sm px-3 py-1 hover:bg-gray-100">
-                  ...
-                </li>
-                <li className="li1 rounded-sm px-3 py-1 hover:bg-gray-100">
-                  ...
-                </li>
-              </ul>
-            </div>
-            <div className="group inline-block ">
-              <button className="btn1 rounded-sm flex items-center min-w-32">
                 <span className="pr-1 font-semibold flex-1 ">
                   Đã đánh dấu sao
                 </span>
                 <span>
                   <svg
-                    className="fill-current h-4 w-4 transform group-hover:-rotate-180
+                    className="fill-current h-4 w-4 transform group-focus:rotate-180
         transition duration-150 ease-in-out"
                     xmlns="http://www.w3.org/2000/svg"
                     viewBox="0 0 20 20"
@@ -125,28 +216,37 @@ export default function Navbar() {
                   </svg>
                 </span>
               </button>
-
-              <ul
-                className="bg-white border rounded-sm transform scale-0 group-hover:scale-100 absolute
-  transition duration-150 ease-in-out origin-top min-w-32 w-80 mt-4"
+              <div
+                id="dropdownNavbar1"
+                className="hidden bg-white text-base z-10 list-none divide-y divide-gray-100 rounded shadow my-4 w-44"
               >
-                <li className="li1 color-text-li text-center justify-center bg-inherit hover:bg-inherit ">
-                  Đã đánh dấu sao
-                </li>
-                <hr className="hr-navbar"></hr>
-                <li className="li1 rounded-sm px-3 py-1 hover:bg-gray-100">
-                  ...
-                </li>
-                <li className="rounded-sm px-3 py-1 hover:bg-gray-100">...</li>
-              </ul>
+                <ul
+                  /////////////////////
+                  // aria-labelledby="dropdownLargeButton3"
+                  className="bg-black border rounded-sm transform scale-0 absolute
+  transition duration-150 ease-in-out origin-top min-w-32 w-80 mt-4"
+                >
+                  <li className="li1 color-text-li text-center justify-center bg-inherit hover:bg-inherit ">
+                    Đã đánh dấu sao
+                  </li>
+                  <hr className="hr-navbar"></hr>
+                  <li className="li1 rounded-sm px-3 py-1 hover:bg-gray-100">
+                    ...
+                  </li>
+                  <li className="rounded-sm px-3 py-1 hover:bg-gray-100">
+                    ...
+                  </li>
+                </ul>
+              </div>
             </div>
 
             <div className="group inline-block ">
-              <button className="btn1 flex items-center button-create" onClick={handleCreateBroad} >
+              <button
+                className="btn1 flex items-center button-create"
+                onClick={handleCreateBroad}
+              >
                 Tạo mới
               </button>
-
-             
             </div>
           </div>
 
@@ -177,7 +277,7 @@ export default function Navbar() {
             </button>
           </div>
           {/* login-logout */}
-          <IsLogin/>
+          <IsLogin />
         </div>
       </nav>
       <Outlet></Outlet>

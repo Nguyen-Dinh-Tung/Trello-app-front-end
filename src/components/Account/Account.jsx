@@ -11,8 +11,8 @@ export default function Account() {
     str.split(" ");
   }
   return (
-    <div className="overflow-y-scrol">
-      <div className="w-full bg-slate-100 h-56 l  leading-5 flex flex-col  gap-y-12   drop-shadow-sm  ">
+    <div>
+      <div className="w-full bg-slate-100 h-56 l  leading-5 flex flex-col  gap-y-12  drop-shadow-sm  ">
         <div className="flex flex-row justify-center py-0 mx-48">
           <div className=" my-10 flex ">
             <span

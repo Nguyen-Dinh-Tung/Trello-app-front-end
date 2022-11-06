@@ -1,5 +1,5 @@
 .navbar {
-  background-color: #026aa7;
+  background-color: rgb(2, 106, 167);
   color: aliceblue;
 }
 
@@ -8,20 +8,20 @@
 
   border-radius: 5px;
   padding: 2px;
-  background-color: #026aa7;
+  background-color: rgb(2, 106, 167);
 }
 .a1:hover {
-  background-color: #3588b9;
+  background-color: rgb(53, 136, 185);
 }
 .btn1 {
   border-radius: 5px;
   padding: 5px 12px;
-  background-color: #026aa7;
+  background-color: rgb(2, 106, 167);
   margin-left: 5px;
   font-style: normal;
 }
 .btn1:hover {
-  background-color: #3588b9;
+  background-color: rgb(53, 136, 185);
 }
 
 /* li > ul {

@@ -47,8 +47,9 @@ export default function IsLogin() {
               </span>
             </a>
             <ul
+              // style={{ top: 131 + "%", left: -183 + "%" }}
               style={{
-                position: "fixed",
+                // position: "fixed",
                 width: 250 + "px",
                 top: 58 + "px",
                 left: 1280 + "px",
@@ -60,7 +61,6 @@ export default function IsLogin() {
    text-base
    shadow-lg
    hidden
-
  "
               aria-labelledby="dropdownMenuButton2"
             >
