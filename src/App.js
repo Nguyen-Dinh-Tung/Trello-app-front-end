@@ -11,6 +11,8 @@ import Broad from "./page/broad/Broad";
 import Home from "./page/home/Home";
 import PrivateRoutes from "./hooks/PrivateRoutes";
 import Account from "./components/Account/Account";
+import { Profile } from "./components/Account/Profile";
+import { ResetPass } from "./components/Account/ResetPass";
 function App() {
   return (
     <div>
@@ -19,12 +21,17 @@ function App() {
           <Route path="/register" element={<Register />} />
           <Route path="/login" element={<Login />} />
           <Route element={<PrivateRoutes />}>
-            <Route path="/userinfo" element={<UserInfo />} />
+            <Route path="/profile" element={<UserInfo />} />
             <Route path="/changepassword" element={<ChangePassword />} />
             <Route path="/user" element={<Home />} />
             <Route path="/" element={<Home />}></Route>
             <Route path="/broad" element={<Broad />} />
-            <Route path="/account" element={<Account />} />
+            <Route element={<Navbar />}>
+              <Route path="/account" element={<Account />}>
+                <Route path="/account/profile" element={<Profile />} />
+                <Route path="/account/resetpassword" element={<ResetPass />} />
+              </Route>
+            </Route>
           </Route>
         </Routes>
       </GoogleOAuthProvider>

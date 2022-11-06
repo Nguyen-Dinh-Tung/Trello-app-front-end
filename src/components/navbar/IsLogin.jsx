@@ -38,7 +38,7 @@ export default function IsLogin() {
                   height: 35 + "px",
                   width: 35 + "px",
                   lineHeight: 35 + "px",
-                  cursor: "pointer"
+                  cursor: "pointer",
                 }}
               >
                 <span className="overflow-visible text-black text-lg cursor-pointer">
@@ -47,12 +47,11 @@ export default function IsLogin() {
               </span>
             </a>
             <ul
-              // style={{ top: 131 + "%", left: -183 + "%" }}
               style={{
-                // position: "fixed",
+                position: "fixed",
                 width: 250 + "px",
                 top: 58 + "px",
-                left: 1280 + "px",
+                left: 1890 + "px",
               }}
               className="
               
@@ -61,6 +60,7 @@ export default function IsLogin() {
    text-base
    shadow-lg
    hidden
+
  "
               aria-labelledby="dropdownMenuButton2"
             >
@@ -118,7 +118,9 @@ export default function IsLogin() {
                   </span>
                   <span className="flex flex-col gap-1">
                     <span className="text-sm">{decode.name}</span>
-                    <span className="text-xs text-stone-300">{decode.iat}</span>
+                    <span className="text-xs  text-stone-400">
+                      {decode.email}
+                    </span>
                   </span>
                 </div>
               </li>
@@ -160,7 +162,7 @@ export default function IsLogin() {
        text-gray-700
        hover:bg-gray-100
      "
-                  href="/home"
+                  href="/"
                 >
                   Đăng xuất khỏi trái đất
                 </a>

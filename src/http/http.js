@@ -55,7 +55,6 @@ Http.setToken = (token) => {
 //   }
 // );
 
-
 Http.interceptors.response.use(
   (response) => {
     const err = response.data;
@@ -64,7 +63,9 @@ Http.interceptors.response.use(
         .then((rs) => {
           console.log(rs);
           const { token } = rs.data;
+          // const { refreshToken } = rs.data;
           Http.setToken(token);
+          // setRefreshToken(refreshToken);
           const config = response.config;
           config.headers["x-access-token"] = token;
           config.baseURL = "http://localhost:8080/";
