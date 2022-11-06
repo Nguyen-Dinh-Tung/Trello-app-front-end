@@ -130,10 +130,12 @@ function Broad(props) {
   useEffect(() =>{
     getDataBroad(idBroad)
     .then(res => {
+      console.log(res.data);
       dispatch(setDataBroad(res.data.broad))
     })
     .catch(e => console.log(e.message))
   }, [])
+  console.log(dataByStore);
   useEffect(() =>{
     if(dataByStore && dataByStore.columnOrder.length > 0){
       UpdateBroad(dataByStore)

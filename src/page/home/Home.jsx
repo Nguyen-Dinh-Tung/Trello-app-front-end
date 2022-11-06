@@ -16,21 +16,6 @@ function Home(props) {
   const dispatch = useDispatch()
   let [listIdBroad , setListIdBroad] = useState([])
   let [columnsOrder , setColumnOrder] = useState([])
-  const initial = {
-    columns: {
-      "column-0": {
-        id: "column-0",
-        title: "First column",
-        items: [
-          {
-            id: "1",
-            text: "Tung",
-          },
-        ],
-      },
-    },
-    columnOrder: ["column-0"],
-  };
   useEffect(() =>{
     getBroad(idUser)
     .then(res => {
