@@ -1,11 +1,12 @@
-import axios from "axios";
 import { Outlet } from "react-router-dom";
 import Modals from "../Modals/Modals";
 import { useState } from "react";
-import { useSelector } from "react-redux";
 import { useDispatch } from "react-redux";
 import { setShowModal } from "../../redux/features/showModal.slice";
 import IsLogin from "./IsLogin";
+import Drop3 from "./Drop3";
+import Drop1 from "./Drop1";
+import Drop2 from "./Drop2";
 export default function Navbar() {
   const dispatch = useDispatch();
   const handleCreateBroad = () => {
@@ -13,7 +14,7 @@ export default function Navbar() {
   };
 
   return (
-    <div>
+    <div className="chrome chrome-107 windows adgMarkdown body-tabbed-page">
       <Modals />
       <nav className="navbar flex bg-sky-600 items-center justify-between justify-center flex-wrap  py-1 lg:px-2 shadow text-white">
         <button className="px-2">
@@ -48,247 +49,12 @@ export default function Navbar() {
         </div>
         <div className="menu w-full lg:block flex-grow lg:flex lg:items-center lg:w-auto ">
           <div className=" text-md flex-row flex gap-2 lg:flex-grow ">
-            <div className="group inline-block hover:bg-sky-500 focus:bg-sky-500 rounded">
-              <button
-                id="dropdownNavbarLink"
-                data-dropdown-toggle="dropdown1"
-                className="text-white  border-b md:border-0 pl-3 pr-4 py-1 px-2  focus:bg-sky-500 rounded md:p-0 flex items-center justify-between w-full md:w-auto"
-              >
-                Các không gian việc làm
-                <svg
-                  className="w-6 h-6 ml-1"
-                  fill="currentColor"
-                  viewBox="0 0 20 20"
-                  xmlns="http://www.w3.org/2000/svg"
-                >
-                  <path
-                    fillRule="evenodd"
-                    d="M5.293 7.293a1 1 0 011.414 0L10 10.586l3.293-3.293a1 1 0 111.414 1.414l-4 4a1 1 0 01-1.414 0l-4-4a1 1 0 010-1.414z"
-                    clipRule="evenodd"
-                  />
-                </svg>
-              </button>
-              <div
-                id="dropdown1"
-                className="hidden bg-white z-10 list-none divide-y-2 divide-gray-100 rounded py-2 shadow my-1 w-44 w-64"
-              >
-                <div className="py-1">
-                  <a
-                    href="#"
-                    className="text-sm block text-center text-black p-2 flex flex-row"
-                  >
-                    <span className="text-center w-11/12 cursor-text text-stone-500 align-middle">
-                      Các không gian việc làm
-                    </span>
-
-                    <button
-                      className="cursor-pointer  absolute top-0 right-0 mt-4 mr-5 text-gray-400 hover:text-gray-600 transition duration-150 ease-in-out rounded "
-                      role="button"
-                    >
-                      <svg
-                        xmlns="http://www.w3.org/2000/svg"
-                        className="icon icon-tabler icon-tabler-x"
-                        width={17}
-                        height={17}
-                        viewBox="0 0 24 24"
-                        strokeWidth="2.5"
-                        stroke="currentColor"
-                        fill="none"
-                        strokeLinecap="round"
-                        strokeLinejoin="round"
-                      >
-                        <path stroke="none" d="M0 0h24v24H0z" />
-                        <line x1={18} y1={6} x2={6} y2={18} />
-                        <line x1={6} y1={6} x2={18} y2={18} />
-                      </svg>
-                    </button>
-                  </a>
-                </div>
-                <div>
-                  <ul
-                    className="py-1 rounded-sm text-black "
-                    aria-labelledby="dropdownLargeButton"
-                  >
-                    <li>
-                      <a href="#" className="text-sm block px-4 py-2">
-                        11
-                      </a>
-                    </li>
-                    <li>
-                      <a href="#" className="text-sm block px-4 py-2">
-                        11
-                      </a>
-                    </li>
-                    <li>
-                      <a href="#" className="text-sm block px-4 py-2">
-                        cccc
-                      </a>
-                    </li>
-                  </ul>
-                </div>
-              </div>
-            </div>
-            <div className="group inline-block hover:bg-sky-500 focus:bg-sky-500 rounded">
-              <button
-                id="dropdownNavbarLink"
-                data-dropdown-toggle="dropdownGanDay"
-                className="text-white  border-b md:border-0 pl-3 pr-4 py-1 px-2  focus:bg-sky-500 rounded md:p-0 flex items-center justify-between w-full md:w-auto"
-              >
-                Gần đây
-                <svg
-                  className="w-6 h-6 ml-1"
-                  fill="currentColor"
-                  viewBox="0 0 20 20"
-                  xmlns="http://www.w3.org/2000/svg"
-                >
-                  <path
-                    fillRule="evenodd"
-                    d="M5.293 7.293a1 1 0 011.414 0L10 10.586l3.293-3.293a1 1 0 111.414 1.414l-4 4a1 1 0 01-1.414 0l-4-4a1 1 0 010-1.414z"
-                    clipRule="evenodd"
-                  />
-                </svg>
-              </button>
-              <div
-                id="dropdownGanDay"
-                className="hidden bg-white z-10 list-none divide-y-2 divide-gray-100 rounded py-2 shadow my-1 w-44 w-64"
-              >
-                <div className="py-1">
-                  <a
-                    href="#"
-                    className="text-sm block text-center text-black p-2 flex flex-row"
-                  >
-                    <span className="text-center w-11/12 cursor-text text-stone-500 align-middle">
-                      Gần đây
-                    </span>
-
-                    <button
-                      className="cursor-pointer absolute top-0 right-0 mt-4 mr-5 text-gray-400 hover:text-gray-600 transition duration-150 ease-in-out rounded "
-                      aria-label="close modal"
-                      role="button"
-                    >
-                      <svg
-                        xmlns="http://www.w3.org/2000/svg"
-                        className="icon icon-tabler icon-tabler-x"
-                        width={17}
-                        height={17}
-                        viewBox="0 0 24 24"
-                        strokeWidth="2.5"
-                        stroke="currentColor"
-                        fill="none"
-                        strokeLinecap="round"
-                        strokeLinejoin="round"
-                      >
-                        <path stroke="none" d="M0 0h24v24H0z" />
-                        <line x1={18} y1={6} x2={6} y2={18} />
-                        <line x1={6} y1={6} x2={18} y2={18} />
-                      </svg>
-                    </button>
-                  </a>
-                </div>
-                <div>
-                  <ul
-                    className="py-1 rounded-sm text-black "
-                    aria-labelledby="dropdownLargeButton"
-                  >
-                    <li>
-                      <a href="#" className="text-sm block px-4 py-2">
-                        222
-                      </a>
-                    </li>
-                    <li>
-                      <a href="#" className="text-sm block px-4 py-2">
-                        222
-                      </a>
-                    </li>
-                    <li>
-                      <a href="#" className="text-sm block px-4 py-2">
-                        cccc
-                      </a>
-                    </li>
-                  </ul>
-                </div>
-              </div>
-            </div>
-            <div className="group inline-block hover:bg-sky-500 focus:bg-sky-500 rounded">
-              <button
-                id="dropdownNavbarLink"
-                data-dropdown-toggle="dropdown3"
-                className="text-white  border-b md:border-0 pl-3  pr-4 py-1 px-2  focus:bg-sky-500 rounded md:p-0 flex items-center justify-between w-full md:w-auto"
-              >
-                Đã đánh dấu sao
-                <svg
-                  className="w-6 h-6 ml-1"
-                  fill="currentColor"
-                  viewBox="0 0 20 20"
-                  xmlns="http://www.w3.org/2000/svg"
-                >
-                  <path
-                    fillRule="evenodd"
-                    d="M5.293 7.293a1 1 0 011.414 0L10 10.586l3.293-3.293a1 1 0 111.414 1.414l-4 4a1 1 0 01-1.414 0l-4-4a1 1 0 010-1.414z"
-                    clipRule="evenodd"
-                  />
-                </svg>
-              </button>
-              <div
-                id="dropdown3"
-                className="hidden bg-white z-10 list-none divide-y-2 divide-gray-100 rounded py-2 shadow my-1 w-44 w-64"
-              >
-                <div className="py-1">
-                  <a
-                    href="#"
-                    className="text-sm block text-center cursor-text text-black p-2 flex flex-row"
-                  >
-                    <span className="text-center w-11/12 text-stone-500 align-middle">
-                      Đã đánh dấu sao
-                    </span>
-                    <button
-                      className="cursor-pointer absolute top-0 right-0 mt-4 mr-5 text-gray-400 hover:text-gray-600 transition duration-150 ease-in-out rounded "
-                      aria-label="close modal"
-                      role="button"
-                    >
-                      <svg
-                        xmlns="http://www.w3.org/2000/svg"
-                        className="icon icon-tabler icon-tabler-x"
-                        width={17}
-                        height={17}
-                        viewBox="0 0 24 24"
-                        strokeWidth="2.5"
-                        stroke="currentColor"
-                        fill="none"
-                        strokeLinecap="round"
-                        strokeLinejoin="round"
-                      >
-                        <path stroke="none" d="M0 0h24v24H0z" />
-                        <line x1={18} y1={6} x2={6} y2={18} />
-                        <line x1={6} y1={6} x2={18} y2={18} />
-                      </svg>
-                    </button>
-                  </a>
-                </div>
-                <div className="flex flew-col gap-3">
-                  <ul
-                    className="py-1 rounded-sm text-black "
-                    aria-labelledby="dropdownLargeButton"
-                  >
-                    <li>
-                      <a href="#" className="text-sm block px-4 py-2">
-                        333
-                      </a>
-                    </li>
-                    <li>
-                      <a href="#" className="text-sm block px-4 py-2">
-                        33
-                      </a>
-                    </li>
-                    <li>
-                      <a href="#" className="text-sm block px-4 py-2">
-                        cccc
-                      </a>
-                    </li>
-                  </ul>
-                </div>
-              </div>
-            </div>
+            {/* dropdow-1 */}
+            <Drop1 />
+            {/* dropdow-2 */}
+            <Drop2 />
+            {/* dropdow-3 */}
+            <Drop3 />
             <div className="group inline-block hover:bg-sky-500 focus:bg-sky-500 rounded">
               <button
                 onClick={handleCreateBroad}

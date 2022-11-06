@@ -50,7 +50,7 @@ export default function IsLogin() {
                 position: "fixed",
                 width: 250 + "px",
                 top: 58 + "px",
-                left: 1290 + "px",
+                left: 1330 + "px",
               }}
               className="
               
