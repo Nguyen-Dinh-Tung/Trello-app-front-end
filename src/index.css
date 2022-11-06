@@ -1,15 +1,15 @@
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
-.column{
-  margin-left:  20px;
+.column {
+  margin-left: 20px;
   margin-right: 20px;
-  border:  1px solid #ccc;
+  border: 1px solid #ccc;
   border-radius: 10px;
   overflow: hidden;
   background-color: #ebecf0;
 }
-.column-title{
+.column-title {
   text-align: center;
   padding: 6px 0;
   height: 40px;
@@ -17,7 +17,7 @@
   position: relative;
   top: -9px;
 }
-.item-task{
+.item-task {
   padding: 8px;
   margin: 8px 8px;
   background-color: white;
@@ -26,18 +26,18 @@
   font-size: 16px;
   box-shadow: 0 1px 0 #091e4240;
 }
-.item-task:hover{
+.item-task:hover {
   background-color: #f4f4f7;
 }
 
-.Broad{
+.Broad {
   /* background-image: url('../public/assets/image/wallpaper-4k-hinh-nen-4k-con-duong-day-tuyet-dep_101306165.jpg'); */
   padding-bottom: 110px;
 }
-.asslsss:hover{
+.asslsss:hover {
   background-color: #026aa7;
 }
-.btn-my-trell{
+.btn-my-trell {
   position: relative;
   bottom: -6px;
 }

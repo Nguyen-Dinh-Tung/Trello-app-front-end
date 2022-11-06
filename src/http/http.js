@@ -25,35 +25,22 @@ const refreshToken = async () => {
 };
 
 Http.setToken = (token) => {
-  Http.defaults.headers["x-access-token"] = token;
+  Http.defaults.headers.Authorization = token;
   window.localStorage.setItem("token", token);
 };
 
-// Http.interceptors.request.use(
-//   function (config) {
-//     const token = localStorage.getItem("token");
-//     if (token) {
-//       // config.headers.common["Authorization"] = `Bearer ${token}`;
-//       config.headers.common["Authorization"] = `${token}`;
-//     }
-//     return config;
-//   },
-//   function (error) {
-//     return Promise.reject(error);
-//   }
-// );
-
-// Http.interceptors.response.use(
-//   function (response) {
-//     return response;
-//   },
-//   function (error) {
-//     if (error.response) {
-//       return Promise.reject(error.response);
-//     }
-//     return Promise.reject(error);
-//   }
-// );
+Http.interceptors.request.use(
+  function (config) {
+    const token = localStorage.getItem("token");
+    if (token) {
+      config.headers.Authorization = `${token}`;
+    }
+    return config;
+  },
+  function (error) {
+    return Promise.reject(error);
+  }
+);
 
 Http.interceptors.response.use(
   (response) => {
@@ -61,13 +48,10 @@ Http.interceptors.response.use(
     if (err.message == "Unauthorized access.") {
       refreshToken()
         .then((rs) => {
-          console.log(rs);
           const { token } = rs.data;
-          // const { refreshToken } = rs.data;
           Http.setToken(token);
-          // setRefreshToken(refreshToken);
           const config = response.config;
-          config.headers["x-access-token"] = token;
+          config.headers.Authorization = token;
           config.baseURL = "http://localhost:8080/";
           return config;
         })

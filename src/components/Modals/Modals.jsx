@@ -9,12 +9,12 @@ import jwtDecode from "jwt-decode";
 function Modals(props) {
   const isShowModal = useSelector((state) => state.isShowModal.isShowModal);
   const dispath = useDispatch();
-  let token = localStorage.getItem('token') ;
-  let idUser = jwtDecode(token).id
+  let token = localStorage.getItem("token");
+  let idUser = jwtDecode(token).id;
   const [newBroad, setNewBroad] = useState({
     title: "",
     mode: "",
-    idUser : idUser
+    idUser: idUser,
   });
   const [isCreateBroad, setCreateBroad] = useState(true);
   console.log(isShowModal);
@@ -33,7 +33,7 @@ function Modals(props) {
       createBroad(newBroad)
         .then((res) => {
           console.log(res);
-          dispath(setShowModal('none'))
+          dispath(setShowModal("none"));
         })
         .catch((e) => console.log(e.message));
     }
@@ -42,7 +42,7 @@ function Modals(props) {
     <>
       <div className="modals" style={{ display: isShowModal }}>
         <div
-          className="py-12 bg-gray-700 dark:bg-gray-900 transition duration-150 ease-in-out z-10 absolute top-0 right-0 bottom-0 left-0"
+          className="py-12 backdrop-blur-sm dark:bg-gray-900 transition duration-150 ease-in-out z-10 absolute top-0 right-0 bottom-0 left-0"
           id="modal"
         >
           <div
