@@ -1,6 +1,5 @@
 import axios from "axios";
 import { Outlet } from "react-router-dom";
-import "./navbar.css";
 import Modals from "../Modals/Modals";
 import { useState } from "react";
 import { useSelector } from "react-redux";
@@ -16,7 +15,7 @@ export default function Navbar() {
   return (
     <div>
       <Modals />
-      <nav className="navbar flex items-center justify-between justify-center flex-wrap  py-2 lg:px-2 shadow text-white  border-blue-700 text-white-700">
+      <nav className="navbar flex bg-sky-600 items-center justify-between justify-center flex-wrap  py-2 lg:px-2 shadow text-white  border-blue-700 text-white-700">
         <button className="btn1">
           <span
             role="img"
@@ -45,17 +44,20 @@ export default function Navbar() {
             <span className="font-semibold text-xl tracking-tight">Trello</span>
           </div>
         </div>
-        <div className="menu w-full lg:block flex-grow lg:flex lg:items-center lg:w-auto">
+        <div className="menu w-full lg:block flex-grow lg:flex lg:items-center lg:w-auto ">
           <div className="text-md font-bold flex-row lg:flex-grow">
             <div className="group inline-block ">
-              <button className="btn1 rounded-sm flex items-center min-w-32">
+              <button
+                className="btn1 rounded-sm flex items-center min-w-32"
+                id="dropdownNavbarLink"
+                data-dropdown-toggle="dropdownNavbar"
+              >
                 <span className="pr-1 font-semibold flex-1 ">
                   Các không gian làm việc
                 </span>
                 <span>
                   <svg
-                    className="fill-current h-4 w-4 transform group-hover:-rotate-180
-        transition duration-150 ease-in-out"
+                    className="fill-current h-4 w-4"
                     xmlns="http://www.w3.org/2000/svg"
                     viewBox="0 0 20 20"
                   >
@@ -63,22 +65,23 @@ export default function Navbar() {
                   </svg>
                 </span>
               </button>
-
-              <ul
-                className="bg-white border rounded-sm transform scale-0 group-hover:scale-100 absolute
-  transition duration-150 ease-in-out origin-top min-w-32 w-80 mt-4"
-              >
-                <li className="li1 color-text-li text-center justify-center bg-inherit hover:bg-inherit ">
-                  Các không gian làm việc
-                </li>
-                <hr className="hr-navbar"></hr>
-                <li className="li1 rounded-sm px-3 py-1 hover:bg-gray-100">
-                  ...
-                </li>
-                <li className="li1 rounded-sm px-3 py-1 hover:bg-gray-100">
-                  ...
-                </li>
-              </ul>
+              <div id="dropdownNavbar">
+                <ul
+                  className="bg-white border rounded-sm 
+   ease-in-out origin-top min-w-32 w-80 mt-4"
+                >
+                  <li className="li1 color-text-li text-center justify-center bg-inherit hover:bg-inherit ">
+                    Các không gian làm việc
+                  </li>
+                  <hr className="hr-navbar"></hr>
+                  <li className="li1 rounded-sm px-3 py-1 hover:bg-gray-100">
+                    ...
+                  </li>
+                  <li className="li1 rounded-sm px-3 py-1 hover:bg-gray-100">
+                    ...
+                  </li>
+                </ul>
+              </div>
             </div>
             <div className="group inline-block ">
               <button className="btn1 rounded-sm flex items-center min-w-32">
@@ -145,7 +148,7 @@ export default function Navbar() {
 
             <div className="group inline-block ">
               <button
-                className="btn1 flex items-center button-create"
+                className=" flex items-center button-create"
                 onClick={handleCreateBroad}
               >
                 Tạo mới

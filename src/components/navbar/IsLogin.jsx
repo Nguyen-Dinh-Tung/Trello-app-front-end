@@ -26,13 +26,12 @@ export default function IsLogin() {
               href="#"
               data-bs-toggle="dropdown"
               aria-expanded="false"
-              style={{
+              style={{ 
                 background:
                   "url('data:image/jpeg;base64,/9j/4AAQSkZJRgABAQAAAQABAAD/2wCEAAkGBwcICAgIBwcHBwcIBwoHBwcHBw8ICQcKFREWFhQRExMYKCggGBolGxMTITEhMSkrLi4uFx8zODMsNygtLisBCgoKDg0OFRAPFzcdFR0rMis3LTcrKy03KysrNys3LS0rNy0tKysrKy0tKystKysrLSsrKy0tNysrKysrKy0tK//AABEIASwAqAMBIgACEQEDEQH/xAAYAAEBAQEBAAAAAAAAAAAAAAAAAQIDB//EABoQAQEBAAMBAAAAAAAAAAAAAAABEQIxQQP/xAAVAQEBAAAAAAAAAAAAAAAAAAAAAf/EABYRAQEBAAAAAAAAAAAAAAAAAAABEf/aAAwDAQACEQMRAD8A9xAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAS1UBQAAAAAAAAAAAAASkUAAABICstAAAAAAAAAAAAAAJQUAAAAAAAAAAAAAAAAAAAAAAAASKAAAAAAAAAAAAAAAAAAAigAACeqkgKAAAAAAAAAAAAAAAAAAAAAAAAACRSAAAAAAAAAAAAAAAAAAAAAAAAAAAAACKAAAAAAAAAAAAAAAAAnqpO1AAAAAAAAAAAAAAAAAAABKBFAAAAAAEoFEtyWnARoAUAAAAAAAARQAAAAAABFAY+nWLxmRrATAAUAAAAAAAAEUAAAAAAAAAYvONSgomqAAAAAAAAAAAAAAAAAxzt8bTBK4cfnd2u3UaAkxym66syNJFAFAAAAAAAAAAAAAAAABLVSgkrSRQAAAAAAf//Z')",
               }}
             >
               <span
-                title={str[0]}
                 className="  text-center overflow-visible rounded-full bg-sky-400 hover:bg-sky-300  "
                 style={{
                   height: 35 + "px",
@@ -51,7 +50,7 @@ export default function IsLogin() {
                 position: "fixed",
                 width: 250 + "px",
                 top: 58 + "px",
-                left: 1890 + "px",
+                left: 1290 + "px",
               }}
               className="
               
