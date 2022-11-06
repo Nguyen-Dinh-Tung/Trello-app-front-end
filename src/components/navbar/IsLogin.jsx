@@ -41,42 +41,28 @@ export default function IsLogin() {
       {isLogin ? (
         <div className="flex items-center relative">
           <div className=" items-center text ml-2  text-stone-700">
-            {avatar ? (
-              <div
-                className="avatar "
-                data-bs-toggle="dropdown"
-                aria-expanded="false"
-              >
-                <div className="w-12 rounded-full   ">
-                  <i class="fa-solid fa-2xl fa-user"></i>
+            <div
+              className="avatar "
+              data-bs-toggle="dropdown"
+              aria-expanded="false"
+            >
+              <div className="w-12 rounded-full   ">
+                <div className="overflow-hidden relative w-10 h-10 bg-gray-100 rounded-full dark:bg-gray-600">
+                  <svg
+                    className="absolute -left-1 w-12 h-12 text-gray-400"
+                    fill="currentColor"
+                    viewBox="0 0 20 20"
+                    xmlns="http://www.w3.org/2000/svg"
+                  >
+                    <path
+                      fillRule="evenodd"
+                      d="M10 9a3 3 0 100-6 3 3 0 000 6zm-7 9a7 7 0 1114 0H3z"
+                      clipRule="evenodd"
+                    />
+                  </svg>
                 </div>
               </div>
-            ) : (
-              <a
-                className="flex items-center text ml-2 rounded-full  hover:text-white "
-                href="#"
-                data-bs-toggle="dropdown"
-                aria-expanded="false"
-                style={{
-                  background:
-                    "url('data:image/jpeg;base64,/9j/4AAQSkZJRgABAQAAAQABAAD/2wCEAAkGBwcICAgIBwcHBwcIBwoHBwcHBw8ICQcKFREWFhQRExMYKCggGBolGxMTITEhMSkrLi4uFx8zODMsNygtLisBCgoKDg0OFRAPFzcdFR0rMis3LTcrKy03KysrNys3LS0rNy0tKysrKy0tKystKysrLSsrKy0tNysrKysrKy0tK//AABEIASwAqAMBIgACEQEDEQH/xAAYAAEBAQEBAAAAAAAAAAAAAAAAAQIDB//EABoQAQEBAAMBAAAAAAAAAAAAAAABEQIxQQP/xAAVAQEBAAAAAAAAAAAAAAAAAAAAAf/EABYRAQEBAAAAAAAAAAAAAAAAAAABEf/aAAwDAQACEQMRAD8A9xAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAS1UBQAAAAAAAAAAAAASkUAAABICstAAAAAAAAAAAAAAJQUAAAAAAAAAAAAAAAAAAAAAAAASKAAAAAAAAAAAAAAAAAAAigAACeqkgKAAAAAAAAAAAAAAAAAAAAAAAAACRSAAAAAAAAAAAAAAAAAAAAAAAAAAAAACKAAAAAAAAAAAAAAAAAnqpO1AAAAAAAAAAAAAAAAAAABKBFAAAAAAEoFEtyWnARoAUAAAAAAAARQAAAAAABFAY+nWLxmRrATAAUAAAAAAAAEUAAAAAAAAAYvONSgomqAAAAAAAAAAAAAAAAAxzt8bTBK4cfnd2u3UaAkxym66syNJFAFAAAAAAAAAAAAAAAABLVSgkrSRQAAAAAAf//Z')",
-                }}
-              >
-                <span
-                  className="  text-center overflow-visible rounded-full bg-sky-400 hover:bg-sky-300  "
-                  style={{
-                    height: 35 + "px",
-                    width: 35 + "px",
-                    lineHeight: 35 + "px",
-                    cursor: "pointer",
-                  }}
-                >
-                  <span className="overflow-visible text-black text-lg cursor-pointer">
-                    {str[0]}
-                  </span>
-                </span>
-              </a>
-            )}
+            </div>
 
             <ul
               style={{
@@ -155,7 +141,7 @@ export default function IsLogin() {
      "
                   href="/account"
                 >
-                  Hồ sơ tài khoản
+                  Thông tin tài khoản
                 </a>
               </li>
               <li>
@@ -177,7 +163,7 @@ export default function IsLogin() {
      "
                   href="/"
                 >
-                  Đăng xuất khỏi trái đất
+                  Đăng xuất
                 </a>
               </li>
             </ul>

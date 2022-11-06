@@ -132,32 +132,11 @@ export default function Account() {
                   />
                 </div>
               ) : (
-                <a
-                  className="flex items-center text ml-2 rounded-full  hover:text-white "
-                  href="#"
-                  data-bs-toggle="dropdown"
-                  aria-expanded="false"
-                  style={{
-                    background:
-                      "url('data:image/jpeg;base64,/9j/4AAQSkZJRgABAQAAAQABAAD/2wCEAAkGBwcICAgIBwcHBwcIBwoHBwcHBw8ICQcKFREWFhQRExMYKCggGBolGxMTITEhMSkrLi4uFx8zODMsNygtLisBCgoKDg0OFRAPFzcdFR0rMis3LTcrKy03KysrNys3LS0rNy0tKysrKy0tKystKysrLSsrKy0tNysrKysrKy0tK//AABEIASwAqAMBIgACEQEDEQH/xAAYAAEBAQEBAAAAAAAAAAAAAAAAAQIDB//EABoQAQEBAAMBAAAAAAAAAAAAAAABEQIxQQP/xAAVAQEBAAAAAAAAAAAAAAAAAAAAAf/EABYRAQEBAAAAAAAAAAAAAAAAAAABEf/aAAwDAQACEQMRAD8A9xAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAS1UBQAAAAAAAAAAAAASkUAAABICstAAAAAAAAAAAAAAJQUAAAAAAAAAAAAAAAAAAAAAAAASKAAAAAAAAAAAAAAAAAAAigAACeqkgKAAAAAAAAAAAAAAAAAAAAAAAAACRSAAAAAAAAAAAAAAAAAAAAAAAAAAAAACKAAAAAAAAAAAAAAAAAnqpO1AAAAAAAAAAAAAAAAAAABKBFAAAAAAEoFEtyWnARoAUAAAAAAAARQAAAAAABFAY+nWLxmRrATAAUAAAAAAAAEUAAAAAAAAAYvONSgomqAAAAAAAAAAAAAAAAAxzt8bTBK4cfnd2u3UaAkxym66syNJFAFAAAAAAAAAAAAAAAABLVSgkrSRQAAAAAAf//Z')",
-                  }}
-                >
-                  <span
-                    className="  text-center overflow-visible rounded-full bg-sky-400 hover:bg-sky-300  "
-                    style={{
-                      height: 35 + "px",
-                      width: 35 + "px",
-                      lineHeight: 35 + "px",
-                      cursor: "pointer",
-                    }}
-                  >
-                    <span className="overflow-visible text-black text-lg cursor-pointer">
-                      {str[0]}
-                    </span>
-                  </span>
-                </a>
+                <div>
+                  <i class="fa-sharp fa-solid fa-user-ninja fa-2xl"></i>
+                </div>
               )}
-              <span className="text-2xl font-semibold    ">{str}</span>
+              <span className="text-2xl font-semibold  ">{str}</span>
             </span>
           </div>
         </div>
