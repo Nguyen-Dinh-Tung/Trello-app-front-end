@@ -88,7 +88,7 @@ export default function IsLogin() {
               </li>
               <li className="hover:bg-stone-300">
                 <a
-                  onClick={()=>handleLogout()}
+                  onClick={() => handleLogout()}
                   className="
        dropdown-item
        text-sm
@@ -100,7 +100,7 @@ export default function IsLogin() {
        text-gray-700
        hover:bg-gray-100
      "
-                  href="/home"
+                  href="/login"
                 >
                   Đăng xuất khỏi trái đất
                 </a>
