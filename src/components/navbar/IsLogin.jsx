@@ -1,7 +1,11 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import jwt_decode from "jwt-decode";
+import getImageUser from "../../api/GetImageUser";
 
 export default function IsLogin() {
+  const [avatar, setAvatar] = useState(false);
+  const [valueAvatar, setValueAvatar] = useState();
+
   const isLogin = localStorage.getItem("token");
   let decode;
   let str = "";
@@ -15,41 +19,74 @@ export default function IsLogin() {
     localStorage.removeItem("token");
     setOpen(false);
   };
+  let idUser = decode["id"];
+  useEffect(() => {
+    getImageUser(idUser)
+      .then((res) => {
+        if (res.data.message === "Không có ảnh!") {
+          setAvatar(false);
+        } else if (res.data.message === "Unauthorized access.") {
+          setAvatar(false);
+        } else {
+          setValueAvatar(res.data.message);
+          setAvatar(true);
+        }
+      })
+      .catch((e) => {
+        console.log(e);
+      });
+  }, []);
   return (
     <>
       {isLogin ? (
         <div className="flex items-center relative">
-          <div>
-            <a
-              className="flex items-center hover:bg-sky-400  cursor-pointer hover:text-white bg-sky-300 rounded-full px-3 py-2 ml-2 text-lg"
-              href="#"
-              role="button"
+          <div className=" items-center text ml-2  text-stone-700">
+            <div
+              className="avatar "
               data-bs-toggle="dropdown"
               aria-expanded="false"
             >
-              {str[0]}
-            </a>
+              <div className="w-12 rounded-full   ">
+                <div className="overflow-hidden relative w-10 h-10 bg-gray-100 rounded-full dark:bg-gray-600">
+                  <svg
+                    className="absolute -left-1 w-12 h-12 text-gray-400"
+                    fill="currentColor"
+                    viewBox="0 0 20 20"
+                    xmlns="http://www.w3.org/2000/svg"
+                  >
+                    <path
+                      fillRule="evenodd"
+                      d="M10 9a3 3 0 100-6 3 3 0 000 6zm-7 9a7 7 0 1114 0H3z"
+                      clipRule="evenodd"
+                    />
+                  </svg>
+                </div>
+              </div>
+            </div>
+
             <ul
-              style={{ top: 131 + "%", left: -283 + "%" }}
+              style={{
+                position: "fixed",
+                width: 250 + "px",
+                top: 58 + "px",
+                left: 1890 + "px",
+              }}
               className="
-        w-48
+              
    dropdown-menu
-   absolute
-   hidden
    bg-white
    text-base
-   list-none
    shadow-lg
    hidden
-   bg-clip-padding
-   border-none
 
  "
               aria-labelledby="dropdownMenuButton2"
             >
-              <li className="hover:bg-stone-300">
+              <li className=" flex flex-row">
                 <a
                   className="
+                  focus:text-gray-700
+                  w-10-12
        dropdown-item
        text-sm
        font-normal
@@ -57,21 +94,43 @@ export default function IsLogin() {
        whitespace-nowrap
        bg-transparent
        text-gray-700
-       hover:bg-gray-100
        text-center
+       cursor:text
      "
-                  href="#"
                 >
                   Tài khoản
                 </a>
-                <hr></hr>
+                <span className=" w-2/12 mt-1">
+                  <svg
+                    xmlns="http://www.w3.org/2000/svg"
+                    fill="none"
+                    viewBox="0 0 24 24"
+                    strokeWidth={1.5}
+                    stroke="currentColor"
+                    className="w-5 h-5"
+                    style={{ cursor: "pointer" }}
+                  >
+                    <path
+                      strokeLinecap="round"
+                      strokeLinejoin="round"
+                      d="M6 18L18 6M6 6l12 12"
+                    />
+                  </svg>
+                </span>
               </li>
-              <li className="hover:bg-stone-300 ">
+
+              <li>
+                <hr className="mx-3 border-2 text-stone-500 my-2"></hr>
+              </li>
+              <li></li>
+              <li>
+                <hr className="mx-3 border-2 text-slate-400 my-2"></hr>
+              </li>
+              <li className="hover:bg-stone-200 ">
                 <a
                   className="
        dropdown-item
        text-sm
-      
        font-normal
        block
        w-full
@@ -80,15 +139,17 @@ export default function IsLogin() {
        text-gray-700
        hover:bg-gray-100
      "
-                  href="#"
+                  href="/account"
                 >
-                  Hồ sơ tài khoản
+                  Thông tin tài khoản
                 </a>
-                <hr></hr>
               </li>
-              <li className="hover:bg-stone-300">
+              <li>
+                <hr className="mx-3 border-2 text-stone-500 my-2"></hr>
+              </li>
+              <li className="hover:bg-stone-200">
                 <a
-                  onClick={()=>handleLogout()}
+                  onClick={() => handleLogout()}
                   className="
        dropdown-item
        text-sm
@@ -100,9 +161,9 @@ export default function IsLogin() {
        text-gray-700
        hover:bg-gray-100
      "
-                  href="/home"
+                  href="/"
                 >
-                  Đăng xuất khỏi trái đất
+                  Đăng xuất
                 </a>
               </li>
             </ul>
