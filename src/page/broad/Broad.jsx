@@ -91,7 +91,7 @@ function Broad(props) {
     const newState = {
       ...dataByStore,
       columns: {
-        ...data.columns,
+        ...dataByStore.columns,
         [newSourceColumn.id]: newSourceColumn,
         [newDestinationColumn.id]: newDestinationColumn,
       },
@@ -144,6 +144,7 @@ function Broad(props) {
         .catch((e) => console.log(e.message));
     }
   }, [dataByStore]);
+
   return (
     <DragDropContext onDragEnd={onDragEnd}>
       <Navbar></Navbar>

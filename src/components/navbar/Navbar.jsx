@@ -76,10 +76,7 @@ export default function Navbar() {
                 className="hidden bg-white z-10 list-none divide-y-2 divide-gray-100 rounded py-2 shadow my-1 w-44 w-64"
               >
                 <div className="py-1">
-                  <a
-                    href="#"
-                    className="text-sm block text-center text-black p-2 flex flex-row"
-                  >
+                  <a className="text-sm block text-center text-black p-2 flex flex-row">
                     <span className="text-center w-11/12 cursor-text text-stone-500 align-middle">
                       Các không gian việc làm
                     </span>
@@ -113,19 +110,13 @@ export default function Navbar() {
                     aria-labelledby="dropdownLargeButton"
                   >
                     <li>
-                      <a href="#" className="text-sm block px-4 py-2">
-                        11
-                      </a>
+                      <a className="text-sm block px-4 py-2">11</a>
                     </li>
                     <li>
-                      <a href="#" className="text-sm block px-4 py-2">
-                        11
-                      </a>
+                      <a className="text-sm block px-4 py-2">11</a>
                     </li>
                     <li>
-                      <a href="#" className="text-sm block px-4 py-2">
-                        cccc
-                      </a>
+                      <a className="text-sm block px-4 py-2">cccc</a>
                     </li>
                   </ul>
                 </div>
@@ -156,10 +147,7 @@ export default function Navbar() {
                 className="hidden bg-white z-10 list-none divide-y-2 divide-gray-100 rounded py-2 shadow my-1 w-44 w-64"
               >
                 <div className="py-1">
-                  <a
-                    href="#"
-                    className="text-sm block text-center text-black p-2 flex flex-row"
-                  >
+                  <a className="text-sm block text-center text-black p-2 flex flex-row">
                     <span className="text-center w-11/12 cursor-text text-stone-500 align-middle">
                       Gần đây
                     </span>
@@ -194,19 +182,13 @@ export default function Navbar() {
                     aria-labelledby="dropdownLargeButton"
                   >
                     <li>
-                      <a href="#" className="text-sm block px-4 py-2">
-                        222
-                      </a>
+                      <a className="text-sm block px-4 py-2">222</a>
                     </li>
                     <li>
-                      <a href="#" className="text-sm block px-4 py-2">
-                        222
-                      </a>
+                      <a className="text-sm block px-4 py-2">222</a>
                     </li>
                     <li>
-                      <a href="#" className="text-sm block px-4 py-2">
-                        cccc
-                      </a>
+                      <a className="text-sm block px-4 py-2">cccc</a>
                     </li>
                   </ul>
                 </div>
@@ -237,10 +219,7 @@ export default function Navbar() {
                 className="hidden bg-white z-10 list-none divide-y-2 divide-gray-100 rounded py-2 shadow my-1 w-44 w-64"
               >
                 <div className="py-1">
-                  <a
-                    href="#"
-                    className="text-sm block text-center cursor-text text-black p-2 flex flex-row"
-                  >
+                  <a className="text-sm block text-center cursor-text text-black p-2 flex flex-row">
                     <span className="text-center w-11/12 text-stone-500 align-middle">
                       Đã đánh dấu sao
                     </span>
@@ -274,19 +253,13 @@ export default function Navbar() {
                     aria-labelledby="dropdownLargeButton"
                   >
                     <li>
-                      <a href="#" className="text-sm block px-4 py-2">
-                        333
-                      </a>
+                      <a className="text-sm block px-4 py-2">333</a>
                     </li>
                     <li>
-                      <a href="#" className="text-sm block px-4 py-2">
-                        33
-                      </a>
+                      <a className="text-sm block px-4 py-2">33</a>
                     </li>
                     <li>
-                      <a href="#" className="text-sm block px-4 py-2">
-                        cccc
-                      </a>
+                      <a className="text-sm block px-4 py-2">cccc</a>
                     </li>
                   </ul>
                 </div>
