@@ -1,10 +1,10 @@
 import { useState } from "react";
 import MediaCard from "../Card/Card";
-import { useSelector } from 'react-redux';
+import { useSelector } from "react-redux";
 export default function Sidebar(props) {
-  const columnsOrder = props.columnsOrder
+  const columnsOrder = props.columnsOrder;
   const [onCreate, setOnCreate] = useState(true);
-  const data = useSelector(state => state.broad) ;
+  const data = useSelector((state) => state.broad);
   return (
     <div className="flex flex-cols gap-12 justify-center mt-8 ">
       <div className="flex flex-col">
@@ -170,9 +170,7 @@ export default function Sidebar(props) {
                   </li>
                 </ul>
               </li>
-              <li>
-
-              </li>
+              <li></li>
             </ul>
           </div>
         </div>
@@ -180,7 +178,7 @@ export default function Sidebar(props) {
 
       {/* oulet */}
 
-      <div className="pl-5 w-fit ">
+      <div className="pl-5  ">
         <div className="text-slate-400 text-xl pb-5 ">
           Các không gian làm việc của bạn
         </div>
@@ -256,11 +254,18 @@ export default function Sidebar(props) {
             </div>
           </div>
         </div>
-        <div className="flex flex-row gap-4">
-          {columnsOrder ? columnsOrder.map(broad =>{
-            return <MediaCard broad={broad}/>
-          }) : <h2>Hiện chưa có dữ liệu</h2>}
+        <div className=" ">
+          <div className="  grid grid-cols-4 gap-4">
+            {columnsOrder ? (
+              columnsOrder.map((broad) => {
+                return <MediaCard broad={broad} />;
+              })
+            ) : (
+              <h2>Hiện chưa có dữ liệu</h2>
+            )}
+          </div>
         </div>
+
         {/* <Content/> */}
       </div>
     </div>
