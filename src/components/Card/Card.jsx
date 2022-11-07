@@ -10,6 +10,7 @@ import { useSelector } from 'react-redux';
 export default function MediaCard(props) {
   const broad = props.broad ;
   const navigate = useNavigate()
+  console.log(broad);
   const handleCLick = ()=>{
     navigate('/broad' , {state : { broad : broad}})
   }

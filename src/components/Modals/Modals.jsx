@@ -17,7 +17,6 @@ function Modals(props) {
     idUser : idUser
   });
   const [isCreateBroad, setCreateBroad] = useState(true);
-  console.log(isShowModal);
   const handleHiddenModals = () => {
     dispath(setShowModal("none"));
   };
