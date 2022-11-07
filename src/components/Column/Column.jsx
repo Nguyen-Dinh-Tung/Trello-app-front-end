@@ -1,12 +1,12 @@
-import React from 'react';
-import { Draggable } from 'react-beautiful-dnd';
-import ListItem from '../ListItem/ListItem';
-import { useState } from 'react';
-import { useSelector } from 'react-redux';
-import {v4 as uuidv4} from 'uuid'
-import { useDispatch } from 'react-redux';
-import { setItemBroad } from '../../redux/features/broad.slice';
-import List from '@mui/material/List';
+import React from "react";
+import { Draggable } from "react-beautiful-dnd";
+import ListItem from "../ListItem/ListItem";
+import { useState } from "react";
+import { useSelector } from "react-redux";
+import { v4 as uuidv4 } from "uuid";
+import { useDispatch } from "react-redux";
+import { setItemBroad } from "../../redux/features/broad.slice";
+import List from "@mui/material/List";
 
 function Column(props) {
   const data = useSelector(state => state.broad.data);
