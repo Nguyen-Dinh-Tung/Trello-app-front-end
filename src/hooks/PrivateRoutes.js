@@ -6,7 +6,6 @@ let check;
 
 const PrivateRoutes = () => {
   const token = localStorage.getItem("token");
-
   if (token === null) {
     check = false;
   } else {

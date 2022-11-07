@@ -104,7 +104,7 @@ function Modals(props) {
                 </button>
               </div>
               <button
-                className="cursor-pointer absolute top-0 right-0 mt-4 mr-5 text-gray-400 hover:text-gray-600 transition duration-150 ease-in-out rounded focus:ring-2 focus:outline-none focus:ring-gray-600"
+                className="cursor-pointer absolute top-0 right-0 mt-4 mr-5 text-gray-400 hover:text-gray-600 transition duration-150 ease-in-out rounded "
                 onclick="modalHandler()"
                 aria-label="close modal"
                 role="button"
