@@ -1,11 +1,11 @@
 import { useState } from "react";
 import MediaCard from "../Card/Card";
-import { useSelector } from 'react-redux';
+import { useSelector } from "react-redux";
 import Project from "./Project";
 export default function Sidebar(props) {
-  const columnsOrder = props.columnsOrder
+  const columnsOrder = props.columnsOrder;
   const [onCreate, setOnCreate] = useState(true);
-  const data = useSelector(state => state.broad) ;
+  const data = useSelector((state) => state.broad);
   return (
     <div className="flex flex-cols gap-12 justify-center mt-8 ">
       {/* <div className="flex flex-col">
@@ -54,7 +54,7 @@ export default function Sidebar(props) {
                   <span className="px-4 text-sm text-center text-justify">
                     Mẫu
                   </span>
-                </a>
+</a>
               </li>
               <li className="flex-row rounded hover:bg-gray-200">
                 <a href="#" className="flex align-items-center p-1 ">
@@ -125,7 +125,7 @@ export default function Sidebar(props) {
                   </svg>
 
                   <span
-                    className="flex-1 ml-3 text-left whitespace-nowrap"
+className="flex-1 ml-3 text-left whitespace-nowrap"
                     sidebar-toggle-item
                   >
                     Dự án...
@@ -171,9 +171,7 @@ export default function Sidebar(props) {
                   </li>
                 </ul>
               </li>
-              <li>
-
-              </li>
+              <li></li>
             </ul>
           </div>
         </div>
@@ -182,7 +180,7 @@ export default function Sidebar(props) {
 
       {/* oulet */}
 
-      <div className="pl-5 w-fit ">
+      <div className="pl-5  ">
         <div className="text-slate-400 text-xl pb-5 ">
           Các không gian làm việc của bạn
         </div>
@@ -198,7 +196,7 @@ export default function Sidebar(props) {
             <path
               strokeLinecap="round"
               strokeLinejoin="round"
-              d="M6.429 9.75L2.25 12l4.179 2.25m0-4.5l5.571 3 5.571-3m-11.142 0L2.25 7.5 12 2.25l9.75 5.25-4.179 2.25m0 0L21.75 12l-4.179 2.25m0 0l4.179 2.25L12 21.75 2.25 16.5l4.179-2.25m11.142 0l-5.571 3-5.571-3"
+d="M6.429 9.75L2.25 12l4.179 2.25m0-4.5l5.571 3 5.571-3m-11.142 0L2.25 7.5 12 2.25l9.75 5.25-4.179 2.25m0 0L21.75 12l-4.179 2.25m0 0l4.179 2.25L12 21.75 2.25 16.5l4.179-2.25m11.142 0l-5.571 3-5.571-3"
             />
           </svg>
           <span className="font-bold">Dự án...</span>
@@ -250,7 +248,7 @@ export default function Sidebar(props) {
                 <path
                   strokeLinecap="round"
                   strokeLinejoin="round"
-                  d="M15.75 6a3.75 3.75 0 11-7.5 0 3.75 3.75 0 017.5 0zM4.501 20.118a7.5 7.5 0 0114.998 0A17.933 17.933 0 0112 21.75c-2.676 0-5.216-.584-7.499-1.632z"
+d="M15.75 6a3.75 3.75 0 11-7.5 0 3.75 3.75 0 017.5 0zM4.501 20.118a7.5 7.5 0 0114.998 0A17.933 17.933 0 0112 21.75c-2.676 0-5.216-.584-7.499-1.632z"
                 />
               </svg>
 
@@ -258,10 +256,16 @@ export default function Sidebar(props) {
             </div>
           </div>
         </div>
-        <div className="flex flex-row gap-4">
-          {columnsOrder ? columnsOrder.map(broad =>{
-            return <MediaCard broad={broad}/>
-          }) : <h2>Hiện chưa có dữ liệu</h2>}
+        <div className=" ">
+          <div className="  grid grid-cols-4 gap-4">
+            {columnsOrder ? (
+              columnsOrder.map((broad) => {
+                return <MediaCard broad={broad} />;
+              })
+            ) : (
+              <h2>Hiện chưa có dữ liệu</h2>
+            )}
+          </div>
         </div>
 
         {/* <Content/> */}
