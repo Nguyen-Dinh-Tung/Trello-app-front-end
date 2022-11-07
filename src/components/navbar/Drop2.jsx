@@ -6,7 +6,6 @@ export default function Drop2() {
       <div>
         <div className="bg-600 dropdown relative group inline-block hover:bg-sky-500 focus:bg-sky-500 rounded">
           <button
-            href="#"
             data-bs-toggle="dropdown"
             data-dropdown-toggle="dropdown2"
             className=" dropdown
@@ -55,7 +54,6 @@ export default function Drop2() {
           >
             <div className="py-1">
               <a
-                href="#"
                 className="text-sm block text-center cursor-text text-black p-2 flex flex-row"
               >
                 <span className="text-center w-11/12 text-stone-500 align-middle">

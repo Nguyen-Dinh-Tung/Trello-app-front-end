@@ -36,7 +36,7 @@ export default function IsLogin() {
   return (
     <>
       {isLogin ? (
-        <div className="flex items-center relative">
+        <div className="flex items-center relative ">
           <div className=" items-center text ml-2  text-stone-700">
             <div
               className="avatar "
@@ -63,10 +63,10 @@ export default function IsLogin() {
 
             <ul
               style={{
-                position: "fixed",
-                width: 20 + "%",
-                top: 8 + "%",
-                left: 80 + "%",
+                flex: "auto",
+                width: 460 + "%",
+                top: 120 + "%",
+                left: -350 + "%",
               }}
               className="
               
@@ -117,7 +117,7 @@ export default function IsLogin() {
               <li>
                 <hr className="mx-3 border-2 text-stone-500 my-2"></hr>
               </li>
-              <li></li>
+             
               <li className="hover:bg-stone-200 ">
                 <a
                   className="

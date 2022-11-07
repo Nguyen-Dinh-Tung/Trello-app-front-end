@@ -33,7 +33,6 @@ function Home(props) {
   useEffect(() => {
     getBroad(idUser)
       .then((res) => {
-        console.log(res.data.data);
         setColumnOrder(res.data.data);
       })
       .catch((e) => console.log(e.message));

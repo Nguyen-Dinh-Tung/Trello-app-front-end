@@ -76,7 +76,7 @@ function Modals(props) {
               >
                 Trạng thái
               </label>
-              <div className="relative mb-5 mt-2">
+<div className="relative mb-5 mt-2">
                 <select
                   className="text-gray-600"
                   onChange={(e) => {
@@ -105,7 +105,7 @@ function Modals(props) {
                 </button>
               </div>
               <button
-                className="cursor-pointer absolute top-0 right-0 mt-4 mr-5 text-gray-400 hover:text-gray-600 transition duration-150 ease-in-out rounded "
+                className="cursor-pointer absolute top-0 right-0 mt-4 mr-5 text-gray-400 hover:text-gray-600 transition duration-150 ease-in-out rounded focus:ring-2 focus:outline-none focus:ring-gray-600"
                 onclick="modalHandler()"
                 aria-label="close modal"
                 role="button"
