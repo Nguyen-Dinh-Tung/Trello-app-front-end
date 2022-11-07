@@ -1,24 +1,28 @@
 import { Outlet } from "react-router-dom";
 import Modals from "../Modals/Modals";
 import { useDispatch } from "react-redux";
-import { setShowMenuDivider, setShowModal } from "../../redux/features/showModal.slice";
+import {
+  setShowMenuDivider,
+  setShowModal,
+} from "../../redux/features/showModal.slice";
 import IsLogin from "./IsLogin";
 import Drop3 from "./Drop3";
 import Drop1 from "./Drop1";
 import Drop2 from "./Drop2";
-import MenuDivider from '../MenuDivider/MenuDivider'
+import MenuDivider from "../MenuDivider/MenuDivider";
 import { useSelector } from "react-redux";
 export default function Navbar() {
   const dispatch = useDispatch();
-  const isShowMenuDivider = useSelector(state => state.isShowModal.isShowMenudivider)
-  const handleShowMenuDivider = () =>{
-    dispatch(setShowMenuDivider('block'))
-  }
+  const isShowMenuDivider = useSelector(
+    (state) => state.isShowModal.isShowMenudivider
+  );
+  const handleShowMenuDivider = () => {
+    dispatch(setShowMenuDivider("block"));
+  };
   return (
-    <div className=" h-20vh w-full bg-sky-600 shadow"
-    >
+    <div className=" h-20vh w-full bg-sky-600 shadow">
       <Modals />
-      <nav className="navbar flex items-center justify-between justify-center flex-wrap lg:px-2 text-white " >
+      <nav className="navbar flex items-center justify-between justify-center flex-wrap lg:px-2 text-white ">
         <button className="px-2">
           <span
             role="img"
@@ -67,8 +71,11 @@ export default function Navbar() {
               >
                 Thêm
               </button>
-              <div className="dropdown-top" style={{display : isShowMenuDivider}}>
-              <MenuDivider />
+              <div
+                className="dropdown-top"
+                style={{ display: isShowMenuDivider }}
+              >
+                <MenuDivider />
               </div>
             </div>
           </div>
