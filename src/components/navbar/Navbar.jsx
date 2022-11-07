@@ -1,21 +1,22 @@
 import { Outlet } from "react-router-dom";
 import Modals from "../Modals/Modals";
-import { useState } from "react";
 import { useDispatch } from "react-redux";
-import { setShowModal } from "../../redux/features/showModal.slice";
+import { setShowMenuDivider, setShowModal } from "../../redux/features/showModal.slice";
 import IsLogin from "./IsLogin";
 import Drop3 from "./Drop3";
 import Drop1 from "./Drop1";
 import Drop2 from "./Drop2";
+import MenuDivider from '../MenuDivider/MenuDivider'
+import { useSelector } from "react-redux";
 export default function Navbar() {
   const dispatch = useDispatch();
-  const handleCreateBroad = () => {
-    dispatch(setShowModal("block"));
-  };
-
+  const isShowMenuDivider = useSelector(state => state.isShowModal.isShowMenudivider)
+  const handleShowMenuDivider = () =>{
+    dispatch(setShowMenuDivider('block'))
+  }
   return (
-    <div className=" h-20vh w-full bg-sky-600 shadow" 
-    style={{height:8 + 'vh'}}>
+    <div className=" h-20vh w-full bg-sky-600 shadow"
+    >
       <Modals />
       <nav className="navbar flex items-center justify-between justify-center flex-wrap lg:px-2 text-white " >
         <button className="px-2">
@@ -61,11 +62,14 @@ export default function Navbar() {
             <Drop3 />
             <div className="group inline-block hover:bg-sky-500 focus:bg-sky-500 rounded">
               <button
-                onClick={handleCreateBroad}
+                onClick={handleShowMenuDivider}
                 className="text-white  border-b md:border-0 pl-3 pr-4 py-1 px-2  focus:bg-sky-500 rounded md:p-0 flex items-center justify-between w-full md:w-auto"
               >
-                Tạo mới
+                Thêm
               </button>
+              <div className="dropdown-top" style={{display : isShowMenuDivider}}>
+              <MenuDivider />
+              </div>
             </div>
           </div>
 
