@@ -14,7 +14,6 @@ function Column(props) {
   const [isItemInput , setItemInput] = useState(true) ;
   const [valueItem , setValueItem] = useState()
   const column = props.column ;
-  console.log(data);
   if(column){
     const index = props.index ;
     const idColum = column.id ;
@@ -70,6 +69,7 @@ function Column(props) {
             </h2>
             <ListItem column={column} index={index}/>
             <div>
+
             {isItemInput ? <button
             style={{
               height : '40px',
