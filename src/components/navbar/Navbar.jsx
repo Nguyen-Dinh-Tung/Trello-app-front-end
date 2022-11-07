@@ -154,7 +154,7 @@ export default function Navbar() {
                             title.map((title) => {
                               <li>
                                 <a className="text-sm block px-4 py-2">
-                                  {console.log(title)}
+                                  {title}
                                 </a>
                               </li>;
                             })}

@@ -89,8 +89,8 @@ export default function Drop2() {
                 aria-labelledby="dropdownLargeButton"
               >
                 <li>
-                  <a href="#" className="text-sm block px-4 py-2">
-                    222
+                  <a  className="text-sm block px-4 py-2 max-w-fit text-justify">
+                    2222222222222222222222222222222222222222222222222222222222222222222222222222222222222222222222222222222222
                   </a>
                 </li>
                 <li>
