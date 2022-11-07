@@ -1,56 +1,72 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import jwt_decode from "jwt-decode";
+import getImageUser from "../../api/GetImageUser";
 
 export default function IsLogin() {
+  const [avatar, setAvatar] = useState(false);
+  const [valueAvatar, setValueAvatar] = useState();
+
   const isLogin = localStorage.getItem("token");
   let decode;
-  let str = "";
   if (isLogin) {
     decode = jwt_decode(isLogin);
-    str = decode.name;
-    str.split(" ");
   }
-  console.log(decode);
   const [open, setOpen] = useState(false);
   const handleLogout = () => {
     localStorage.removeItem("token");
     setOpen(false);
   };
+  let idUser = decode["id"];
+  useEffect(() => {
+    getImageUser(idUser)
+      .then((res) => {
+        if (res.data.message === "Không có ảnh!") {
+          setAvatar(false);
+        } else if (res.data.message === "Unauthorized access.") {
+          setAvatar(false);
+        } else {
+          setValueAvatar(res.data.message);
+          setAvatar(true);
+        }
+      })
+      .catch((e) => {
+        console.log(e);
+      });
+  }, []);
   return (
     <>
       {isLogin ? (
         <div className="flex items-center relative">
           <div className=" items-center text ml-2  text-stone-700">
-            <a
-              className="flex items-center text ml-2 rounded-full  hover:text-white "
-              href="#"
+            <div
+              className="avatar "
               data-bs-toggle="dropdown"
               aria-expanded="false"
-              style={{ 
-                background:
-                  "url('data:image/jpeg;base64,/9j/4AAQSkZJRgABAQAAAQABAAD/2wCEAAkGBwcICAgIBwcHBwcIBwoHBwcHBw8ICQcKFREWFhQRExMYKCggGBolGxMTITEhMSkrLi4uFx8zODMsNygtLisBCgoKDg0OFRAPFzcdFR0rMis3LTcrKy03KysrNys3LS0rNy0tKysrKy0tKystKysrLSsrKy0tNysrKysrKy0tK//AABEIASwAqAMBIgACEQEDEQH/xAAYAAEBAQEBAAAAAAAAAAAAAAAAAQIDB//EABoQAQEBAAMBAAAAAAAAAAAAAAABEQIxQQP/xAAVAQEBAAAAAAAAAAAAAAAAAAAAAf/EABYRAQEBAAAAAAAAAAAAAAAAAAABEf/aAAwDAQACEQMRAD8A9xAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAS1UBQAAAAAAAAAAAAASkUAAABICstAAAAAAAAAAAAAAJQUAAAAAAAAAAAAAAAAAAAAAAAASKAAAAAAAAAAAAAAAAAAAigAACeqkgKAAAAAAAAAAAAAAAAAAAAAAAAACRSAAAAAAAAAAAAAAAAAAAAAAAAAAAAACKAAAAAAAAAAAAAAAAAnqpO1AAAAAAAAAAAAAAAAAAABKBFAAAAAAEoFEtyWnARoAUAAAAAAAARQAAAAAABFAY+nWLxmRrATAAUAAAAAAAAEUAAAAAAAAAYvONSgomqAAAAAAAAAAAAAAAAAxzt8bTBK4cfnd2u3UaAkxym66syNJFAFAAAAAAAAAAAAAAAABLVSgkrSRQAAAAAAf//Z')",
-              }}
             >
-              <span
-                className="  text-center overflow-visible rounded-full bg-sky-400 hover:bg-sky-300  "
-                style={{
-                  height: 35 + "px",
-                  width: 35 + "px",
-                  lineHeight: 35 + "px",
-                  cursor: "pointer",
-                }}
-              >
-                <span className="overflow-visible text-black text-lg cursor-pointer">
-                  {str[0]}
-                </span>
-              </span>
-            </a>
+              <div className="w-12 rounded-full   ">
+                <div className="overflow-hidden relative w-10 h-10 bg-gray-100 rounded-full dark:bg-gray-600 cursor-pointer">
+                  <svg
+                    className="absolute -left-1 w-12 h-12 text-gray-400"
+                    fill="currentColor"
+                    viewBox="0 0 20 20"
+                    xmlns="http://www.w3.org/2000/svg"
+                  >
+                    <path
+                      fillRule="evenodd"
+                      d="M10 9a3 3 0 100-6 3 3 0 000 6zm-7 9a7 7 0 1114 0H3z"
+                      clipRule="evenodd"
+                    />
+                  </svg>
+                </div>
+              </div>
+            </div>
+
             <ul
               style={{
                 position: "fixed",
                 width: 250 + "px",
                 top: 58 + "px",
-                left: 1330 + "px",
+                left: 1290 + "px",
               }}
               className="
               
@@ -59,73 +75,49 @@ export default function IsLogin() {
    text-base
    shadow-lg
    hidden
-
  "
               aria-labelledby="dropdownMenuButton2"
             >
-              <li className=" flex flex-row">
-                <a
-                  className="
-                  focus:text-gray-700
-                  w-10-12
-       dropdown-item
-       text-sm
-       font-normal
-       block
-       whitespace-nowrap
-       bg-transparent
-       text-gray-700
-       text-center
-       cursor:text
-     "
+              <li>
+              <div>
+              <a
+                href="#"
+                className="text-sm  text-center cursor-text text-black p-2 flex flex-row"
+              >
+                <span className="text-center text-stone-500 w-full">
+                Tài khoản
+                </span>
+                <button
+                  className="cursor-pointer absolute top-5.4 right-0 mr-5 text-gray-400 hover:text-gray-600 transition duration-150 ease-in-out rounded "
+                  aria-label="close modal"
+                  role="button"
                 >
-                  Tài khoản
-                </a>
-                <span className=" w-2/12 mt-1">
                   <svg
                     xmlns="http://www.w3.org/2000/svg"
-                    fill="none"
+                    className="icon icon-tabler icon-tabler-x"
+                    width={17}
+                    height={17}
                     viewBox="0 0 24 24"
-                    strokeWidth={1.5}
+                    strokeWidth="2.5"
                     stroke="currentColor"
-                    className="w-5 h-5"
-                    style={{ cursor: "pointer" }}
+                    fill="none"
+                    strokeLinecap="round"
+                    strokeLinejoin="round"
                   >
-                    <path
-                      strokeLinecap="round"
-                      strokeLinejoin="round"
-                      d="M6 18L18 6M6 6l12 12"
-                    />
+                    <path stroke="none" d="M0 0h24v24H0z" />
+                    <line x1={18} y1={6} x2={6} y2={18} />
+                    <line x1={6} y1={6} x2={18} y2={18} />
                   </svg>
-                </span>
+                </button>
+              </a>
+            </div>
+                
               </li>
 
               <li>
                 <hr className="mx-3 border-2 text-stone-500 my-2"></hr>
               </li>
-              <li>
-                <div className="flex ml-3 gap-3 my-1">
-                  <span
-                    className=" text-center rounded-full bg-sky-400 text-center text-white text-3xl"
-                    style={{
-                      height: 45 + "px",
-                      width: 45 + "px",
-                      lineHeight: 45 + "px",
-                    }}
-                  >
-                    {str[0]}
-                  </span>
-                  <span className="flex flex-col gap-1">
-                    <span className="text-sm">{decode.name}</span>
-                    <span className="text-xs  text-stone-400">
-                      {decode.email}
-                    </span>
-                  </span>
-                </div>
-              </li>
-              <li>
-                <hr className="mx-3 border-2 text-slate-400 my-2"></hr>
-              </li>
+              <li></li>
               <li className="hover:bg-stone-200 ">
                 <a
                   className="
@@ -141,7 +133,7 @@ export default function IsLogin() {
      "
                   href="/account"
                 >
-                  Hồ sơ tài khoản
+                  Thông tin tài khoản
                 </a>
               </li>
               <li>
@@ -163,7 +155,7 @@ export default function IsLogin() {
      "
                   href="/"
                 >
-                  Đăng xuất khỏi trái đất
+                  Đăng xuất
                 </a>
               </li>
             </ul>
