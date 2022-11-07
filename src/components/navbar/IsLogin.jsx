@@ -63,10 +63,10 @@ export default function IsLogin() {
 
             <ul
               style={{
-                position: "fixed",
-                width: 20 + "%",
-                top: 8 + "%",
-                left: 80 + "%",
+                flex: "auto",
+                width: 460 + "%",
+                top: 120 + "%",
+                left: -350 + "%",
               }}
               className="
               
