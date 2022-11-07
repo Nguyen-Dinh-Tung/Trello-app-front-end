@@ -13,9 +13,10 @@ export default function Navbar() {
   };
 
   return (
-    <div>
+    <div className=" h-20vh w-full bg-sky-600 shadow" 
+    style={{height:8 + 'vh'}}>
       <Modals />
-      <nav className="navbar flex bg-sky-600 items-center justify-between justify-center flex-wrap  py-1 lg:px-2 shadow text-white">
+      <nav className="navbar flex items-center justify-between justify-center flex-wrap lg:px-2 text-white " >
         <button className="px-2">
           <span
             role="img"
