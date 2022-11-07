@@ -9,15 +9,14 @@ import jwtDecode from "jwt-decode";
 function Modals(props) {
   const isShowModal = useSelector((state) => state.isShowModal.isShowModal);
   const dispath = useDispatch();
-  let token = localStorage.getItem("token");
-  let idUser = jwtDecode(token).id;
+  let token = localStorage.getItem('token') ;
+  let idUser = jwtDecode(token).id
   const [newBroad, setNewBroad] = useState({
     title: "",
     mode: "",
-    idUser: idUser,
+    idUser : idUser
   });
   const [isCreateBroad, setCreateBroad] = useState(true);
-  console.log(isShowModal);
   const handleHiddenModals = () => {
     dispath(setShowModal("none"));
   };
@@ -33,7 +32,7 @@ function Modals(props) {
       createBroad(newBroad)
         .then((res) => {
           console.log(res);
-          dispath(setShowModal("none"));
+          dispath(setShowModal('none'))
         })
         .catch((e) => console.log(e.message));
     }
