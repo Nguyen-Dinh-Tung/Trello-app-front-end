@@ -1,6 +1,5 @@
 import axios from "axios";
 import { Outlet } from "react-router-dom";
-import "./navbar.css";
 import Modals from "../Modals/Modals";
 import { useState } from "react";
 import { useSelector } from "react-redux";
@@ -15,9 +14,9 @@ export default function Navbar() {
 
   return (
     <div>
-    <Modals/>
-      <nav className="navbar flex items-center justify-between justify-center flex-wrap  py-2 lg:px-2 shadow text-white  border-blue-700 text-white-700">
-        <button className="btn1">
+      <Modals />
+      <nav className="navbar flex bg-sky-600 items-center justify-between justify-center flex-wrap  py-1 lg:px-2 shadow text-white">
+        <button className="px-2">
           <span
             role="img"
             aria-label="ApplicationSwitcherIcon"
@@ -40,136 +39,278 @@ export default function Navbar() {
             </svg>
           </span>
         </button>
-        <div className="flex justify-between lg:w-auto w-full lg:border-b-0 ml-2 text-center justify-center  border-solid border-b-2 border-gray-300  lg:pb-0">
+        <div className="flex mr-5 justify-between lg:w-auto w-full lg:border-b-0 ml-2 text-center justify-center border-solid border-b-2 border-gray-300  lg:pb-0">
           <div className="flex items-center flex-shrink-0 text-gray-800 ">
-            <span className="font-semibold text-xl tracking-tight">Trello</span>
+            <a href="/">
+              {" "}
+              <span className="font-semibold text-xl tracking-tight ">
+                Trello
+              </span>
+            </a>
           </div>
         </div>
-        <div className="menu w-full lg:block flex-grow lg:flex lg:items-center lg:w-auto">
-          <div className="text-md font-bold flex-row lg:flex-grow">
-          <div className="group inline-block ">
-              <button className="btn1 rounded-sm flex items-center min-w-32">
-                <span className="pr-1 font-semibold flex-1 ">Các không gian làm việc</span>
-                <span>
-                  <svg
-                    className="fill-current h-4 w-4 transform group-hover:-rotate-180
-        transition duration-150 ease-in-out"
-                    xmlns="http://www.w3.org/2000/svg"
-                    viewBox="0 0 20 20"
-                  >
-                    <path d="M9.293 12.95l.707.707L15.657 8l-1.414-1.414L10 10.828 5.757 6.586 4.343 8z" />
-                  </svg>
-                </span>
-              </button>
-
-              <ul
-                className="bg-white border rounded-sm transform scale-0 group-hover:scale-100 absolute
-  transition duration-150 ease-in-out origin-top min-w-32 w-80 mt-4"
+        <div className="menu w-full lg:block flex-grow lg:flex lg:items-center lg:w-auto ">
+          <div className=" text-md flex-row flex gap-2 lg:flex-grow ">
+            <div className="group inline-block hover:bg-sky-500 focus:bg-sky-500 rounded">
+              <button
+                id="dropdownNavbarLink"
+                data-dropdown-toggle="dropdown1"
+                className="text-white  border-b md:border-0 pl-3 pr-4 py-1 px-2  focus:bg-sky-500 rounded md:p-0 flex items-center justify-between w-full md:w-auto"
               >
-                <li className="li1 color-text-li text-center justify-center bg-inherit hover:bg-inherit ">
-                Các không gian làm việc
-                </li>
-                <hr className="hr-navbar"></hr>
-                <li className="li1 rounded-sm px-3 py-1 hover:bg-gray-100">
-                  ...
-                </li>
-                <li className="li1 rounded-sm px-3 py-1 hover:bg-gray-100">
-                  ...
-                </li>
-              </ul>
-            </div>
-            <div className="group inline-block ">
-              <button className="btn1 rounded-sm flex items-center min-w-32">
-                <span className="pr-1 font-semibold flex-1 ">Gần đây</span>
-                <span>
-                  <svg
-                    className="fill-current h-4 w-4 transform group-hover:-rotate-180
-        transition duration-150 ease-in-out"
-                    xmlns="http://www.w3.org/2000/svg"
-                    viewBox="0 0 20 20"
-                  >
-                    <path d="M9.293 12.95l.707.707L15.657 8l-1.414-1.414L10 10.828 5.757 6.586 4.343 8z" />
-                  </svg>
-                </span>
+                Các không gian việc làm
+                <svg
+                  className="w-6 h-6 ml-1"
+                  fill="currentColor"
+                  viewBox="0 0 20 20"
+                  xmlns="http://www.w3.org/2000/svg"
+                >
+                  <path
+                    fillRule="evenodd"
+                    d="M5.293 7.293a1 1 0 011.414 0L10 10.586l3.293-3.293a1 1 0 111.414 1.414l-4 4a1 1 0 01-1.414 0l-4-4a1 1 0 010-1.414z"
+                    clipRule="evenodd"
+                  />
+                </svg>
               </button>
-
-              <ul
-                className="bg-white border rounded-sm transform scale-0 group-hover:scale-100 absolute
-  transition duration-150 ease-in-out origin-top min-w-32 w-80 mt-4"
+              <div
+                id="dropdown1"
+                className="hidden bg-white z-10 list-none divide-y-2 divide-gray-100 rounded py-2 shadow my-1 w-44 w-64"
               >
-                <li className="li1 color-text-li text-center justify-center bg-inherit hover:bg-inherit ">
-                  Gần đây
-                </li>
-                <hr className="hr-navbar"></hr>
-                <li className="li1 rounded-sm px-3 py-1 hover:bg-gray-100">
-                  ...
-                </li>
-                <li className="li1 rounded-sm px-3 py-1 hover:bg-gray-100">
-                  ...
-                </li>
-              </ul>
-            </div>
-            <div className="group inline-block ">
-              <button className="btn1 rounded-sm flex items-center min-w-32">
-                <span className="pr-1 font-semibold flex-1 ">
-                  Đã đánh dấu sao
-                </span>
-                <span>
-                  <svg
-                    className="fill-current h-4 w-4 transform group-hover:-rotate-180
-        transition duration-150 ease-in-out"
-                    xmlns="http://www.w3.org/2000/svg"
-                    viewBox="0 0 20 20"
+                <div className="py-1">
+                  <a
+                    href="#"
+                    className="text-sm block text-center text-black p-2 flex flex-row"
                   >
-                    <path d="M9.293 12.95l.707.707L15.657 8l-1.414-1.414L10 10.828 5.757 6.586 4.343 8z" />
-                  </svg>
-                </span>
-              </button>
+                    <span className="text-center w-11/12 cursor-text text-stone-500 align-middle">
+                      Các không gian việc làm
+                    </span>
 
-              <ul
-                className="bg-white border rounded-sm transform scale-0 group-hover:scale-100 absolute
-  transition duration-150 ease-in-out origin-top min-w-32 w-80 mt-4"
-              >
-                <li className="li1 color-text-li text-center justify-center bg-inherit hover:bg-inherit ">
-                  Đã đánh dấu sao
-                </li>
-                <hr className="hr-navbar"></hr>
-                <li className="li1 rounded-sm px-3 py-1 hover:bg-gray-100">
-                  ...
-                </li>
-                <li className="rounded-sm px-3 py-1 hover:bg-gray-100">...</li>
-              </ul>
+                    <button
+                      className="cursor-pointer  absolute top-0 right-0 mt-4 mr-5 text-gray-400 hover:text-gray-600 transition duration-150 ease-in-out rounded "
+                      role="button"
+                    >
+                      <svg
+                        xmlns="http://www.w3.org/2000/svg"
+                        className="icon icon-tabler icon-tabler-x"
+                        width={17}
+                        height={17}
+                        viewBox="0 0 24 24"
+                        strokeWidth="2.5"
+                        stroke="currentColor"
+                        fill="none"
+                        strokeLinecap="round"
+                        strokeLinejoin="round"
+                      >
+                        <path stroke="none" d="M0 0h24v24H0z" />
+                        <line x1={18} y1={6} x2={6} y2={18} />
+                        <line x1={6} y1={6} x2={18} y2={18} />
+                      </svg>
+                    </button>
+                  </a>
+                </div>
+                <div>
+                  <ul
+                    className="py-1 rounded-sm text-black "
+                    aria-labelledby="dropdownLargeButton"
+                  >
+                    <li>
+                      <a href="#" className="text-sm block px-4 py-2">
+                        11
+                      </a>
+                    </li>
+                    <li>
+                      <a href="#" className="text-sm block px-4 py-2">
+                        11
+                      </a>
+                    </li>
+                    <li>
+                      <a href="#" className="text-sm block px-4 py-2">
+                        cccc
+                      </a>
+                    </li>
+                  </ul>
+                </div>
+              </div>
             </div>
+            <div className="group inline-block hover:bg-sky-500 focus:bg-sky-500 rounded">
+              <button
+                id="dropdownNavbarLink"
+                data-dropdown-toggle="dropdownGanDay"
+                className="text-white  border-b md:border-0 pl-3 pr-4 py-1 px-2  focus:bg-sky-500 rounded md:p-0 flex items-center justify-between w-full md:w-auto"
+              >
+                Gần đây
+                <svg
+                  className="w-6 h-6 ml-1"
+                  fill="currentColor"
+                  viewBox="0 0 20 20"
+                  xmlns="http://www.w3.org/2000/svg"
+                >
+                  <path
+                    fillRule="evenodd"
+                    d="M5.293 7.293a1 1 0 011.414 0L10 10.586l3.293-3.293a1 1 0 111.414 1.414l-4 4a1 1 0 01-1.414 0l-4-4a1 1 0 010-1.414z"
+                    clipRule="evenodd"
+                  />
+                </svg>
+              </button>
+              <div
+                id="dropdownGanDay"
+                className="hidden bg-white z-10 list-none divide-y-2 divide-gray-100 rounded py-2 shadow my-1 w-44 w-64"
+              >
+                <div className="py-1">
+                  <a
+                    href="#"
+                    className="text-sm block text-center text-black p-2 flex flex-row"
+                  >
+                    <span className="text-center w-11/12 cursor-text text-stone-500 align-middle">
+                      Gần đây
+                    </span>
 
-            <div className="group inline-block ">
-              <button className="btn1 flex items-center button-create"  onClick={handleCreateBroad}>
+                    <button
+                      className="cursor-pointer absolute top-0 right-0 mt-4 mr-5 text-gray-400 hover:text-gray-600 transition duration-150 ease-in-out rounded "
+                      aria-label="close modal"
+                      role="button"
+                    >
+                      <svg
+                        xmlns="http://www.w3.org/2000/svg"
+                        className="icon icon-tabler icon-tabler-x"
+                        width={17}
+                        height={17}
+                        viewBox="0 0 24 24"
+                        strokeWidth="2.5"
+                        stroke="currentColor"
+                        fill="none"
+                        strokeLinecap="round"
+                        strokeLinejoin="round"
+                      >
+                        <path stroke="none" d="M0 0h24v24H0z" />
+                        <line x1={18} y1={6} x2={6} y2={18} />
+                        <line x1={6} y1={6} x2={18} y2={18} />
+                      </svg>
+                    </button>
+                  </a>
+                </div>
+                <div>
+                  <ul
+                    className="py-1 rounded-sm text-black "
+                    aria-labelledby="dropdownLargeButton"
+                  >
+                    <li>
+                      <a href="#" className="text-sm block px-4 py-2">
+                        222
+                      </a>
+                    </li>
+                    <li>
+                      <a href="#" className="text-sm block px-4 py-2">
+                        222
+                      </a>
+                    </li>
+                    <li>
+                      <a href="#" className="text-sm block px-4 py-2">
+                        cccc
+                      </a>
+                    </li>
+                  </ul>
+                </div>
+              </div>
+            </div>
+            <div className="group inline-block hover:bg-sky-500 focus:bg-sky-500 rounded">
+              <button
+                id="dropdownNavbarLink"
+                data-dropdown-toggle="dropdown3"
+                className="text-white  border-b md:border-0 pl-3  pr-4 py-1 px-2  focus:bg-sky-500 rounded md:p-0 flex items-center justify-between w-full md:w-auto"
+              >
+                Đã đánh dấu sao
+                <svg
+                  className="w-6 h-6 ml-1"
+                  fill="currentColor"
+                  viewBox="0 0 20 20"
+                  xmlns="http://www.w3.org/2000/svg"
+                >
+                  <path
+                    fillRule="evenodd"
+                    d="M5.293 7.293a1 1 0 011.414 0L10 10.586l3.293-3.293a1 1 0 111.414 1.414l-4 4a1 1 0 01-1.414 0l-4-4a1 1 0 010-1.414z"
+                    clipRule="evenodd"
+                  />
+                </svg>
+              </button>
+              <div
+                id="dropdown3"
+                className="hidden bg-white z-10 list-none divide-y-2 divide-gray-100 rounded py-2 shadow my-1 w-44 w-64"
+              >
+                <div className="py-1">
+                  <a
+                    href="#"
+                    className="text-sm block text-center cursor-text text-black p-2 flex flex-row"
+                  >
+                    <span className="text-center w-11/12 text-stone-500 align-middle">
+                      Đã đánh dấu sao
+                    </span>
+                    <button
+                      className="cursor-pointer absolute top-0 right-0 mt-4 mr-5 text-gray-400 hover:text-gray-600 transition duration-150 ease-in-out rounded "
+                      aria-label="close modal"
+                      role="button"
+                    >
+                      <svg
+                        xmlns="http://www.w3.org/2000/svg"
+                        className="icon icon-tabler icon-tabler-x"
+                        width={17}
+                        height={17}
+                        viewBox="0 0 24 24"
+                        strokeWidth="2.5"
+                        stroke="currentColor"
+                        fill="none"
+                        strokeLinecap="round"
+                        strokeLinejoin="round"
+                      >
+                        <path stroke="none" d="M0 0h24v24H0z" />
+                        <line x1={18} y1={6} x2={6} y2={18} />
+                        <line x1={6} y1={6} x2={18} y2={18} />
+                      </svg>
+                    </button>
+                  </a>
+                </div>
+                <div className="flex flew-col gap-3">
+                  <ul
+                    className="py-1 rounded-sm text-black "
+                    aria-labelledby="dropdownLargeButton"
+                  >
+                    <li>
+                      <a href="#" className="text-sm block px-4 py-2">
+                        333
+                      </a>
+                    </li>
+                    <li>
+                      <a href="#" className="text-sm block px-4 py-2">
+                        33
+                      </a>
+                    </li>
+                    <li>
+                      <a href="#" className="text-sm block px-4 py-2">
+                        cccc
+                      </a>
+                    </li>
+                  </ul>
+                </div>
+              </div>
+            </div>
+            <div className="group inline-block hover:bg-sky-500 focus:bg-sky-500 rounded">
+              <button
+                onClick={handleCreateBroad}
+                className="text-white  border-b md:border-0 pl-3 pr-4 py-1 px-2  focus:bg-sky-500 rounded md:p-0 flex items-center justify-between w-full md:w-auto"
+              >
                 Tạo mới
               </button>
-
-              <ul
-                className="bg-white border rounded-sm transform scale-0 group-hover:scale-100 absolute
-  transition duration-150 ease-in-out origin-top min-w-32 w-80 mt-4"
-              >
-                <li className="li1 color-text-li text-center justify-center bg-inherit hover:bg-inherit ">
-                  Tạo mới
-                </li>
-                <hr className="hr-navbar"></hr>
-                <li className="li1 rounded-sm px-3 py-1 hover:bg-gray-100">
-                  Tạo bảng
-                </li>
-              </ul>
             </div>
           </div>
 
           {/* This is an example component */}
           <div className="relative mx-auto text-gray-600 lg:block hidden">
             <input
-              className="border-2 border-gray-300 bg-white h-10 pl-2 pr-8 rounded-lg text-sm focus:outline-none"
+              className="border-2 border-gray-300 bg-white h-8 pl-2 pr-8 rounded-lg text-sm focus:outline-none"
               type="search"
               name="search"
               placeholder="Search"
             />
-            <button type="submit" className="absolute right-0 top-0 mt-3 mr-2">
+            <button type="submit" className="absolute right-0 top-0 mt-2 mr-2">
               <svg
                 className="text-gray-600 h-4 w-4 "
                 xmlns="http://www.w3.org/2000/svg"
@@ -188,7 +329,7 @@ export default function Navbar() {
             </button>
           </div>
           {/* login-logout */}
-          <IsLogin/>
+          <IsLogin />
         </div>
       </nav>
       <Outlet></Outlet>
