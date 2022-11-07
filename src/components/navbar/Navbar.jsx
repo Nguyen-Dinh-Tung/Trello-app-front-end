@@ -14,9 +14,10 @@ export default function Navbar() {
   };
 
   return (
-    <div className="chrome chrome-107 windows adgMarkdown body-tabbed-page">
+    <div className=" h-20vh w-full bg-sky-600 shadow" 
+    style={{height:8 + 'vh'}}>
       <Modals />
-      <nav className="navbar flex bg-sky-600 items-center justify-between justify-center flex-wrap  py-1 lg:px-2 shadow text-white">
+      <nav className="navbar flex items-center justify-between justify-center flex-wrap lg:px-2 text-white " >
         <button className="px-2">
           <span
             role="img"
@@ -42,9 +43,12 @@ export default function Navbar() {
         </button>
         <div className="flex mr-5 justify-between lg:w-auto w-full lg:border-b-0 ml-2 text-center justify-center border-solid border-b-2 border-gray-300  lg:pb-0">
           <div className="flex items-center flex-shrink-0 text-gray-800 ">
-            <span className="font-semibold text-xl tracking-tight ">
-              Trello
-            </span>
+            <a href="/">
+              {" "}
+              <span className="font-semibold text-xl tracking-tight ">
+                Trello
+              </span>
+            </a>
           </div>
         </div>
         <div className="menu w-full lg:block flex-grow lg:flex lg:items-center lg:w-auto ">
