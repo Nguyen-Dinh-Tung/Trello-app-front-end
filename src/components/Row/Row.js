@@ -5,7 +5,6 @@ import Item from "../Item/Item";
 const Row = React.memo(function Row(props) {
   const {data: items, index, style} = props;
   const item = items[index];
-
   // We are rendering an extra item for the placeholder
   if (!item) {
     return null;

@@ -48,3 +48,21 @@
 .hover-btn-top:hover{
   background-color: #ccc;
 }
+
+
+.ic-edit-data{
+  position: absolute;
+  top: 0px;
+  right: 0;
+  padding: 4px;
+  z-index: 1;
+}
+.ic-edit-details{
+  position: relative;
+  font-size: 28px;
+  color: black;
+  cursor: pointer;
+}
+.ic-edit-details:hover{
+  color: white;
+}

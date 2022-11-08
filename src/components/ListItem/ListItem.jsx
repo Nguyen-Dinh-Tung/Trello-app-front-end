@@ -19,7 +19,8 @@ function ListItem(props) {
     <Droppable
     droppableId={column.id}
     type='virtual'
-    renderClone={(provided, snapshot, rubric) => (
+
+    renderClone={(provided, snapshot, rubric ) => (
       <Item
         provided={provided}
         isDragging={snapshot.isDragging}
@@ -33,7 +34,7 @@ function ListItem(props) {
          : column.items.length;
 
        return (
-        <div>
+        <div column={column}>
           <FixedSizeList
            height={500}
            itemCount={itemCount}

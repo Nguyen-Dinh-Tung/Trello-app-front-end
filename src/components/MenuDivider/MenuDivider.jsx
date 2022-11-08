@@ -18,6 +18,10 @@ export default function MenuDivider() {
   const handleCreateBroad = () => {
     dispatch(setShowModal("block"));
   };
+  const handleCreateSpace = () =>{
+    dispatch(setShowModal("block"));
+
+  }
   return (
     <List sx={style} component="nav" aria-label="mailbox folders">
       <ListItem button>
@@ -26,7 +30,7 @@ export default function MenuDivider() {
       </ListItem>
       <ListItem button>
         <ListItemText  disableTypography
-        primary={<Typography type="body2" style={{ color: 'black'}}>Tạo không gian</Typography>} />
+        primary={<Typography type="body2" style={{ color: 'black'}} onClick={handleCreateSpace}>Tạo không gian</Typography>} />
       </ListItem>
     </List>
   );
