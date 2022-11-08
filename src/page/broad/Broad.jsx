@@ -61,7 +61,6 @@ function Broad(props) {
           },
         },
       };
-      console.log('check');
       dispatch(setDataBroad(newState));
       return;
     }
