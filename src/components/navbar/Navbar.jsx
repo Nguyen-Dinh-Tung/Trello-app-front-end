@@ -11,6 +11,8 @@ import Drop1 from "./Drop1";
 import Drop2 from "./Drop2";
 import MenuDivider from "../MenuDivider/MenuDivider";
 import { useSelector } from "react-redux";
+import ModalSpace from "../ModalSpace/ModalSpace";
+import { useState } from "react";
 export default function Navbar() {
   const dispatch = useDispatch();
   const isShowMenuDivider = useSelector(
@@ -22,6 +24,7 @@ export default function Navbar() {
   return (
     <div className=" h-20vh w-full bg-sky-600 shadow">
       <Modals />
+      <ModalSpace />
       <nav className="navbar flex items-center justify-between justify-center flex-wrap lg:px-2 text-white ">
         <button className="px-2">
           <span
@@ -64,20 +67,8 @@ export default function Navbar() {
             <Drop2 />
             {/* dropdow-3 */}
             <Drop3 />
-            <div className="group inline-block hover:bg-sky-500 focus:bg-sky-500 rounded">
-              <button
-                onClick={handleShowMenuDivider}
-                className="text-white  border-b md:border-0 pl-3 pr-4 py-1 px-2  focus:bg-sky-500 rounded md:p-0 flex items-center justify-between w-full md:w-auto"
-              >
-                Thêm
-              </button>
-              <div
-                className="dropdown-top"
-                style={{ display: isShowMenuDivider }}
-              >
-                <MenuDivider />
-              </div>
-            </div>
+            {/* create */}
+            <MenuDivider />
           </div>
 
           {/* This is an example component */}
