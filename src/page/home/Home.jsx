@@ -9,11 +9,13 @@ import jwtDecode from "jwt-decode";
 import { useDispatch } from "react-redux";
 import { setDataBroad } from "../../redux/features/broad.slice";
 import { setShowWorkSpace } from "../../redux/features/showModal.slice";
+import { useSelector } from "react-redux";
 
 function Home(props) {
   const token = localStorage.getItem("token");
   const idUser = jwtDecode(token)["id"];
   const dispatch = useDispatch();
+  const flag = useSelector((state) => state.isShowModal.flag);
 
   let [listIdBroad, setListIdBroad] = useState([]);
   let [columnsOrder, setColumnOrder] = useState([]);
@@ -27,7 +29,7 @@ function Home(props) {
         dispatch(setShowWorkSpace(res.data.listWorkSpace));
       })
       .catch((e) => console.log(e.message));
-  }, []);
+  }, [flag]);
 
   return (
     <>

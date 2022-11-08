@@ -2,7 +2,7 @@ import React, { useEffect, useState } from "react";
 import { Select, Option } from "@material-tailwind/react";
 import createBroad from "../../api/CreateBroad.api";
 import { useSelector } from "react-redux";
-import { setShowModal } from "../../redux/features/showModal.slice";
+import { setFlag, setShowModal } from "../../redux/features/showModal.slice";
 import { useDispatch } from "react-redux";
 import jwtDecode from "jwt-decode";
 
@@ -22,6 +22,7 @@ function Modals(props) {
     workSpace: "",
   });
   const [isCreateBroad, setCreateBroad] = useState(true);
+
   const handleHiddenModals = () => {
     dispatch(setShowModal("none"));
   };
@@ -38,6 +39,7 @@ function Modals(props) {
         .then((res) => {
           console.log(res);
           dispatch(setShowModal("none"));
+          dispatch(setFlag(res));
         })
         .catch((e) => console.log(e.message));
     }
