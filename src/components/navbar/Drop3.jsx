@@ -48,13 +48,11 @@ export default function Drop3() {
             hidden
             m-0
             border-none
-             bg-white z-10 list-none divide-y-2 divide-gray-100 rounded py-2 my-1 w-44 w-64 "
-        aria-labelledby="dropdownMenuButton2"
+             bg-white z-10 list-none divide-y-2 divide-gray-100 rounded py-2 my-1 w-64 "
+            aria-labelledby="dropdownMenuButton2"
           >
             <div className="py-1">
-              <a
-                className="text-sm block text-center cursor-text text-black p-2 flex flex-row"
-              >
+              <a className="text-sm block text-center cursor-text text-black p-2 flex flex-row">
                 <span className="text-center w-11/12 text-stone-500 align-middle">
                   Đã đánh dấu sao
                 </span>
@@ -83,26 +81,9 @@ export default function Drop3() {
               </a>
             </div>
             <div className="flex flew-col gap-3">
-              <ul
-                className="py-1 rounded-sm text-black "
-                aria-labelledby="dropdownLargeButton"
-              >
-                <li>
-                  <a href="#" className="text-sm block px-4 py-2">
-                    333
-                  </a>
-                </li>
-                <li>
-                  <a href="#" className="text-sm block px-4 py-2">
-                    33
-                  </a>
-                </li>
-                <li>
-                  <a href="#" className="text-sm block px-4 py-2">
-                    cccc
-                  </a>
-                </li>
+              <ul className="w-64" role="list">
               </ul>
+              
             </div>
           </div>
         </div>

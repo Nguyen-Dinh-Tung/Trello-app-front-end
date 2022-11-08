@@ -176,7 +176,7 @@ className="flex-1 ml-3 text-left whitespace-nowrap"
           </div>
         </div>
       </div> */}
-      <Project/>
+      <Project />
 
       {/* oulet */}
 
@@ -196,7 +196,7 @@ className="flex-1 ml-3 text-left whitespace-nowrap"
             <path
               strokeLinecap="round"
               strokeLinejoin="round"
-d="M6.429 9.75L2.25 12l4.179 2.25m0-4.5l5.571 3 5.571-3m-11.142 0L2.25 7.5 12 2.25l9.75 5.25-4.179 2.25m0 0L21.75 12l-4.179 2.25m0 0l4.179 2.25L12 21.75 2.25 16.5l4.179-2.25m11.142 0l-5.571 3-5.571-3"
+              d="M6.429 9.75L2.25 12l4.179 2.25m0-4.5l5.571 3 5.571-3m-11.142 0L2.25 7.5 12 2.25l9.75 5.25-4.179 2.25m0 0L21.75 12l-4.179 2.25m0 0l4.179 2.25L12 21.75 2.25 16.5l4.179-2.25m11.142 0l-5.571 3-5.571-3"
             />
           </svg>
           <span className="font-bold">Dự án...</span>
@@ -248,7 +248,7 @@ d="M6.429 9.75L2.25 12l4.179 2.25m0-4.5l5.571 3 5.571-3m-11.142 0L2.25 7.5 12 2.
                 <path
                   strokeLinecap="round"
                   strokeLinejoin="round"
-d="M15.75 6a3.75 3.75 0 11-7.5 0 3.75 3.75 0 017.5 0zM4.501 20.118a7.5 7.5 0 0114.998 0A17.933 17.933 0 0112 21.75c-2.676 0-5.216-.584-7.499-1.632z"
+                  d="M15.75 6a3.75 3.75 0 11-7.5 0 3.75 3.75 0 017.5 0zM4.501 20.118a7.5 7.5 0 0114.998 0A17.933 17.933 0 0112 21.75c-2.676 0-5.216-.584-7.499-1.632z"
                 />
               </svg>
 
@@ -260,7 +260,11 @@ d="M15.75 6a3.75 3.75 0 11-7.5 0 3.75 3.75 0 017.5 0zM4.501 20.118a7.5 7.5 0 011
           <div className="  grid grid-cols-4 gap-4">
             {columnsOrder ? (
               columnsOrder.map((broad) => {
-                return <MediaCard broad={broad} />;
+                return (
+                  <div>   
+                    <MediaCard broad={broad} />
+                  </div>
+                );
               })
             ) : (
               <h2>Hiện chưa có dữ liệu</h2>

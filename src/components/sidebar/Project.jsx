@@ -56,7 +56,7 @@ export default function Project() {
                 stroke-linejoin="round"
               />
             </svg>
-            <p class="text-base leading-4 ">Bảng</p>
+            <button class="text-base leading-4 bg-orange-600 opacity-0 hover:opacity-100 ">Bảng</button>
           </button>
           {/* Mẫu */}
           <button class="flex jusitfy-start items-center w-full  space-x-6 focus:outline-none text-black focus:text-indigo-400   rounded ">
@@ -199,7 +199,7 @@ export default function Project() {
                   stroke-linejoin="round"
                 />
               </svg>
-              <p class="text-base leading-4  ">Security</p>
+              <p class="text-base leading-4 ">Security</p>
             </button>
           </div>
         </div>
