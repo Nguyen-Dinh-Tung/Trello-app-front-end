@@ -4,6 +4,7 @@ import { FixedSizeList, areEqual } from "react-window";
 import Item from '../Item/Item';
 import { useRef ,useLayoutEffect } from 'react';
 import Row from '../Row/Row';
+
 function ListItem(props) {
   const index = props.index
   const column = props.column ;
@@ -18,7 +19,8 @@ function ListItem(props) {
     <Droppable
     droppableId={column.id}
     type='virtual'
-    renderClone={(provided, snapshot, rubric) => (
+
+    renderClone={(provided, snapshot, rubric ) => (
       <Item
         provided={provided}
         isDragging={snapshot.isDragging}
@@ -32,7 +34,8 @@ function ListItem(props) {
          : column.items.length;
 
        return (
-         <FixedSizeList
+        <div column={column}>
+          <FixedSizeList
            height={500}
            itemCount={itemCount}
            itemSize={80}
@@ -43,8 +46,11 @@ function ListItem(props) {
            ref={listRef}
          >
            {Row}
-         </FixedSizeList>)
-      }}
+         </FixedSizeList>
+           {provided.placeholder}
+        </div>
+        )
+    }}
     </Droppable>
   );
 }

@@ -27,7 +27,6 @@ function Broad(props) {
     if (!result.destination) {
       return;
     }
-
     if (result.type === "column") {
       const columnOrder = reorderList(
         dataByStore.columnOrder,
@@ -51,7 +50,6 @@ function Broad(props) {
         result.source.index,
         result.destination.index
       );
-
       // updating column entry
       const newState = {
         ...dataByStore,
@@ -87,11 +85,10 @@ function Broad(props) {
     };
     // in line modification of items
     newDestinationColumn.items.splice(result.destination.index, 0, item);
-
     const newState = {
       ...dataByStore,
       columns: {
-        ...data.columns,
+        ...dataByStore.columns,
         [newSourceColumn.id]: newSourceColumn,
         [newDestinationColumn.id]: newDestinationColumn,
       },
@@ -212,15 +209,12 @@ function Broad(props) {
               style={{ display: "flex" }}
               {...provided.droppableProps}
               ref={provided.innerRef}
-            >
-              {dataByStore &&
-                dataByStore.columns &&
-                dataByStore.columnOrder.map((column, index) => (
-                  <Column
-                    className="column"
-                    key={column}
-                    column={dataByStore.columns[column]}
-                    index={index}
+              >
+                {dataByStore && dataByStore.columns && dataByStore.columnOrder.length>0 && dataByStore.columnOrder.map((column , index) =>(
+                  <Column className="column"
+                  key={column}
+                  column={dataByStore.columns[column]}
+                  index={index}
                   />
                 ))}
               {provided.placeholder}

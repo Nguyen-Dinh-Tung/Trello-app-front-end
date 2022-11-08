@@ -8,11 +8,8 @@ export default function IsLogin() {
 
   const isLogin = localStorage.getItem("token");
   let decode;
-  let str = "";
   if (isLogin) {
     decode = jwt_decode(isLogin);
-    str = decode.name;
-    str.split(" ");
   }
   const [open, setOpen] = useState(false);
   const handleLogout = () => {
@@ -47,7 +44,7 @@ export default function IsLogin() {
               aria-expanded="false"
             >
               <div className="w-12 rounded-full   ">
-                <div className="overflow-hidden relative w-10 h-10 bg-gray-100 rounded-full dark:bg-gray-600">
+                <div className="overflow-hidden relative w-10 h-10 bg-gray-100 rounded-full dark:bg-gray-600 cursor-pointer">
                   <svg
                     className="absolute -left-1 w-12 h-12 text-gray-400"
                     fill="currentColor"
@@ -66,10 +63,10 @@ export default function IsLogin() {
 
             <ul
               style={{
-                position: "fixed",
-                width: 20 + "%",
-                top: 8 + "%",
-                left: 80 + "%",
+                flex: "auto",
+                width: 460 + "%",
+                top: 120 + "%",
+                left: -350 + "%",
               }}
               className="
               
@@ -78,54 +75,45 @@ export default function IsLogin() {
    text-base
    shadow-lg
    hidden
-
  "
               aria-labelledby="dropdownMenuButton2"
             >
-              <li className=" flex flex-row">
-                <a
-                  className="
-                  focus:text-gray-700
-                  w-10-12
-       dropdown-item
-       text-sm
-       font-normal
-       block
-       whitespace-nowrap
-       bg-transparent
-       text-gray-700
-       text-center
-       cursor:text
-     "
-                >
-                  Tài khoản
-                </a>
-                <span className=" w-2/12 mt-1">
-                  <svg
-                    xmlns="http://www.w3.org/2000/svg"
-                    fill="none"
-                    viewBox="0 0 24 24"
-                    strokeWidth={1.5}
-                    stroke="currentColor"
-                    className="w-5 h-5"
-                    style={{ cursor: "pointer" }}
-                  >
-                    <path
-                      strokeLinecap="round"
-                      strokeLinejoin="round"
-                      d="M6 18L18 6M6 6l12 12"
-                    />
-                  </svg>
-                </span>
+              <li>
+                <div>
+                  <a className="text-sm  text-center cursor-text text-black p-2 flex flex-row">
+                    <span className="text-center text-stone-500 w-full">
+                      Tài khoản
+                    </span>
+                    <button
+                      className="cursor-pointer absolute top-5.4 right-0 mr-5 text-gray-400 hover:text-gray-600 transition duration-150 ease-in-out rounded "
+                      aria-label="close modal"
+                      role="button"
+                    >
+                      <svg
+                        xmlns="http://www.w3.org/2000/svg"
+                        className="icon icon-tabler icon-tabler-x"
+                        width={17}
+                        height={17}
+                        viewBox="0 0 24 24"
+                        strokeWidth="2.5"
+                        stroke="currentColor"
+                        fill="none"
+                        strokeLinecap="round"
+                        strokeLinejoin="round"
+                      >
+                        <path stroke="none" d="M0 0h24v24H0z" />
+                        <line x1={18} y1={6} x2={6} y2={18} />
+                        <line x1={6} y1={6} x2={18} y2={18} />
+                      </svg>
+                    </button>
+                  </a>
+                </div>
               </li>
 
               <li>
                 <hr className="mx-3 border-2 text-stone-500 my-2"></hr>
               </li>
               <li></li>
-              <li>
-                <hr className="mx-3 border-2 text-slate-400 my-2"></hr>
-              </li>
               <li className="hover:bg-stone-200 ">
                 <a
                   className="

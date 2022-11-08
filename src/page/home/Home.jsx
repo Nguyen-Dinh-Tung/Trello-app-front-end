@@ -10,30 +10,14 @@ import { useDispatch } from "react-redux";
 import { setDataBroad } from "../../redux/features/broad.slice";
 
 function Home(props) {
-  const token = localStorage.getItem("token");
-  const idUser = jwtDecode(token)["id"];
-  const dispatch = useDispatch();
-  let [listIdBroad, setListIdBroad] = useState([]);
-  let [columnsOrder, setColumnOrder] = useState([]);
-  const initial = {
-    columns: {
-      "column-0": {
-        id: "column-0",
-        title: "First column",
-        items: [
-          {
-            id: "1",
-            text: "Tung",
-          },
-        ],
-      },
-    },
-    columnOrder: ["column-0"],
-  };
-  useEffect(() => {
+  const token = localStorage.getItem('token') ;
+  const idUser = jwtDecode(token)["id"] ;
+  const dispatch = useDispatch()
+  let [listIdBroad , setListIdBroad] = useState([])
+  let [columnsOrder , setColumnOrder] = useState([])
+  useEffect(() =>{
     getBroad(idUser)
       .then((res) => {
-        console.log(res.data.data);
         setColumnOrder(res.data.data);
       })
       .catch((e) => console.log(e.message));
