@@ -29,7 +29,6 @@ function ModalSpace(props) {
   };
 
   useEffect(() => {
-    console.log(newBroad);
     if (newBroad.name && newBroad.des) {
       setCreateBroad(false);
     } else {
@@ -38,22 +37,11 @@ function ModalSpace(props) {
   }, [newBroad]);
   const handleClick = () => {
     if (isCreateBroad === false) {
-      console.log(
-        "🚀 ~ file: ModalSpace.jsx ~ line 24 ~ ModalSpace ~ newBroad",
-        newBroad
-      );
       CreateWorkSpace(newBroad)
         .then((res) => {
-          console.log(res);
+          dispath(setShowMenuDivider("none"));
         })
         .catch((e) => console.log(e));
-
-      // createBroad(newBroad)
-      //   .then((res) => {
-      //     console.log(res);
-      //     dispath(setShowModal("none"));
-      //   })
-      //   .catch((e) => console.log(e.message));
     } else {
       console.log(1);
     }
@@ -66,23 +54,23 @@ function ModalSpace(props) {
           className="  backdrop-blur-sm  transition duration-150 ease-in-out z-10 absolute top-0 right-0 bottom-0 left-0"
           id="modal"
         >
-          <div role="alert" className="container  mt-24">
-            <div className="">
+          <div role="alert" className="my-24 mx-60">
+            <div className=" ">
               <div className="relative flex py-16 gap-10 px-5 md:px-10 bg-white dark:bg-gray-800 dark:border-gray-700 shadow-md rounded border border-gray-400">
-                <div className="w-6/12">
+                <div className="w-6/12 p-10">
                   {" "}
-                  <h1 className="text-gray-800 dark:text-black  font-lg font-bold tracking-normal leading-tight mb-4">
+                  <h1 className="text-gray-800  dark:text-black text-4xl ml-2 font-lg font-bold tracking-normal leading-tight mb-16">
                     Hãy xây dựng một Không gian làm việc
                   </h1>
                   <label
                     htmlFor="name"
-                    className="text-gray-800 dark:text-black  text-sm font-bold leading-tight tracking-normal"
+                    className="text-gray-800  dark:text-black  text-xl ml-2 font-bold leading-tight tracking-normal"
                   >
                     Tên Không gian làm việc
                   </label>
                   <input
                     id="name"
-                    className="mb-5 mt-2 text-gray-600  dark:text-black dark:placeholder-gray-600 dark:border-gray-700 focus:outline-none focus:border focus:border-indigo-700 font-normal w-full h-10 flex items-center pl-3 text-sm border-gray-300 rounded border"
+                    className="mb-5 text-xl mt-2 text-gray-600  dark:text-black dark:placeholder-gray-400 dark:border-gray-700 focus:outline-none focus:border focus:border-indigo-700 font-normal w-full h-10 flex items-center pl-3 border-gray-300 rounded border"
                     name="name"
                     placeholder="Công ty của Taco"
                     onChange={(e) => {
@@ -92,18 +80,17 @@ function ModalSpace(props) {
                   />
                   <label
                     htmlFor="cvc"
-                    className="text-gray-800 dark:text-black  text-sm font-bold leading-tight tracking-normal"
+                    className="text-gray-800 text-xl dark:text-black ml-2 font-bold leading-tight tracking-normal"
                   >
                     Mô tả Không gian làm việc
                   </label>
                   <div className="relative mb-5 mt-2">
                     <select
-                      className="text-gray-600"
+                      className="text-gray-600 w-64 text-xl ml-1 hover:border-slate-700 border-slate-700"
                       onChange={(e) => {
                         setNewBroad({ ...newBroad, des: e.target.value });
                       }}
                     >
-                      <option value="">Chọn</option>
                       <option value="Doanh nghệp nhỏ">Doanh nghệp nhỏ</option>
                       <option value="Kỹ thuật-CNTT">Kỹ thuật-CNTT</option>
                       <option value="Giáo dục">Giáo dục</option>
@@ -111,14 +98,14 @@ function ModalSpace(props) {
                   </div>
                   <div className="flex items-center justify-start w-full">
                     <button
-                      className="focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-700 transition duration-150 ease-in-out hover:bg-indigo-600 bg-indigo-700 rounded text-white px-8 py-2 text-sm"
+                      className="focus:outline-none cursor-pointer bg-gradient-to-r text-xl from-cyan-500 to-blue-500 hover:bg-gradient-to-bl focus:ring-offset-2 focus:ring-indigo-700 transition duration-150 ease-in-out hover:bg-indigo-600 bg-indigo-700 rounded text-white px-8 py-2 text-sm"
                       disabled={isCreateBroad}
                       onClick={handleClick}
                     >
                       Tạo
                     </button>
                     <button
-                      className="focus:outline-none focus:ring-2 focus:ring-offset-2  focus:ring-gray-400 ml-3 bg-gray-100 transition duration-150 text-gray-600 ease-in-out hover:border-gray-400 hover:bg-gray-300 border rounded px-8 py-2 text-sm"
+                      className="focus:outline-none focus:ring-2 cursor-pointer bg-gradient-to-br text-xl from-pink-500 to-orange-400 hover:bg-gradient-to-bl focus:ring-offset-2  focus:ring-gray-400 ml-3 bg-gray-100 transition duration-150 text-white ease-in-out hover:border-gray-400 hover:bg-gray-300 border rounded px-8 py-2 text-sm"
                       onClick={handleHiddenModals}
                     >
                       Hủy

@@ -83,7 +83,7 @@ export default function MenuDivider() {
                 href="#"
                 className="text-sm block text-center cursor-text text-black p-2 flex flex-row"
               >
-                <span className="text-center w-11/12 text-stone-500 align-middle">
+                <span className="text-center w-11/12 text-stone-500 align-middle ">
                   Tạo mới
                 </span>
                 <button
@@ -117,15 +117,15 @@ export default function MenuDivider() {
               >
                 <li>
                   <a
-                    className="text-sm  block px-4 py-2"
+                    className="text-sm  block px-4 py-2 cursor-pointer"
                     onClick={handleCreateBroad}
                   >
-                    <i class="fa-solid fa-table"></i> &ensp; Tạo bảng
+                    <i class="fa-solid fa-table "></i> &ensp; Tạo bảng
                   </a>
                 </li>
                 <li>
                   <a
-                    className="text-sm block px-4 py-2"
+                    className="text-sm block px-4 py-2 cursor-pointer"
                     onClick={handleCreateBroadWord}
                   >
                     <i class="fa-solid fa-users"></i>&ensp; Tạo không gian làm
