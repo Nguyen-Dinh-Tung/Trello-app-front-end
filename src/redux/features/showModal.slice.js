@@ -1,4 +1,4 @@
-import {createSlice} from "@reduxjs/toolkit";
+import { createSlice } from "@reduxjs/toolkit";
 
 const showModalSlice = createSlice({
   name: "isShowModal",
@@ -7,8 +7,12 @@ const showModalSlice = createSlice({
     isShowMenudivider: "none",
     isShowEditTitleColumn: false,
     isShowModalItem: false,
+    isShowWorkSpace: [],
   },
   reducers: {
+    setShowWorkSpace: (state, actions) => {
+      state.isShowWorkSpace = actions.payload;
+    },
     setShowModal: (state, actions) => {
       state.isShowModal = actions.payload;
     },
@@ -28,5 +32,6 @@ export const {
   setShowMenuDivider,
   setShowModalEditTitleColumn,
   setShowModalItem,
+  setShowWorkSpace,
 } = showModalSlice.actions;
 export default showModalSlice.reducer;
