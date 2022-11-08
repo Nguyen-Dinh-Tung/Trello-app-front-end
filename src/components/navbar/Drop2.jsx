@@ -92,17 +92,7 @@ export default function Drop2() {
               >
                 <li>
                   <a href="#" className="text-sm block px-4 py-2">
-                    222
-                  </a>
-                </li>
-                <li>
-                  <a href="#" className="text-sm block px-4 py-2">
-                    222
-                  </a>
-                </li>
-                <li>
-                  <a href="#" className="text-sm block px-4 py-2">
-                    bbb
+                    ....
                   </a>
                 </li>
               </ul>
