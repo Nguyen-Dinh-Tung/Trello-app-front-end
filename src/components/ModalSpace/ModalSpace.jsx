@@ -37,22 +37,11 @@ function ModalSpace(props) {
   }, [newBroad]);
   const handleClick = () => {
     if (isCreateBroad === false) {
-      // console.log(
-      //   "🚀 ~ file: ModalSpace.jsx ~ line 24 ~ ModalSpace ~ newBroad",
-      //   newBroad
-      // );
       CreateWorkSpace(newBroad)
         .then((res) => {
-          console.log(res);
+          dispath(setShowMenuDivider("none"));
         })
         .catch((e) => console.log(e));
-
-      // createBroad(newBroad)
-      //   .then((res) => {
-      //     console.log(res);
-      //     dispath(setShowModal("none"));
-      //   })
-      //   .catch((e) => console.log(e.message));
     } else {
       console.log(1);
     }
