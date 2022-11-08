@@ -12,6 +12,7 @@ import Drop2 from "./Drop2";
 import MenuDivider from "../MenuDivider/MenuDivider";
 import { useSelector } from "react-redux";
 import ModalSpace from "../ModalSpace/ModalSpace";
+import { useState } from "react";
 export default function Navbar() {
   const dispatch = useDispatch();
   const isShowMenuDivider = useSelector(

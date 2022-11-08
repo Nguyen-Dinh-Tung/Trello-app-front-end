@@ -29,7 +29,6 @@ function ModalSpace(props) {
   };
 
   useEffect(() => {
-    console.log(newBroad);
     if (newBroad.name && newBroad.des) {
       setCreateBroad(false);
     } else {
@@ -38,10 +37,10 @@ function ModalSpace(props) {
   }, [newBroad]);
   const handleClick = () => {
     if (isCreateBroad === false) {
-      console.log(
-        "🚀 ~ file: ModalSpace.jsx ~ line 24 ~ ModalSpace ~ newBroad",
-        newBroad
-      );
+      // console.log(
+      //   "🚀 ~ file: ModalSpace.jsx ~ line 24 ~ ModalSpace ~ newBroad",
+      //   newBroad
+      // );
       CreateWorkSpace(newBroad)
         .then((res) => {
           console.log(res);
