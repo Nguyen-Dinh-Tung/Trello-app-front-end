@@ -7,6 +7,7 @@ module.exports = {
         "primary-page-text": "#fff",
         "btn-primary": "#030303",
         opacity: "#333",
+        "bg-menu-top": "#ccc",
       },
     },
     container: {

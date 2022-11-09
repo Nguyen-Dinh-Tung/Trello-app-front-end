@@ -8,21 +8,25 @@ import jwtDecode from "jwt-decode";
 
 function Modals(props) {
   const isShowModal = useSelector((state) => state.isShowModal.isShowModal);
-  const dispath = useDispatch();
+  const isShowWorkSpace = useSelector((state) => {
+    return state.isShowModal.isShowWorkSpace;
+  });
+
+  const dispatch = useDispatch();
   let token = localStorage.getItem("token");
   let idUser = jwtDecode(token).id;
   const [newBroad, setNewBroad] = useState({
     title: "",
     mode: "",
     idUser: idUser,
+    workSpace: "",
   });
   const [isCreateBroad, setCreateBroad] = useState(true);
-  console.log(isShowModal);
   const handleHiddenModals = () => {
-    dispath(setShowModal("none"));
+    dispatch(setShowModal("none"));
   };
   useEffect(() => {
-    if (newBroad.title && newBroad.mode) {
+    if (newBroad.title && newBroad.mode && newBroad.workSpace) {
       setCreateBroad(false);
     } else {
       setCreateBroad(true);
@@ -33,7 +37,7 @@ function Modals(props) {
       createBroad(newBroad)
         .then((res) => {
           console.log(res);
-          dispath(setShowModal("none"));
+          dispatch(setShowModal("none"));
         })
         .catch((e) => console.log(e.message));
     }
@@ -50,19 +54,19 @@ function Modals(props) {
             className="container mx-auto w-11/12 md:w-2/3 max-w-lg"
           >
             <div className="relative py-8 px-5 md:px-10 bg-white dark:bg-gray-800 dark:border-gray-700 shadow-md rounded border border-gray-400">
-              <h1 className="text-gray-800 dark:text-white  font-lg font-bold tracking-normal leading-tight mb-4">
+              <h1 className="text-gray-800 dark:text-black  font-lg font-bold tracking-normal leading-tight mb-4">
                 Thêm bảng mới
               </h1>
               <label
                 htmlFor="name"
-                className="text-gray-800 dark:text-white  text-sm font-bold leading-tight tracking-normal"
+                className="text-gray-800 dark:text-black  text-sm font-bold leading-tight tracking-normal"
               >
                 Tiêu đề
               </label>
 
               <input
                 id="name"
-                className="mb-5 mt-2 text-gray-600 dark:bg-gray-900 dark:text-white dark:placeholder-gray-200 dark:border-gray-700 focus:outline-none focus:border focus:border-indigo-700 font-normal w-full h-10 flex items-center pl-3 text-sm border-gray-300 rounded border"
+                className="mb-5 mt-2 text-gray-600  dark:text-black dark:placeholder-gray-200 dark:border-gray-700 focus:outline-none focus:border focus:border-indigo-700 font-normal w-full h-10 flex items-center pl-3 text-sm border-gray-300 rounded border"
                 name="title"
                 onChange={(e) => {
                   setNewBroad({ ...newBroad, [e.target.name]: e.target.value });
@@ -72,10 +76,30 @@ function Modals(props) {
               />
               <label
                 htmlFor="cvc"
-                className="text-gray-800 dark:text-white  text-sm font-bold leading-tight tracking-normal"
+                className="text-gray-800 dark:text-black  text-sm font-bold leading-tight tracking-normal"
+              >
+                Không gian làm việc
+              </label>
+
+              <div className="relative mb-5 mt-2">
+                <select
+                  className="text-gray-600"
+                  onChange={(e) => {
+                    setNewBroad({ ...newBroad, workSpace: e.target.value });
+                  }}
+                >
+                  {isShowWorkSpace.map((item) => (
+                    <option value={item._id}>{item.name}</option>
+                  ))}
+                </select>
+              </div>
+              <label
+                htmlFor="cvc"
+                className="text-gray-800 dark:text-black  text-sm font-bold leading-tight tracking-normal"
               >
                 Trạng thái
               </label>
+
               <div className="relative mb-5 mt-2">
                 <select
                   className="text-gray-600"

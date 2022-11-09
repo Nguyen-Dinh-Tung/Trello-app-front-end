@@ -3,12 +3,17 @@ import MediaCard from "../Card/Card";
 import { useSelector } from "react-redux";
 import Project from "./Project";
 export default function Sidebar(props) {
+  console.log("🚀 ~ file: Sidebar.jsx ~ line 6 ~ Sidebar ~ props", props);
+  const dataWorkSpace = props.WorkSpace;
   const columnsOrder = props.columnsOrder;
   const [onCreate, setOnCreate] = useState(true);
   const data = useSelector((state) => state.broad);
   return (
     <div className="flex flex-cols gap-12 justify-center mt-8 ">
-      <Project/>
+      <Project />
+
+      {/* oulet */}
+
       <div className="pl-5  ">
         <div className="text-slate-400 text-xl pb-5 ">
           Các không gian làm việc của bạn
