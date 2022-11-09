@@ -9,9 +9,10 @@ import { useNavigate } from "react-router-dom";
 import { useSelector } from "react-redux";
 export default function MediaCard(props) {
   const broad = props.broad;
+  const idWS = props.idWorkSpace;
   const navigate = useNavigate();
   const handleCLick = () => {
-    navigate("/broad", { state: { broad: broad } });
+    navigate("/broad", { state: { broad: broad, idWorkSpace: idWS } });
   };
   return (
     <div onClick={handleCLick}>
@@ -20,7 +21,7 @@ export default function MediaCard(props) {
         style={{ height: 130 + "px", width: 250 + "px" }}
       >
         <span className="text-left text-xl font-bold tracking-tight text-gray-900 dark:text-black">
-           {broad.title} 
+          {broad.title}
         </span>
       </a>
     </div>

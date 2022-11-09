@@ -22,6 +22,8 @@ function Broad(props) {
   const location = useLocation();
   const dataByStore = useSelector((state) => state.broad.data);
   const idBroad = location.state.broad._id;
+  const idWorkSpace = location.state.idWorkSpace;
+
   const dispatch = useDispatch();
   const [isTitleColumn, setIseTitleColumn] = useState(true);
   const [titleColumn, setTitleColumn] = useState();
@@ -189,6 +191,7 @@ function Broad(props) {
   let member = {
     email: ValueShare,
     idbroad: idBroad,
+    idWorkSpace: idWorkSpace,
   };
 
   const handleSendEmail = () => {

@@ -8,7 +8,7 @@ import { useEffect } from "react";
 import jwtDecode from "jwt-decode";
 import { useDispatch } from "react-redux";
 import { setDataBroad } from "../../redux/features/broad.slice";
-import { setShowWorkSpace } from "../../redux/features/showModal.slice";
+import { setIdWorkSpace, setShowWorkSpace } from "../../redux/features/showModal.slice";
 import { useSelector } from "react-redux";
 
 function Home(props) {

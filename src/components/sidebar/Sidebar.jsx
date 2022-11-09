@@ -98,7 +98,9 @@ export default function Sidebar(props) {
                   {columnsOrder ? (
                     columnsOrder.map((broad) => {
                       if (item.id_listIdBroad.includes(broad._id)) {
-                        return <MediaCard broad={broad} />;
+                        return (
+                          <MediaCard broad={broad} idWorkSpace={item._id} />
+                        );
                       }
                     })
                   ) : (
