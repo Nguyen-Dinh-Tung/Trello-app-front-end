@@ -29,8 +29,7 @@ function Modals(props) {
   useEffect(() => {
     getBroad(idUser)
       .then((res) => {
-        console.log("🚀 ~ file: Home.jsx ~ line 24 ~ .then ~ res", res);
-        setWorkSpace(res.data.listWorkSpace);
+          setWorkSpace(res.data.listWorkSpace);
       })
       .catch((e) => console.log(e.message));
   }, []);
