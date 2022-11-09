@@ -27,7 +27,7 @@ function Broad(props) {
   const [showModal, setShowModal] = useState(false);
   const [value, setValueShare] = useState();
   const [valuesUserEmail, setValueUserEmail] = useState([]);
-  let [dataSearch , setDataSearch] = useState([]) ;
+  let [dataSearch, setDataSearch] = useState([]);
   function onDragEnd(result) {
     if (!result.destination) {
       return;
@@ -157,6 +157,10 @@ function Broad(props) {
       let data = element.toLowerCase();
       if (data.includes(Share)) {
         setDataSearch(element);
+        console.log(
+          "🚀 ~ file: Broad.jsx ~ line 160 ~ valuesUserEmail.map ~ element",
+          element
+        );
       } else {
         setDataSearch([]);
       }
