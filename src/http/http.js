@@ -53,7 +53,7 @@ Http.interceptors.response.use(
           const config = response.config;
           config.headers.Authorization = token;
           config.baseURL = "http://localhost:8080/";
-          return config;
+          return Http(config);
         })
         .catch((e) => {
           console.log(e.message);
