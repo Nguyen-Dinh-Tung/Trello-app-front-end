@@ -14,6 +14,7 @@ import { Button } from "@mui/material";
 import Navbar from "../../components/navbar/Navbar";
 import { useLocation } from "react-router";
 import getDataBroad from "./../../api/getDataBroad";
+import getUser from "../../api/GetUser";
 function Broad(props) {
   let initial = useSelector((state) => state.broad.data);
   const location = useLocation();
@@ -23,6 +24,9 @@ function Broad(props) {
   const [isTitleColumn, setIseTitleColumn] = useState(true);
   const [titleColumn, setTitleColumn] = useState();
   const [data, setData] = useState(initial);
+  const [showModal, setShowModal] = useState(false);
+  const [value, setValueShare] = useState();
+  const [valuesUserEmail, setValueUserEmail] = useState([]);
   function onDragEnd(result) {
     if (!result.destination) {
       return;
@@ -122,6 +126,10 @@ function Broad(props) {
       setTitleColumn("");
     }
   };
+
+  const handlShowModalShare = () => {
+    setShowModal(true);
+  };
   // useEffect(() =>{
   //   UpdateBroad(data)
   //   .then(res => console.log(res))
@@ -141,67 +149,148 @@ function Broad(props) {
         .catch((e) => console.log(e.message));
     }
   }, [dataByStore]);
+  const handleShare = (e) => {
+    setValueShare(e.target.value);
+    let data = valuesUserEmail.includes(e.target.value);
+    console.log(data);
+  };
+  useEffect(() => {
+    getUser()
+      .then((res) => {
+        setValueUserEmail(res.data.email);
+      })
+      .catch((e) => {
+        console.log(e);
+      });
+  }, [value]);
+
   return (
     <DragDropContext onDragEnd={onDragEnd}>
       <Navbar></Navbar>
       <div className="Broad">
-        <div
-          className="add-column"
-          style={{
-            display: "flex",
-            alignItems: "center",
-            marginLeft: "8px",
-          }}
-        >
-          {isTitleColumn ? (
-            <button
-              className="asslsss"
-              style={{
-                margin: "10px",
-                padding: "8px",
-                width: "300px",
-                backgroundColor: "#b2b2b2",
-                color: "black",
-                borderRadius: "6px",
-              }}
-              onClick={handleShowCreateColumn}
-            >
-              Thêm cột
-            </button>
-          ) : (
-            <>
-              <input
-                type="text"
-                name="title"
-                onChange={handleGetTitleColunn}
-                style={{
-                  border: "1px solid #ccc",
-                  height: "40px",
-                  paddingLeft: "4px",
-                  borderRadius: "4px",
-                  marginLeft: "14px",
-                }}
-                placeholder={"Tiêu đề cột"}
-              />
+        <div className="flex w-full ">
+          <div
+            className="add-column w-11/12"
+            style={{
+              display: "flex",
+              alignItems: "center",
+              marginLeft: "8px",
+            }}
+          >
+            {isTitleColumn ? (
               <button
                 className="asslsss"
                 style={{
-                  margin: "20px 0",
+                  margin: "10px",
                   padding: "8px",
-                  width: "104px",
-                  backgroundColor: "white",
+                  width: "300px",
+                  backgroundColor: "#b2b2b2",
                   color: "black",
                   borderRadius: "6px",
-                  marginLeft: "8px",
                 }}
-                onClick={handleCreateColumn}
-                disabled={titleColumn ? false : true}
+                onClick={handleShowCreateColumn}
               >
-                Tạo
+                Thêm cột
               </button>
+            ) : (
+              <>
+                <input
+                  type="text"
+                  name="title"
+                  onChange={handleGetTitleColunn}
+                  style={{
+                    border: "1px solid #ccc",
+                    height: "40px",
+                    paddingLeft: "4px",
+                    borderRadius: "4px",
+                    marginLeft: "14px",
+                  }}
+                  placeholder={"Tiêu đề cột"}
+                />
+                <button
+                  className="asslsss"
+                  style={{
+                    margin: "20px 0",
+                    padding: "8px",
+                    width: "104px",
+                    backgroundColor: "white",
+                    color: "black",
+                    borderRadius: "6px",
+                    marginLeft: "8px",
+                  }}
+                  onClick={handleCreateColumn}
+                  disabled={titleColumn ? false : true}
+                >
+                  Tạo
+                </button>
+              </>
+            )}
+          </div>
+          <div className="text-center mt-2 w-2/12">
+            <a
+              className="bg-sky-500 py-1 px-1 rounded cursor-pointer text-white hover:bg-sky-400"
+              onClick={handlShowModalShare}
+            >
+              <i class="fa-solid fa-user-plus"></i> Chia sẻ
+            </a>
+          </div>
+          {showModal ? (
+            <>
+              <div className="justify-center items-center flex overflow-x-hidden overflow-y-auto fixed inset-0 z-50 outline-none focus:outline-none">
+                <div className="relative w-auto my-6 mx-auto max-w-3xl">
+                  {/*content*/}
+                  <div className="border-0 rounded-lg shadow-lg relative flex flex-col w-full bg-white outline-none focus:outline-none">
+                    {/*header*/}
+                    <div className="flex items-start justify-between p-5 border-b border-solid border-slate-200 rounded-t">
+                      <h4 className="text-3xl font-semibold ">Chia sẻ bảng</h4>
+                      <a>
+                        <i class="fa-solid fa-x"></i>
+                      </a>
+                    </div>
+                    <div
+                      className="relative p-6 flex-auto"
+                      style={{ width: "600px" }}
+                    >
+                      <form
+                        novalidate=""
+                        action=""
+                        className="space-y-12 ng-untouched ng-pristine ng-valid"
+                      >
+                        <div className="space-y-4  ">
+                          <div className="m-2">
+                            <div className="w-full gap-2 flex">
+                              <div className="w-3/4 dark:placeholder-gray-700 my-auto">
+                                <input
+                                  type="text"
+                                  name="email"
+                                  onChange={handleShare}
+                                  id="first name"
+                                  className="w-full px-3 py-2 border rounded-md dark:border-gray-700   dark:text-gray-900"
+                                  placeholder="Địa chỉ email"
+                                />
+                              </div>
+                              <div className="w-1/8 items-center justify-center p-2 my-auto border border-gray-400">
+                                <select>
+                                  <option value="1">Thành viên</option>
+                                </select>
+                              </div>
+                              <div className="w-1/8 bg-sky-500 text-center text-white">
+                                Chia sẻ
+                              </div>
+                            </div>
+                          </div>
+                        </div>
+                        <div className="space-y-2 ml-2"></div>
+                      </form>
+                    </div>
+                  </div>
+                </div>
+              </div>
+              <div className="opacity-25 fixed inset-0 z-40 bg-black"></div>
             </>
-          )}
+          ) : null}
         </div>
+
         <Droppable droppableId="broad" direction="horizontal" type="column">
           {(provided) => (
             <div
@@ -209,12 +298,16 @@ function Broad(props) {
               style={{ display: "flex" }}
               {...provided.droppableProps}
               ref={provided.innerRef}
-              >
-                {dataByStore && dataByStore.columns && dataByStore.columnOrder.length>0 && dataByStore.columnOrder.map((column , index) =>(
-                  <Column className="column"
-                  key={column}
-                  column={dataByStore.columns[column]}
-                  index={index}
+            >
+              {dataByStore &&
+                dataByStore.columns &&
+                dataByStore.columnOrder.length > 0 &&
+                dataByStore.columnOrder.map((column, index) => (
+                  <Column
+                    className="column"
+                    key={column}
+                    column={dataByStore.columns[column]}
+                    index={index}
                   />
                 ))}
               {provided.placeholder}
