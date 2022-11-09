@@ -15,6 +15,7 @@ import Navbar from "../../components/navbar/Navbar";
 import { useLocation } from "react-router";
 import getDataBroad from "./../../api/getDataBroad";
 import getUser from "../../api/GetUser";
+import sendEmailUser from "../../api/SendEmailUser";
 function Broad(props) {
   let initial = useSelector((state) => state.broad.data);
   const location = useLocation();
@@ -25,7 +26,7 @@ function Broad(props) {
   const [titleColumn, setTitleColumn] = useState();
   const [data, setData] = useState(initial);
   const [showModal, setShowModal] = useState(false);
-  const [value, setValueShare] = useState();
+  const [ValueShare, setValueShare] = useState();
   const [valuesUserEmail, setValueUserEmail] = useState([]);
   let [dataSearch, setDataSearch] = useState([]);
   function onDragEnd(result) {
@@ -151,22 +152,18 @@ function Broad(props) {
     }
   }, [dataByStore]);
   const handleShare = (e) => {
+    let email = [];
     setValueShare(e.target.value);
-    valuesUserEmail.map((element) => {
+    valuesUserEmail.forEach((element) => {
       let Share = e.target.value.toLowerCase();
       let data = element.toLowerCase();
       if (data.includes(Share)) {
-        setDataSearch(element);
-        console.log(
-          "🚀 ~ file: Broad.jsx ~ line 160 ~ valuesUserEmail.map ~ element",
-          element
-        );
-      } else {
-        setDataSearch([]);
+        email.push(element);
       }
     });
+    setDataSearch(email);
   };
-  
+
   useEffect(() => {
     getUser()
       .then((res) => {
@@ -175,8 +172,17 @@ function Broad(props) {
       .catch((e) => {
         console.log(e);
       });
-  }, [value]);
+  }, [ValueShare]);
 
+  const handleSendEmail = () => {
+    sendEmailUser(ValueShare)
+      .then((res) => {
+        console.log(res);
+      })
+      .catch((e) => {
+        console.log(e);
+      });
+  };
   return (
     <DragDropContext onDragEnd={onDragEnd}>
       <Navbar></Navbar>
@@ -276,24 +282,68 @@ function Broad(props) {
                         <div className="space-y-4  ">
                           <div className="m-2">
                             <div className="w-full gap-2 flex">
-                              <div className="w-3/4 dark:placeholder-gray-700 my-auto">
+                              <div className="w-3/4 dark:placeholder-gray-700 cursor:text my-auto">
                                 <input
                                   type="text"
                                   name="email"
                                   onChange={handleShare}
                                   id="first name"
-                                  className="w-full px-3 py-2 border rounded-md dark:border-gray-700   dark:text-gray-900"
-                                  placeholder="Địa chỉ email"
+                                  className="w-full px-3 py-2 border rounded-md dark:border-gray-700   dark:text-gray-900 "
+                                  role="button"
+                                  data-bs-toggle="dropdown"
+                                  data-dropdown-toggle="dropdownSearch"
+                                  value={ValueShare}
                                 />
+                                <div
+                                  id="dropdownSearch"
+                                  className=" dropdown-menu
+            min-w-max
+            absolute
+            hidden
+            bg-white
+            py-2
+            shadow
+            list-none
+            text-left
+            rounded-lg
+            mt-1
+            hidden
+            m-0
+            border-none
+             bg-white z-10 list-none divide-y-2 divide-gray-100 rounded py-2 my-1 w-44 w-64 "
+                                  aria-labelledby="dropdownMenuButton2"
+                                >
+                                  <div className="flex flew-col gap-3">
+                                    <ul
+                                      className="py-1 rounded-sm text-black "
+                                      aria-labelledby="dropdownLargeButton"
+                                    >
+                                      {dataSearch.map((item) => (
+                                        <li
+                                          onClick={() => {
+                                            setValueShare(item);
+                                          }}
+                                        >
+                                          <a className="text-sm block px-4 py-2">
+                                            {item}
+                                          </a>
+                                        </li>
+                                      ))}
+                                    </ul>
+                                  </div>
+                                </div>
                               </div>
                               <div className="w-1/8 items-center justify-center p-2 my-auto border border-gray-400">
                                 <select>
                                   <option value="1">Thành viên</option>
                                 </select>
                               </div>
-                              <div className="w-1/8 bg-sky-500 text-center text-white">
+                              <a
+                                onClick={handleSendEmail}
+                                className="w-1/8 bg-sky-500 text-center text-white"
+                              >
                                 Chia sẻ
-                              </div>
+                              </a>
                             </div>
                           </div>
                         </div>
