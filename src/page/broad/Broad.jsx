@@ -183,6 +183,7 @@ function Broad(props) {
         console.log(e);
       });
   };
+  const image = "http://www.elle.vn/wp-content/uploads/2017/07/25/hinh-anh-dep-1.jpg"
   return (
     <DragDropContext onDragEnd={onDragEnd}>
       <Navbar></Navbar>
@@ -245,6 +246,9 @@ function Broad(props) {
               </>
             )}
           </div>
+          <div>
+<img src={`${image}`} />
+          </div>
           <div className="text-center mt-2 w-2/12">
             <a
               className="bg-sky-500 py-1 px-1 rounded cursor-pointer text-white hover:bg-sky-400"
@@ -282,13 +286,13 @@ function Broad(props) {
                         <div className="space-y-4  ">
                           <div className="m-2">
                             <div className="w-full gap-2 flex">
-                              <div className="w-3/4 dark:placeholder-gray-700 cursor:text my-auto">
+                              <div className="w-3/4 dark:placeholder-gray-700  my-auto">
                                 <input
                                   type="text"
                                   name="email"
                                   onChange={handleShare}
                                   id="first name"
-                                  className="w-full px-3 py-2 border rounded-md dark:border-gray-700   dark:text-gray-900 "
+                                  className="w-full px-3 py-2 border rounded-md dark:border-gray-700 cursor-text  dark:text-gray-900 "
                                   role="button"
                                   data-bs-toggle="dropdown"
                                   data-dropdown-toggle="dropdownSearch"
