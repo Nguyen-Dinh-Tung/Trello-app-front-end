@@ -27,6 +27,7 @@ function Broad(props) {
   const [showModal, setShowModal] = useState(false);
   const [value, setValueShare] = useState();
   const [valuesUserEmail, setValueUserEmail] = useState([]);
+  let [dataSearch , setDataSearch] = useState([]) ;
   function onDragEnd(result) {
     if (!result.destination) {
       return;
@@ -151,8 +152,15 @@ function Broad(props) {
   }, [dataByStore]);
   const handleShare = (e) => {
     setValueShare(e.target.value);
-    let data = valuesUserEmail.includes(e.target.value);
-    console.log(data);
+    valuesUserEmail.map((element) => {
+      let Share = e.target.value.toLowerCase();
+      let data = element.toLowerCase();
+      if (data.includes(Share)) {
+        setDataSearch(element);
+      } else {
+        setDataSearch([]);
+      }
+    });
   };
   useEffect(() => {
     getUser()
@@ -231,7 +239,7 @@ function Broad(props) {
               className="bg-sky-500 py-1 px-1 rounded cursor-pointer text-white hover:bg-sky-400"
               onClick={handlShowModalShare}
             >
-              <i class="fa-solid fa-user-plus"></i> Chia sẻ
+              <i class="fa-solid fa-user-plus "></i> Chia sẻ
             </a>
           </div>
           {showModal ? (
@@ -241,9 +249,13 @@ function Broad(props) {
                   {/*content*/}
                   <div className="border-0 rounded-lg shadow-lg relative flex flex-col w-full bg-white outline-none focus:outline-none">
                     {/*header*/}
-                    <div className="flex items-start justify-between p-5 border-b border-solid border-slate-200 rounded-t">
-                      <h4 className="text-3xl font-semibold ">Chia sẻ bảng</h4>
-                      <a>
+                    <div className="flex items-start justify-between p-3 border-b border-solid border-slate-200 rounded-t">
+                      <h5 className="text-3xl font-semibold ">Chia sẻ bảng</h5>
+                      <a
+                        onClick={() => {
+                          setShowModal(false);
+                        }}
+                      >
                         <i class="fa-solid fa-x"></i>
                       </a>
                     </div>
