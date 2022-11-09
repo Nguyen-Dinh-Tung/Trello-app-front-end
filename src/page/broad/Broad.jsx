@@ -152,20 +152,17 @@ function Broad(props) {
   }, [dataByStore]);
   const handleShare = (e) => {
     setValueShare(e.target.value);
+    let email = [];
     valuesUserEmail.map((element) => {
       let Share = e.target.value.toLowerCase();
       let data = element.toLowerCase();
       if (data.includes(Share)) {
-        setDataSearch(element);
-        console.log(
-          "🚀 ~ file: Broad.jsx ~ line 160 ~ valuesUserEmail.map ~ element",
-          element
-        );
-      } else {
-        setDataSearch([]);
+        email.push(element);
       }
     });
+    setDataSearch(email);
   };
+  console.log(dataSearch);
   useEffect(() => {
     getUser()
       .then((res) => {

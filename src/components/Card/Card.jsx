@@ -20,7 +20,7 @@ export default function MediaCard(props) {
         style={{ height: 130 + "px", width: 250 + "px" }}
       >
         <span className="text-left text-xl font-bold tracking-tight text-gray-900 dark:text-black">
-          {broad ? broad.title : "helo"}
+           {broad.title} 
         </span>
       </a>
     </div>
