@@ -45,21 +45,23 @@ export default function IsLogin() {
               data-bs-toggle="dropdown"
               aria-expanded="false"
             >
-              <div className="w-12 rounded-full   ">
-                <div className="overflow-hidden relative w-10 h-10 bg-gray-100 rounded-full dark:bg-gray-600 cursor-pointer">
+              <div className="w-12  rounded-full text-center item-center ">
+                <div className="overflow-hidden relative w-10 h-10 bg-gray-100 rounded-full  dark:bg-gray-600 cursor-pointer">
                   {valueAvatar ? (
                     <div title={decode.name}>
                       <img
                         className="h-10 w-10  rounded-full "
                         src={valueAvatar}
                       />
+                    
                     </div>
                   ) : (
-                    <div title={decode.name}>
+                    <div title={decode.name} className="text-lg ">
                       <span
-                        className={`w-10 h-10 rounded-full text-sm bg-gray-500 hover:bg-gray-400 font-bold text-white`}
+                        className={`w-10 h-10 rounded-full border bg-gray-500 hover:bg-gray-400 font-bold block p-1 text-white`}
                       >
-                        {name[0]}
+                        {name[0].toUpperCase()}
+                      
                       </span>
                     </div>
                   )}
@@ -118,7 +120,7 @@ export default function IsLogin() {
               </li>
               <li>
                 <div className="flex flex-row gap-4 p-2">
-                  <div className="overflow-hidden m-1 my-auto relative w-12 h-12 bg-gray-100 rounded-full dark:bg-gray-600 cursor-pointer">
+                  <div className="overflow-hidden m-1 my-auto text-center relative w-12 h-12 bg-gray-100 rounded-full cursor-pointer">
                     {valueAvatar ? (
                       <div title={decode.name} className="text-center">
                        
@@ -132,14 +134,14 @@ export default function IsLogin() {
                     ) : (
                       <div title={decode.name}>
                         <span
-                          className={`w-10 h-10 rounded-full text-sm bg-gray-500 hover:bg-gray-400 font-bold text-white`}
+                          className={` rounded-full block text-lg  bg-gray-500  w-12 h-12 p-2 font-bold text-white`}
                         >
-                          {name[0]}
+                          {name[0].toUpperCase()}
                         </span>
                       </div>
                     )}
                   </div>
-                  <div className="flex flex-col">
+                  <div className="flex flex-col ">
                     <span className="text-lg">{decode.name}</span>
                     <span className="text-sm text-gray-400">{decode.email}</span>
                   </div>
