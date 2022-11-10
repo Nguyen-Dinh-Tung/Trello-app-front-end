@@ -7,8 +7,21 @@ const showModalSlice = createSlice({
     isShowMenudivider: "none",
     isShowEditTitleColumn: false,
     isShowModalItem: false,
+    isShowWorkSpace: [],
+    flag: "",
+    isIdWorkSpace: "",
   },
   reducers: {
+    setIdWorkSpace: (state, actions) => {
+      state.isIdWorkSpace = actions.payload;
+    },
+    setFlag: (state, actions) => {
+      state.flag = actions.payload;
+    },
+
+    setShowWorkSpace: (state, actions) => {
+      state.isShowWorkSpace = actions.payload;
+    },
     setShowModal: (state, actions) => {
       state.isShowModal = actions.payload;
     },
@@ -28,5 +41,8 @@ export const {
   setShowMenuDivider,
   setShowModalEditTitleColumn,
   setShowModalItem,
+  setShowWorkSpace,
+  setFlag,
+  setIdWorkSpace,
 } = showModalSlice.actions;
 export default showModalSlice.reducer;

@@ -1,6 +1,20 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
+import jwtDecode from "jwt-decode";
+import getBroad from "../../api/GetBroad";
 
 export default function Drop1() {
+  let token = localStorage.getItem("token");
+  let idUser = jwtDecode(token).id;
+  let [workspace, setWorkSpace] = useState([]);
+
+  useEffect(() => {
+    getBroad(idUser)
+      .then((res) => {
+        setWorkSpace(res.data.listWorkSpace);
+      })
+      .catch((e) => console.log(e.message));
+  }, []);
+
   return (
     <div class="flex justify-center">
       <div>
@@ -19,7 +33,7 @@ export default function Drop1() {
             whitespace-nowrap
             text-white pl-3  pr-4 py-1 px-2  focus:bg-sky-500 rounded md:p-0 flex items-center justify-between w-full md:w-auto"
           >
-           Các không gian làm việc
+            Các không gian làm việc
             <svg
               className="w-6 h-6 ml-1"
               fill="currentColor"
@@ -50,7 +64,7 @@ export default function Drop1() {
             m-0
             border-none
              bg-white z-10 list-none divide-y-2 divide-gray-100 rounded py-2 my-1 w-44 w-64 "
-        aria-labelledby="dropdownMenuButton2"
+            aria-labelledby="dropdownMenuButton2"
           >
             <div className="py-1">
               <a
@@ -58,7 +72,7 @@ export default function Drop1() {
                 className="text-sm block text-center cursor-text text-black p-2 flex flex-row"
               >
                 <span className="text-center w-11/12 text-stone-500 align-middle">
-                Các không gian làm việc
+                  Các không gian làm việc
                 </span>
                 <button
                   className="cursor-pointer absolute top-0 right-0 mt-4 mr-5 text-gray-400 hover:text-gray-600 transition duration-150 ease-in-out rounded "
@@ -89,21 +103,13 @@ export default function Drop1() {
                 className="py-1 rounded-sm text-black "
                 aria-labelledby="dropdownLargeButton"
               >
-                <li>
-                  <a href="#" className="text-sm block px-4 py-2">
-                    111
-                  </a>
-                </li>
-                <li>
-                  <a href="#" className="text-sm block px-4 py-2">
-                    111
-                  </a>
-                </li>
-                <li>
-                  <a href="#" className="text-sm block px-4 py-2">
-                    aaa
-                  </a>
-                </li>
+                {workspace.map((item) => (
+                  <li>
+                    <a href="#" className="text-sm block px-4 py-2">
+                      {item.name}
+                    </a>
+                  </li>
+                ))}
               </ul>
             </div>
           </div>

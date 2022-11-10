@@ -2,26 +2,40 @@ import React, { useEffect, useState } from "react";
 import { Select, Option } from "@material-tailwind/react";
 import createBroad from "../../api/CreateBroad.api";
 import { useSelector } from "react-redux";
-import { setShowModal } from "../../redux/features/showModal.slice";
+import { setFlag, setShowModal } from "../../redux/features/showModal.slice";
 import { useDispatch } from "react-redux";
 import jwtDecode from "jwt-decode";
+import getBroad from "../../api/GetBroad";
 
 function Modals(props) {
   const isShowModal = useSelector((state) => state.isShowModal.isShowModal);
-  const dispath = useDispatch();
-  let token = localStorage.getItem('token') ;
-  let idUser = jwtDecode(token).id
+
+  let [workspace, setWorkSpace] = useState([]);
+
+  const dispatch = useDispatch();
+  let token = localStorage.getItem("token");
+  let idUser = jwtDecode(token).id;
   const [newBroad, setNewBroad] = useState({
     title: "",
     mode: "",
-    idUser : idUser
+    idUser: idUser,
+    workSpace: "",
   });
   const [isCreateBroad, setCreateBroad] = useState(true);
+
   const handleHiddenModals = () => {
-    dispath(setShowModal("none"));
+    dispatch(setShowModal("none"));
   };
   useEffect(() => {
-    if (newBroad.title && newBroad.mode) {
+    getBroad(idUser)
+      .then((res) => {
+          setWorkSpace(res.data.listWorkSpace);
+      })
+      .catch((e) => console.log(e.message));
+  }, []);
+
+  useEffect(() => {
+    if (newBroad.title && newBroad.mode && newBroad.workSpace) {
       setCreateBroad(false);
     } else {
       setCreateBroad(true);
@@ -32,7 +46,8 @@ function Modals(props) {
       createBroad(newBroad)
         .then((res) => {
           console.log(res);
-          dispath(setShowModal('none'))
+          dispatch(setShowModal("none"));
+          dispatch(setFlag(res));
         })
         .catch((e) => console.log(e.message));
     }
@@ -49,19 +64,19 @@ function Modals(props) {
             className="container mx-auto w-11/12 md:w-2/3 max-w-lg"
           >
             <div className="relative py-8 px-5 md:px-10 bg-white dark:bg-gray-800 dark:border-gray-700 shadow-md rounded border border-gray-400">
-              <h1 className="text-gray-800 dark:text-white  font-lg font-bold tracking-normal leading-tight mb-4">
+              <h1 className="text-gray-800 dark:text-black text-3xl ml-1 font-lg font-bold tracking-normal leading-tight mb-4">
                 Thêm bảng mới
               </h1>
               <label
                 htmlFor="name"
-                className="text-gray-800 dark:text-white  text-sm font-bold leading-tight tracking-normal"
+                className="text-gray-800 dark:text-black text-xl ml-1 font-bold leading-tight tracking-normal"
               >
                 Tiêu đề
               </label>
 
               <input
                 id="name"
-                className="mb-5 mt-2 text-gray-600 dark:bg-gray-900 dark:text-white dark:placeholder-gray-200 dark:border-gray-700 focus:outline-none focus:border focus:border-indigo-700 font-normal w-full h-10 flex items-center pl-3 text-sm border-gray-300 rounded border"
+                className="mb-5 mt-2 text-gray-600 text-xl dark:text-black dark:placeholder-gray-400 dark:border-gray-700 focus:outline-none focus:border focus:border-indigo-700 font-normal w-full h-10 flex items-center pl-3 border-gray-300 rounded border"
                 name="title"
                 onChange={(e) => {
                   setNewBroad({ ...newBroad, [e.target.name]: e.target.value });
@@ -71,13 +86,33 @@ function Modals(props) {
               />
               <label
                 htmlFor="cvc"
-                className="text-gray-800 dark:text-white  text-sm font-bold leading-tight tracking-normal"
+                className="text-gray-800 text-xl dark:text-black font-bold leading-tight tracking-normal"
+              >
+                Không gian làm việc
+              </label>
+
+              <div className="relative mb-5 mt-2 text-lg ">
+                <select
+                  className="text-gray-600 w-48"
+                  onChange={(e) => {
+                    setNewBroad({ ...newBroad, workSpace: e.target.value });
+                  }}
+                >
+                  {workspace.map((item) => (
+                    <option value={item._id}>{item.name}</option>
+                  ))}
+                </select>
+              </div>
+              <label
+                htmlFor="cvc"
+                className="text-gray-800 text-xl dark:text-black font-bold leading-tight tracking-normal"
               >
                 Trạng thái
               </label>
+
               <div className="relative mb-5 mt-2">
                 <select
-                  className="text-gray-600"
+                  className="text-gray-600 text-lg w-32"
                   onChange={(e) => {
                     setNewBroad({ ...newBroad, mode: e.target.value });
                   }}
@@ -88,16 +123,16 @@ function Modals(props) {
                   <option value="public">Công khai</option>
                 </select>
               </div>
-              <div className="flex items-center justify-start w-full">
+              <div className="flex items-center justify-start w-full ">
                 <button
-                  className="focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-700 transition duration-150 ease-in-out hover:bg-indigo-600 bg-indigo-700 rounded text-white px-8 py-2 text-sm"
+                  className=" cursor:pointer focus:ring-2 bg-gradient-to-r text-xl from-cyan-500 to-blue-500 hover:bg-gradient-to-bl focus:ring-offset-2 focus:ring-indigo-700 transition duration-150 ease-in-out hover:bg-indigo-600 bg-indigo-700 rounded text-white px-8 py-2 "
                   disabled={isCreateBroad}
                   onClick={handleClick}
                 >
                   Tạo
                 </button>
                 <button
-                  className="focus:outline-none focus:ring-2 focus:ring-offset-2  focus:ring-gray-400 ml-3 bg-gray-100 transition duration-150 text-gray-600 ease-in-out hover:border-gray-400 hover:bg-gray-300 border rounded px-8 py-2 text-sm"
+                  className="focus:outline-none bg-gradient-to-br cursor:pointer text-xl from-pink-500 to-orange-400 hover:bg-gradient-to-bl focus:ring-2 focus:ring-offset-2  focus:ring-gray-400 ml-3 bg-gray-100 transition duration-150  ease-in-out hover:border-gray-400 hover:bg-gray-300 border rounded px-8 py-2 text-white"
                   onClick={handleHiddenModals}
                 >
                   Hủy
