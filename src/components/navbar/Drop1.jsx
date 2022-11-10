@@ -10,7 +10,6 @@ export default function Drop1() {
   useEffect(() => {
     getBroad(idUser)
       .then((res) => {
-        console.log("🚀 ~ file: Home.jsx ~ line 24 ~ .then ~ res", res);
         setWorkSpace(res.data.listWorkSpace);
       })
       .catch((e) => console.log(e.message));
@@ -104,12 +103,12 @@ export default function Drop1() {
                 className="py-1 rounded-sm text-black "
                 aria-labelledby="dropdownLargeButton"
               >
-                {/* {workspace.map((item) => (
+                {workspace.map((item, index) => (
                   <li>
-                    <a href="#" className="text-sm block px-4 py-2">
+                    <a key={index} className="text-sm block px-4 py-2">
                       {item.name}
                     </a>
-                  </li> */}
+                  </li>
                 ))}
               </ul>
             </div>

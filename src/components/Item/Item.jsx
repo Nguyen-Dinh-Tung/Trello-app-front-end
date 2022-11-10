@@ -1,7 +1,6 @@
 import React from 'react';
 import ListItem from '@mui/material/ListItem';
 import ListItemButton from '@mui/material/ListItemButton';
-import ModalEditItem from '../ModalEditItem/ModalEditItem';
 import { setShowModalItem } from '../../redux/features/showModal.slice';
 
 import { useState  } from 'react';
@@ -74,16 +73,49 @@ const style = {
 };
 
 function Item({ provided, item, isDragging  } , props) {
-  const [showModal, setShowModal] = React.useState(false);
   const dispatch = useDispatch() ;
-  const [valueItem , setValueItem] = useState('');
-  const [itemTarget , setItemTarget] = useState()
-  const handleEditItem = (e) =>{
-    dispatch(setShowModalItem(true))
+  const dataByStore = useSelector((state) => state.broad.data);
+  const itemIdTarget = item.id
+  var  handleFocusOut = (e) =>{
+    let itemContent = e.target.value ;
+    let newItems = [] ;
+    dataByStore.columnOrder.forEach(column =>{
+          dataByStore.columns[`${column}`].items.forEach((e,index) =>{
+            if(e.id === itemIdTarget){
+              newItems = [...dataByStore.columns[`${column}`].items]
+              newItems.splice(index,1 , {
+                id : itemIdTarget ,
+                text : itemContent
+              })
+              let newData = {
+                ...dataByStore ,
+                columns : {
+                  ...dataByStore.columns ,
+                  [`${column}`] : {
+                    ...dataByStore.columns[`${column}`] ,
+                    items : [...newItems]
+                  }
+                }
+              }
+              dispatch(setShowModalItem(false))
+              dispatch(setDataBroad(newData))
+            }
+          })
+
+    })
+
   }
 
+  const handleEditItem = (e) =>{
+    // dispatch(setShowModalItem(true))
+    let itemTarget = e.target.innerHTML
+    let input = `<div class="div-item"><input type="text" value="${itemTarget}" style="width: 100% ; paddingLeft : 4px" class="item-content-out"/></div>`
+    e.target.innerHTML = input;
+    document.querySelector('.item-content-out').addEventListener('focusout' , handleFocusOut)
+  }
   return (
       <div
+      id={item.id}
         {...provided.draggableProps}
         {...provided.dragHandleProps}
         ref={provided.innerRef}
@@ -96,7 +128,6 @@ function Item({ provided, item, isDragging  } , props) {
           }
         }}
       >
-        <ModalEditItem/>
       {item.text}
       </div>
   );
