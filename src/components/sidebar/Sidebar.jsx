@@ -94,7 +94,7 @@ export default function Sidebar(props) {
                 </div>
               </div>
               <div className=" ">
-                <div className="flex  flex-row gap-4">
+                <div className="grid grid-cols-3 gap-4 ">
                   {columnsOrder ? (
                     columnsOrder.map((broad) => {
                       if (item.id_listIdBroad.includes(broad._id)) {
