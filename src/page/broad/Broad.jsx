@@ -14,15 +14,36 @@ import { Button } from "@mui/material";
 import Navbar from "../../components/navbar/Navbar";
 import { useLocation } from "react-router";
 import getDataBroad from "./../../api/getDataBroad";
+import getUser from "../../api/GetUser";
+import sendEmailUser from "../../api/SendEmailUser";
+import Member from "../../api/DataMember";
 function Broad(props) {
   let initial = useSelector((state) => state.broad.data);
   const location = useLocation();
   const dataByStore = useSelector((state) => state.broad.data);
   const idBroad = location.state.broad._id;
+  const idWorkSpace = location.state.idWorkSpace;
+
   const dispatch = useDispatch();
   const [isTitleColumn, setIseTitleColumn] = useState(true);
   const [titleColumn, setTitleColumn] = useState();
   const [data, setData] = useState(initial);
+  const [showModal, setShowModal] = useState(false);
+  const [ValueShare, setValueShare] = useState();
+  const [valuesUserEmail, setValueUserEmail] = useState([]);
+  let [dataSearch, setDataSearch] = useState([]);
+  let [a, setA] = useState([]);
+  let [flagImg, setFlagImg] = useState([]);
+
+  useEffect(() => {
+    Member(idBroad)
+      .then((res) => {
+        setA(res.data.user);
+      })
+      .catch((e) => {
+        console.log(e);
+      });
+  }, [flagImg]);
   function onDragEnd(result) {
     if (!result.destination) {
       return;
@@ -61,7 +82,6 @@ function Broad(props) {
           },
         },
       };
-      console.log('check');
       dispatch(setDataBroad(newState));
       return;
     }
@@ -123,6 +143,10 @@ function Broad(props) {
       setTitleColumn("");
     }
   };
+
+  const handlShowModalShare = () => {
+    setShowModal(true);
+  };
   // useEffect(() =>{
   //   UpdateBroad(data)
   //   .then(res => console.log(res))
@@ -142,67 +166,241 @@ function Broad(props) {
         .catch((e) => console.log(e.message));
     }
   }, [dataByStore]);
+  const handleShare = (e) => {
+    let email = [];
+    setValueShare(e.target.value);
+    valuesUserEmail.forEach((element) => {
+      let Share = e.target.value.toLowerCase();
+      let data = element.toLowerCase();
+      if (data.includes(Share)) {
+        email.push(element);
+      }
+    });
+    setDataSearch(email);
+  };
+  useEffect(() => {
+    getUser()
+      .then((res) => {
+        setValueUserEmail(res.data.email);
+      })
+      .catch((e) => {
+        console.log(e);
+      });
+  }, [ValueShare]);
+
+  let member = {
+    email: ValueShare,
+    idbroad: idBroad,
+    idWorkSpace: idWorkSpace,
+  };
+
+  const handleSendEmail = () => {
+    sendEmailUser(member)
+      .then((res) => {
+        if (res.data.message === "add member success!") {
+          setValueShare("");
+          setShowModal(false);
+          setFlagImg(res);
+        }
+      })
+      .catch((e) => {
+        console.log(e);
+      });
+  };
+
   return (
     <DragDropContext onDragEnd={onDragEnd}>
       <Navbar></Navbar>
       <div className="Broad">
-        <div
-          className="add-column"
-          style={{
-            display: "flex",
-            alignItems: "center",
-            marginLeft: "8px",
-          }}
-        >
-          {isTitleColumn ? (
-            <button
-              className="asslsss"
-              style={{
-                margin: "10px",
-                padding: "8px",
-                width: "300px",
-                backgroundColor: "#b2b2b2",
-                color: "black",
-                borderRadius: "6px",
-              }}
-              onClick={handleShowCreateColumn}
-            >
-              Thêm cột
-            </button>
-          ) : (
-            <>
-              <input
-                type="text"
-                name="title"
-                onChange={handleGetTitleColunn}
-                style={{
-                  border: "1px solid #ccc",
-                  height: "40px",
-                  paddingLeft: "4px",
-                  borderRadius: "4px",
-                  marginLeft: "14px",
-                }}
-                placeholder={"Tiêu đề cột"}
-              />
+        <div className="flex w-full ">
+          <div
+            className="add-column w-9/12"
+            style={{
+              display: "flex",
+              alignItems: "center",
+              marginLeft: "8px",
+            }}
+          >
+            {isTitleColumn ? (
               <button
                 className="asslsss"
                 style={{
-                  margin: "20px 0",
-                  padding: "8px",
-                  width: "104px",
-                  backgroundColor: "white",
+                  margin: "4px",
+                  padding: "6px",
+                  width: "300px",
+                  backgroundColor: "#b2b2b2",
                   color: "black",
                   borderRadius: "6px",
-                  marginLeft: "8px",
                 }}
-                onClick={handleCreateColumn}
-                disabled={titleColumn ? false : true}
+                onClick={handleShowCreateColumn}
               >
-                Tạo
+                Thêm cột
               </button>
+            ) : (
+              <>
+                <input
+                  type="text"
+                  name="title"
+                  onChange={handleGetTitleColunn}
+                  style={{
+                    border: "1px solid #ccc",
+                    height: "40px",
+                    paddingLeft: "4px",
+                    borderRadius: "4px",
+                    marginLeft: "14px",
+                  }}
+                  placeholder={"Tiêu đề cột"}
+                />
+                <button
+                  className="asslsss"
+                  style={{
+                    margin: "20px 0",
+                    padding: "8px",
+                    width: "104px",
+                    backgroundColor: "white",
+                    color: "black",
+                    borderRadius: "6px",
+                    marginLeft: "8px",
+                  }}
+                  onClick={handleCreateColumn}
+                  disabled={titleColumn ? false : true}
+                >
+                  Tạo
+                </button>
+              </>
+            )}
+          </div>
+          <div className=" w-2/12 flex my-auto">
+            {a.length > 0 &&
+              a.map((user) => (
+                <div className=" ">
+                  <img
+                    className="h-8 w-8  rounded-full "
+                    src={
+                      user.image
+                        ? user.image
+                        : "https://biology.ucdavis.edu/sites/g/files/dgvnsk13361/files/styles/sf_profile/public/media/images/Person%20Profile%20Image%20Graphic%20alt_0.png?h=579c9536&itok=ZLGA_Cqp"
+                    }
+                  />
+                </div>
+              ))}
+          </div>
+          <div className="text-center my-auto  w-1/12">
+            <div>
+              {" "}
+              <a
+                className="bg-sky-500 py-1 px-1  rounded cursor-pointer text-white hover:bg-sky-400"
+                onClick={handlShowModalShare}
+              >
+                <i class="fa-solid fa-user-plus "></i> Chia sẻ
+              </a>
+            </div>
+          </div>
+          {showModal ? (
+            <>
+              <div className="justify-center items-center flex overflow-x-hidden overflow-y-auto fixed inset-0 z-50 outline-none focus:outline-none">
+                <div className="relative w-auto my-6 mx-auto max-w-3xl">
+                  {/*content*/}
+                  <div className="border-0 rounded-lg shadow-lg relative flex flex-col w-full bg-white outline-none focus:outline-none">
+                    {/*header*/}
+                    <div className="flex items-start justify-between p-3 border-b border-solid border-slate-200 rounded-t">
+                      <h5 className="text-3xl font-semibold ">Chia sẻ bảng</h5>
+                      <a
+                        onClick={() => {
+                          setShowModal(false);
+                        }}
+                      >
+                        <i class="fa-solid fa-x"></i>
+                      </a>
+                    </div>
+                    <div
+                      className="relative p-6 flex-auto"
+                      style={{ width: "600px" }}
+                    >
+                      <form
+                        novalidate=""
+                        action=""
+                        className="space-y-12 ng-untouched ng-pristine ng-valid"
+                      >
+                        <div className="space-y-4  ">
+                          <div className="m-2">
+                            <div className="w-full gap-2 flex">
+                              <div className="w-3/4 dark:placeholder-gray-700 cursor:text my-auto">
+                                <input
+                                  type="text"
+                                  name="email"
+                                  onChange={handleShare}
+                                  id="first name"
+                                  className="w-full px-3 py-2 border rounded-md dark:border-gray-700   dark:text-gray-900 "
+                                  role="button"
+                                  data-bs-toggle="dropdown"
+                                  data-dropdown-toggle="dropdownSearch"
+                                  value={ValueShare}
+                                />
+                                <div
+                                  id="dropdownSearch"
+                                  className=" dropdown-menu
+            min-w-max
+            absolute
+            hidden
+            bg-white
+            py-2
+            shadow
+            list-none
+            text-left
+            rounded-lg
+            mt-1
+            hidden
+            m-0
+            border-none
+             bg-white z-10 list-none divide-y-2 divide-gray-100 rounded py-2 my-1 w-44 w-64 "
+                                  aria-labelledby="dropdownMenuButton2"
+                                >
+                                  <div className="flex flew-col gap-3">
+                                    <ul
+                                      className="py-1 rounded-sm text-black "
+                                      aria-labelledby="dropdownLargeButton"
+                                    >
+                                      {dataSearch.map((item) => (
+                                        <li
+                                          onClick={() => {
+                                            setValueShare(item);
+                                          }}
+                                        >
+                                          <a className="text-sm block px-4 py-2">
+                                            {item}
+                                          </a>
+                                        </li>
+                                      ))}
+                                    </ul>
+                                  </div>
+                                </div>
+                              </div>
+                              <div className="w-1/8 items-center justify-center p-2 my-auto border border-gray-400">
+                                <select>
+                                  <option value="1">Thành viên</option>
+                                </select>
+                              </div>
+                              <a
+                                onClick={handleSendEmail}
+                                className="w-1/8 bg-sky-500 text-center text-white"
+                              >
+                                Chia sẻ
+                              </a>
+                            </div>
+                          </div>
+                        </div>
+                        <div className="space-y-2 ml-2"></div>
+                      </form>
+                    </div>
+                  </div>
+                </div>
+              </div>
+              <div className="opacity-25 fixed inset-0 z-40 bg-black"></div>
             </>
-          )}
+          ) : null}
         </div>
+
         <Droppable droppableId="broad" direction="horizontal" type="column">
           {(provided) => (
             <div
@@ -210,12 +408,16 @@ function Broad(props) {
               style={{ display: "flex" }}
               {...provided.droppableProps}
               ref={provided.innerRef}
-              >
-                {dataByStore && dataByStore.columns && dataByStore.columnOrder.length>0 && dataByStore.columnOrder.map((column , index) =>(
-                  <Column className="column"
-                  key={column}
-                  column={dataByStore.columns[column]}
-                  index={index}
+            >
+              {dataByStore &&
+                dataByStore.columns &&
+                dataByStore.columnOrder.length > 0 &&
+                dataByStore.columnOrder.map((column, index) => (
+                  <Column
+                    className="column"
+                    key={column}
+                    column={dataByStore.columns[column]}
+                    index={index}
                   />
                 ))}
               {provided.placeholder}

@@ -4,9 +4,9 @@ import {Route, Routes} from "react-router-dom";
 
 import Register from "./page/Register/Register";
 import Sidebar from "./components/sidebar/Sidebar";
-import {Login} from "./page/login/Login";
+import { Login } from "./page/login/Login";
 import axios from "axios";
-import {GoogleOAuthProvider} from "@react-oauth/google";
+import { GoogleOAuthProvider } from "@react-oauth/google";
 import UserInfo from "./components/UserInfo/UserInfo";
 import ChangePassword from "./components/ChangePassword/ChangePassword";
 import Broad from "./page/broad/Broad";

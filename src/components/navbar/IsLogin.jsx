@@ -63,10 +63,10 @@ export default function IsLogin() {
 
             <ul
               style={{
-                position: "fixed",
-                width: 20 + "%",
-                top: 8 + "%",
-                left: 80 + "%",
+                flex: "auto",
+                width: 460 + "%",
+                top: 120 + "%",
+                left: -350 + "%",
               }}
               className="
               
@@ -79,39 +79,35 @@ export default function IsLogin() {
               aria-labelledby="dropdownMenuButton2"
             >
               <li>
-              <div>
-              <a
-                href="#"
-                className="text-sm  text-center cursor-text text-black p-2 flex flex-row"
-              >
-                <span className="text-center text-stone-500 w-full">
-                Tài khoản
-                </span>
-                <button
-                  className="cursor-pointer absolute top-5.4 right-0 mr-5 text-gray-400 hover:text-gray-600 transition duration-150 ease-in-out rounded "
-                  aria-label="close modal"
-                  role="button"
-                >
-                  <svg
-                    xmlns="http://www.w3.org/2000/svg"
-                    className="icon icon-tabler icon-tabler-x"
-                    width={17}
-                    height={17}
-                    viewBox="0 0 24 24"
-                    strokeWidth="2.5"
-                    stroke="currentColor"
-                    fill="none"
-                    strokeLinecap="round"
-                    strokeLinejoin="round"
-                  >
-                    <path stroke="none" d="M0 0h24v24H0z" />
-                    <line x1={18} y1={6} x2={6} y2={18} />
-                    <line x1={6} y1={6} x2={18} y2={18} />
-                  </svg>
-                </button>
-              </a>
-            </div>
-                
+                <div>
+                  <a className="text-sm  text-center cursor-text text-black p-2 flex flex-row">
+                    <span className="text-center text-stone-500 w-full">
+                      Tài khoản
+                    </span>
+                    <button
+                      className="cursor-pointer absolute top-5.4 right-0 mr-5 text-gray-400 hover:text-gray-600 transition duration-150 ease-in-out rounded "
+                      aria-label="close modal"
+                      role="button"
+                    >
+                      <svg
+                        xmlns="http://www.w3.org/2000/svg"
+                        className="icon icon-tabler icon-tabler-x"
+                        width={17}
+                        height={17}
+                        viewBox="0 0 24 24"
+                        strokeWidth="2.5"
+                        stroke="currentColor"
+                        fill="none"
+                        strokeLinecap="round"
+                        strokeLinejoin="round"
+                      >
+                        <path stroke="none" d="M0 0h24v24H0z" />
+                        <line x1={18} y1={6} x2={6} y2={18} />
+                        <line x1={6} y1={6} x2={18} y2={18} />
+                      </svg>
+                    </button>
+                  </a>
+                </div>
               </li>
 
               <li>

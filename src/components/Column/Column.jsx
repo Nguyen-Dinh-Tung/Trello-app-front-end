@@ -7,9 +7,14 @@ import {v4 as uuidv4} from 'uuid'
 import { useDispatch } from 'react-redux';
 import { setItemBroad } from '../../redux/features/broad.slice';
 import List from '@mui/material/List';
+import ModalEditTitleColumn from '../ModalEditTitleColumn/ModalEditTitleColumn';
+import { setColHover } from '../../redux/features/colHover';
 
 function Column(props) {
   const data = useSelector(state => state.broad.data);
+  // const columnDClick = useSelector(state => state.columnDClick.column)
+
+  const colHover = useSelector(state => state.colHover.column)
   const dispatch = useDispatch();
   const [isItemInput , setItemInput] = useState(true) ;
   const [valueItem , setValueItem] = useState()
@@ -17,7 +22,6 @@ function Column(props) {
   if(column){
     const index = props.index ;
     const idColum = column.id ;
-
     const handleCLick = () =>{
       setItemInput(false)
     }
@@ -51,6 +55,7 @@ function Column(props) {
       setItemInput(true)
       setValueItem('')
     }
+
     return (
       <Draggable
       draggableId={idColum} index={index}
@@ -60,16 +65,20 @@ function Column(props) {
           sx={{ m: 2 ,boxShadow: 3  }}
           {...provided.draggableProps}
           ref={provided.innerRef}
+          onDoubleClick={(e)=>{
+            dispatch(setColHover(column))
+          }}
+
           >
+            <ModalEditTitleColumn column={column}/>
             <h2 className='column-title'
             style={{height : '40px'  , color : 'white' , fontSize : '18px'}}
             {...provided.dragHandleProps}
             >
             {column.title}
             </h2>
-            <ListItem column={column} index={index}/>
+            <ListItem column={column} index={index} />
             <div>
-
             {isItemInput ? <button
             style={{
               height : '40px',
