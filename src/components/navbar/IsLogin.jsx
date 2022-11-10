@@ -7,10 +7,12 @@ export default function IsLogin() {
   const [valueAvatar, setValueAvatar] = useState();
 
   const isLogin = localStorage.getItem("token");
+
   let decode;
   if (isLogin) {
     decode = jwt_decode(isLogin);
   }
+  const name = decode.name.split("");
   const [open, setOpen] = useState(false);
   const handleLogout = () => {
     localStorage.removeItem("token");
@@ -43,20 +45,26 @@ export default function IsLogin() {
               data-bs-toggle="dropdown"
               aria-expanded="false"
             >
-              <div className="w-12 rounded-full   ">
-                <div className="overflow-hidden relative w-10 h-10 bg-gray-100 rounded-full dark:bg-gray-600 cursor-pointer">
-                  <svg
-                    className="absolute -left-1 w-12 h-12 text-gray-400"
-                    fill="currentColor"
-                    viewBox="0 0 20 20"
-                    xmlns="http://www.w3.org/2000/svg"
-                  >
-                    <path
-                      fillRule="evenodd"
-                      d="M10 9a3 3 0 100-6 3 3 0 000 6zm-7 9a7 7 0 1114 0H3z"
-                      clipRule="evenodd"
-                    />
-                  </svg>
+              <div className="w-12  rounded-full text-center item-center ">
+                <div className="overflow-hidden relative w-10 h-10 bg-gray-100 rounded-full  dark:bg-gray-600 cursor-pointer">
+                  {valueAvatar ? (
+                    <div title={decode.name}>
+                      <img
+                        className="h-10 w-10  rounded-full "
+                        src={valueAvatar}
+                      />
+                    
+                    </div>
+                  ) : (
+                    <div title={decode.name} className="text-lg ">
+                      <span
+                        className={`w-10 h-10 rounded-full border bg-gray-500 hover:bg-gray-400 font-bold block p-1 text-white`}
+                      >
+                        {name[0].toUpperCase()}
+                      
+                      </span>
+                    </div>
+                  )}
                 </div>
               </div>
             </div>
@@ -69,7 +77,8 @@ export default function IsLogin() {
                 left: -350 + "%",
               }}
               className="
-              
+              divide 
+              divide-y
    dropdown-menu
    bg-white
    text-base
@@ -80,7 +89,7 @@ export default function IsLogin() {
             >
               <li>
                 <div>
-                  <a className="text-sm  text-center cursor-text text-black p-2 flex flex-row">
+                  <a className="text-sm text-center cursor-text text-black p-2 flex flex-row">
                     <span className="text-center text-stone-500 w-full">
                       Tài khoản
                     </span>
@@ -109,12 +118,36 @@ export default function IsLogin() {
                   </a>
                 </div>
               </li>
-
               <li>
-                <hr className="mx-3 border-2 text-stone-500 my-2"></hr>
+                <div className="flex flex-row gap-4 p-2">
+                  <div className="overflow-hidden m-1 my-auto text-center relative w-12 h-12 bg-gray-100 rounded-full cursor-pointer">
+                    {valueAvatar ? (
+                      <div title={decode.name} className="text-center">
+                       
+                           <img
+                          className=" h-12 w-12 rounded-full cursor-text "
+                          src={valueAvatar}
+                        />
+                        
+                       
+                      </div>
+                    ) : (
+                      <div title={decode.name}>
+                        <span
+                          className={` rounded-full block text-lg  bg-gray-500  w-12 h-12 p-2 font-bold text-white`}
+                        >
+                          {name[0].toUpperCase()}
+                        </span>
+                      </div>
+                    )}
+                  </div>
+                  <div className="flex flex-col ">
+                    <span className="text-lg">{decode.name}</span>
+                    <span className="text-sm text-gray-400">{decode.email}</span>
+                  </div>
+                </div>
               </li>
-              <li></li>
-              <li className="hover:bg-stone-200 ">
+              <li className="hover:bg-stone-200">
                 <a
                   className="
        dropdown-item
@@ -132,9 +165,7 @@ export default function IsLogin() {
                   Thông tin tài khoản
                 </a>
               </li>
-              <li>
-                <hr className="mx-3 border-2 text-stone-500 my-2"></hr>
-              </li>
+
               <li className="hover:bg-stone-200">
                 <a
                   onClick={() => handleLogout()}

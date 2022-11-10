@@ -18,14 +18,14 @@ import getUser from "../../api/GetUser";
 import sendEmailUser from "../../api/SendEmailUser";
 import Member from "../../api/DataMember";
 import jwtDecode from "jwt-decode";
-
 function Broad(props) {
-  let initial = useSelector((state) => state.broad.data);
+  const token = localStorage.getItem("token");
+  const decode = jwtDecode(token);
+  const initial = useSelector((state) => state.broad.data);
   const location = useLocation();
   const dataByStore = useSelector((state) => state.broad.data);
   const idBroad = location.state.broad._id;
   const idWorkSpace = location.state.idWorkSpace;
-  const token = localStorage.getItem("token");
   const emailIdUser = jwtDecode(token)["email"];
 
   const dispatch = useDispatch();
@@ -35,10 +35,10 @@ function Broad(props) {
   const [showModal, setShowModal] = useState(false);
   const [ValueShare, setValueShare] = useState();
   const [valuesUserEmail, setValueUserEmail] = useState([]);
-  let [dataSearch, setDataSearch] = useState([]);
-  let [a, setA] = useState([]);
-  let [flagImg, setFlagImg] = useState([]);
-
+  const [dataSearch, setDataSearch] = useState([]);
+  const [a, setA] = useState([]);
+  const [flagImg, setFlagImg] = useState([]);
+  const name = decode.name.split("");
   useEffect(() => {
     Member(idBroad)
       .then((res) => {
@@ -276,15 +276,24 @@ function Broad(props) {
           <div className=" w-2/12 flex my-auto">
             {a.length > 0 &&
               a.map((user) => (
-                <div className=" ">
-                  <img
-                    className="h-8 w-8  rounded-full "
-                    src={
-                      user.image
-                        ? user.image
-                        : "https://biology.ucdavis.edu/sites/g/files/dgvnsk13361/files/styles/sf_profile/public/media/images/Person%20Profile%20Image%20Graphic%20alt_0.png?h=579c9536&itok=ZLGA_Cqp"
-                    }
-                  />
+                <div> 
+                  {user.image ? (
+                    <div title={user.name}>
+                      <img
+                        className="h-8 w-8  rounded-full "
+                        src={user.image}
+                      />
+                    </div>
+                  ) : (
+                    <div title={user.name}>
+                      <span
+                      
+                        className={`px-2 py-0.5 rounded-full text-sm bg-gray-500 hover:bg-gray-400 font-bold text-white` }
+                      >
+                        {name[0]}
+                      </span>
+                    </div>
+                  )}
                 </div>
               ))}
           </div>
