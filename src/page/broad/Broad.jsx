@@ -17,12 +17,16 @@ import getDataBroad from "./../../api/getDataBroad";
 import getUser from "../../api/GetUser";
 import sendEmailUser from "../../api/SendEmailUser";
 import Member from "../../api/DataMember";
+import jwtDecode from "jwt-decode";
+
 function Broad(props) {
   let initial = useSelector((state) => state.broad.data);
   const location = useLocation();
   const dataByStore = useSelector((state) => state.broad.data);
   const idBroad = location.state.broad._id;
   const idWorkSpace = location.state.idWorkSpace;
+  const token = localStorage.getItem("token");
+  const emailIdUser = jwtDecode(token)["email"];
 
   const dispatch = useDispatch();
   const [isTitleColumn, setIseTitleColumn] = useState(true);
@@ -192,16 +196,15 @@ function Broad(props) {
     email: ValueShare,
     idbroad: idBroad,
     idWorkSpace: idWorkSpace,
+    emailIdUser: emailIdUser,
   };
 
   const handleSendEmail = () => {
     sendEmailUser(member)
       .then((res) => {
-        if (res.data.message === "add member success!") {
-          setValueShare("");
-          setShowModal(false);
-          setFlagImg(res);
-        }
+        setValueShare("");
+        setShowModal(false);
+        setFlagImg(res);
       })
       .catch((e) => {
         console.log(e);
