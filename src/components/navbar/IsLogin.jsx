@@ -1,8 +1,37 @@
 import { useEffect, useState } from "react";
 import jwt_decode from "jwt-decode";
 import getImageUser from "../../api/GetImageUser";
+import Avatar from "@mui/material/Avatar";
 
 export default function IsLogin() {
+  function stringToColor(string) {
+    let hash = 0;
+    let i;
+
+    /* eslint-disable no-bitwise */
+    for (i = 0; i < string.length; i += 1) {
+      hash = string.charCodeAt(i) + ((hash << 5) - hash);
+    }
+
+    let color = "#";
+
+    for (i = 0; i < 3; i += 1) {
+      const value = (hash >> (i * 8)) & 0xff;
+      color += `00${value.toString(16)}`.slice(-2);
+    }
+    /* eslint-enable no-bitwise */
+
+    return color;
+  }
+
+  function stringAvatar(name) {
+    return {
+      sx: {
+        bgcolor: stringToColor(name),
+      },
+      children: `${name.split(" ")[0][0]}${name.split(" ")[1][0]}`,
+    };
+  }
   const [avatar, setAvatar] = useState(false);
   const [valueAvatar, setValueAvatar] = useState();
 
@@ -19,6 +48,8 @@ export default function IsLogin() {
     setOpen(false);
   };
   let idUser = decode["id"];
+  
+
   useEffect(() => {
     getImageUser(idUser)
       .then((res) => {
@@ -45,27 +76,14 @@ export default function IsLogin() {
               data-bs-toggle="dropdown"
               aria-expanded="false"
             >
-              <div className="w-12  rounded-full text-center item-center ">
-                <div className="overflow-hidden relative w-10 h-10 bg-gray-100 rounded-full  dark:bg-gray-600 cursor-pointer">
-                  {valueAvatar ? (
-                    <div title={decode.name}>
-                      <img
-                        className="h-10 w-10  rounded-full "
-                        src={valueAvatar}
-                      />
-                    
-                    </div>
-                  ) : (
-                    <div title={decode.name} className="text-lg ">
-                      <span
-                        className={`w-10 h-10 rounded-full border bg-gray-500 hover:bg-gray-400 font-bold block p-1 text-white`}
-                      >
-                        {name[0].toUpperCase()}
-                      
-                      </span>
-                    </div>
-                  )}
-                </div>
+              <div className="cursor-pointer">
+                {valueAvatar ? (
+                  <div>
+                    <Avatar src={valueAvatar} />
+                  </div>
+                ) : (
+                  <Avatar title={decode.name} {...stringAvatar(decode.name)} />
+                )}
               </div>
             </div>
 
@@ -120,30 +138,22 @@ export default function IsLogin() {
               </li>
               <li>
                 <div className="flex flex-row gap-4 p-2">
-                  <div className="overflow-hidden m-1 my-auto text-center relative w-12 h-12 bg-gray-100 rounded-full cursor-pointer">
+                  <div>
                     {valueAvatar ? (
-                      <div title={decode.name} className="text-center">
-                       
-                           <img
-                          className=" h-12 w-12 rounded-full cursor-text "
-                          src={valueAvatar}
-                        />
-                        
-                       
+                      <div>
+                        <Avatar src={valueAvatar} />
                       </div>
                     ) : (
                       <div title={decode.name}>
-                        <span
-                          className={` rounded-full block text-lg  bg-gray-500  w-12 h-12 p-2 font-bold text-white`}
-                        >
-                          {name[0].toUpperCase()}
-                        </span>
+                        <Avatar {...stringAvatar(decode.name)} />
                       </div>
                     )}
                   </div>
                   <div className="flex flex-col ">
-                    <span className="text-lg">{decode.name}</span>
-                    <span className="text-sm text-gray-400">{decode.email}</span>
+                    <span className="text-sm">{decode.name}</span>
+                    <span className="text-xs text-gray-400">
+                      {decode.email}
+                    </span>
                   </div>
                 </div>
               </li>
