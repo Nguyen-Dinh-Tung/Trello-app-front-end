@@ -104,12 +104,12 @@ export default function Drop1() {
                 className="py-1 rounded-sm text-black "
                 aria-labelledby="dropdownLargeButton"
               >
-                {workspace.map((item) => (
+                {/* {workspace.map((item) => (
                   <li>
                     <a href="#" className="text-sm block px-4 py-2">
                       {item.name}
                     </a>
-                  </li>
+                  </li> */}
                 ))}
               </ul>
             </div>

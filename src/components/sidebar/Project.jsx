@@ -128,7 +128,7 @@ export default function Project() {
           </button>
           {/* Project */}
         </div>
-        {workspace.map((item,index) => (
+        {workspace && workspace.map((item,index) => (
           <div className="w-full ">
             <div class="flex flex-col justify-start items-center px-2 py-1 border-b border-gray-600  ">
               <button
