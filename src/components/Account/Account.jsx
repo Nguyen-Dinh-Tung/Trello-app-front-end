@@ -113,10 +113,10 @@ export default function Account() {
   };
 
   return (
-    <div className="overflow-y-scrol">
-      <div className="w-full bg-slate-100 h-50  leading-5 flex flex-col  gap-y-12   drop-shadow-sm  ">
+    <div >
+      <div className="w-full h-screen bg-gray-50  leading-5 flex flex-col   ">
         <div className="flex flex-row justify-center py-0 mx-48">
-          <div className=" my-10 flex ">
+          <div className=" flex my-12 ">
             <span
               className="flex flex-row gap-3 items-center  text-center rounded-full "
               href="#"
@@ -124,9 +124,9 @@ export default function Account() {
               aria-expanded="false"
             >
               {avatar ? (
-                <div>
+                <div> 
                   <img
-                    className="h-24 w-24 md rounded-full relative"
+                    className="h-24 w-24 md rounded-full relative "
                     src={valueAvatar}
                     alt
                   />
@@ -142,9 +142,9 @@ export default function Account() {
         </div>
 
         <div>
-          <div className="h-full">
-            <div className="border-b-2 block md:flex">
-              <div className="w-full md:w-2/5 p-4 sm:p-6  lg:p-8 bg-white shadow-md">
+          <div>
+          <div className=" block md:flex mx-auto w-[70%] gap-12">
+              <div className="w-full md:w-2/5 p-4 sm:p-6 shadow bg-white">
                 {loading ? (
                   <div className="flex items-center justify-center space-x-2 animate-bounce">
                     <div className="w-8 h-8 bg-blue-400 rounded-full" />
@@ -154,9 +154,9 @@ export default function Account() {
                 ) : (
                   <div className="w-full p-8 mx-2 flex justify-center">
                     {result ? (
-                      <img ref={imageRef} src={result} alt="" />
+                      <img ref={imageRef} src={result} className="max-h-[75%] max-w-[75%]" alt="" />
                     ) : (
-                      <img src={Upload?.image} ref={imageRef} alt="" />
+                      <img src={Upload?.image} ref={imageRef}  alt="" />
                     )}
                   </div>
                 )}
@@ -173,9 +173,10 @@ export default function Account() {
                       uploader(event);
                     }}
                   />
-                  <label
+                  <div className="flex flex-col items-center gap-3">
+                    <label
                     htmlFor="file-upload"
-                    className="z-20 flex flex-col-reverse items-center justify-center w-full h-full cursor-pointer"
+                    className="z-20 flex flex-col-reverse items-center justify-center w-full h-full cursor-pointer hover:text-red-800"
                   >
                     <p className="z-10 text-lg font-light text-center text-gray-700">
                       Tải ảnh lên
@@ -186,7 +187,7 @@ export default function Account() {
                       viewBox="0 0 24 24"
                       strokeWidth={1.5}
                       stroke="currentColor"
-                      className="w-6 h-6"
+                      className="w-6 h-6  "
                     >
                       <path
                         strokeLinecap="round"
@@ -199,15 +200,18 @@ export default function Account() {
                     type="button"
                     data-mdb-ripple="true"
                     data-mdb-ripple-color="light"
-                    className="w-full  p-8 mx-2 flex justify-center  px-6 py-2.5 bg-blue-600 text-white font-medium text-xs leading-tight uppercase rounded shadow-md hover:bg-blue-700 hover:shadow-lg focus:bg-blue-700 focus:shadow-lg focus:outline-none focus:ring-0 active:bg-blue-800 active:shadow-lg transition duration-150 ease-in-out"
+                    className="w-full  p-8 mx-2 flex justify-center w-32  px-6 py-2.5 bg-blue-600 text-white font-medium text-xs leading-tight uppercase rounded  hover:bg-blue-700  focus:bg-blue-700 focus:outline-none focus:ring-0 active:bg-blue-800 transition duration-150 ease-in-out"
                     onClick={handleUpload}
                   >
                     LƯU
                   </button>
+                  </div>
+                  
                 </div>
               </div>
-              <div className="w-full md:w-3/5 p-8 bg-white lg:ml-4 shadow-md">
-                <div className="rounded  shadow p-6">
+              <div className="w-full md:w-3/5 p-8 bg-white shadow lg:ml-4 justify-items-center items-center"
+              >
+                <div className="rounded p-auto  justify-items-center items-center block" >
                   <div className="pb-6">
                     <label
                       htmlFor="name"
@@ -271,12 +275,13 @@ export default function Account() {
           </div>
         </div>
       </div>
+      
       {showModal ? (
         <>
-          <div className="justify-center items-center flex overflow-x-hidden overflow-y-auto fixed inset-0 z-50 outline-none focus:outline-none">
+          <div className="justify-center items-center flex overflow-x-hidden overflow-y-auto fixed visible inset-0 z-50  ">
             <div className="relative w-auto my-6 mx-auto max-w-3xl">
               {/*content*/}
-              <div className="border-0 rounded-lg shadow-lg relative flex flex-col w-full bg-white outline-none focus:outline-none">
+              <div className="border-0 rounded-lg  relative flex flex-col w-full bg-white outline-none focus:outline-none">
                 {/*header*/}
                 <div className="flex items-start justify-between p-5 border-b border-solid border-slate-200 rounded-t">
                   <h3 className="text-3xl font-semibold ">Thay đổi mật khẩu</h3>
