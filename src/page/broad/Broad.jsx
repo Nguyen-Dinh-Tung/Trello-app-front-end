@@ -16,11 +16,17 @@ import { useLocation } from "react-router";
 import getDataBroad from "./../../api/getDataBroad";
 import getUser from "../../api/GetUser";
 import sendEmailUser from "../../api/SendEmailUser";
+import Member from "../../api/DataMember";
+import jwtDecode from "jwt-decode";
 function Broad(props) {
-  let initial = useSelector((state) => state.broad.data);
+  const token = localStorage.getItem("token");
+  const decode = jwtDecode(token);
+  const initial = useSelector((state) => state.broad.data);
   const location = useLocation();
   const dataByStore = useSelector((state) => state.broad.data);
   const idBroad = location.state.broad._id;
+  const idWorkSpace = location.state.idWorkSpace;
+
   const dispatch = useDispatch();
   const [isTitleColumn, setIseTitleColumn] = useState(true);
   const [titleColumn, setTitleColumn] = useState();
@@ -28,7 +34,19 @@ function Broad(props) {
   const [showModal, setShowModal] = useState(false);
   const [ValueShare, setValueShare] = useState();
   const [valuesUserEmail, setValueUserEmail] = useState([]);
-  let [dataSearch, setDataSearch] = useState([]);
+  const [dataSearch, setDataSearch] = useState([]);
+  const [a, setA] = useState([]);
+  const [flagImg, setFlagImg] = useState([]);
+  const name = decode.name.split("");
+  useEffect(() => {
+    Member(idBroad)
+      .then((res) => {
+        setA(res.data.user);
+      })
+      .catch((e) => {
+        console.log(e);
+      });
+  }, [flagImg]);
   function onDragEnd(result) {
     if (!result.destination) {
       return;
@@ -174,22 +192,33 @@ function Broad(props) {
       });
   }, [ValueShare]);
 
+  let member = {
+    email: ValueShare,
+    idbroad: idBroad,
+    idWorkSpace: idWorkSpace,
+  };
+
   const handleSendEmail = () => {
-    sendEmailUser(ValueShare)
+    sendEmailUser(member)
       .then((res) => {
-        console.log(res);
+        if (res.data.message === "add member success!") {
+          setValueShare("");
+          setShowModal(false);
+          setFlagImg(res);
+        }
       })
       .catch((e) => {
         console.log(e);
       });
   };
+
   return (
     <DragDropContext onDragEnd={onDragEnd}>
       <Navbar></Navbar>
       <div className="Broad">
         <div className="flex w-full ">
           <div
-            className="add-column w-11/12"
+            className="add-column w-9/12"
             style={{
               display: "flex",
               alignItems: "center",
@@ -200,8 +229,8 @@ function Broad(props) {
               <button
                 className="asslsss"
                 style={{
-                  margin: "10px",
-                  padding: "8px",
+                  margin: "4px",
+                  padding: "6px",
                   width: "300px",
                   backgroundColor: "#b2b2b2",
                   color: "black",
@@ -245,13 +274,40 @@ function Broad(props) {
               </>
             )}
           </div>
-          <div className="text-center mt-2 w-2/12">
-            <a
-              className="bg-sky-500 py-1 px-1 rounded cursor-pointer text-white hover:bg-sky-400"
-              onClick={handlShowModalShare}
-            >
-              <i class="fa-solid fa-user-plus "></i> Chia sẻ
-            </a>
+          <div className=" w-2/12 flex my-auto">
+            {a.length > 0 &&
+              a.map((user) => (
+                <div> 
+                  {user.image ? (
+                    <div title={user.name}>
+                      <img
+                        className="h-8 w-8  rounded-full "
+                        src={user.image}
+                      />
+                    </div>
+                  ) : (
+                    <div title={user.name}>
+                      <span
+                      
+                        className={`px-2 py-0.5 rounded-full text-sm bg-gray-500 hover:bg-gray-400 font-bold text-white` }
+                      >
+                        {name[0]}
+                      </span>
+                    </div>
+                  )}
+                </div>
+              ))}
+          </div>
+          <div className="text-center my-auto  w-1/12">
+            <div>
+              {" "}
+              <a
+                className="bg-sky-500 py-1 px-1  rounded cursor-pointer text-white hover:bg-sky-400"
+                onClick={handlShowModalShare}
+              >
+                <i class="fa-solid fa-user-plus "></i> Chia sẻ
+              </a>
+            </div>
           </div>
           {showModal ? (
             <>
