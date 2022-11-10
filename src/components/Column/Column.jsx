@@ -7,8 +7,8 @@ import {v4 as uuidv4} from 'uuid'
 import { useDispatch } from 'react-redux';
 import { setItemBroad } from '../../redux/features/broad.slice';
 import List from '@mui/material/List';
-import ModalEditTitleColumn from '../ModalEditTitleColumn/ModalEditTitleColumn';
 import { setColHover } from '../../redux/features/colHover';
+import { setDataBroad } from '../../redux/features/broad.slice';
 
 function Column(props) {
   const data = useSelector(state => state.broad.data);
@@ -18,6 +18,7 @@ function Column(props) {
   const dispatch = useDispatch();
   const [isItemInput , setItemInput] = useState(true) ;
   const [valueItem , setValueItem] = useState()
+  const dataByStore = useSelector((state) => state.broad.data);
   const column = props.column ;
   if(column){
     const index = props.index ;
@@ -55,7 +56,26 @@ function Column(props) {
       setItemInput(true)
       setValueItem('')
     }
-
+    const handleFocusOut = (e) =>{
+      let newTitle = e.target.value ;
+      const newData = {
+        ...dataByStore ,
+        columns : {
+          ...dataByStore.columns ,
+          [`${column.id}`] : {
+            ...dataByStore.columns[`${column.id}`] ,
+            title : newTitle
+          }
+        }
+      }
+      dispatch(setDataBroad(newData))
+    }
+    const handleDoubleClick = (e) =>{
+    let itemTarget = e.target.innerHTML;
+    let input = `<div><class="div-item"><input type="text" value="${itemTarget}" style="color:black" class="item-content-out"/>`;
+    e.target.innerHTML = input;
+    document.querySelector('.item-content-out').addEventListener('focusout' , handleFocusOut);
+    }
     return (
       <Draggable
       draggableId={idColum} index={index}
@@ -68,15 +88,15 @@ function Column(props) {
           onDoubleClick={(e)=>{
             dispatch(setColHover(column))
           }}
-
           >
-            <ModalEditTitleColumn column={column}/>
-            <h2 className='column-title'
+            <div className='column-title'
+            onDoubleClick={handleDoubleClick}
             style={{height : '40px'  , color : 'white' , fontSize : '18px'}}
             {...provided.dragHandleProps}
+
             >
             {column.title}
-            </h2>
+            </div>
             <ListItem column={column} index={index} />
             <div>
             {isItemInput ? <button

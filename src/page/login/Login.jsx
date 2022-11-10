@@ -5,7 +5,7 @@ import Swal from "sweetalert2";
 import { Link, useNavigate } from "react-router-dom";
 import { Formik, Form, Field, ErrorMessage } from "formik";
 import { useGoogleLogin } from "@react-oauth/google";
-import jwt_decode from "jwt-decode";
+import jwt_decode from "jwt-decode"
 
 const LoginSchema = Yup.object().shape({
   email: Yup.string().email("Invalid email").required("Required"),
@@ -84,13 +84,13 @@ export const Login = () => {
               Xin mời đăng nhập
             </p>
           </div>
-          <div className="flex flex-row justify-center items-center space-x-3 cursor-pointer" onClick={loginGoogle}>
+          <div className="flex flex-row justify-center items-center cursor-pointer" onClick={loginGoogle}>
             <span>
               Đăng nhập bằng Google
             </span>
-            <span className="w-10 h-10 items-center justify-center inline-flex rounded-full font-bold text-lg  text-white  bg-blue-500 hover:shadow-lg cursor-pointer transition ease-in duration-300">
+            <span className="w-10 h-10 items-center justify-center inline-flex rounded-full font-bold text-lg  text-white cursor-pointer transition ease-in duration-300">
                 {" "}
-                <i className="fa-brands fa-google fa-2xl"></i>
+                <img src="https://cdn1.iconfinder.com/data/icons/google-s-logo/150/Google_Icons-09-512.png"></img>
             </span>
           </div>
           <div className="flex items-center justify-center space-x-2">
