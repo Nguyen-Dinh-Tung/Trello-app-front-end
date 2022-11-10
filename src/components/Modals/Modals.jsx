@@ -29,7 +29,7 @@ function Modals(props) {
   useEffect(() => {
     getBroad(idUser)
       .then((res) => {
-          setWorkSpace(res.data.listWorkSpace);
+        setWorkSpace(res.data.listWorkSpace);
       })
       .catch((e) => console.log(e.message));
   }, []);
@@ -119,7 +119,6 @@ function Modals(props) {
                 >
                   <option value="">Trạng thái</option>
                   <option value="private">Chỉ mình tôi</option>
-                  <option value="group">Nhóm</option>
                   <option value="public">Công khai</option>
                 </select>
               </div>
