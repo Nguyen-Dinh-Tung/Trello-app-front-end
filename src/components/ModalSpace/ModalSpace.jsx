@@ -3,6 +3,7 @@ import { Select, Option } from "@material-tailwind/react";
 import createBroad from "../../api/CreateBroad.api";
 import { useSelector } from "react-redux";
 import {
+  setFlag,
   setShowMenuDivider,
   setShowModal,
 } from "../../redux/features/showModal.slice";
@@ -14,6 +15,7 @@ function ModalSpace(props) {
   const isShowMenudivider = useSelector((state) => {
     return state.isShowModal.isShowMenudivider;
   });
+
   const dispath = useDispatch();
   let token = localStorage.getItem("token");
   let idUser = jwtDecode(token).id;
@@ -40,6 +42,7 @@ function ModalSpace(props) {
       CreateWorkSpace(newBroad)
         .then((res) => {
           dispath(setShowMenuDivider("none"));
+          dispath(setFlag(res));
         })
         .catch((e) => console.log(e));
     } else {
