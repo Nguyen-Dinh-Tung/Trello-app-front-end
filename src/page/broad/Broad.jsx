@@ -26,6 +26,7 @@ function Broad(props) {
   const dataByStore = useSelector((state) => state.broad.data);
   const idBroad = location.state.broad._id;
   const idWorkSpace = location.state.idWorkSpace;
+  const emailIdUser = jwtDecode(token)["email"];
 
   const dispatch = useDispatch();
   const [isTitleColumn, setIseTitleColumn] = useState(true);
@@ -181,7 +182,6 @@ function Broad(props) {
     });
     setDataSearch(email);
   };
-
   useEffect(() => {
     getUser()
       .then((res) => {
@@ -196,16 +196,15 @@ function Broad(props) {
     email: ValueShare,
     idbroad: idBroad,
     idWorkSpace: idWorkSpace,
+    emailIdUser: emailIdUser,
   };
 
   const handleSendEmail = () => {
     sendEmailUser(member)
       .then((res) => {
-        if (res.data.message === "add member success!") {
-          setValueShare("");
-          setShowModal(false);
-          setFlagImg(res);
-        }
+        setValueShare("");
+        setShowModal(false);
+        setFlagImg(res);
       })
       .catch((e) => {
         console.log(e);
