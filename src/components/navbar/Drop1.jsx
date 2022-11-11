@@ -1,11 +1,43 @@
 import React, { useEffect, useState } from "react";
 import jwtDecode from "jwt-decode";
 import getBroad from "../../api/GetBroad";
+import Avatar from "@mui/material/Avatar";
+import { Button } from "@mui/material";
 
 export default function Drop1() {
   let token = localStorage.getItem("token");
   let idUser = jwtDecode(token).id;
   let [workspace, setWorkSpace] = useState([]);
+
+  function stringToColor(string) {
+    let hash = 0;
+    let i;
+
+    /* eslint-disable no-bitwise */
+    for (i = 0; i < string.length; i += 1) {
+      hash = string.charCodeAt(i) + ((hash << 5) - hash);
+    }
+
+    let color = "#";
+
+    for (i = 0; i < 3; i += 1) {
+      const value = (hash >> (i * 8)) & 0xff;
+      color += `00${value.toString(16)}`.slice(-2);
+    }
+    /* eslint-enable no-bitwise */
+
+    return color;
+  }
+
+  function stringAvatar(name) {
+    return {
+      sx: {
+        bgcolor: stringToColor(name),
+        fontSize: 30,
+      },
+      children: `${name.split(" ")[0][0]}`,
+    };
+  }
 
   useEffect(() => {
     getBroad(idUser)
@@ -102,12 +134,16 @@ export default function Drop1() {
               <ul
                 className="py-1 rounded-sm text-black "
                 aria-labelledby="dropdownLargeButton"
+
               >
-                {workspace.map((item,index) => (
-                  <li>
-                    <a key={index} className="text-sm block px-4 py-2">
-                      {item.name}
-                    </a>
+                {workspace.map((item, index) => (
+                  <li key={index} className="text-sm  block px-4 py-2 flex">
+                    <Button>
+                      <Avatar sx={{borderRadius:10}} variant="rounded" {...stringAvatar(item.name)} />
+                    </Button>
+                    <span className=" my-auto ml-2 text-lg">
+                    {item.name}
+                    </span>
                   </li>
                 ))}
               </ul>

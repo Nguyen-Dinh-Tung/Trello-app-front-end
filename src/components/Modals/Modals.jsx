@@ -11,6 +11,7 @@ function Modals(props) {
   const isShowModal = useSelector((state) => state.isShowModal.isShowModal);
 
   let [workspace, setWorkSpace] = useState([]);
+  console.log(workspace)
 
   const dispatch = useDispatch();
   let token = localStorage.getItem("token");
@@ -98,9 +99,9 @@ function Modals(props) {
                     setNewBroad({ ...newBroad, workSpace: e.target.value });
                   }}
                 >
-                  {workspace.map((item) => (
+                   {workspace.map((item) => (
                     <option value={item._id}>{item.name}</option>
-                  ))}
+                  ))} 
                 </select>
               </div>
               <label
