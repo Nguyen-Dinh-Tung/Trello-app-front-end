@@ -25,6 +25,7 @@
   border-radius: 8px;
   font-size: 16px;
   box-shadow: 0 1px 0 #091e4240;
+  width: 230px;
 }
 .item-task:hover {
   background-color: #f4f4f7;
@@ -32,7 +33,7 @@
 
 .Broad {
   background-image: url('../public/assets/image/backtrello.jpg');
-  padding-bottom: 180px;
+  padding-bottom: 100px;
 }
 .asslsss:hover {
   background-color: #026aa7;
@@ -64,6 +65,7 @@
 }
 .ic-edit-details:hover{
   color: white;
+
 }
 .MuiAvatar-root{
   height: 50px;
