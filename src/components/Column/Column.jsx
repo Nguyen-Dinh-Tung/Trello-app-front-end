@@ -32,13 +32,15 @@ function Column(props) {
     const handleAddItem = () =>{
       let item = {
         id : '' ,
-        text : ''
+        text : '',
+        listComment : []
       }  ;
       if(valueItem){
         const iTemId = uuidv4() ;
          item = {
           id : iTemId ,
-          text : valueItem
+          text : valueItem,
+          listComment : []
         }
       }
       if(item.id !== '' && item.text){
