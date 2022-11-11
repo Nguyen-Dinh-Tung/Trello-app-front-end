@@ -24,6 +24,7 @@ function Broad(props) {
   const initial = useSelector((state) => state.broad.data);
   const location = useLocation();
   const idBroad = location.state.broad._id;
+  const bgImg = location.state.broad.img;
   const dataByStore = useSelector((state) => state.broad.data);
   const idWorkSpace = location.state.idWorkSpace;
   const emailIdUser = jwtDecode(token)["email"];
@@ -219,7 +220,9 @@ function Broad(props) {
   return (
     <DragDropContext onDragEnd={onDragEnd}>
       <Navbar></Navbar>
-      <div className="Broad">
+      <div
+      style={{backgroundImage: `url(${bgImg})`}}
+        className="Broad ">
         <div className="flex w-full ">
           <div
             className="add-column w-9/12"

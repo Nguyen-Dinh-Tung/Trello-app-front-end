@@ -30,7 +30,6 @@ function Home(props) {
     getBroad(idUser)
       .then((res) => {
         setLoading(false);
-        console.log("🚀 ~ file: Home.jsx ~ line 24 ~ .then ~ res", res);
         setColumnOrder(res.data.data);
         setWorkSpace(res.data.listWorkSpace);
         dispatch(setShowWorkSpace(res.data.listWorkSpace));
