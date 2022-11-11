@@ -130,7 +130,7 @@ export default function Project() {
                 </ListItemButton>
               </List>
               <List component="div" disablePadding>
-                <ListItemButton href={`/member${decode.id}`} sx={{ pl: 4 }}>
+                <ListItemButton href={`/member/${decode.id}`} sx={{ pl: 4 }}>
                   <ListItemIcon>
                     <GroupIcon />
                   </ListItemIcon>
