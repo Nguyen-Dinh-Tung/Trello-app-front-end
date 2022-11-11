@@ -228,7 +228,7 @@ function Broad(props) {
               <button
                 className="asslsss"
                 style={{
-                  margin: "4px",
+                  margin: "4px 10px",
                   padding: "6px",
                   width: "300px",
                   backgroundColor: "#b2b2b2",
@@ -276,7 +276,7 @@ function Broad(props) {
           <div className=" w-2/12 flex my-auto">
             {a.length > 0 &&
               a.map((user) => (
-                <div> 
+                <div>
                   {user.image ? (
                     <div title={user.name}>
                       <img
@@ -287,7 +287,7 @@ function Broad(props) {
                   ) : (
                     <div title={user.name}>
                       <span
-                      
+
                         className={`px-2 py-0.5 rounded-full text-sm bg-gray-500 hover:bg-gray-400 font-bold text-white` }
                       >
                         {name[0]}
