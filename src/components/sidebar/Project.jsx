@@ -19,7 +19,7 @@ import SettingsIcon from "@mui/icons-material/Settings";
 import Avatar from "@mui/material/Avatar";
 import { Button } from "@mui/material";
 export default function Project() {
-  const decode = jwtDecode(localStorage.getItem('token'));
+  const decode = jwtDecode(localStorage.getItem("token"));
   useEffect(() => {
     getBroad(idUser)
       .then((res) => {
@@ -112,9 +112,14 @@ export default function Project() {
             }
           >
             <ListItemButton onClick={handleClick}>
-              <ListItemIcon >
+              <ListItemIcon>
                 <Button>
-                  <Avatar sx={{ fontSize: 50,fontWeight: "800px"}} sizes="50px" variant="rounded"  {...stringAvatar(item.name)} />
+                  <Avatar
+                    sx={{ fontSize: 50, fontWeight: "800px" }}
+                    sizes="50px"
+                    variant="rounded"
+                    {...stringAvatar(item.name)}
+                  />
                 </Button>
               </ListItemIcon>
               <ListItemText primary={item.name} />
@@ -134,7 +139,7 @@ export default function Project() {
                   <ListItemIcon>
                     <GroupIcon />
                   </ListItemIcon>
-                  <ListItemText  primary="Thành viên" />
+                  <ListItemText primary="Thành viên" />
                 </ListItemButton>
               </List>
               <List component="div" disablePadding>
