@@ -1,13 +1,54 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import MediaCard from "../Card/Card";
 import { useSelector } from "react-redux";
 import Project from "./Project";
+import Avatar from "@mui/material/Avatar";
+import { Button } from "@mui/material";
+import Member from "../../api/DataMember";
+import jwtDecode from "jwt-decode";
+import { useLocation } from "react-router-dom";
+import getBroad from "../../api/GetBroad";
+
 export default function Sidebar(props) {
-  console.log("🚀 ~ file: Sidebar.jsx ~ line 6 ~ Sidebar ~ props", props);
+  let decode = jwtDecode(localStorage.getItem("token"));
   const dataWorkSpace = props.WorkSpace;
   const columnsOrder = props.columnsOrder;
-  const [onCreate, setOnCreate] = useState(true);
-  const data = useSelector((state) => state.broad);
+  const [member, setmember] = useState();
+  
+  useEffect(() => {
+    getBroad(decode.id)
+      .then((res) => console.log(res))
+      .catch((e) => console.log(e));
+  });
+  function stringToColor(string) {
+    let hash = 0;
+    let i;
+
+    /* eslint-disable no-bitwise */
+    for (i = 0; i < string.length; i += 1) {
+      hash = string.charCodeAt(i) + ((hash << 5) - hash);
+    }
+
+    let color = "#";
+
+    for (i = 0; i < 3; i += 1) {
+      const value = (hash >> (i * 8)) & 0xff;
+      color += `00${value.toString(16)}`.slice(-2);
+    }
+    /* eslint-enable no-bitwise */
+
+    return color;
+  }
+
+  function stringAvatar(name) {
+    return {
+      sx: {
+        bgcolor: stringToColor(name),
+        fontSize: 30,
+      },
+      children: `${name.split(" ")[0][0]}`,
+    };
+  }
   return (
     <div className="flex flex-cols gap-12 justify-center mt-8 ">
       <Project />
@@ -22,21 +63,10 @@ export default function Sidebar(props) {
           {dataWorkSpace.map((item, index) => (
             <div>
               <div className="flex px-2">
-                <svg
-                  xmlns="http://www.w3.org/2000/svg"
-                  fill="none"
-                  viewBox="0 0 24 24"
-                  strokeWidth={1.5}
-                  stroke="currentColor"
-                  className="w-6 h-6 mr-1 "
-                >
-                  <path
-                    strokeLinecap="round"
-                    strokeLinejoin="round"
-                    d="M6.429 9.75L2.25 12l4.179 2.25m0-4.5l5.571 3 5.571-3m-11.142 0L2.25 7.5 12 2.25l9.75 5.25-4.179 2.25m0 0L21.75 12l-4.179 2.25m0 0l4.179 2.25L12 21.75 2.25 16.5l4.179-2.25m11.142 0l-5.571 3-5.571-3"
-                  />
-                </svg>
-                <span className="font-bold text-xl">{item.name}</span>
+                <Button>
+                  <Avatar variant="rounded" {...stringAvatar(item.name)} />
+                </Button>
+                <span className="my-auto text-3xl font-bold">{item.name}</span>
                 <div className=" ml-40  flex flex-row gap-3 mb-6">
                   <div className="flex hover:bg-slate-300 bg-slate-200 p-1 px-2 rounded cursor-pointer">
                     <svg
@@ -54,24 +84,6 @@ export default function Sidebar(props) {
                       />
                     </svg>
                     <a>Bảng</a>
-                  </div>
-                  <div className="flex hover:bg-slate-300 bg-slate-200 p-1 px-2 rounded cursor-pointer ">
-                    <svg
-                      xmlns="http://www.w3.org/2000/svg"
-                      fill="none"
-                      viewBox="0 0 24 24"
-                      strokeWidth={1.5}
-                      stroke="currentColor"
-                      className="w-4 h-4 mt-1 mr-1"
-                    >
-                      <path
-                        strokeLinecap="round"
-                        strokeLinejoin="round"
-                        d="M3.75 6A2.25 2.25 0 016 3.75h2.25A2.25 2.25 0 0110.5 6v2.25a2.25 2.25 0 01-2.25 2.25H6a2.25 2.25 0 01-2.25-2.25V6zM3.75 15.75A2.25 2.25 0 016 13.5h2.25a2.25 2.25 0 012.25 2.25V18a2.25 2.25 0 01-2.25 2.25H6A2.25 2.25 0 013.75 18v-2.25zM13.5 6a2.25 2.25 0 012.25-2.25H18A2.25 2.25 0 0120.25 6v2.25A2.25 2.25 0 0118 10.5h-2.25a2.25 2.25 0 01-2.25-2.25V6zM13.5 15.75a2.25 2.25 0 012.25-2.25H18a2.25 2.25 0 012.25 2.25V18A2.25 2.25 0 0118 20.25h-2.25A2.25 2.25 0 0113.5 18v-2.25z"
-                      />
-                    </svg>
-
-                    <a>Dạng xem</a>
                   </div>
                   <div className="flex hover:bg-slate-300 bg-slate-200 p-1 px-2 rounded cursor-pointer">
                     <svg

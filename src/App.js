@@ -13,6 +13,7 @@ import Broad from "./page/broad/Broad";
 import Home from "./page/home/Home";
 import PrivateRoutes from "./hooks/PrivateRoutes";
 import Account from "./components/Account/Account";
+import MemberList from "./components/MemberList/MemberList";
 function App() {
   return (
     <div>
@@ -28,6 +29,7 @@ function App() {
             <Route path="/broad" element={<Broad />} />
             <Route element={<Navbar />}>
               <Route path="/account" element={<Account />} />
+              <Route path="/member/:id" element={<MemberList />} />
             </Route>
           </Route>
         </Routes>

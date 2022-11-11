@@ -67,3 +67,9 @@
   color: white;
 
 }
+.MuiAvatar-root{
+  height: 50px;
+  width: 50px;
+  font-size: 40px;
+  font-weight: bold;
+}

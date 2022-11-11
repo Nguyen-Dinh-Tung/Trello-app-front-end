@@ -23,8 +23,9 @@ function Broad(props) {
   const decode = jwtDecode(token);
   const initial = useSelector((state) => state.broad.data);
   const location = useLocation();
-  const dataByStore = useSelector((state) => state.broad.data);
   const idBroad = location.state.broad._id;
+  console.log("🚀 ~ file: Broad.jsx ~ line 27 ~ Broad ~ idBroad", idBroad)
+  const dataByStore = useSelector((state) => state.broad.data);
   const idWorkSpace = location.state.idWorkSpace;
   const emailIdUser = jwtDecode(token)["email"];
 
@@ -182,6 +183,7 @@ function Broad(props) {
     });
     setDataSearch(email);
   };
+  
   useEffect(() => {
     getUser()
       .then((res) => {
