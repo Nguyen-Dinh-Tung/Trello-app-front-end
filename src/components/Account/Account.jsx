@@ -11,6 +11,8 @@ import { ref, uploadBytes, listAll, getDownloadURL } from "firebase/storage";
 import UploadAvatar from "../../api/UpLoadAvatar";
 import Swal from "sweetalert2";
 import reSetPass from "../../api/ConfirmPassWord";
+import { Loading2 } from "../../components/Loading/Loading2";
+import { Loading3 } from "../Loading/Loading3";
 
 const UpdateSchema = Yup.object().shape({
   oldPassword: Yup.string().required("Mật khẩu không được để trống !"),
@@ -35,9 +37,11 @@ export default function Account() {
   const [showEyeOld, setShowEyeOld] = useState(false);
   const [newPasswordType, setNewPasswordType] = useState("password");
   const [showEyeNew, setShowEyenew] = useState(false);
-
   const [newConfirmPasswordType, setConfirmPasswordType] = useState("password");
   const [showEyeCf, setShowEyeCf] = useState(false);
+  const [loadingRspw, setLoadingRSPW] = useState(false);
+  const [loading3, setLoading3] = useState(false);
+  const [loading3avatar, setLoading3Avatrt] = useState(false);
 
   const handleShowPass = () => {
     if (oldPasswordType === "password") {
@@ -70,6 +74,24 @@ export default function Account() {
     setShowEyeCf(false);
     setConfirmPasswordType("password");
   };
+  useEffect(() => {
+    let timeId = setTimeout(() => {
+      setLoading3(false);
+    }, 3000);
+
+    return () => {
+      clearTimeout(timeId);
+    };
+  }, [loading3]);
+  useEffect(() => {
+    let timeAvatart = setTimeout(() => {
+      setLoading3Avatrt(false);
+    }, 3000);
+
+    return () => {
+      clearTimeout(timeAvatart);
+    };
+  }, [loading3avatar]);
 
   let decode;
   let str = "";
@@ -133,13 +155,9 @@ export default function Account() {
           .then((res) => {
             console.log(res);
             setLoading(false);
-            Swal.fire({
-              icon: "success",
-              title: "Tải ảnh thành công !",
-              showConfirmButton: false,
-            }).then(() => {
-              setFlag(res);
-            });
+            setLoading3Avatrt(true);
+
+            setFlag(res);
           })
           .catch((e) => {
             console.log(e);
@@ -153,6 +171,10 @@ export default function Account() {
 
   return (
     <div>
+      {loading3 ? <Loading3 message="Thay đổi mật khẩu thành công !" /> : null}
+
+      {loading3avatar ? <Loading3 message="Thay đổi ảnh thành công !" /> : null}
+
       <div className="w-full h-screen bg-gray-50  leading-5 flex flex-col   ">
         <div className="flex flex-row justify-center py-0 mx-48">
           <div className=" flex my-12 ">
@@ -375,11 +397,11 @@ export default function Account() {
                     }}
                     validationSchema={UpdateSchema}
                     onSubmit={(values, { resetForm }) => {
+                      setLoadingRSPW(true);
                       setErrOldPass(false);
-                      console.log(values);
                       reSetPass(values)
                         .then((res) => {
-                          console.log(res);
+                          setLoadingRSPW(false);
                           if (
                             res.data.message ===
                             "Sai mật khẩu cũ, Mời nhật lại !"
@@ -387,13 +409,8 @@ export default function Account() {
                             setValueErr(res.data.message);
                             setErrOldPass(true);
                           } else {
-                            Swal.fire({
-                              icon: "success",
-                              title: "Cập nhật mật khẩu mới thành công !",
-                              showConfirmButton: false,
-                            }).then(() => {
-                              setShowModal(false);
-                            });
+                            setShowModal(false);
+                            setLoading3(true);
                           }
                         })
                         .catch((e) => {
@@ -626,13 +643,17 @@ export default function Account() {
                         </div>
                         <div className="space-y-2 ml-2">
                           <div>
-                            <button
-                              className="text-white bg-gradient-to-r from-cyan-500 to-blue-500 hover:bg-gradient-to-bl focus:ring-4 focus:outline-none focus:ring-cyan-300 dark:focus:ring-cyan-800 font-medium rounded-lg text-sm px-5 py-2.5 text-center mr-2 mb-2"
-                              onClick={handleSubmit}
-                              type="submit"
-                            >
-                              LƯU
-                            </button>
+                            {loadingRspw ? (
+                              <Loading2 />
+                            ) : (
+                              <button
+                                className="text-white bg-gradient-to-r from-cyan-500 to-blue-500 hover:bg-gradient-to-bl focus:ring-4 focus:outline-none focus:ring-cyan-300 dark:focus:ring-cyan-800 font-medium rounded-lg text-sm px-5 py-2.5 text-center mr-2 mb-2"
+                                onClick={handleSubmit}
+                                type="submit"
+                              >
+                                LƯU
+                              </button>
+                            )}
                             <button
                               className="text-white bg-gradient-to-br from-pink-500 to-orange-400 hover:bg-gradient-to-bl focus:ring-4 focus:outline-none focus:ring-pink-200 dark:focus:ring-pink-800 font-medium rounded-lg text-sm px-5 py-2.5 text-center mr-2 mb-2"
                               type="button"
