@@ -113,8 +113,15 @@ function Item({ provided, item, isDragging  } , props) {
     e.target.innerHTML = input;
     document.querySelector('.item-content-out').addEventListener('focusout' , handleFocusOut)
   }
+  const handleClickMoreOption = () =>{
+    console.log('check');
+  }
   return (
+    <div
+    style={{display: 'flex' , justifyContent: 'space-between' , padding: '0 6px' , alignItems : 'center'  , backgroundColor : 'white' , margin: '10px  12px' , borderRadius : '8px'}}
+    >
       <div
+      class="item-style-my-fen"
       id={item.id}
         {...provided.draggableProps}
         {...provided.dragHandleProps}
@@ -127,9 +134,14 @@ function Item({ provided, item, isDragging  } , props) {
             dispatch(setIdItemTarget(valueTarget))
           }
         }}
+
       >
       {item.text}
       </div>
+      <i class="fa-solid fa-ellipsis " style={{fontSize:"20px" , cursor: 'pointer'}} onClick={handleClickMoreOption}></i>
+
+    </div>
+
   );
 }
 
