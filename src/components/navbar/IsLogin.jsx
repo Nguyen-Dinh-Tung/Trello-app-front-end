@@ -29,7 +29,7 @@ export default function IsLogin() {
       sx: {
         bgcolor: stringToColor(name),
       },
-      children: `${name.split(" ")[0][0]}${name.split(" ")[1][0]}`,
+      children: `${name.split(" ")[0][0]}`,
     };
   }
   const [avatar, setAvatar] = useState(false);
@@ -48,7 +48,6 @@ export default function IsLogin() {
     setOpen(false);
   };
   let idUser = decode["id"];
-  
 
   useEffect(() => {
     getImageUser(idUser)
