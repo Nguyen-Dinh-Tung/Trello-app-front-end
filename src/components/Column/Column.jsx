@@ -91,7 +91,7 @@ function Column(props) {
           >
             <div className='column-title'
             onDoubleClick={handleDoubleClick}
-            style={{height : '40px'  , color : 'white' , fontSize : '18px'}}
+            style={{height : '40px'  , color : 'white' , fontSize : '18px' , backgroundColor : '#21acf3'}}
             {...provided.dragHandleProps}
 
             >
