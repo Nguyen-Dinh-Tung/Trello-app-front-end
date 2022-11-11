@@ -17,8 +17,9 @@ import DashboardIcon from "@mui/icons-material/Dashboard";
 import GroupIcon from "@mui/icons-material/Group";
 import SettingsIcon from "@mui/icons-material/Settings";
 import Avatar from "@mui/material/Avatar";
-
+import { Button } from "@mui/material";
 export default function Project() {
+  const decode = jwtDecode(localStorage.getItem("token"));
   useEffect(() => {
     getBroad(idUser)
       .then((res) => {
@@ -42,17 +43,17 @@ export default function Project() {
       color += `00${value.toString(16)}`.slice(-2);
     }
     /* eslint-enable no-bitwise */
-  
+
     return color;
   }
-  
+
   function stringAvatar(name) {
     return {
       sx: {
         bgcolor: stringToColor(name),
-        fontSize:30
+        fontSize: 30,
       },
-      children: `${name.split(' ')[0][0]}`,
+      children: `${name.split(" ")[0][0]}`,
     };
   }
 
@@ -112,8 +113,15 @@ export default function Project() {
             }
           >
             <ListItemButton onClick={handleClick}>
-              <ListItemIcon sx={{fontSize:50}}>
-              <Avatar variant="square" {...stringAvatar(item.name)} />
+              <ListItemIcon>
+                <Button>
+                  <Avatar
+                    sx={{ fontSize: 50, fontWeight: "800px" }}
+                    sizes="50px"
+                    variant="rounded"
+                    {...stringAvatar(item.name)}
+                  />
+                </Button>
               </ListItemIcon>
               <ListItemText primary={item.name} />
               {open ? <ExpandLess /> : <ExpandMore />}
@@ -128,7 +136,7 @@ export default function Project() {
                 </ListItemButton>
               </List>
               <List component="div" disablePadding>
-                <ListItemButton sx={{ pl: 4 }}>
+                <ListItemButton href={`/member/${decode.id}`} sx={{ pl: 4 }}>
                   <ListItemIcon>
                     <GroupIcon />
                   </ListItemIcon>

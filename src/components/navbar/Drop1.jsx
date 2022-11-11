@@ -2,6 +2,7 @@ import React, { useEffect, useState } from "react";
 import jwtDecode from "jwt-decode";
 import getBroad from "../../api/GetBroad";
 import Avatar from "@mui/material/Avatar";
+import { Button } from "@mui/material";
 
 export default function Drop1() {
   let token = localStorage.getItem("token");
@@ -133,12 +134,13 @@ export default function Drop1() {
               <ul
                 className="py-1 rounded-sm text-black "
                 aria-labelledby="dropdownLargeButton"
+
               >
                 {workspace.map((item, index) => (
-                  <li key={index} className="text-sm block px-4 py-2 flex">
-                    <span >
-                      <Avatar variant="square" {...stringAvatar(item.name)} />
-                    </span>
+                  <li key={index} className="text-sm  block px-4 py-2 flex">
+                    <Button>
+                      <Avatar sx={{borderRadius:10}} variant="rounded" {...stringAvatar(item.name)} />
+                    </Button>
                     <span className=" my-auto ml-2 text-lg">
                     {item.name}
                     </span>
