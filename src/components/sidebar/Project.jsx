@@ -100,59 +100,62 @@ export default function Project() {
           </button>
           {/* Project */}
         </div>
-        {workspace.map((item, index) => (
-          <List
-            sx={{ width: "100%", maxWidth: 360, bgcolor: "background.paper" }}
-            component="nav"
-            aria-labelledby="nested-list-subheader"
-            subheader={
-              <ListSubheader component="div" id="nested-list-subheader">
-                Các không gian làm việc
-              </ListSubheader>
-            }
-          >
-            <ListItemButton onClick={handleClick}>
-              <ListItemIcon>
-                <Button>
-                  <Avatar
-                    sx={{ fontSize: 50, fontWeight: "800px" }}
-                    sizes="50px"
-                    variant="rounded"
-                    {...stringAvatar(item.name)}
-                  />
-                </Button>
-              </ListItemIcon>
-              <ListItemText primary={item.name} />
-              {open ? <ExpandLess /> : <ExpandMore />}
-            </ListItemButton>
-            <Collapse in={open} timeout="auto" unmountOnExit>
-              <List component="div" disablePadding>
-                <ListItemButton sx={{ pl: 4 }}>
-                  <ListItemIcon>
-                    <DashboardIcon />
-                  </ListItemIcon>
-                  <ListItemText primary="Bảng" />
-                </ListItemButton>
-              </List>
-              <List component="div" disablePadding>
-                <ListItemButton href={`/member/${decode.id}`} sx={{ pl: 4 }}>
-                  <ListItemIcon>
-                    <GroupIcon />
-                  </ListItemIcon>
-                  <ListItemText primary="Thành viên" />
-                </ListItemButton>
-              </List>
-              <List component="div" disablePadding>
-                <ListItemButton sx={{ pl: 4 }}>
-                  <ListItemIcon>
-                    <SettingsIcon />
-                  </ListItemIcon>
-                  <ListItemText primary="Cài đặt" />
-                </ListItemButton>
-              </List>
-            </Collapse>
-          </List>
-        ))}
+
+        <List
+          sx={{ width: "100%", maxWidth: 360, bgcolor: "background.paper" }}
+          component="nav"
+          aria-labelledby="nested-list-subheader"
+          subheader={
+            <ListSubheader component="div" id="nested-list-subheader">
+              Các không gian làm việc
+            </ListSubheader>
+          }
+        >
+          {workspace.map((item, index) => (
+            < >
+              <ListItemButton onClick={handleClick}>
+                <ListItemIcon>
+                  <Button>
+                    <Avatar
+                      sx={{ fontSize: 50, fontWeight: "800px" }}
+                      sizes="50px"
+                      variant="rounded"
+                      {...stringAvatar(item.name)}
+                    />
+                  </Button>
+                </ListItemIcon>
+                <ListItemText primary={item.name} />
+                {open ? <ExpandLess /> : <ExpandMore />}
+              </ListItemButton>
+              <Collapse in={open} timeout="auto" unmountOnExit>
+                <List component="div" disablePadding>
+                  <ListItemButton sx={{ pl: 4 }}>
+                    <ListItemIcon>
+                      <DashboardIcon />
+                    </ListItemIcon>
+                    <ListItemText primary="Bảng" />
+                  </ListItemButton>
+                </List>
+                <List component="div" disablePadding>
+                  <ListItemButton href={`/member/${decode.id}`} sx={{ pl: 4 }}>
+                    <ListItemIcon>
+                      <GroupIcon />
+                    </ListItemIcon>
+                    <ListItemText primary="Thành viên" />
+                  </ListItemButton>
+                </List>
+                <List component="div" disablePadding>
+                  <ListItemButton sx={{ pl: 4 }}>
+                    <ListItemIcon>
+                      <SettingsIcon />
+                    </ListItemIcon>
+                    <ListItemText primary="Cài đặt" />
+                  </ListItemButton>
+                </List>
+              </Collapse>
+            </>
+          ))}
+        </List>
       </div>
     </>
   );
