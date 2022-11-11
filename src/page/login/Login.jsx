@@ -5,7 +5,7 @@ import Swal from "sweetalert2";
 import { Link, useNavigate } from "react-router-dom";
 import { Formik, Form, Field, ErrorMessage } from "formik";
 import { useGoogleLogin } from "@react-oauth/google";
-import jwt_decode from "jwt-decode";
+import jwt_decode from "jwt-decode"
 
 const LoginSchema = Yup.object().shape({
   email: Yup.string().email("Invalid email").required("Required"),
@@ -77,24 +77,25 @@ export const Login = () => {
         <div className="absolute bg-black opacity-60 inset-0 z-0" />
         <div className="max-w-md w-full space-y-8 p-10 bg-white rounded-xl z-10">
           <div className="text-center">
-            <h2 className="mt-6 text-3xl font-bold text-gray-900">
-              Welcom Back!
+            <h2 className="mt-6 text-3xl font-bold text-blue-500">
+              Chào mừng bạn trở lại!
             </h2>
             <p className="mt-2 text-sm text-gray-600">
-              Please sign in to your account
+              Xin mời đăng nhập
             </p>
           </div>
-          <div className="flex flex-row justify-center items-center space-x-3">
-            <span className="w-11 h-11 items-center justify-center inline-flex rounded-full font-bold text-lg  text-white  bg-emerald-600 hover:shadow-lg cursor-pointer transition ease-in duration-300">
-              <a onClick={loginGoogle}>
+          <div className="flex flex-row justify-center items-center cursor-pointer" onClick={loginGoogle}>
+            <span>
+              Đăng nhập bằng Google
+            </span>
+            <span className="w-10 h-10 items-center justify-center inline-flex rounded-full font-bold text-lg  text-white cursor-pointer transition ease-in duration-300">
                 {" "}
-                <i className="fa-brands fa-google fa-2xl"></i>
-              </a>
+                <img src="https://cdn1.iconfinder.com/data/icons/google-s-logo/150/Google_Icons-09-512.png"></img>
             </span>
           </div>
           <div className="flex items-center justify-center space-x-2">
             <span className="h-px w-16 bg-gray-300" />
-            <span className="text-gray-500 font-normal">OR</span>
+            <span className="text-gray-500 font-normal">Hoặc</span>
             <span className="h-px w-16 bg-gray-300" />
           </div>
           <Formik
@@ -186,14 +187,14 @@ export const Login = () => {
                   ) : null}
 
                   <label className="text-sm font-bold text-gray-700 tracking-wide">
-                    Email
+                    Địa chỉ email
                   </label>
                   <input
-                    className=" w-full text-base py-2 border-b text-black border-gray-300 focus:outline-none focus:border-indigo-500"
+                    className=" w-full text-base py-2 border-b text-black border-gray-300 focus:outline-none focus:border-blue-500"
                     type="email"
                     name="email"
                     onChange={handleChange}
-                    placeholder="mail@gmail.com"
+                    placeholder="nguyenvana@gmail.com"
                   />
                   {errors.email && touched.email ? (
                     <div style={{ color: "red" }}>{errors.email}</div>
@@ -201,16 +202,16 @@ export const Login = () => {
                 </div>
                 <div className="mt-8 content-center">
                   <label className="text-sm font-bold text-gray-700 tracking-wide">
-                    Password
+                    Mật khẩu
                   </label>
                   <div className="grid grid-cols-12">
                     <div className="col-span-11">
                       <input
-                        className="w-full content-center text-base py-2 border-b text-black border-gray-300 focus:outline-none focus:border-indigo-500"
+                        className="w-full content-center text-base py-2 border-b text-black border-gray-300 focus:outline-none focus:border-blue-500"
                         type={passwordType}
                         name="password"
                         onChange={handleChange}
-                        placeholder="Enter your password"
+                        placeholder="********"
                       />
                     </div>
 
@@ -264,21 +265,21 @@ export const Login = () => {
                       id="remember_me"
                       name="remember_me"
                       type="checkbox"
-                      className="h-4 w-4 bg-indigo-500 focus:ring-indigo-400 border-gray-300 rounded"
+                      className="h-4 w-4 bg-blue-500 focus:ring-blue-400 border-gray-300 rounded"
                     />
                     <label
                       htmlFor="remember_me"
                       className="ml-2 block text-sm text-gray-900"
                     >
-                      Remember me
+                      Lưu lại
                     </label>
                   </div>
                   <div className="text-sm">
                     <a
                       href="#"
-                      className="font-medium text-indigo-500 hover:text-indigo-500"
+                      className="font-medium hover:text-blue-500"
                     >
-                      Forgot your password?
+                      Quên mật khẩu?
                     </a>
                   </div>
                 </div>
@@ -286,19 +287,19 @@ export const Login = () => {
                   <button
                     onClick={handleSubmit}
                     type="submit"
-                    className="w-full flex justify-center bg-indigo-500 text-black p-4  rounded-full tracking-wide
-                          font-semibold  focus:outline-none focus:shadow-outline hover:bg-indigo-600 shadow-lg cursor-pointer transition ease-in duration-300"
+                    className="w-1/2  mx-auto flex justify-center bg-blue-500 text-white p-2  rounded-full tracking-wide
+                          font-semibold  focus:outline-none focus:shadow-outline hover:bg-blue-600 shadow-lg cursor-pointer transition ease-in duration-300"
                   >
-                    Login
+                    Đăng nhập
                   </button>
                 </div>
                 <p className="flex flex-col items-center justify-center mt-10 text-center text-md text-gray-500">
-                  <span>Don't have an account?</span>
+                  <span>Bạn không có tài khoản</span>
                   <a
                     href="/register"
-                    className="text-indigo-500 hover:text-indigo-500no-underline hover:underline cursor-pointer transition ease-in duration-300"
+                    className="text-blue-500 no-underline hover:underline cursor-pointer transition ease-in duration-300"
                   >
-                    Sign up
+                    Đăng ký
                   </a>
                 </p>
               </form>

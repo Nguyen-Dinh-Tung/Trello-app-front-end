@@ -63,8 +63,8 @@ export default function Register() {
             <div className="absolute bg-black opacity-60 inset-0 z-0" />
             <div className="max-w-md w-full space-y-8 p-10 bg-white rounded-xl z-10">
               <div className="text-center">
-                <h1 className="mt- text-3xl font-bold text-gray-900">
-                  Register
+                <h1 className="mt- text-3xl font-bold text-blue-500">
+                  Đăng Ký
                 </h1>
               </div>
               <span className="h-px w-16 bg-gray-300" />
@@ -144,14 +144,14 @@ export default function Register() {
                   <form className="mt-8 space-y-6">
                     <div className="relative">
                       <label className="text-sm font-bold text-gray-700 tracking-wide">
-                        Name
+                        Họ và tên
                       </label>
                       <input
-                        className=" w-full text-base py-2 border-b text-black border-gray-300 focus:outline-none focus:border-indigo-500"
+                        className=" w-full text-base py-2 border-b text-black border-gray-300 focus:outline-none focus:border-blue-500"
                         type="text"
                         name="name"
                         onChange={handleChange}
-                        placeholder="name"
+                        placeholder="nguyenvana"
                       />
                       {errors.name && touched.name ? (
                         <div style={{ color: "red" }}>{errors.name}</div>
@@ -159,14 +159,14 @@ export default function Register() {
                     </div>
                     <div className="relative">
                       <label className="text-sm font-bold text-gray-700 tracking-wide">
-                        Email
+                        Địa chỉ email
                       </label>
                       <input
-                        className=" w-full text-base py-2 border-b text-black border-gray-300 focus:outline-none focus:border-indigo-500"
+                        className=" w-full text-base py-2 border-b text-black border-gray-300 focus:outline-none focus:border-blue-500"
                         type="email"
                         name="email"
                         onChange={handleChange}
-                        placeholder="mail@gmail.com"
+                        placeholder="abc@gmail.com"
                       />
                       {errors.email && touched.email ? (
                         <div style={{ color: "red" }}>{errors.email}</div>
@@ -174,16 +174,16 @@ export default function Register() {
                     </div>
                     <div className="mt-8 content-center">
                       <label className="text-sm font-bold text-gray-700 tracking-wide">
-                        Password
+                        Mật khẩu
                       </label>
                       <div className="">
                         <div className="flex flex-row">
                           <input
-                            className="w-full content-center text-base py-2 border-b text-black border-gray-300 focus:outline-none focus:border-indigo-500"
+                            className="w-full content-center text-base py-2 border-b text-black border-gray-300 focus:outline-none focus:border-blue-500"
                             type={passwordType}
                             name="password"
                             onChange={handleChange}
-                            placeholder="Enter your password"
+                            placeholder="********"
                           />
                           <div onClick={handleShowPass} className="col-span-1">
                             {showEye ? (
@@ -231,16 +231,16 @@ export default function Register() {
                     </div>
                     <div className="mt-8 content-center">
                       <label className="text-sm font-bold text-gray-700 tracking-wide">
-                        ConfirmPassword
+                        Nhập lại mật khẩu
                       </label>
                       <div className="">
                         <div className="flex flex-row">
                           <input
-                            className="w-full content-center text-base py-2 border-b text-black border-gray-300 focus:outline-none focus:border-indigo-500"
+                            className="w-full content-center text-base py-2 border-b text-black border-gray-300 focus:outline-none focus:borde-blue-500"
                             type={ConfirmPasWordType}
                             name="confirmpassword"
                             onChange={handleChange}
-                            placeholder="Enter your confirmpassword"
+                            placeholder="********"
                           />
                           <div
                             onClick={handleShowConfirmPass}
@@ -297,19 +297,19 @@ export default function Register() {
                       <button
                         onClick={handleSubmit}
                         type="submit"
-                        className="w-full flex justify-center bg-indigo-500 text-black p-4  rounded-full tracking-wide
-                          font-semibold  focus:outline-none focus:shadow-outline hover:bg-indigo-600 shadow-lg cursor-pointer transition ease-in duration-300"
+                        className="w-1/2 mx-auto flex justify-center bg-blue-500 text-white p-2  rounded tracking-wide
+                          font-semibold  focus:outline-none focus:shadow-outline hover:bg-blue-600 shadow-lg cursor-pointer transition ease-in duration-300"
                       >
-                        Register
+                        Đăng ký
                       </button>
                     </div>
                     <p className="flex flex-col items-center justify-center mt-10 text-center text-md text-gray-500">
-                      <span>Already have an account !</span>
+                      <span>Bạn đã có tài khoản rồi !</span>
                       <a
                         href="/login"
-                        className="text-indigo-500 hover:text-indigo-500no-underline hover:underline cursor-pointer transition ease-in duration-300"
+                        className="text-blue-500 no-underline hover:text-blue-500 hover:underline cursor-pointer transition ease-in duration-300"
                       >
-                        Login
+                        Đăng nhập
                       </a>
                     </p>
                   </form>
