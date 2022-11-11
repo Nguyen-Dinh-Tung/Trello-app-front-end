@@ -9,6 +9,7 @@ function ListItem(props) {
   const index = props.index
   const column = props.column ;
   const listRef = useRef();
+  console.log(column.items.length);
   useLayoutEffect(() => {
     const list = listRef.current;
     if (list) {
@@ -36,7 +37,7 @@ function ListItem(props) {
        return (
         <div column={column}>
           <FixedSizeList
-           height={500}
+           height={600}
            itemCount={itemCount}
            itemSize={80}
            width={300}
