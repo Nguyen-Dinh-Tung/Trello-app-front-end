@@ -1,7 +1,7 @@
 import React from 'react';
 import ListItem from '@mui/material/ListItem';
 import ListItemButton from '@mui/material/ListItemButton';
-import { setShowModalItem } from '../../redux/features/showModal.slice';
+import { setShowModalDetailItem, setShowModalItem } from '../../redux/features/showModal.slice';
 
 import { useState  } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
@@ -15,6 +15,7 @@ import { styled } from '@mui/material/styles';
 import { purple } from '@mui/material/colors';
 import { setDataBroad } from '../../redux/features/broad.slice';
 import { useEffect } from 'react';
+import ModalDetailsItem from '../ModalDetailsItem/ModalDetailsItem';
 
 const BootstrapButton = styled(Button)({
   boxShadow: 'none',
@@ -115,6 +116,7 @@ function Item({ provided, item, isDragging  } , props) {
   }
   const handleClickMoreOption = () =>{
     console.log('check');
+    dispatch(setShowModalDetailItem(true))
   }
   return (
     <div
@@ -138,8 +140,9 @@ function Item({ provided, item, isDragging  } , props) {
       >
       {item.text}
       </div>
-      <i class="fa-solid fa-ellipsis " style={{fontSize:"20px" , cursor: 'pointer'}} onClick={handleClickMoreOption}></i>
-
+      <i class="fa-solid fa-ellipsis " style={{fontSize:"20px" , cursor: 'pointer'}} onClick={handleClickMoreOption}
+      ></i>
+      <ModalDetailsItem/>
     </div>
 
   );

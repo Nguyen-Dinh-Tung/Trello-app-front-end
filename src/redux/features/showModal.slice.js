@@ -10,6 +10,7 @@ const showModalSlice = createSlice({
     isShowWorkSpace: [],
     flag: "",
     isIdWorkSpace: "",
+    isShowModalDetailsItem: false,
   },
   reducers: {
     setIdWorkSpace: (state, actions) => {
@@ -34,6 +35,9 @@ const showModalSlice = createSlice({
     setShowModalItem: (state, action) => {
       state.isShowModalItem = action.payload;
     },
+    setShowModalDetailItem: (state, action) => {
+      state.isShowModalDetailsItem = action.payload;
+    },
   },
 });
 export const {
@@ -44,5 +48,6 @@ export const {
   setShowWorkSpace,
   setFlag,
   setIdWorkSpace,
+  setShowModalDetailItem,
 } = showModalSlice.actions;
 export default showModalSlice.reducer;
