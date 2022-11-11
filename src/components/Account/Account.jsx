@@ -11,6 +11,8 @@ import { ref, uploadBytes, listAll, getDownloadURL } from "firebase/storage";
 import UploadAvatar from "../../api/UpLoadAvatar";
 import Swal from "sweetalert2";
 import reSetPass from "../../api/ConfirmPassWord";
+import { Loading2 } from "../../components/Loading/Loading2";
+import { Loading3 } from "../Loading/Loading3";
 
 const UpdateSchema = Yup.object().shape({
   oldPassword: Yup.string().required("Mật khẩu không được để trống !"),
@@ -31,6 +33,65 @@ export default function Account() {
   const [errorImage, setErrorImage] = useState("");
   const [errOldPass, setErrOldPass] = useState(false);
   const [valueErr, setValueErr] = useState();
+  const [oldPasswordType, setOldPasswordType] = useState("password");
+  const [showEyeOld, setShowEyeOld] = useState(false);
+  const [newPasswordType, setNewPasswordType] = useState("password");
+  const [showEyeNew, setShowEyenew] = useState(false);
+  const [newConfirmPasswordType, setConfirmPasswordType] = useState("password");
+  const [showEyeCf, setShowEyeCf] = useState(false);
+  const [loadingRspw, setLoadingRSPW] = useState(false);
+  const [loading3, setLoading3] = useState(false);
+  const [loading3avatar, setLoading3Avatrt] = useState(false);
+
+  const handleShowPass = () => {
+    if (oldPasswordType === "password") {
+      setOldPasswordType("text");
+      setShowEyeOld(true);
+
+      return;
+    }
+    setShowEyeOld(false);
+    setOldPasswordType("password");
+  };
+
+  const handleShowNewPass = () => {
+    if (newPasswordType === "password") {
+      setNewPasswordType("text");
+      setShowEyenew(true);
+
+      return;
+    }
+    setShowEyenew(false);
+    setNewPasswordType("password");
+  };
+  const handleShowCfPass = () => {
+    if (newConfirmPasswordType === "password") {
+      setConfirmPasswordType("text");
+      setShowEyeCf(true);
+
+      return;
+    }
+    setShowEyeCf(false);
+    setConfirmPasswordType("password");
+  };
+  useEffect(() => {
+    let timeId = setTimeout(() => {
+      setLoading3(false);
+    }, 3000);
+
+    return () => {
+      clearTimeout(timeId);
+    };
+  }, [loading3]);
+  useEffect(() => {
+    let timeAvatart = setTimeout(() => {
+      setLoading3Avatrt(false);
+    }, 3000);
+
+    return () => {
+      clearTimeout(timeAvatart);
+    };
+  }, [loading3avatar]);
 
   let decode;
   let str = "";
@@ -94,13 +155,9 @@ export default function Account() {
           .then((res) => {
             console.log(res);
             setLoading(false);
-            Swal.fire({
-              icon: "success",
-              title: "Tải ảnh thành công !",
-              showConfirmButton: false,
-            }).then(() => {
-              setFlag(res);
-            });
+            setLoading3Avatrt(true);
+
+            setFlag(res);
           })
           .catch((e) => {
             console.log(e);
@@ -113,7 +170,11 @@ export default function Account() {
   };
 
   return (
-    <div >
+    <div>
+      {loading3 ? <Loading3 message="Thay đổi mật khẩu thành công !" /> : null}
+
+      {loading3avatar ? <Loading3 message="Thay đổi ảnh thành công !" /> : null}
+
       <div className="w-full h-screen bg-gray-50  leading-5 flex flex-col   ">
         <div className="flex flex-row justify-center py-0 mx-48">
           <div className=" flex my-12 ">
@@ -124,7 +185,7 @@ export default function Account() {
               aria-expanded="false"
             >
               {avatar ? (
-                <div> 
+                <div>
                   <img
                     className="h-24 w-24 md rounded-full relative "
                     src={valueAvatar}
@@ -143,7 +204,7 @@ export default function Account() {
 
         <div>
           <div>
-          <div className=" block md:flex mx-auto w-[70%] gap-12">
+            <div className=" block md:flex mx-auto w-[70%] gap-12">
               <div className="w-full md:w-2/5 p-4 sm:p-6 shadow bg-white">
                 {loading ? (
                   <div className="flex items-center justify-center space-x-2 animate-bounce">
@@ -154,9 +215,14 @@ export default function Account() {
                 ) : (
                   <div className="w-full p-8 mx-2 flex justify-center">
                     {result ? (
-                      <img ref={imageRef} src={result} className="max-h-[75%] max-w-[75%]" alt="" />
+                      <img
+                        ref={imageRef}
+                        src={result}
+                        className="max-h-[75%] max-w-[75%]"
+                        alt=""
+                      />
                     ) : (
-                      <img src={Upload?.image} ref={imageRef}  alt="" />
+                      <img src={Upload?.image} ref={imageRef} alt="" />
                     )}
                   </div>
                 )}
@@ -175,43 +241,41 @@ export default function Account() {
                   />
                   <div className="flex flex-col items-center gap-3">
                     <label
-                    htmlFor="file-upload"
-                    className="z-20 flex flex-col-reverse items-center justify-center w-full h-full cursor-pointer hover:text-red-800"
-                  >
-                    <p className="z-10 text-lg font-light text-center text-gray-700">
-                      Tải ảnh lên
-                    </p>
-                    <svg
-                      xmlns="http://www.w3.org/2000/svg"
-                      fill="none"
-                      viewBox="0 0 24 24"
-                      strokeWidth={1.5}
-                      stroke="currentColor"
-                      className="w-6 h-6  "
+                      htmlFor="file-upload"
+                      className="z-20 flex flex-col-reverse items-center justify-center w-full h-full cursor-pointer hover:text-red-800"
                     >
-                      <path
-                        strokeLinecap="round"
-                        strokeLinejoin="round"
-                        d="M2.25 15.75l5.159-5.159a2.25 2.25 0 013.182 0l5.159 5.159m-1.5-1.5l1.409-1.409a2.25 2.25 0 013.182 0l2.909 2.909m-18 3.75h16.5a1.5 1.5 0 001.5-1.5V6a1.5 1.5 0 00-1.5-1.5H3.75A1.5 1.5 0 002.25 6v12a1.5 1.5 0 001.5 1.5zm10.5-11.25h.008v.008h-.008V8.25zm.375 0a.375.375 0 11-.75 0 .375.375 0 01.75 0z"
-                      />
-                    </svg>
-                  </label>
-                  <button
-                    type="button"
-                    data-mdb-ripple="true"
-                    data-mdb-ripple-color="light"
-                    className="w-full  p-8 mx-2 flex justify-center w-32  px-6 py-2.5 bg-blue-600 text-white font-medium text-xs leading-tight uppercase rounded  hover:bg-blue-700  focus:bg-blue-700 focus:outline-none focus:ring-0 active:bg-blue-800 transition duration-150 ease-in-out"
-                    onClick={handleUpload}
-                  >
-                    LƯU
-                  </button>
+                      <p className="z-10 text-lg font-light text-center text-gray-700">
+                        Tải ảnh lên
+                      </p>
+                      <svg
+                        xmlns="http://www.w3.org/2000/svg"
+                        fill="none"
+                        viewBox="0 0 24 24"
+                        strokeWidth={1.5}
+                        stroke="currentColor"
+                        className="w-6 h-6  "
+                      >
+                        <path
+                          strokeLinecap="round"
+                          strokeLinejoin="round"
+                          d="M2.25 15.75l5.159-5.159a2.25 2.25 0 013.182 0l5.159 5.159m-1.5-1.5l1.409-1.409a2.25 2.25 0 013.182 0l2.909 2.909m-18 3.75h16.5a1.5 1.5 0 001.5-1.5V6a1.5 1.5 0 00-1.5-1.5H3.75A1.5 1.5 0 002.25 6v12a1.5 1.5 0 001.5 1.5zm10.5-11.25h.008v.008h-.008V8.25zm.375 0a.375.375 0 11-.75 0 .375.375 0 01.75 0z"
+                        />
+                      </svg>
+                    </label>
+                    <button
+                      type="button"
+                      data-mdb-ripple="true"
+                      data-mdb-ripple-color="light"
+                      className="text-white bg-gradient-to-r from-cyan-500 to-blue-500 hover:bg-gradient-to-bl focus:ring-4 focus:outline-none focus:ring-cyan-300 dark:focus:ring-cyan-800 font-medium rounded-lg text-sm px-5 py-2.5 text-center mr-2 mb-2"
+                      onClick={handleUpload}
+                    >
+                      LƯU
+                    </button>
                   </div>
-                  
                 </div>
               </div>
-              <div className="w-full md:w-3/5 p-8 bg-white shadow lg:ml-4 justify-items-center items-center"
-              >
-                <div className="rounded p-auto  justify-items-center items-center block" >
+              <div className="w-full md:w-3/5 p-8 bg-white shadow lg:ml-4 justify-items-center items-center">
+                <div className="rounded p-auto  justify-items-center items-center block">
                   <div className="pb-6">
                     <label
                       htmlFor="name"
@@ -275,7 +339,7 @@ export default function Account() {
           </div>
         </div>
       </div>
-      
+
       {showModal ? (
         <>
           <div className="justify-center items-center flex overflow-x-hidden overflow-y-auto fixed visible inset-0 z-50  ">
@@ -333,11 +397,11 @@ export default function Account() {
                     }}
                     validationSchema={UpdateSchema}
                     onSubmit={(values, { resetForm }) => {
+                      setLoadingRSPW(true);
                       setErrOldPass(false);
-                      console.log(values);
                       reSetPass(values)
                         .then((res) => {
-                          console.log(res);
+                          setLoadingRSPW(false);
                           if (
                             res.data.message ===
                             "Sai mật khẩu cũ, Mời nhật lại !"
@@ -345,13 +409,8 @@ export default function Account() {
                             setValueErr(res.data.message);
                             setErrOldPass(true);
                           } else {
-                            Swal.fire({
-                              icon: "success",
-                              title: "Cập nhật mật khẩu mới thành công !",
-                              showConfirmButton: false,
-                            }).then(() => {
-                              setShowModal(false);
-                            });
+                            setShowModal(false);
+                            setLoading3(true);
                           }
                         })
                         .catch((e) => {
@@ -387,60 +446,192 @@ export default function Account() {
                                 className="w-full px-3 py-2 border rounded-md dark:border-gray-700  dark:text-gray-900"
                               />
                             </div>
-                            <div>
-                              <label
-                                for="oldPassword"
-                                className="block mb-2 text-sm"
-                              >
+                            <div className=" content-center">
+                              <label className="text-sm font-bold text-gray-700 tracking-wide">
                                 Mật khẩu cũ
                               </label>
-                              <input
-                                type="text"
-                                name="oldPassword"
-                                onChange={handleChange}
-                                id="first name"
-                                className="w-full px-3 py-2 border rounded-md dark:border-gray-700 dark:text-gray-900"
-                              />
+                              <div className="grid grid-cols-12">
+                                <div className="col-span-11">
+                                  <input
+                                    className="w-full content-center text-base py-2 border-b text-black border-gray-300 focus:outline-none focus:border-indigo-500"
+                                    type={oldPasswordType}
+                                    name="oldPassword"
+                                    onChange={handleChange}
+                                    placeholder="Nhập mật khẩu cũ"
+                                  />
+                                </div>
+
+                                <div
+                                  onClick={handleShowPass}
+                                  className="col-span-1"
+                                >
+                                  {/* <i className="fa-solid fa-eye"></i> */}
+                                  {showEyeOld ? (
+                                    <svg
+                                      xmlns="http://www.w3.org/2000/svg"
+                                      fill="none"
+                                      viewBox="0 0 24 24"
+                                      strokeWidth={1.5}
+                                      stroke="currentColor"
+                                      className="w-6 h-6"
+                                    >
+                                      <path
+                                        strokeLinecap="round"
+                                        strokeLinejoin="round"
+                                        d="M2.036 12.322a1.012 1.012 0 010-.639C3.423 7.51 7.36 4.5 12 4.5c4.638 0 8.573 3.007 9.963 7.178.07.207.07.431 0 .639C20.577 16.49 16.64 19.5 12 19.5c-4.638 0-8.573-3.007-9.963-7.178z"
+                                      />
+                                      <path
+                                        strokeLinecap="round"
+                                        strokeLinejoin="round"
+                                        d="M15 12a3 3 0 11-6 0 3 3 0 016 0z"
+                                      />
+                                    </svg>
+                                  ) : (
+                                    <svg
+                                      xmlns="http://www.w3.org/2000/svg"
+                                      fill="none"
+                                      viewBox="0 0 24 24"
+                                      strokeWidth={1.5}
+                                      stroke="currentColor"
+                                      className="w-6 h-6"
+                                    >
+                                      <path
+                                        strokeLinecap="round"
+                                        strokeLinejoin="round"
+                                        d="M3.98 8.223A10.477 10.477 0 001.934 12C3.226 16.338 7.244 19.5 12 19.5c.993 0 1.953-.138 2.863-.395M6.228 6.228A10.45 10.45 0 0112 4.5c4.756 0 8.773 3.162 10.065 7.498a10.523 10.523 0 01-4.293 5.774M6.228 6.228L3 3m3.228 3.228l3.65 3.65m7.894 7.894L21 21m-3.228-3.228l-3.65-3.65m0 0a3 3 0 10-4.243-4.243m4.242 4.242L9.88 9.88"
+                                      />
+                                    </svg>
+                                  )}
+                                </div>
+                              </div>
                               {errors.oldPassword && touched.oldPassword ? (
                                 <div style={{ color: "red" }}>
                                   {errors.oldPassword}
                                 </div>
                               ) : null}
                             </div>
-                            <div>
-                              <label
-                                for="password"
-                                className="block mb-2 text-sm"
-                              >
+                            <div className="mt-4 content-center">
+                              <label className="text-sm font-bold text-gray-700 tracking-wide">
                                 Mật khẩu mới
                               </label>
-                              <input
-                                type="text"
-                                name="password"
-                                onChange={handleChange}
-                                id="password"
-                                className="w-full px-3 py-2 border rounded-md dark:border-gray-700 dark:text-gray-900"
-                              />
+                              <div className="grid grid-cols-12">
+                                <div className="col-span-11">
+                                  <input
+                                    className="w-full content-center text-base py-2 border-b text-black border-gray-300 focus:outline-none focus:border-indigo-500"
+                                    type={newPasswordType}
+                                    name="password"
+                                    onChange={handleChange}
+                                    placeholder="Nhập mật khẩu mới"
+                                  />
+                                </div>
+
+                                <div
+                                  onClick={handleShowNewPass}
+                                  className="col-span-1"
+                                >
+                                  {/* <i className="fa-solid fa-eye"></i> */}
+                                  {showEyeNew ? (
+                                    <svg
+                                      xmlns="http://www.w3.org/2000/svg"
+                                      fill="none"
+                                      viewBox="0 0 24 24"
+                                      strokeWidth={1.5}
+                                      stroke="currentColor"
+                                      className="w-6 h-6"
+                                    >
+                                      <path
+                                        strokeLinecap="round"
+                                        strokeLinejoin="round"
+                                        d="M2.036 12.322a1.012 1.012 0 010-.639C3.423 7.51 7.36 4.5 12 4.5c4.638 0 8.573 3.007 9.963 7.178.07.207.07.431 0 .639C20.577 16.49 16.64 19.5 12 19.5c-4.638 0-8.573-3.007-9.963-7.178z"
+                                      />
+                                      <path
+                                        strokeLinecap="round"
+                                        strokeLinejoin="round"
+                                        d="M15 12a3 3 0 11-6 0 3 3 0 016 0z"
+                                      />
+                                    </svg>
+                                  ) : (
+                                    <svg
+                                      xmlns="http://www.w3.org/2000/svg"
+                                      fill="none"
+                                      viewBox="0 0 24 24"
+                                      strokeWidth={1.5}
+                                      stroke="currentColor"
+                                      className="w-6 h-6"
+                                    >
+                                      <path
+                                        strokeLinecap="round"
+                                        strokeLinejoin="round"
+                                        d="M3.98 8.223A10.477 10.477 0 001.934 12C3.226 16.338 7.244 19.5 12 19.5c.993 0 1.953-.138 2.863-.395M6.228 6.228A10.45 10.45 0 0112 4.5c4.756 0 8.773 3.162 10.065 7.498a10.523 10.523 0 01-4.293 5.774M6.228 6.228L3 3m3.228 3.228l3.65 3.65m7.894 7.894L21 21m-3.228-3.228l-3.65-3.65m0 0a3 3 0 10-4.243-4.243m4.242 4.242L9.88 9.88"
+                                      />
+                                    </svg>
+                                  )}
+                                </div>
+                              </div>
                               {errors.password && touched.password ? (
                                 <div style={{ color: "red" }}>
                                   {errors.password}
                                 </div>
                               ) : null}
                             </div>
-                            <div>
-                              <label
-                                for="confirmpassword"
-                                className="block mb-2 text-sm"
-                              >
+                            <div className="mt-4 content-center">
+                              <label className="text-sm font-bold text-gray-700 tracking-wide">
                                 Nhập lại mật khẩu mới
                               </label>
-                              <input
-                                type="text"
-                                name="confirmpassword"
-                                onChange={handleChange}
-                                id="confirmpassword"
-                                className="w-full px-3 py-2 border rounded-md dark:border-gray-700 dark:text-gray-900"
-                              />
+                              <div className="grid grid-cols-12">
+                                <div className="col-span-11">
+                                  <input
+                                    className="w-full content-center text-base py-2 border-b text-black border-gray-300 focus:outline-none focus:border-indigo-500"
+                                    type={newConfirmPasswordType}
+                                    name="confirmpassword"
+                                    onChange={handleChange}
+                                    placeholder="Nhập mật lại khẩu mới"
+                                  />
+                                </div>
+
+                                <div
+                                  onClick={handleShowCfPass}
+                                  className="col-span-1"
+                                >
+                                  {/* <i className="fa-solid fa-eye"></i> */}
+                                  {showEyeCf ? (
+                                    <svg
+                                      xmlns="http://www.w3.org/2000/svg"
+                                      fill="none"
+                                      viewBox="0 0 24 24"
+                                      strokeWidth={1.5}
+                                      stroke="currentColor"
+                                      className="w-6 h-6"
+                                    >
+                                      <path
+                                        strokeLinecap="round"
+                                        strokeLinejoin="round"
+                                        d="M2.036 12.322a1.012 1.012 0 010-.639C3.423 7.51 7.36 4.5 12 4.5c4.638 0 8.573 3.007 9.963 7.178.07.207.07.431 0 .639C20.577 16.49 16.64 19.5 12 19.5c-4.638 0-8.573-3.007-9.963-7.178z"
+                                      />
+                                      <path
+                                        strokeLinecap="round"
+                                        strokeLinejoin="round"
+                                        d="M15 12a3 3 0 11-6 0 3 3 0 016 0z"
+                                      />
+                                    </svg>
+                                  ) : (
+                                    <svg
+                                      xmlns="http://www.w3.org/2000/svg"
+                                      fill="none"
+                                      viewBox="0 0 24 24"
+                                      strokeWidth={1.5}
+                                      stroke="currentColor"
+                                      className="w-6 h-6"
+                                    >
+                                      <path
+                                        strokeLinecap="round"
+                                        strokeLinejoin="round"
+                                        d="M3.98 8.223A10.477 10.477 0 001.934 12C3.226 16.338 7.244 19.5 12 19.5c.993 0 1.953-.138 2.863-.395M6.228 6.228A10.45 10.45 0 0112 4.5c4.756 0 8.773 3.162 10.065 7.498a10.523 10.523 0 01-4.293 5.774M6.228 6.228L3 3m3.228 3.228l3.65 3.65m7.894 7.894L21 21m-3.228-3.228l-3.65-3.65m0 0a3 3 0 10-4.243-4.243m4.242 4.242L9.88 9.88"
+                                      />
+                                    </svg>
+                                  )}
+                                </div>
+                              </div>
                               {errors.confirmpassword &&
                               touched.confirmpassword ? (
                                 <div style={{ color: "red" }}>
@@ -452,13 +643,17 @@ export default function Account() {
                         </div>
                         <div className="space-y-2 ml-2">
                           <div>
-                            <button
-                              className="text-white bg-gradient-to-r from-cyan-500 to-blue-500 hover:bg-gradient-to-bl focus:ring-4 focus:outline-none focus:ring-cyan-300 dark:focus:ring-cyan-800 font-medium rounded-lg text-sm px-5 py-2.5 text-center mr-2 mb-2"
-                              onClick={handleSubmit}
-                              type="submit"
-                            >
-                              LƯU
-                            </button>
+                            {loadingRspw ? (
+                              <Loading2 />
+                            ) : (
+                              <button
+                                className="text-white bg-gradient-to-r from-cyan-500 to-blue-500 hover:bg-gradient-to-bl focus:ring-4 focus:outline-none focus:ring-cyan-300 dark:focus:ring-cyan-800 font-medium rounded-lg text-sm px-5 py-2.5 text-center mr-2 mb-2"
+                                onClick={handleSubmit}
+                                type="submit"
+                              >
+                                LƯU
+                              </button>
+                            )}
                             <button
                               className="text-white bg-gradient-to-br from-pink-500 to-orange-400 hover:bg-gradient-to-bl focus:ring-4 focus:outline-none focus:ring-pink-200 dark:focus:ring-pink-800 font-medium rounded-lg text-sm px-5 py-2.5 text-center mr-2 mb-2"
                               type="button"
