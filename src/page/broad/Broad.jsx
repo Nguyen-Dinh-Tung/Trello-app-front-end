@@ -24,11 +24,9 @@ function Broad(props) {
   const initial = useSelector((state) => state.broad.data);
   const location = useLocation();
   const idBroad = location.state.broad._id;
-  console.log("🚀 ~ file: Broad.jsx ~ line 27 ~ Broad ~ idBroad", idBroad)
   const dataByStore = useSelector((state) => state.broad.data);
   const idWorkSpace = location.state.idWorkSpace;
   const emailIdUser = jwtDecode(token)["email"];
-
   const dispatch = useDispatch();
   const [isTitleColumn, setIseTitleColumn] = useState(true);
   const [titleColumn, setTitleColumn] = useState();
@@ -39,6 +37,7 @@ function Broad(props) {
   const [dataSearch, setDataSearch] = useState([]);
   const [a, setA] = useState([]);
   const [flagImg, setFlagImg] = useState([]);
+  const [role, setRole] = useState();
   const name = decode.name.split("");
   useEffect(() => {
     Member(idBroad)
@@ -183,7 +182,7 @@ function Broad(props) {
     });
     setDataSearch(email);
   };
-  
+
   useEffect(() => {
     getUser()
       .then((res) => {
@@ -199,6 +198,7 @@ function Broad(props) {
     idbroad: idBroad,
     idWorkSpace: idWorkSpace,
     emailIdUser: emailIdUser,
+    role: role,
   };
 
   const handleSendEmail = () => {
@@ -211,6 +211,9 @@ function Broad(props) {
       .catch((e) => {
         console.log(e);
       });
+  };
+  const handleRole = (e) => {
+    console.log(e);
   };
 
   return (
@@ -289,8 +292,7 @@ function Broad(props) {
                   ) : (
                     <div title={user.name}>
                       <span
-
-                        className={`px-2 py-0.5 rounded-full text-sm bg-gray-500 hover:bg-gray-400 font-bold text-white` }
+                        className={`px-2 py-0.5 rounded-full text-sm bg-gray-500 hover:bg-gray-400 font-bold text-white`}
                       >
                         {name[0]}
                       </span>
@@ -391,8 +393,13 @@ function Broad(props) {
                                 </div>
                               </div>
                               <div className="w-1/8 items-center justify-center p-2 my-auto border border-gray-400">
-                                <select>
-                                  <option value="1">Thành viên</option>
+                                <select
+                                  onChange={(e) => {
+                                    setRole(e.target.value);
+                                  }}
+                                >
+                                  <option value="menber">Thành viên</option>
+                                  <option value="admin">Quản trị viên</option>
                                 </select>
                               </div>
                               <a
