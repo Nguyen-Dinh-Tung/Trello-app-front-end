@@ -9,7 +9,6 @@ function ListItem(props) {
   const index = props.index
   const column = props.column ;
   const listRef = useRef();
-  console.log(column.items.length);
   useLayoutEffect(() => {
     const list = listRef.current;
     if (list) {
