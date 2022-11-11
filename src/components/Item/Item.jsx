@@ -15,8 +15,14 @@ import { styled } from '@mui/material/styles';
 import { purple } from '@mui/material/colors';
 import { setDataBroad } from '../../redux/features/broad.slice';
 import { useEffect } from 'react';
-import ModalDetailsItem from '../ModalDetailsItem/ModalDetailsItem';
-
+import Dialog from '@mui/material/Dialog';
+import DialogActions from '@mui/material/DialogActions';
+import DialogContent from '@mui/material/DialogContent';
+import DialogContentText from '@mui/material/DialogContentText';
+import DialogTitle from '@mui/material/DialogTitle';
+import AlignItemsList from './../comment/Comment';
+import jwtDecode from 'jwt-decode';
+import e from 'express';
 const BootstrapButton = styled(Button)({
   boxShadow: 'none',
   textTransform: 'none',
@@ -52,7 +58,11 @@ const BootstrapButton = styled(Button)({
     boxShadow: '0 0 0 0.2rem rgba(0,123,255,.5)',
   },
 });
-
+const token = localStorage.getItem('token') ;
+const user = {
+  idUser : jwtDecode(token).id ,
+  email : jwtDecode(token).email
+} ;
 const ColorButton = styled(Button)(({ theme }) => ({
   color: theme.palette.getContrastText(purple[500]),
   backgroundColor: purple[500],
@@ -72,6 +82,7 @@ const style = {
   boxShadow: 24,
   p: 4,
 };
+let itemId = '' ;
 
 function Item({ provided, item, isDragging  } , props) {
   const dispatch = useDispatch() ;
@@ -104,9 +115,7 @@ function Item({ provided, item, isDragging  } , props) {
           })
 
     })
-
   }
-
   const handleEditItem = (e) =>{
     // dispatch(setShowModalItem(true))
     let itemTarget = e.target.innerHTML
@@ -115,8 +124,9 @@ function Item({ provided, item, isDragging  } , props) {
     document.querySelector('.item-content-out').addEventListener('focusout' , handleFocusOut)
   }
   const handleClickMoreOption = () =>{
-    console.log('check');
+    itemId = itemIdTarget ;
     dispatch(setShowModalDetailItem(true))
+
   }
   return (
     <div
@@ -142,10 +152,73 @@ function Item({ provided, item, isDragging  } , props) {
       </div>
       <i class="fa-solid fa-ellipsis " style={{fontSize:"20px" , cursor: 'pointer'}} onClick={handleClickMoreOption}
       ></i>
-      <ModalDetailsItem/>
+      <ModalDetailsItem item={item.text}/>
     </div>
 
   );
 }
 
 export default Item;
+
+
+
+function ModalDetailsItem(props) {
+  const [open, setOpen] = React.useState(false);
+  const dispatch = useDispatch()
+  const handleClose = () => dispatch(setShowModalDetailItem(false))
+  const [itemTarget , setItemTarget] = useState()
+  const isShowModalDetailsItem = useSelector((state) => state.isShowModal.isShowModalDetailsItem) ;
+  const dataByStore = useSelector((state) => state.broad.data);
+  const [commentContent , setCommentContent] = useState()
+  useEffect(() =>{
+    dataByStore.columnOrder.forEach(column =>{
+      dataByStore.columns[`${column}`].items.forEach((e,index) =>{
+        if(itemId && e.id == itemId){
+          setItemTarget(e)
+        }
+      })
+  }, [itemId])
+  })
+
+  const handleKeyEnter = () =>{
+    let newComment = {
+      ...user ,
+      content : commentContent
+    }
+    console.log(newComment);
+    if(e.key === 'enter'){
+      console.log(newComment);
+    }
+  }
+  return (
+    <div>
+      <Dialog open={isShowModalDetailsItem} onClose={handleClose}
+      >
+        <DialogTitle sx={{width : '600px'}}>Chi tiết công việc</DialogTitle>
+        <DialogContent>
+          <DialogContentText>
+           Tên việc : {itemTarget&&itemTarget.text}
+          </DialogContentText>
+          <TextField
+            autoFocus
+            margin="dense"
+            id="name"
+            label="Hãy để lại bình luận của bạn"
+            type="email"
+            fullWidth
+            variant="standard"
+            onChange={(e) =>{
+              setCommentContent(e.target.value)
+            }}
+            onKeyDown={handleKeyEnter}
+          />
+        </DialogContent>
+        <AlignItemsList/>
+        <DialogActions>
+          <Button onClick={handleClose}>Cancel</Button>
+          <Button onClick={handleClose}>Subscribe</Button>
+        </DialogActions>
+      </Dialog>
+    </div>
+  );
+}
