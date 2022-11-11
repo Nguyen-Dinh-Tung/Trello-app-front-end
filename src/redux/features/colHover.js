@@ -3,7 +3,7 @@ import {createSlice} from "@reduxjs/toolkit";
 const colHoverSlice = createSlice({
   name: "colHover",
   initialState: {
-    columnId: {},
+    column: {},
     idItemTarget: "",
   },
   reducers: {
