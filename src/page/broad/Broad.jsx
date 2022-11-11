@@ -24,7 +24,7 @@ function Broad(props) {
   const initial = useSelector((state) => state.broad.data);
   const location = useLocation();
   const idBroad = location.state.broad._id;
-  console.log("🚀 ~ file: Broad.jsx ~ line 27 ~ Broad ~ idBroad", idBroad)
+  const bgImg = location.state.broad.img;
   const dataByStore = useSelector((state) => state.broad.data);
   const idWorkSpace = location.state.idWorkSpace;
   const emailIdUser = jwtDecode(token)["email"];
@@ -183,7 +183,7 @@ function Broad(props) {
     });
     setDataSearch(email);
   };
-  
+
   useEffect(() => {
     getUser()
       .then((res) => {
@@ -216,7 +216,9 @@ function Broad(props) {
   return (
     <DragDropContext onDragEnd={onDragEnd}>
       <Navbar></Navbar>
-      <div className="Broad">
+      <div
+      style={{backgroundImage: `url(${bgImg})`}}
+        className="Broad ">
         <div className="flex w-full ">
           <div
             className="add-column w-9/12"
@@ -289,8 +291,7 @@ function Broad(props) {
                   ) : (
                     <div title={user.name}>
                       <span
-
-                        className={`px-2 py-0.5 rounded-full text-sm bg-gray-500 hover:bg-gray-400 font-bold text-white` }
+                        className={`px-2 py-0.5 rounded-full text-sm bg-gray-500 hover:bg-gray-400 font-bold text-white`}
                       >
                         {name[0]}
                       </span>
