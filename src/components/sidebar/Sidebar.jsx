@@ -15,11 +15,11 @@ export default function Sidebar(props) {
   const columnsOrder = props.columnsOrder;
   const [member, setmember] = useState();
   
-  useEffect(() => {
-    getBroad(decode.id)
-      .then((res) => console.log(res))
-      .catch((e) => console.log(e));
-  });
+  // useEffect(() => {
+  //   getBroad(decode.id)
+  //     .then((res) => console.log(res))
+  //     .catch((e) => console.log(e));
+  // });
   function stringToColor(string) {
     let hash = 0;
     let i;
