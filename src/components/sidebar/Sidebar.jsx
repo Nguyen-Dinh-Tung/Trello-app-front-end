@@ -14,7 +14,7 @@ export default function Sidebar(props) {
   const dataWorkSpace = props.WorkSpace;
   const columnsOrder = props.columnsOrder;
   const [member, setmember] = useState();
-  
+
   // useEffect(() => {
   //   getBroad(decode.id)
   //     .then((res) => console.log(res))
