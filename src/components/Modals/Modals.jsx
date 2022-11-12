@@ -9,6 +9,7 @@ import getBroad from "../../api/GetBroad";
 import ImageList from "@mui/material/ImageList";
 import ImageListItem from "@mui/material/ImageListItem";
 import { Button, RadioGroup } from "@mui/material";
+import Snackbar from "@mui/material/Snackbar";
 
 const itemData = [
   {
@@ -71,7 +72,6 @@ function Modals(props) {
   const isShowModal = useSelector((state) => state.isShowModal.isShowModal);
 
   let [workspace, setWorkSpace] = useState([]);
-  console.log(workspace);
 
   const dispatch = useDispatch();
   let token = localStorage.getItem("token");
@@ -81,7 +81,6 @@ function Modals(props) {
     mode: "",
     idUser: idUser,
     workSpace: "",
-    
   });
 
   const [isCreateBroad, setCreateBroad] = useState(true);
@@ -97,24 +96,48 @@ function Modals(props) {
       .catch((e) => console.log(e.message));
   }, []);
 
-  useEffect(() => {
-    if (newBroad.title && newBroad.mode && newBroad.workSpace && newBroad.img) {
-      setCreateBroad(false);
-    } else {
-      setCreateBroad(true);
-    }
-  }, [newBroad]);
+  // useEffect(() => {
+  //   if (newBroad.title && newBroad.mode && newBroad.workSpace && newBroad.img) {
+  //     setCreateBroad(false);
+  //   } else {
+  //     setCreateBroad(true);
+  //   }
+  // }, [newBroad]);
 
   const handleClick = () => {
-    if (isCreateBroad === false) {
+    if (newBroad.title && newBroad.mode && newBroad.workSpace && newBroad.img) {
       createBroad(newBroad)
         .then((res) => {
           dispatch(setShowModal("none"));
           dispatch(setFlag(res));
         })
         .catch((e) => console.log(e.message));
+    } else if (
+      !newBroad.title ||
+      !newBroad.mode ||
+      !newBroad.workSpace ||
+      !newBroad.img
+    ) {
+      setState({
+        open: true,
+        vertical: "bottom",
+        horizontal: "center",
+        message: "Không được để trống các giá trị !",
+      });
     }
   };
+  const [state, setState] = React.useState({
+    open: false,
+    vertical: "top",
+    horizontal: "center",
+    message: "",
+  });
+
+  const { vertical, horizontal, open, message } = state;
+  const handleClose = () => {
+    setState({ ...state, open: false });
+  };
+
   return (
     <>
       <div className="modals" style={{ display: isShowModal }}>
@@ -195,7 +218,7 @@ function Modals(props) {
                 <div className="flex items-center justify-start w-full ">
                   <button
                     className=" cursor:pointer focus:ring-2 bg-gradient-to-r text-xl from-cyan-500 to-blue-500 hover:bg-gradient-to-bl focus:ring-offset-2 focus:ring-indigo-700 transition duration-150 ease-in-out hover:bg-indigo-600 bg-indigo-700 rounded text-white px-8 py-2 "
-                    disabled={isCreateBroad}
+                    // disabled={isCreateBroad}
                     onClick={handleClick}
                   >
                     Tạo
@@ -261,6 +284,13 @@ function Modals(props) {
           </div>
         </div>
       </div>
+      <Snackbar
+        anchorOrigin={{ vertical, horizontal }}
+        open={open}
+        onClose={handleClose}
+        message={message}
+        key={vertical + horizontal}
+      />
     </>
   );
 }
