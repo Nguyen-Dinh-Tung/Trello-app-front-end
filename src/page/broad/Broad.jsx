@@ -49,11 +49,6 @@ function Broad(props) {
   const [modeBoard, setModeBoard] = useState();
   const [FlagModeBoard, setFlagModeBoard] = useState();
   const [roleMember, setRoleMember] = useState();
-  console.log(
-    "🚀 ~ file: Broad.jsx ~ line 52 ~ Broad ~ roleMember",
-    roleMember
-  );
-
   const [valueMember, setValueMember] = useState();
 
   const [stateAlert, setStateAlert] = useState({
