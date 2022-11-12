@@ -6,7 +6,6 @@ import { useSelector } from "react-redux";
 
 export default function MediaCard(props) {
   const broad = props.broad;
-  console.log("🚀 ~ file: Card.jsx ~ line 12 ~ MediaCard ~ broad", broad)
   const idWS = props.idWorkSpace;
   const navigate = useNavigate();
   const handleCLick = () => {

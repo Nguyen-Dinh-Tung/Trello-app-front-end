@@ -71,7 +71,6 @@ function Modals(props) {
   const isShowModal = useSelector((state) => state.isShowModal.isShowModal);
 
   let [workspace, setWorkSpace] = useState([]);
-  console.log(workspace)
 
   const dispatch = useDispatch();
   let token = localStorage.getItem("token");

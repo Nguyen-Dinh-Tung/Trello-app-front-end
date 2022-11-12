@@ -116,7 +116,8 @@ export default function Sidebar(props) {
                       }
                     })
                   ) : (
-                    <h2>Hiện chưa có dữ liệu</h2>
+                    <MediaCard>Trello</MediaCard>
+
                   )}
                 </div>
               </div>

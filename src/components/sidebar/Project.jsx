@@ -19,7 +19,15 @@ import SettingsIcon from "@mui/icons-material/Settings";
 import Avatar from "@mui/material/Avatar";
 import { Button } from "@mui/material";
 export default function Project() {
+  const token = localStorage.getItem("token");
   const decode = jwtDecode(localStorage.getItem("token"));
+  const [open, setOpen] = React.useState(false);
+  const handleClick = (data) => {
+    setOpen(!open);
+    
+  };
+  const [workspace, setWorkSpace] = useState([]);
+  const idUser = jwtDecode(token).id;
   useEffect(() => {
     getBroad(idUser)
       .then((res) => {
@@ -35,18 +43,14 @@ export default function Project() {
     for (i = 0; i < string.length; i += 1) {
       hash = string.charCodeAt(i) + ((hash << 5) - hash);
     }
-
     let color = "#";
-
     for (i = 0; i < 3; i += 1) {
       const value = (hash >> (i * 8)) & 0xff;
       color += `00${value.toString(16)}`.slice(-2);
     }
     /* eslint-enable no-bitwise */
-
     return color;
   }
-
   function stringAvatar(name) {
     return {
       sx: {
@@ -56,17 +60,6 @@ export default function Project() {
       children: `${name.split(" ")[0][0]}`,
     };
   }
-
-  const [open, setOpen] = React.useState(false);
-
-  const handleClick = () => {
-    setOpen(!open);
-  };
-  const [workspace, setWorkSpace] = useState([]);
-
-  const token = localStorage.getItem("token");
-  const idUser = jwtDecode(token).id;
-
   return (
     <>
       <div
@@ -100,8 +93,8 @@ export default function Project() {
           </button>
           {/* Project */}
         </div>
-
         <List
+          // key={item.id}
           sx={{ width: "100%", maxWidth: 360, bgcolor: "background.paper" }}
           component="nav"
           aria-labelledby="nested-list-subheader"
@@ -112,8 +105,8 @@ export default function Project() {
           }
         >
           {workspace.map((item, index) => (
-            < >
-              <ListItemButton onClick={handleClick}>
+            <div key={item.id}>
+              <ListItemButton onClick={()=>handleClick(item)}>
                 <ListItemIcon>
                   <Button>
                     <Avatar
@@ -137,7 +130,7 @@ export default function Project() {
                   </ListItemButton>
                 </List>
                 <List component="div" disablePadding>
-                  <ListItemButton href={`/member/${decode.id}`} sx={{ pl: 4 }}>
+                  <ListItemButton  href={`/member/${item._id}`} sx={{ pl: 4 }}>
                     <ListItemIcon>
                       <GroupIcon />
                     </ListItemIcon>
@@ -153,9 +146,10 @@ export default function Project() {
                   </ListItemButton>
                 </List>
               </Collapse>
-            </>
+            </div>
           ))}
         </List>
+        ;
       </div>
     </>
   );
