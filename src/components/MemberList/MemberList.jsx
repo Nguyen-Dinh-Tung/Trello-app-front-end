@@ -11,13 +11,20 @@ import { useState } from "react";
 import Member from "../../api/DataMember";
 import { useSelector } from "react-redux";
 import { useDispatch } from "react-redux";
-import FolderIcon from '@mui/icons-material/Folder';
+import FolderIcon from "@mui/icons-material/Folder";
+import CircularProgress from "@mui/material/CircularProgress";
+import GetUserInBoard from "../../api/GetUserInBoard";
 
 export default function MemberList() {
   const id = useParams().id;
   const dispatch = useDispatch();
-  console.log(id);
   const [data, setData] = useState();
+  const [user, setUser] = useState("");
+  const [InfoUser, setInfoUser] = useState();
+  const [userAdminWorkSpace, setUserAdminWorkSpace] = useState();
+
+  const token = localStorage.getItem("token");
+  const decode = jwtDecode(token)["email"];
 
   function stringToColor(string) {
     let hash = 0;
@@ -48,11 +55,46 @@ export default function MemberList() {
       children: `${name.split(" ")[0][0]}`,
     };
   }
+  function unique(arr) {
+    var newArr = [];
+    for (var i = 0; i < arr.length; i++) {
+      if (newArr.indexOf(arr[i]) === -1) {
+        newArr.push(arr[i]);
+      }
+    }
+    return newArr;
+  }
+
   useEffect(() => {
     getDatAWorkSpace(id)
-      .then((res) => setData(res.data.data))
+      .then((res) => {
+        console.log("🚀 ~ file: MemberList.jsx ~ line 71 ~ .then ~ res", res);
+        setUserAdminWorkSpace(res.data.User_admin);
+        let arr = [];
+
+        for (let index = 0; index < res.data.User.length; index++) {
+          for (let i = 0; i < res.data.User[index].length; i++) {
+            arr.push(res.data.User[index][i].email);
+          }
+        }
+
+        setUser(unique(arr));
+        setData(res.data.data);
+      })
       .catch((e) => console.log(e));
   }, []);
+
+  useEffect(() => {
+    if (user.length > 0) {
+      GetUserInBoard({ data: user })
+        .then((res) => {
+          setInfoUser(res.data.data);
+        })
+        .catch((e) => {
+          console.log(e);
+        });
+    }
+  }, [user]);
 
   return (
     <div className="h-screen bg-white ">
@@ -64,13 +106,12 @@ export default function MemberList() {
               <div>
                 {data ? (
                   <Avatar
-                    sx={{ height: 56 , width: 56}}
+                    variant="square"
+                    sx={{ height: 56, width: 56 }}
                     {...stringAvatar(data.name)}
                   />
                 ) : (
-                  <Avatar>
-                  <FolderIcon />
-                </Avatar>
+                  <CircularProgress color="inherit" />
                 )}
               </div>
               <div className="my-auto">
@@ -98,7 +139,7 @@ export default function MemberList() {
             </div>
             <div className="ml-10 w-full">
               <div className=" text-2xl mb-2">
-                Các thành viên Không gian làm việc (14)
+                Các thành viên Không gian làm việc ({user.length})
               </div>
               <div className="text-xs">
                 Các thành viên trong Không gian làm việc có thể xem và tham gia
@@ -110,22 +151,81 @@ export default function MemberList() {
                 <TextField size="small" label={"Lọc theo  tên"} />
               </div>
               <div>
-                <div className="text-xs w-full">
-                  <hr className="my-6"></hr>
-                  <div className="flex w-full">
-                    <div className="w-7/12 my-auto">disablePadding</div>
-                    <div className="w-2/12 my-auto">disablePadding</div>
-                    <div className="w-3/12 my-auto flex gap-4 text-center w-full">
-                      <Button variant="outlined" disabled>
-                        Quản trị viên
-                      </Button>
-                      <Button variant="outlined" startIcon={<DeleteIcon />}>
-                        Xóa
-                      </Button>
+                {InfoUser &&
+                  InfoUser.map((item) => (
+                    <div className="text-xs w-full">
+                      <hr className="my-6"></hr>
+                      <div className="flex w-full">
+                        <div className="w-9/12 my-auto flex gap-3 ">
+                          {" "}
+                          <div>
+                            {item.image ? (
+                              <Avatar alt="Cindy Baker" src={item.image} />
+                            ) : (
+                              <Avatar {...stringAvatar(item.name)} />
+                            )}
+                          </div>
+                          <div className="my-auto">
+                            <div className="mb-1"> {item.name}</div>
+                            <div>{item.email}</div>
+                          </div>
+                        </div>
+                        <div>
+                          {decode === userAdminWorkSpace ? (
+                            <div>
+                              {userAdminWorkSpace &&
+                              userAdminWorkSpace === item.email ? (
+                                <div className="w-3/12 my-auto flex gap-4 text-center w-fit">
+                                  {" "}
+                                  <Button variant="outlined" disabled>
+                                    Admin
+                                  </Button>
+                                </div>
+                              ) : (
+                                <div className="w-3/12 my-auto flex gap-4 text-center w-fit">
+                                  <Button variant="outlined" disabled>
+                                    Member
+                                  </Button>
+                                  <Button
+                                    variant="outlined"
+                                    startIcon={<DeleteIcon />}
+                                  >
+                                    Xóa
+                                  </Button>
+                                </div>
+                              )}
+                            </div>
+                          ) : (
+                            <div>
+                              {userAdminWorkSpace &&
+                              userAdminWorkSpace === item.email ? (
+                                <div className="w-3/12 my-auto flex gap-4 text-center w-fit">
+                                  {" "}
+                                  <Button variant="outlined" disabled>
+                                    Admin
+                                  </Button>
+                                </div>
+                              ) : (
+                                <div className="w-3/12 my-auto flex gap-4 text-center w-fit">
+                                  <Button variant="outlined" disabled>
+                                    Member
+                                  </Button>
+                                  <Button
+                                    variant="outlined"
+                                    disabled
+                                    startIcon={<DeleteIcon />}
+                                  >
+                                    Xóa
+                                  </Button>
+                                </div>
+                              )}
+                            </div>
+                          )}
+                        </div>
+                      </div>
+                      {/* <hr className="my-4"></hr> */}
                     </div>
-                  </div>
-                  <hr className="my-4"></hr>
-                </div>
+                  ))}
               </div>
             </div>
           </div>
