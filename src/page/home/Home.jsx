@@ -20,6 +20,7 @@ function Home(props) {
   const idUser = jwtDecode(token)["id"];
   const dispatch = useDispatch();
   const flag = useSelector((state) => state.isShowModal.flag);
+  const modeBoard = useSelector((state) => state.isShowModal.modeBoard);
   const [loading, setLoading] = useState(false);
 
   let [listIdBroad, setListIdBroad] = useState([]);
@@ -35,7 +36,7 @@ function Home(props) {
         dispatch(setShowWorkSpace(res.data.listWorkSpace));
       })
       .catch((e) => console.log(e.message));
-  }, [flag]);
+  }, [flag, modeBoard]);
 
   return (
     <>
