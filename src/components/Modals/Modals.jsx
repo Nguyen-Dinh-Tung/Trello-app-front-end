@@ -149,16 +149,16 @@ function Modals(props) {
             className="container mx-auto w-11/12 max-w-fit flex"
           >
             <div
-              style={{ background: `url(${img})` }}
-              className="relative flex flex-row gap-5 bg-white py-8 w-full px-5 md:px-10 dark:bg-gray-800 dark:border-gray-700 shadow-md rounded border border-gray-400"
+              style={{ backgroundImage: `url(${img})`, backgroundSize: "cover"}}
+              className="relative flex flex-row gap-5 bg-sky-300 py-8 w-full px-5 md:px-10 dark:bg-gray-800 dark:border-gray-700 shadow-md rounded border border-gray-400"
             >
               <div className="w-3/5">
-                <h1 className="text-gray-800 dark:text-black text-3xl ml-1 font-lg font-bold tracking-normal leading-tight mb-4">
+                <h1 className="text-white dark:text-black text-3xl ml-1 font-lg font-bold tracking-normal leading-tight mb-4">
                   Thêm bảng mới
                 </h1>
                 <label
                   htmlFor="name"
-                  className="text-gray-800 dark:text-black text-xl ml-1 font-bold leading-tight tracking-normal"
+                  className="text-white dark:text-black text-xl ml-1 font-bold leading-tight tracking-normal"
                 >
                   Tiêu đề
                 </label>
@@ -178,7 +178,7 @@ function Modals(props) {
                 />
                 <label
                   htmlFor="cvc"
-                  className="text-gray-800 text-xl dark:text-black font-bold leading-tight tracking-normal"
+                  className="text-white text-xl dark:text-black font-bold leading-tight tracking-normal"
                 >
                   Không gian làm việc
                 </label>
@@ -199,7 +199,7 @@ function Modals(props) {
                 </div>
                 <label
                   htmlFor="cvc"
-                  className="text-gray-800 text-xl dark:text-black font-bold leading-tight tracking-normal"
+                  className="text-white text-xl dark:text-black font-bold leading-tight tracking-normal"
                 >
                   Trạng thái
                 </label>
@@ -270,7 +270,9 @@ function Modals(props) {
                       <Button onClick={() => handleChangeImg(item.img)}>
                         <ImageListItem key={item.img}>
                           <img
-                            src={`${item.img}?w=60&h=60&fit=crop&auto=format`}
+                            // src={`${item.img}?w=60&h=60&fit=crop&auto=format`}
+                            // srcSet={`${item.img}?w=60&h=60&fit=crop&auto=format&dpr=2 2x`}
+                            src={`${item.img}?w=120&h=120&fit=crop&auto=format`}
                             srcSet={`${item.img}?w=60&h=60&fit=crop&auto=format&dpr=2 2x`}
                             alt={item.title}
                             loading="lazy"
