@@ -13,6 +13,8 @@ import Swal from "sweetalert2";
 import reSetPass from "../../api/ConfirmPassWord";
 import { Loading2 } from "../../components/Loading/Loading2";
 import { Loading3 } from "../Loading/Loading3";
+import Avatar from "@mui/material/Avatar";
+
 
 const UpdateSchema = Yup.object().shape({
   oldPassword: Yup.string().required("Mật khẩu không được để trống !"),
@@ -168,6 +170,35 @@ export default function Account() {
   const handleResetPas = () => {
     setShowModal(true);
   };
+  function stringToColor(string) {
+    let hash = 0;
+    let i;
+
+    /* eslint-disable no-bitwise */
+    for (i = 0; i < string.length; i += 1) {
+      hash = string.charCodeAt(i) + ((hash << 5) - hash);
+    }
+
+    let color = "#";
+
+    for (i = 0; i < 3; i += 1) {
+      const value = (hash >> (i * 8)) & 0xff;
+      color += `00${value.toString(16)}`.slice(-2);
+    }
+    /* eslint-enable no-bitwise */
+
+    return color;
+  }
+
+  function stringAvatar(name) {
+    return {
+      sx: {
+        bgcolor: stringToColor(name),
+        fontSize: 30,
+      },
+      children: `${name.split(" ")[0][0]}`,
+    };
+  }
 
   return (
     <div>
@@ -187,17 +218,19 @@ export default function Account() {
               {avatar ? (
                 <div>
                   <img
-                    className="h-24 w-24 md rounded-full relative "
+                    className=" md rounded-full relative "
+                    style={{height:80+'px',width:80+'px'}}
                     src={valueAvatar}
                     alt
                   />
                 </div>
               ) : (
                 <div>
-                  <i class="fa-sharp fa-solid fa-user-ninja fa-2xl"></i>
+              <Avatar style={{height:80+'px',width:80+'px',fontSize:50+'px'}} {...stringAvatar(str)} />
                 </div>
               )}
               <span className="text-2xl font-semibold  ">{str}</span>
+
             </span>
           </div>
         </div>
