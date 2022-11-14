@@ -10,6 +10,7 @@ import {
 import { useDispatch } from "react-redux";
 import jwtDecode from "jwt-decode";
 import CreateWorkSpace from "../../api/CreateWorkSpace";
+import Snackbar from "@mui/material/Snackbar";
 
 function ModalSpace(props) {
   const isShowMenudivider = useSelector((state) => {
@@ -29,6 +30,12 @@ function ModalSpace(props) {
   const handleHiddenModals = () => {
     dispath(setShowMenuDivider("none"));
   };
+  const [state, setState] = useState({
+    open: false,
+    vertical: "top",
+    horizontal: "center",
+    message: "",
+  });
 
   useEffect(() => {
     if (newBroad.name && newBroad.des) {
@@ -38,16 +45,41 @@ function ModalSpace(props) {
     }
   }, [newBroad]);
   const handleClick = () => {
-    if (isCreateBroad === false) {
+    if (newBroad.name && newBroad.des) {
       CreateWorkSpace(newBroad)
         .then((res) => {
           dispath(setShowMenuDivider("none"));
           dispath(setFlag(res));
         })
         .catch((e) => console.log(e));
+    } else if (!newBroad.name && !newBroad.des) {
+      setState({
+        open: true,
+        vertical: "bottom",
+        horizontal: "center",
+        message: "Không được để trống các giá trị !",
+      });
+    } else if (!newBroad.des) {
+      setState({
+        open: true,
+        vertical: "bottom",
+        horizontal: "center",
+        message: "Mô tả không gian làm việc không được để trống !",
+      });
     } else {
-      console.log(1);
+      setState({
+        open: true,
+        vertical: "bottom",
+        horizontal: "center",
+        message: "Tên không gian làm việc không được để trống !",
+      });
     }
+  };
+
+  const { vertical, horizontal, open, message } = state;
+
+  const handleClose = () => {
+    setState({ ...state, open: false });
   };
 
   return (
@@ -102,7 +134,7 @@ function ModalSpace(props) {
                   <div className="flex items-center justify-start w-full">
                     <button
                       className="focus:outline-none cursor-pointer bg-gradient-to-r text-xl from-cyan-500 to-blue-500 hover:bg-gradient-to-bl focus:ring-offset-2 focus:ring-indigo-700 transition duration-150 ease-in-out hover:bg-indigo-600 bg-indigo-700 rounded text-white px-8 py-2 text-sm"
-                      disabled={isCreateBroad}
+                      // disabled={isCreateBroad}
                       onClick={handleClick}
                     >
                       Tạo
@@ -150,6 +182,13 @@ function ModalSpace(props) {
           </div>
         </div>
       </div>
+      <Snackbar
+        anchorOrigin={{ vertical, horizontal }}
+        open={open}
+        onClose={handleClose}
+        message={message}
+        key={vertical + horizontal}
+      />
     </>
   );
 }
