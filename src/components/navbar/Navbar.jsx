@@ -1,4 +1,4 @@
-import { Outlet } from "react-router-dom";
+import { Outlet, useNavigate } from "react-router-dom";
 import Modals from "../Modals/Modals";
 import { useDispatch } from "react-redux";
 import {
@@ -22,22 +22,23 @@ export default function Navbar() {
   const handleShowMenuDivider = () => {
     dispatch(setShowMenuDivider("block"));
   };
+  const navigate = useNavigate()
   return (
     <div className=" h-20vh w-full bg-sky-600 shadow">
       <Modals />
       <ModalSpace />
       <nav className="navbar flex items-center justify-between flex-wrap lg:px-2 text-white ">
-        <button className="px-2">
-          <a href="/">
-            <span>
-              <i class="fa-brands fa-xl fa-beat fa-trello"></i>
+        <button onClick={()=>{navigate('/')}}  className="px-2 hover:bg-sky-500 hover:text-white rounded px-2 py-1">
+          <a>
+            <span >
+              <i class="fa-brands fa-xl fa-beat fa-trello" ></i>
             </span>
             <span className="font-semibold text-xl tracking-tight inline-block ml-1">
               Trello
             </span>
           </a>
         </button>
-        <div className="menu w-full lg:block flex-grow lg:flex lg:items-center lg:w-auto ">
+        <div className="menu w-full lg:block flex-grow lg:flex lg:items-center lg:w-auto">
           <div className=" text-md flex-row flex gap-2 lg:flex-grow ">
             {/* dropdow-1 */}
             <Drop1 />
