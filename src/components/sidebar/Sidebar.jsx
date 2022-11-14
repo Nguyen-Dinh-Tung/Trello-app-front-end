@@ -11,8 +11,10 @@ import getBroad from "../../api/GetBroad";
 
 export default function Sidebar(props) {
   let decode = jwtDecode(localStorage.getItem("token"));
-  const dataWorkSpace = props.WorkSpace;
-  const columnsOrder = props.columnsOrder;
+  const dataWorkSpace = [].concat(props.WorkSpace).reverse();
+
+  const columnsOrder = [].concat(props.columnsOrder).reverse();
+
   const [member, setmember] = useState();
 
   // useEffect(() => {
