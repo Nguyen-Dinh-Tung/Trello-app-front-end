@@ -1,20 +1,27 @@
 import React from 'react';
 import ListItem from '@mui/material/ListItem';
 import ListItemButton from '@mui/material/ListItemButton';
-import { setShowModalItem } from '../../redux/features/showModal.slice';
-
+import { setShowModalItem  ,setShowModalDetailItem} from '../../redux/features/showModal.slice';
+import Button from '@mui/material/Button';
+import TextField from '@mui/material/TextField';
+import Dialog from '@mui/material/Dialog';
+import DialogActions from '@mui/material/DialogActions';
+import DialogContent from '@mui/material/DialogContent';
+import DialogContentText from '@mui/material/DialogContentText';
+import DialogTitle from '@mui/material/DialogTitle';
+import { List } from '@mui/material';
 import { useState  } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { setIdItemTarget } from '../../redux/features/colHover';
 import Box from '@mui/material/Box';
-import Button from '@mui/material/Button';
-import Typography from '@mui/material/Typography';
 import Modal from '@mui/material/Modal';
-import { TextField } from '@mui/material';
 import { styled } from '@mui/material/styles';
 import { purple } from '@mui/material/colors';
 import { setDataBroad } from '../../redux/features/broad.slice';
 import { useEffect } from 'react';
+import jwtDecode from 'jwt-decode';
+import CommentItem from '../Comment/CommentItem';
+import CheckBox from '../Checkbox/Checkbox';
 
 const BootstrapButton = styled(Button)({
   boxShadow: 'none',
@@ -72,7 +79,16 @@ const style = {
   p: 4,
 };
 
+let itemId = '' ;
 function Item({ provided, item, isDragging  } , props) {
+
+  const token = localStorage.getItem('token') ;
+  let user = {
+      idUser : jwtDecode(token).id ,
+      email : jwtDecode(token).email,
+      image : jwtDecode(token).img
+  }
+
   const dispatch = useDispatch() ;
   const dataByStore = useSelector((state) => state.broad.data);
   const itemIdTarget = item.id
@@ -114,12 +130,32 @@ function Item({ provided, item, isDragging  } , props) {
     document.querySelector('.item-content-out').addEventListener('focusout' , handleFocusOut)
   }
   const handleClickMoreOption = () =>{
-    console.log('check');
+    itemId = item.id
+    dispatch(setShowModalDetailItem(true))
   }
+
   return (
-    <div
-    style={{display: 'flex' , justifyContent: 'space-between' , padding: '0 6px' , alignItems : 'center'  , backgroundColor : 'white' , margin: '10px  12px' , borderRadius : '8px'}}
-    >
+
+      <div
+      style={{display: 'flex' , justifyContent: 'space-between' , padding: '0 6px' , alignItems : 'center'  , backgroundColor : 'white' , margin: '10px  12px' , borderRadius : '8px' ,height: '72px'}}
+      >
+      {item && item.listCheckBox && item.listCheckBox.length > 0 ? 
+        <h2 style={{
+          position:'relative',
+          top: '-22px',
+          width:'1px',
+          color : 
+          item.listCheckBox[0] == 'hight' ? '#d81b60' :
+          item.listCheckBox[0] == 'medium' ?  "#1976d2" :
+          item.listCheckBox[0] == 'fit' ? '#9c27b0' : '',
+          fontWeight : '900'
+        }}>
+      { item.listCheckBox[0] == 'medium' ? 'Thấp' 
+        : item.listCheckBox[0] == 'hight' ? 'Cao' 
+        : item.listCheckBox[0] == 'fit' ? 'Vừa' : ''
+      }
+        </h2> : ''
+    }
       <div
       class="item-style-my-fen"
       id={item.id}
@@ -134,15 +170,132 @@ function Item({ provided, item, isDragging  } , props) {
             dispatch(setIdItemTarget(valueTarget))
           }
         }}
-
       >
       {item.text}
       </div>
+      
       <i class="fa-solid fa-ellipsis " style={{fontSize:"20px" , cursor: 'pointer'}} onClick={handleClickMoreOption}></i>
-
+        <ModalDetailsItem />
     </div>
 
   );
 }
 
+
+
+
+
+function ModalDetailsItem(props) {
+  const token = localStorage.getItem('token') ;
+  let user = {
+    idUser : jwtDecode(token).id ,
+    email : jwtDecode(token).email,
+    image : jwtDecode(token).img
+  }
+  const [open, setOpen] = React.useState(false);
+  const dispatch = useDispatch()
+  const handleClose = () => dispatch(setShowModalDetailItem(false))
+  const [itemTarget , setItemTarget] = useState()
+  const isShowModalDetailsItem = useSelector((state) => state.isShowModal.isShowModalDetailsItem) ;
+  const dataByStore = useSelector((state) => state.broad.data);
+  const [commentContent , setCommentContent] = useState();
+  const [listComment , setListComment] = useState([])
+  useEffect(() =>{
+    dataByStore.columnOrder.forEach(column =>{
+      dataByStore.columns[`${column}`].items.forEach((e,index) =>{
+        if(itemId && e.id == itemId){
+          setItemTarget(e)
+        }
+      })
+      })
+  }, [itemId]);
+  const handleKeyEnter =async (event)  =>{
+    let newComment = {
+      ...user ,
+      content : commentContent
+    }
+    if(event.key == 'Enter' && commentContent){
+      dataByStore.columnOrder.forEach(column =>{
+        dataByStore.columns[`${column}`].items.forEach((e,index) =>{
+          if(itemTarget && e.id === itemTarget.id){
+            let replaceItems = [...dataByStore.columns[column].items]
+            replaceItems.splice(index,1,{
+              ...replaceItems[index] ,
+              listComment : [...replaceItems[index].listComment , newComment]
+            })
+            let newData = {
+              ...dataByStore ,
+              columns : {
+                ...dataByStore.columns ,
+                [`${column}`] : {
+                  ...dataByStore.columns[`${column}`],
+                  items : [...replaceItems]
+                }
+              }
+            }
+            setCommentContent('')
+            dispatch(setDataBroad(newData))
+          }
+        })
+      })
+    }
+  }
+useEffect(() =>{
+  if(itemTarget){
+    dataByStore.columnOrder.forEach(column =>{
+      dataByStore.columns[`${column}`].items.forEach((e,index) =>{
+        if(e.id === itemTarget.id &&  e.listComment && e.listComment.length > 0){
+          setListComment(e.listComment)
+        }
+      })
+    })
+  }
+},[itemTarget , handleKeyEnter])
+  return (
+    <div>
+      <Dialog open={isShowModalDetailsItem} onClose={handleClose}
+      >
+        <DialogTitle sx={{width : '600px'}}>Chi tiết công việc</DialogTitle>
+        <DialogContent>
+          <DialogContentText>
+           Tên việc : {itemTarget&&itemTarget.text}
+          </DialogContentText>
+          <CheckBox itemTarget={itemTarget}/>
+          <TextField
+            autoFocus
+            margin="dense"
+            id="name"
+            label="Hãy để lại bình luận của bạn"
+            type="email"
+            fullWidth
+            variant="standard"
+            onChange={(e) =>{
+              setCommentContent(e.target.value)
+            }}
+            onKeyDown={handleKeyEnter}
+            value={commentContent}
+          />
+        </DialogContent>
+        <List  sx={{
+        width: '100%',
+        maxWidth: 360,
+        bgcolor: 'background.paper',
+        position: 'relative',
+        overflow: 'auto',
+        maxHeight: 300,
+        '& ul': { padding: 0 },
+      }}
+      subheader={<li />}>
+        {listComment && listComment.length > 0 && listComment.map((e) =>{
+          return <CommentItem data={e} />
+        })}
+        </List>
+        <DialogActions>
+          <Button onClick={handleClose}>Thoát</Button>
+          <Button onClick={handleClose}>Xong</Button>
+        </DialogActions>
+      </Dialog>
+    </div>
+  );
+}
 export default Item;
