@@ -51,7 +51,7 @@ export default function Sidebar(props) {
     };
   }
   return (
-    <div className="flex flex-cols gap-12 justify-center mt-8 ">
+    <div className="flex flex-cols gap-12 justify-center mt-8">
       <Project />
 
       {/* oulet */}
@@ -63,13 +63,16 @@ export default function Sidebar(props) {
         <div className="flex flex-col gap-5">
           {dataWorkSpace.map((item, index) => (
             <div>
-              <div className="flex px-2">
-                <Button >
-                  <Avatar   variant="rounded" {...stringAvatar(item.name)} />
-                </Button>
+              <div className="flex grid grid-cols-3">
+                <div className="col-span-1">
+                  <Button>
+                    <Avatar variant="rounded" {...stringAvatar(item.name)} />
+                  </Button>
                 <span className="my-auto text-3xl font-bold">{item.name}</span>
-                <div className=" ml-40  flex flex-row gap-3 mb-6">
-                  <div className="flex hover:bg-slate-300 bg-slate-200 mt-2 p-1 px-2 rounded cursor-pointer">
+                </div>
+                
+                <div className=" col-span-2 ml-40  flex flex-row gap-3 mb-6">
+                  <div className="flex hover:bg-slate-300 bg-slate-200 mt-2 p-1 px-2 rounded cursor-pointer inline-block">
                     <span className="block mr-1">
                       <i class="fa-brands fa-trello"></i>
                     </span>
