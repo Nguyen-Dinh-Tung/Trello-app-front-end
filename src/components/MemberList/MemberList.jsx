@@ -11,13 +11,11 @@ import { useState } from "react";
 import Member from "../../api/DataMember";
 import { useSelector } from "react-redux";
 import { useDispatch } from "react-redux";
-import FolderIcon from '@mui/icons-material/Folder';
-import CircularProgress from '@mui/material/CircularProgress';
+import FolderIcon from "@mui/icons-material/Folder";
+import CircularProgress from "@mui/material/CircularProgress";
 
 export default function MemberList() {
   const id = useParams().id;
-  const dispatch = useDispatch();
-  console.log(id);
   const [data, setData] = useState();
 
   function stringToColor(string) {
@@ -49,6 +47,7 @@ export default function MemberList() {
       children: `${name.split(" ")[0][0]}`,
     };
   }
+
   useEffect(() => {
     getDatAWorkSpace(id)
       .then((res) => setData(res.data.data))
@@ -65,7 +64,9 @@ export default function MemberList() {
               <div>
                 {data ? (
                   <Avatar
-                    sx={{ height: 56 , width: 56}}
+                  style={{ height: 65 + "px", width: 65 + "px",fontSize:35+'px'}}
+                    variant="rounded"
+
                     {...stringAvatar(data.name)}
                   />
                 ) : (

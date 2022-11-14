@@ -64,8 +64,8 @@ export default function Sidebar(props) {
           {dataWorkSpace.map((item, index) => (
             <div>
               <div className="flex px-2">
-                <Button>
-                  <Avatar variant="rounded" {...stringAvatar(item.name)} />
+                <Button >
+                  <Avatar   variant="rounded" {...stringAvatar(item.name)} />
                 </Button>
                 <span className="my-auto text-3xl font-bold">{item.name}</span>
                 <div className=" ml-40  flex flex-row gap-3 mb-6">
