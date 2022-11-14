@@ -28,7 +28,9 @@ export default function Navbar() {
       <ModalSpace />
       <nav className="navbar flex items-center justify-between justify-center flex-wrap lg:px-2 text-white ">
         <button className="px-2">
-          <i class="fa-brands fa-xl fa-trello"></i>
+          <a href="/">
+            <i class="fa-brands fa-xl fa-beat  fa-trello"></i>
+          </a>
         </button>
         <div className="flex mr-5 justify-between lg:w-auto w-full lg:border-b-0 ml-2 text-center justify-center border-solid border-b-2 border-gray-300  lg:pb-0">
           <div className="flex items-center flex-shrink-0 text-gray-800 ">
