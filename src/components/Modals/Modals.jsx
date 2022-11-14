@@ -260,7 +260,7 @@ function Modals(props) {
                 <ImageList
                   sx={{ width: "auto", height: "auto" }}
                   cols={3}
-                  rowHeight={50}
+                  rowHeight={90}
                 >
                   {itemData.map((item) => (
                     <RadioGroup
