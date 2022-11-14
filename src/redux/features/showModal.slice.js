@@ -1,4 +1,4 @@
-import {createSlice} from "@reduxjs/toolkit";
+import { createSlice } from "@reduxjs/toolkit";
 
 const showModalSlice = createSlice({
   name: "isShowModal",
@@ -11,10 +11,15 @@ const showModalSlice = createSlice({
     flag: "",
     isIdWorkSpace: "",
     dataAWorkspace: "",
+    modeBoard: "",
+
   },
   reducers: {
     setDataAWorkspace: (state, actions) => {
       state.dataAWorkspace = actions.payload
+  },
+    setModeBoard: (state, actions) => {
+      state.modeBoard = actions.payload;
     },
     setIdWorkSpace: (state, actions) => {
       state.isIdWorkSpace = actions.payload;
@@ -48,6 +53,7 @@ export const {
   setShowWorkSpace,
   setFlag,
   setIdWorkSpace,
-  setDataAWorkspace
+  setDataAWorkspace,
+  setModeBoard,
 } = showModalSlice.actions;
 export default showModalSlice.reducer;

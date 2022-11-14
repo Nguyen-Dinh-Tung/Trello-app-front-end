@@ -20,10 +20,12 @@ function Home(props) {
   const idUser = jwtDecode(token)["id"];
   const dispatch = useDispatch();
   const flag = useSelector((state) => state.isShowModal.flag);
+  const modeBoard = useSelector((state) => state.isShowModal.modeBoard);
   const [loading, setLoading] = useState(false);
 
   let [listIdBroad, setListIdBroad] = useState([]);
   let [columnsOrder, setColumnOrder] = useState([]);
+
   let [workspace, setWorkSpace] = useState([]);
   useEffect(() => {
     setLoading(true);
@@ -35,7 +37,7 @@ function Home(props) {
         dispatch(setShowWorkSpace(res.data.listWorkSpace));
       })
       .catch((e) => console.log(e.message));
-  }, [flag]);
+  }, [flag, modeBoard]);
 
   return (
     <>
@@ -50,6 +52,6 @@ function Home(props) {
         </div>
       )}
     </>
-  );
+  );  
 }
 export default Home;
