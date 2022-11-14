@@ -190,6 +190,8 @@ function Modals(props) {
                       setNewBroad({ ...newBroad, workSpace: e.target.value });
                     }}
                   >
+                    <option value="">Chọn</option>
+
                     {workspace.map((item) => (
                       <option value={item._id}>{item.name}</option>
                     ))}

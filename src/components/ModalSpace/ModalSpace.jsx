@@ -126,6 +126,7 @@ function ModalSpace(props) {
                         setNewBroad({ ...newBroad, des: e.target.value });
                       }}
                     >
+                      <option value="">Trạng thái</option>
                       <option value="Doanh nghệp nhỏ">Doanh nghệp nhỏ</option>
                       <option value="Kỹ thuật-CNTT">Kỹ thuật-CNTT</option>
                       <option value="Giáo dục">Giáo dục</option>
