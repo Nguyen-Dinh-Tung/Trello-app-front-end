@@ -152,7 +152,6 @@ export default function Project() {
                     <List component="div" disablePadding>
                       <ListItemButton
                       onClick={()=>handleCHangPage(item._id)}
-                        href={`/member/${decode.id}`}
                         sx={{ pl: 4 }}
                       >
                         <ListItemIcon>
