@@ -6,13 +6,6 @@ import List from "@mui/material/List";
 import ListItemButton from "@mui/material/ListItemButton";
 import ListItemIcon from "@mui/material/ListItemIcon";
 import ListItemText from "@mui/material/ListItemText";
-import Collapse from "@mui/material/Collapse";
-import InboxIcon from "@mui/icons-material/MoveToInbox";
-import SendIcon from "@mui/icons-material/Send";
-import ExpandLess from "@mui/icons-material/ExpandLess";
-import ExpandMore from "@mui/icons-material/ExpandMore";
-import StarBorder from "@mui/icons-material/StarBorder";
-import AccountTreeIcon from "@mui/icons-material/AccountTree";
 import DashboardIcon from "@mui/icons-material/Dashboard";
 import GroupIcon from "@mui/icons-material/Group";
 import SettingsIcon from "@mui/icons-material/Settings";
@@ -90,16 +83,14 @@ export default function Project() {
           {/* Bảng */}
           <button class="flex jusitfy-start items-center space-x-6 w-full  focus:outline-none  focus:text-indigo-400  text-black rounded ">
             <span>
-              {" "}
-              <i class="fa-brands fa-trello"></i>{" "}
+              <i class="fa-brands fa-trello"></i>
             </span>
             <span> Bảng </span>
           </button>
           {/* Trang chủ */}
-          <button class="flex jusitfy-start items-center w-full  space-x-6 focus:outline-none text-black focus:text-indigo-400   rounded ">
+          <button class="flex jusitfy-start items-center w-full  space-x-4 focus:outline-none text-black focus:text-indigo-400   rounded ">
             <span>
-              {" "}
-              <i class="fa-solid fa-house"></i>{" "}
+              <i class="fa-solid fa-house"></i>
             </span>
             <span> Trang chủ </span>
           </button>

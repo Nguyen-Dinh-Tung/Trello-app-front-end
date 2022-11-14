@@ -12,16 +12,17 @@ export default function MediaCard(props) {
   };
 
   return (
-    <div onClick={handleCLick}>
+    <div onClick={handleCLick} >
       <a
         className="block p-2 cursor-pointer text-left max-w-sm rounded-lg border border-gray-200 shadow-md  hover:ring-2 hover::ring-slate-600 dark:bg-gray-800 dark:border-gray-700 dark:hover:bg-gray-700"
         style={{
-          height: 130 + "px",
-          width: 250 + "px",
+          height: 200 + "px",
+          width: 300 + "px",
           background: `url(${broad.img})`,
+          backgroundSize: "cover"
         }}
       >
-        <span className="text-left text-xl font-bold tracking-tight text-gray-900 dark:text-black">
+        <span className="text-left text-xl font-bold tracking-tight text-white dark:text-black">
           {broad.title}
         </span>
       </a>
