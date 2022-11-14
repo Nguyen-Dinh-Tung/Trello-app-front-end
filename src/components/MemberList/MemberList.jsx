@@ -12,6 +12,7 @@ import Member from "../../api/DataMember";
 import { useSelector } from "react-redux";
 import { useDispatch } from "react-redux";
 import FolderIcon from '@mui/icons-material/Folder';
+import CircularProgress from '@mui/material/CircularProgress';
 
 export default function MemberList() {
   const id = useParams().id;
@@ -68,9 +69,7 @@ export default function MemberList() {
                     {...stringAvatar(data.name)}
                   />
                 ) : (
-                  <Avatar>
-                  <FolderIcon />
-                </Avatar>
+                  <CircularProgress color="inherit" />
                 )}
               </div>
               <div className="my-auto">

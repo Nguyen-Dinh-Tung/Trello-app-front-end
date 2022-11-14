@@ -37,9 +37,9 @@ export default function Project() {
 
   const [workspace, setWorkSpace] = useState([]);
   const idUser = jwtDecode(token).id;
-  const handleCHangPage =(data)=>{
-    navigate(`/member/${data}` )
-  }
+  const handleCHangPage = (data) => {
+    navigate(`/member/${data}`);
+  };
   useEffect(() => {
     getBroad(idUser)
       .then((res) => {
@@ -48,7 +48,6 @@ export default function Project() {
       .catch((e) => console.log(e.message));
   }, []);
 
-  
   function stringToColor(string) {
     let hash = 0;
     let i;
@@ -118,16 +117,16 @@ export default function Project() {
                     id={item._id}
                   >
                     <ListItemButton>
-                      <ListItemIcon>
-                        <Button>
+                      <Button>
+                        <ListItemIcon>
                           <Avatar
                             sx={{ fontSize: 50, fontWeight: "800px" }}
                             sizes="50px"
                             variant="rounded"
                             {...stringAvatar(item.name)}
                           />
-                        </Button>
-                      </ListItemIcon>
+                        </ListItemIcon>
+                      </Button>
                       <ListItemText primary={item.name} />
                     </ListItemButton>
                   </AccordionSummary>
