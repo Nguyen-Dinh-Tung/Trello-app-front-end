@@ -8,7 +8,7 @@ import jwtDecode from "jwt-decode";
 import getBroad from "../../api/GetBroad";
 import ImageList from "@mui/material/ImageList";
 import ImageListItem from "@mui/material/ImageListItem";
-import { Button, RadioGroup } from "@mui/material";
+import { Box, Button, RadioGroup } from "@mui/material";
 import Snackbar from "@mui/material/Snackbar";
 
 const itemData = [
@@ -149,7 +149,7 @@ function Modals(props) {
             className="container mx-auto w-11/12 max-w-fit flex"
           >
             <div
-              style={{ background: `url(${img})` }}
+              style={{ background: `url(${img})`}}
               className="relative flex flex-row gap-5 bg-white py-8 w-full px-5 md:px-10 dark:bg-gray-800 dark:border-gray-700 shadow-md rounded border border-gray-400"
             >
               <div className="w-3/5">
