@@ -30,7 +30,7 @@ export default function Navbar() {
         <button className="px-2">
           <a href="/">
             <span>
-              <i class="fa-brands fa-xl fa-trello"></i>
+              <i class="fa-brands fa-xl fa-beat fa-trello"></i>
             </span>
             <span className="font-semibold text-xl tracking-tight inline-block ml-1">
               Trello
