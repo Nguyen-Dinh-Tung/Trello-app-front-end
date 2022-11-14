@@ -24,6 +24,7 @@ import ModeBroad from "../../api/Modeboard";
 import getDataUSer from "../../api/GetDataUserInBoard";
 import Snackbar from "@mui/material/Snackbar";
 
+
 function Broad(props) {
   const token = localStorage.getItem("token");
   const decode = jwtDecode(token);
@@ -63,8 +64,13 @@ function Broad(props) {
   };
 
   const name = decode.name.split("");
+  const emailUser = decode["email"];
   const handleEditMode = () => {
-    EditModeBoard(idBroad)
+    let data = {
+      idBroad: idBroad,
+      email: emailUser,
+    };
+    EditModeBoard(data)
       .then((res) => {
         setModeBoard("public");
         setFlagModeBoard(res);
@@ -106,7 +112,7 @@ function Broad(props) {
       .catch((e) => {
         console.log(e);
       });
-  }, [flagImg]);
+  }, [flagImg, modeBoard]);
   function onDragEnd(result) {
     if (!result.destination) {
       return;
@@ -274,6 +280,9 @@ function Broad(props) {
           console.log(e);
         });
     }
+  };
+  const handleDeleteMember = (e) => {
+    console.log("🚀 ~ file: Broad.jsx ~ line 281 ~ handleDeleteMember ~ e", e);
   };
 
   return (
@@ -624,7 +633,8 @@ function Broad(props) {
                                                       <li>
                                                         <a className="disabled text-sm block px-4 py-2 cursor-pointer">
                                                           <i class="fa-solid fa-arrow-right-from-bracket"></i>
-                                                          &ensp; Rời khỏi bảng
+                                                          &ensp; Rời khỏi bảng +{" "}
+                                                          {value.email}
                                                         </a>
                                                       </li>
                                                     </ul>
@@ -642,7 +652,8 @@ function Broad(props) {
                                                       <li>
                                                         <a className="text-sm block px-4 py-2 cursor-pointer">
                                                           <i class="fa-solid fa-arrow-right-from-bracket"></i>
-                                                          &ensp; Rời khỏi bảng
+                                                          &ensp; Rời khỏi bảng +{" "}
+                                                          {value.email}
                                                         </a>
                                                       </li>
                                                     </ul>

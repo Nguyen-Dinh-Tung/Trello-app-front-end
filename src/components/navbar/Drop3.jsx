@@ -50,7 +50,7 @@ export default function Drop3() {
             m-0
             border-none
              bg-white z-10 list-none divide-y-2 divide-gray-100 rounded py-2 my-1 w-44 w-64 "
-        aria-labelledby="dropdownMenuButton2"
+            aria-labelledby="dropdownMenuButton2"
           >
             <div className="py-1">
               <a
@@ -88,23 +88,7 @@ export default function Drop3() {
               <ul
                 className="py-1 rounded-sm text-black "
                 aria-labelledby="dropdownLargeButton"
-              >
-                <li>
-                  <a href="#" className="text-sm block px-4 py-2">
-                    333
-                  </a>
-                </li>
-                <li>
-                  <a href="#" className="text-sm block px-4 py-2">
-                    33
-                  </a>
-                </li>
-                <li>
-                  <a href="#" className="text-sm block px-4 py-2">
-                    cccc
-                  </a>
-                </li>
-              </ul>
+              ></ul>
             </div>
           </div>
         </div>

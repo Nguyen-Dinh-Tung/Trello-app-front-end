@@ -18,15 +18,44 @@ import GroupIcon from "@mui/icons-material/Group";
 import SettingsIcon from "@mui/icons-material/Settings";
 import Avatar from "@mui/material/Avatar";
 import { Button } from "@mui/material";
+import getDatAWorkSpace from "../../api/GetDataAWorkSpace";
+import { dataAWorkspace } from "../../redux/features/showModal.slice";
+import { useDispatch } from "react-redux";
+import { useSelector } from "react-redux";
+import { setDataAWorkspace } from "../../redux/features/showModal.slice";
+import { useNavigate } from "react-router-dom";
+
+import Accordion from "@mui/material/Accordion";
+import AccordionSummary from "@mui/material/AccordionSummary";
+import AccordionDetails from "@mui/material/AccordionDetails";
+import Typography from "@mui/material/Typography";
+import ExpandMoreIcon from "@mui/icons-material/ExpandMore";
+
 export default function Project() {
+  const navigate = useNavigate()
+  const dispatch = useDispatch();
+  const token = localStorage.getItem("token");
   const decode = jwtDecode(localStorage.getItem("token"));
+  const [open, setOpen] = React.useState(false);
+  const [idBoard,setIdBoard] = useState();
+  const handleClick = (data) => {
+    setOpen(!open);
+  };
+
+  const [workspace, setWorkSpace] = useState([]);
+  const idUser = jwtDecode(token).id;
+  const handleCHangPage =(data)=>{
+    navigate(`/member/${data}` )
+  }
   useEffect(() => {
     getBroad(idUser)
       .then((res) => {
-        setWorkSpace(res.data.listWorkSpace);
+        setWorkSpace([].concat(res.data.listWorkSpace).reverse());
       })
       .catch((e) => console.log(e.message));
   }, []);
+
+  
   function stringToColor(string) {
     let hash = 0;
     let i;
@@ -35,18 +64,14 @@ export default function Project() {
     for (i = 0; i < string.length; i += 1) {
       hash = string.charCodeAt(i) + ((hash << 5) - hash);
     }
-
     let color = "#";
-
     for (i = 0; i < 3; i += 1) {
       const value = (hash >> (i * 8)) & 0xff;
       color += `00${value.toString(16)}`.slice(-2);
     }
     /* eslint-enable no-bitwise */
-
     return color;
   }
-
   function stringAvatar(name) {
     return {
       sx: {
@@ -56,17 +81,6 @@ export default function Project() {
       children: `${name.split(" ")[0][0]}`,
     };
   }
-
-  const [open, setOpen] = React.useState(false);
-
-  const handleClick = () => {
-    setOpen(!open);
-  };
-  const [workspace, setWorkSpace] = useState([]);
-
-  const token = localStorage.getItem("token");
-  const idUser = jwtDecode(token).id;
-
   return (
     <>
       <div
@@ -81,14 +95,6 @@ export default function Project() {
               <i class="fa-brands fa-trello"></i>{" "}
             </span>
             <span> Bảng </span>
-          </button>
-          {/* Mẫu */}
-          <button class="flex jusitfy-start items-center w-full  space-x-6 focus:outline-none text-black focus:text-indigo-400   rounded ">
-            <span>
-              {" "}
-              <i class="fa-brands fa-trello"></i>{" "}
-            </span>
-            <span> Bảng Mẫu </span>
           </button>
           {/* Trang chủ */}
           <button class="flex jusitfy-start items-center w-full  space-x-6 focus:outline-none text-black focus:text-indigo-400   rounded ">
@@ -112,47 +118,59 @@ export default function Project() {
           }
         >
           {workspace.map((item, index) => (
-            < >
-              <ListItemButton onClick={handleClick}>
-                <ListItemIcon>
-                  <Button>
-                    <Avatar
-                      sx={{ fontSize: 50, fontWeight: "800px" }}
-                      sizes="50px"
-                      variant="rounded"
-                      {...stringAvatar(item.name)}
-                    />
-                  </Button>
-                </ListItemIcon>
-                <ListItemText primary={item.name} />
-                {open ? <ExpandLess /> : <ExpandMore />}
-              </ListItemButton>
-              <Collapse in={open} timeout="auto" unmountOnExit>
-                <List component="div" disablePadding>
-                  <ListItemButton sx={{ pl: 4 }}>
-                    <ListItemIcon>
-                      <DashboardIcon />
-                    </ListItemIcon>
-                    <ListItemText primary="Bảng" />
-                  </ListItemButton>
-                </List>
-                <List component="div" disablePadding>
-                  <ListItemButton href={`/member/${decode.id}`} sx={{ pl: 4 }}>
-                    <ListItemIcon>
-                      <GroupIcon />
-                    </ListItemIcon>
-                    <ListItemText primary="Thành viên" />
-                  </ListItemButton>
-                </List>
-                <List component="div" disablePadding>
-                  <ListItemButton sx={{ pl: 4 }}>
-                    <ListItemIcon>
-                      <SettingsIcon />
-                    </ListItemIcon>
-                    <ListItemText primary="Cài đặt" />
-                  </ListItemButton>
-                </List>
-              </Collapse>
+            <>
+              <div>
+                <Accordion onClick={handleClick} sx={{ boxShadow: 0 }}>
+                  <AccordionSummary
+                    expandIcon={<ExpandMoreIcon />}
+                    aria-controls="panel1a-content"
+                    id={item._id}
+                  >
+                    <ListItemButton>
+                      <ListItemIcon>
+                        <Button>
+                          <Avatar
+                            sx={{ fontSize: 50, fontWeight: "800px" }}
+                            sizes="50px"
+                            variant="rounded"
+                            {...stringAvatar(item.name)}
+                          />
+                        </Button>
+                      </ListItemIcon>
+                      <ListItemText primary={item.name} />
+                    </ListItemButton>
+                  </AccordionSummary>
+                  <AccordionDetails>
+                    <List component="div" disablePadding>
+                      <ListItemButton sx={{ pl: 4 }}>
+                        <ListItemIcon>
+                          <DashboardIcon />
+                        </ListItemIcon>
+                        <ListItemText primary="Bảng" />
+                      </ListItemButton>
+                    </List>
+                    <List component="div" disablePadding>
+                      <ListItemButton
+                      onClick={()=>handleCHangPage(item._id)}
+                        sx={{ pl: 4 }}
+                      >
+                        <ListItemIcon>
+                          <GroupIcon />
+                        </ListItemIcon>
+                        <ListItemText primary="Thành viên" />
+                      </ListItemButton>
+                    </List>
+                    <List component="div" disablePadding>
+                      <ListItemButton sx={{ pl: 4 }}>
+                        <ListItemIcon>
+                          <SettingsIcon />
+                        </ListItemIcon>
+                        <ListItemText primary="Cài đặt" />
+                      </ListItemButton>
+                    </List>
+                  </AccordionDetails>
+                </Accordion>
+              </div>
             </>
           ))}
         </List>
