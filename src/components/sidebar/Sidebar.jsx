@@ -16,7 +16,6 @@ export default function Sidebar(props) {
   const columnsOrder = [].concat(props.columnsOrder).reverse();
 
   const [member, setmember] = useState();
-
   // useEffect(() => {
   //   getBroad(decode.id)
   //     .then((res) => console.log(res))
@@ -95,7 +94,8 @@ export default function Sidebar(props) {
                       }
                     })
                   ) : (
-                    <h2>Hiện chưa có dữ liệu</h2>
+                    <MediaCard>Trello</MediaCard>
+
                   )}
                 </div>
               </div>
