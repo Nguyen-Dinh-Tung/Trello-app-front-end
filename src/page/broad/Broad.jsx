@@ -287,7 +287,7 @@ function Broad(props) {
 
   return (
     <DragDropContext onDragEnd={onDragEnd}>
-      <div style={{ backgroundImage: `url(${bgImg})`, backgroundSize: "cover" }} className="Broad w-full h-[900px]">
+      <div style={{ backgroundImage: `url(${bgImg})`, backgroundSize: "cover" }} className="Broad w-full !h-screen">
         <Navbar></Navbar>
         <div>
           <div className="flex w-full ">
