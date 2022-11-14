@@ -32,12 +32,12 @@ import Typography from "@mui/material/Typography";
 import ExpandMoreIcon from "@mui/icons-material/ExpandMore";
 
 export default function Project() {
-  const navigate = useNavigate();
+  const navigate = useNavigate()
   const dispatch = useDispatch();
   const token = localStorage.getItem("token");
   const decode = jwtDecode(localStorage.getItem("token"));
   const [open, setOpen] = React.useState(false);
-  const [idBoard, setIdBoard] = useState();
+  const [idBoard,setIdBoard] = useState();
   const handleClick = (data) => {
     setOpen(!open);
   };
@@ -150,7 +150,7 @@ export default function Project() {
                     </List>
                     <List component="div" disablePadding>
                       <ListItemButton
-                        onClick={() => handleCHangPage(item._id)}
+                      onClick={()=>handleCHangPage(item._id)}
                         sx={{ pl: 4 }}
                       >
                         <ListItemIcon>
