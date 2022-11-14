@@ -24,6 +24,7 @@ import ModeBroad from "../../api/Modeboard";
 import getDataUSer from "../../api/GetDataUserInBoard";
 import Snackbar from "@mui/material/Snackbar";
 
+
 function Broad(props) {
   const token = localStorage.getItem("token");
   const decode = jwtDecode(token);
