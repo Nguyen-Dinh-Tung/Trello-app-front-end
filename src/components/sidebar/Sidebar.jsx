@@ -11,10 +11,11 @@ import getBroad from "../../api/GetBroad";
 
 export default function Sidebar(props) {
   let decode = jwtDecode(localStorage.getItem("token"));
-  const dataWorkSpace = props.WorkSpace;
-  const columnsOrder = props.columnsOrder;
-  const [member, setmember] = useState();
+  const dataWorkSpace = [].concat(props.WorkSpace).reverse();
 
+  const columnsOrder = [].concat(props.columnsOrder).reverse();
+
+  const [member, setmember] = useState();
   // useEffect(() => {
   //   getBroad(decode.id)
   //     .then((res) => console.log(res))
@@ -93,7 +94,8 @@ export default function Sidebar(props) {
                       }
                     })
                   ) : (
-                    <h2>Hiện chưa có dữ liệu</h2>
+                    <MediaCard>Trello</MediaCard>
+
                   )}
                 </div>
               </div>

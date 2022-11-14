@@ -82,7 +82,6 @@ function Modals(props) {
     idUser: idUser,
     workSpace: "",
   });
-
   const [isCreateBroad, setCreateBroad] = useState(true);
 
   const handleHiddenModals = () => {

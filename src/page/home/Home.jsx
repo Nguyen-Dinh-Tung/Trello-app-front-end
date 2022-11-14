@@ -25,6 +25,7 @@ function Home(props) {
 
   let [listIdBroad, setListIdBroad] = useState([]);
   let [columnsOrder, setColumnOrder] = useState([]);
+
   let [workspace, setWorkSpace] = useState([]);
   useEffect(() => {
     setLoading(true);
@@ -44,13 +45,13 @@ function Home(props) {
         <Loading />
       ) : (
         <div>
-          <header>
+          <header >
             <Navbar></Navbar>
           </header>
           <Sidebar columnsOrder={columnsOrder} WorkSpace={workspace} />
         </div>
       )}
     </>
-  );
+  );  
 }
 export default Home;
