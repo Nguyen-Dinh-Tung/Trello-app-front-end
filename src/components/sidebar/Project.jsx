@@ -18,6 +18,12 @@ import GroupIcon from "@mui/icons-material/Group";
 import SettingsIcon from "@mui/icons-material/Settings";
 import Avatar from "@mui/material/Avatar";
 import { Button } from "@mui/material";
+import getDatAWorkSpace from "../../api/GetDataAWorkSpace";
+import { dataAWorkspace } from "../../redux/features/showModal.slice";
+import { useDispatch } from "react-redux";
+import { useSelector } from "react-redux";
+import { setDataAWorkspace } from "../../redux/features/showModal.slice";
+import { useNavigate } from "react-router-dom";
 
 import Accordion from "@mui/material/Accordion";
 import AccordionSummary from "@mui/material/AccordionSummary";
@@ -26,7 +32,21 @@ import Typography from "@mui/material/Typography";
 import ExpandMoreIcon from "@mui/icons-material/ExpandMore";
 
 export default function Project() {
+  const navigate = useNavigate()
+  const dispatch = useDispatch();
+  const token = localStorage.getItem("token");
   const decode = jwtDecode(localStorage.getItem("token"));
+  const [open, setOpen] = React.useState(false);
+  const [idBoard,setIdBoard] = useState();
+  const handleClick = (data) => {
+    setOpen(!open);
+  };
+
+  const [workspace, setWorkSpace] = useState([]);
+  const idUser = jwtDecode(token).id;
+  const handleCHangPage =(data)=>{
+    navigate(`/member/${data}` )
+  }
   useEffect(() => {
     getBroad(idUser)
       .then((res) => {
@@ -34,6 +54,8 @@ export default function Project() {
       })
       .catch((e) => console.log(e.message));
   }, []);
+
+  
   function stringToColor(string) {
     let hash = 0;
     let i;
@@ -50,10 +72,8 @@ export default function Project() {
       color += `00${value.toString(16)}`.slice(-2);
     }
     /* eslint-enable no-bitwise */
-
     return color;
   }
-
   function stringAvatar(name) {
     return {
       sx: {
@@ -64,16 +84,7 @@ export default function Project() {
     };
   }
 
-  const [open, setOpen] = React.useState(false);
-
-  const handleClick = () => {
-    setOpen(!open);
-  };
-  const [workspace, setWorkSpace] = useState([]);
-
-  const token = localStorage.getItem("token");
-  const idUser = jwtDecode(token).id;
-  
+ 
 
   return (
     <>
@@ -114,7 +125,7 @@ export default function Project() {
           {workspace.map((item, index) => (
             <>
               <div>
-                <Accordion sx={{ boxShadow: 0 }}>
+                <Accordion onClick={handleClick} sx={{ boxShadow: 0 }}>
                   <AccordionSummary
                     expandIcon={<ExpandMoreIcon />}
                     aria-controls="panel1a-content"
@@ -145,7 +156,7 @@ export default function Project() {
                     </List>
                     <List component="div" disablePadding>
                       <ListItemButton
-                        href={`/member/${decode.id}`}
+                      onClick={()=>handleCHangPage(item._id)}
                         sx={{ pl: 4 }}
                       >
                         <ListItemIcon>

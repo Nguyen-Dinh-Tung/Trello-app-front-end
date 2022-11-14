@@ -45,7 +45,7 @@ function Home(props) {
         <Loading />
       ) : (
         <div>
-          <header>
+          <header >
             <Navbar></Navbar>
           </header>
           <Sidebar columnsOrder={columnsOrder} WorkSpace={workspace} />
