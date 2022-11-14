@@ -134,16 +134,20 @@ export default function Drop1() {
               <ul
                 className="py-1 rounded-sm text-black "
                 aria-labelledby="dropdownLargeButton"
-
               >
                 {workspace.map((item, index) => (
-                  <li key={index} className="text-sm  block px-4 py-2 flex">
+                  <li
+                    key={index}
+                    className="text-sm  block px-4 py-2 flex hover"
+                  >
                     <Button>
-                      <Avatar sx={{borderRadius:10}} variant="rounded" {...stringAvatar(item.name)} />
+                      <Avatar
+                        sx={{ borderRadius: 10 }}
+                        variant="rounded"
+                        {...stringAvatar(item.name)}
+                      />
+                      <span className=" my-auto ml-2 text-lg">{item.name}</span>
                     </Button>
-                    <span className=" my-auto ml-2 text-lg">
-                    {item.name}
-                    </span>
                   </li>
                 ))}
               </ul>
