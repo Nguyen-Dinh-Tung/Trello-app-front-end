@@ -11,6 +11,7 @@ const broadSlice = createSlice({
     data: initial,
   },
   reducers: {
+  
     setDataBroad: (state, actions) => {
       state.data = actions.payload;
     },

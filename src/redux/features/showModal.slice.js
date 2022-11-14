@@ -10,8 +10,12 @@ const showModalSlice = createSlice({
     isShowWorkSpace: [],
     flag: "",
     isIdWorkSpace: "",
+    dataAWorkspace: "",
   },
   reducers: {
+    setDataAWorkspace: (state, actions) => {
+      state.dataAWorkspace = actions.payload
+    },
     setIdWorkSpace: (state, actions) => {
       state.isIdWorkSpace = actions.payload;
     },
@@ -44,5 +48,6 @@ export const {
   setShowWorkSpace,
   setFlag,
   setIdWorkSpace,
+  setDataAWorkspace
 } = showModalSlice.actions;
 export default showModalSlice.reducer;

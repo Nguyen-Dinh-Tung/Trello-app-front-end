@@ -18,16 +18,29 @@ import GroupIcon from "@mui/icons-material/Group";
 import SettingsIcon from "@mui/icons-material/Settings";
 import Avatar from "@mui/material/Avatar";
 import { Button } from "@mui/material";
+import getDatAWorkSpace from "../../api/GetDataAWorkSpace";
+import { dataAWorkspace } from "../../redux/features/showModal.slice";
+import { useDispatch } from "react-redux";
+import { useSelector } from "react-redux";
+import { setDataAWorkspace } from "../../redux/features/showModal.slice";
+import { useNavigate } from "react-router-dom";
+
 export default function Project() {
+  const navigate = useNavigate()
+  const dispatch = useDispatch();
   const token = localStorage.getItem("token");
   const decode = jwtDecode(localStorage.getItem("token"));
   const [open, setOpen] = React.useState(false);
+  const [idBoard,setIdBoard] = useState();
   const handleClick = (data) => {
     setOpen(!open);
-    
   };
+
   const [workspace, setWorkSpace] = useState([]);
   const idUser = jwtDecode(token).id;
+  const handleCHangPage =(data)=>{
+    navigate(`/member/${data}` )
+  }
   useEffect(() => {
     getBroad(idUser)
       .then((res) => {
@@ -35,6 +48,8 @@ export default function Project() {
       })
       .catch((e) => console.log(e.message));
   }, []);
+
+  
   function stringToColor(string) {
     let hash = 0;
     let i;
@@ -106,7 +121,7 @@ export default function Project() {
         >
           {workspace.map((item, index) => (
             <div key={item.id}>
-              <ListItemButton onClick={()=>handleClick(item)}>
+              <ListItemButton onClick={() => handleClick(item)}>
                 <ListItemIcon>
                   <Button>
                     <Avatar
@@ -130,7 +145,7 @@ export default function Project() {
                   </ListItemButton>
                 </List>
                 <List component="div" disablePadding>
-                  <ListItemButton  href={`/member/${item._id}`} sx={{ pl: 4 }}>
+                  <ListItemButton onClick={()=>handleCHangPage(item._id)} sx={{ pl: 4 }}>
                     <ListItemIcon>
                       <GroupIcon />
                     </ListItemIcon>

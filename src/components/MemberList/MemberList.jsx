@@ -9,51 +9,51 @@ import jwtDecode from "jwt-decode";
 import getDatAWorkSpace from "../../api/GetDataAWorkSpace";
 import { useState } from "react";
 import Member from "../../api/DataMember";
-
+import { useSelector } from "react-redux";
+import { useDispatch } from "react-redux";
+import FolderIcon from '@mui/icons-material/Folder';
 
 export default function MemberList() {
-  const [dataAWorkSpace,setDataAWorkSpace] = useState();
+  const id = useParams().id;
+  const dispatch = useDispatch();
+  console.log(id);
+  const [data, setData] = useState();
 
-  const idUser = jwtDecode(localStorage.getItem("token")).id;
-  let idAWorkspace = useParams().id;
-  // useEffect(() => {
-  //   getDatAWorkSpace(idAWorkspace).then((res) =>
-  //     setDataAWorkSpace(res.data.aWorkspace).catch((e) => console.log(e))
-  //   );
-  // }, []);
-  useEffect(() => {
-    Member().then((res) =>
-      setDataAWorkSpace(res.data.aWorkspace).catch((e) => console.log(e))
-    );
-  }, []);
   function stringToColor(string) {
     let hash = 0;
     let i;
-  
+
     /* eslint-disable no-bitwise */
+
     for (i = 0; i < string.length; i += 1) {
       hash = string.charCodeAt(i) + ((hash << 5) - hash);
     }
-  
-    let color = '#';
-  
+
+    let color = "#";
+
     for (i = 0; i < 3; i += 1) {
       const value = (hash >> (i * 8)) & 0xff;
       color += `00${value.toString(16)}`.slice(-2);
     }
     /* eslint-enable no-bitwise */
-  
+
     return color;
   }
-  
+
   function stringAvatar(name) {
     return {
       sx: {
         bgcolor: stringToColor(name),
       },
-      children: `${name.split(' ')[0][0]}`,
+      children: `${name.split(" ")[0][0]}`,
     };
   }
+  useEffect(() => {
+    getDatAWorkSpace(id)
+      .then((res) => setData(res.data.data))
+      .catch((e) => console.log(e));
+  }, []);
+
   return (
     <div className="h-screen bg-white ">
       <div className="mx-20 flex flex-col">
@@ -62,12 +62,19 @@ export default function MemberList() {
             <div className="w-1/3"></div>
             <div className="w-2/3 flex gap-4">
               <div>
-              <Avatar {...stringAvatar(dataAWorkSpace.name)} />
+                {data ? (
+                  <Avatar
+                    sx={{ height: 56 , width: 56}}
+                    {...stringAvatar(data.name)}
+                  />
+                ) : (
+                  <Avatar>
+                  <FolderIcon />
+                </Avatar>
+                )}
               </div>
               <div className="my-auto">
-                <div className="text-2xl font-bold">
-                  {dataAWorkSpace.name}
-                </div>
+                <div className="text-2xl font-bold">{data && data.name}</div>
                 <div className="text-xs">Chế độ</div>
               </div>
             </div>

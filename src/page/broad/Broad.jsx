@@ -24,7 +24,7 @@ function Broad(props) {
   const initial = useSelector((state) => state.broad.data);
   const location = useLocation();
   const idBroad = location.state.broad._id;
-  const bgImg = location.state.broad.img;
+  const bgImg = location.state.broad.img
   const dataByStore = useSelector((state) => state.broad.data);
   const idWorkSpace = location.state.idWorkSpace;
   const emailIdUser = jwtDecode(token)["email"];
