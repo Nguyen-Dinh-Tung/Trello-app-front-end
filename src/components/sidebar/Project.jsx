@@ -18,12 +18,19 @@ import GroupIcon from "@mui/icons-material/Group";
 import SettingsIcon from "@mui/icons-material/Settings";
 import Avatar from "@mui/material/Avatar";
 import { Button } from "@mui/material";
+
+import Accordion from "@mui/material/Accordion";
+import AccordionSummary from "@mui/material/AccordionSummary";
+import AccordionDetails from "@mui/material/AccordionDetails";
+import Typography from "@mui/material/Typography";
+import ExpandMoreIcon from "@mui/icons-material/ExpandMore";
+
 export default function Project() {
   const decode = jwtDecode(localStorage.getItem("token"));
   useEffect(() => {
     getBroad(idUser)
       .then((res) => {
-        setWorkSpace(res.data.listWorkSpace);
+        setWorkSpace([].concat(res.data.listWorkSpace).reverse());
       })
       .catch((e) => console.log(e.message));
   }, []);
@@ -83,14 +90,6 @@ export default function Project() {
             </span>
             <span> Bảng </span>
           </button>
-          {/* Mẫu */}
-          <button class="flex jusitfy-start items-center w-full  space-x-6 focus:outline-none text-black focus:text-indigo-400   rounded ">
-            <span>
-              {" "}
-              <i class="fa-brands fa-trello"></i>{" "}
-            </span>
-            <span> Bảng Mẫu </span>
-          </button>
           {/* Trang chủ */}
           <button class="flex jusitfy-start items-center w-full  space-x-6 focus:outline-none text-black focus:text-indigo-400   rounded ">
             <span>
@@ -113,47 +112,59 @@ export default function Project() {
           }
         >
           {workspace.map((item, index) => (
-            < >
-              <ListItemButton onClick={handleClick}>
-                <ListItemIcon>
-                  <Button>
-                    <Avatar
-                      sx={{ fontSize: 50, fontWeight: "800px" }}
-                      sizes="50px"
-                      variant="rounded"
-                      {...stringAvatar(item.name)}
-                    />
-                  </Button>
-                </ListItemIcon>
-                <ListItemText primary={item.name} />
-                {open ? <ExpandLess /> : <ExpandMore />}
-              </ListItemButton>
-              <Collapse in={open} timeout="auto" unmountOnExit>
-                <List component="div" disablePadding>
-                  <ListItemButton sx={{ pl: 4 }}>
-                    <ListItemIcon>
-                      <DashboardIcon />
-                    </ListItemIcon>
-                    <ListItemText primary="Bảng" />
-                  </ListItemButton>
-                </List>
-                <List component="div" disablePadding>
-                  <ListItemButton href={`/member/${decode.id}`} sx={{ pl: 4 }}>
-                    <ListItemIcon>
-                      <GroupIcon />
-                    </ListItemIcon>
-                    <ListItemText primary="Thành viên" />
-                  </ListItemButton>
-                </List>
-                <List component="div" disablePadding>
-                  <ListItemButton sx={{ pl: 4 }}>
-                    <ListItemIcon>
-                      <SettingsIcon />
-                    </ListItemIcon>
-                    <ListItemText primary="Cài đặt" />
-                  </ListItemButton>
-                </List>
-              </Collapse>
+            <>
+              <div>
+                <Accordion sx={{ boxShadow: 0 }}>
+                  <AccordionSummary
+                    expandIcon={<ExpandMoreIcon />}
+                    aria-controls="panel1a-content"
+                    id={item._id}
+                  >
+                    <ListItemButton>
+                      <ListItemIcon>
+                        <Button>
+                          <Avatar
+                            sx={{ fontSize: 50, fontWeight: "800px" }}
+                            sizes="50px"
+                            variant="rounded"
+                            {...stringAvatar(item.name)}
+                          />
+                        </Button>
+                      </ListItemIcon>
+                      <ListItemText primary={item.name} />
+                    </ListItemButton>
+                  </AccordionSummary>
+                  <AccordionDetails>
+                    <List component="div" disablePadding>
+                      <ListItemButton sx={{ pl: 4 }}>
+                        <ListItemIcon>
+                          <DashboardIcon />
+                        </ListItemIcon>
+                        <ListItemText primary="Bảng" />
+                      </ListItemButton>
+                    </List>
+                    <List component="div" disablePadding>
+                      <ListItemButton
+                        href={`/member/${decode.id}`}
+                        sx={{ pl: 4 }}
+                      >
+                        <ListItemIcon>
+                          <GroupIcon />
+                        </ListItemIcon>
+                        <ListItemText primary="Thành viên" />
+                      </ListItemButton>
+                    </List>
+                    <List component="div" disablePadding>
+                      <ListItemButton sx={{ pl: 4 }}>
+                        <ListItemIcon>
+                          <SettingsIcon />
+                        </ListItemIcon>
+                        <ListItemText primary="Cài đặt" />
+                      </ListItemButton>
+                    </List>
+                  </AccordionDetails>
+                </Accordion>
+              </div>
             </>
           ))}
         </List>

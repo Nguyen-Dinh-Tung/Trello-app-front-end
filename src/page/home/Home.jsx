@@ -25,6 +25,7 @@ function Home(props) {
 
   let [listIdBroad, setListIdBroad] = useState([]);
   let [columnsOrder, setColumnOrder] = useState([]);
+
   let [workspace, setWorkSpace] = useState([]);
   useEffect(() => {
     setLoading(true);
@@ -51,6 +52,6 @@ function Home(props) {
         </div>
       )}
     </>
-  );
+  );  
 }
 export default Home;
