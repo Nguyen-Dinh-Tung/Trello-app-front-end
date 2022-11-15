@@ -15,26 +15,12 @@ export default function Sidebar(props) {
   const dataWorkSpace = [].concat(props.WorkSpace).reverse();
 
   const columnsOrder = [].concat(props.columnsOrder).reverse();
-  const [idWorkspace, setIdWorkspace] = useState();
-  console.log(
-    "🚀 ~ file: Sidebar.jsx ~ line 19 ~ Sidebar ~ idWorkspace",
-    idWorkspace
-  );
+
   const navigate = useNavigate();
-  const [member, setmember] = useState();
 
   const handleGetIdWorkspace = (id) => {
-    setIdWorkspace(id);
     navigate(`/member/${id}`);
-
   };
-  useEffect(() => {
-    getDatAWorkSpace(idWorkspace)
-      .then((res) => {
-        console.log(res)
-      })
-      .catch((e) => console.log(e));
-  }, [idWorkspace]);
   function stringToColor(string) {
     let hash = 0;
     let i;
