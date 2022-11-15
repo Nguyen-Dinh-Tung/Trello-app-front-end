@@ -261,7 +261,8 @@ function Modals(props) {
               </div>
               <div className="my-auto">
                 <ImageList
-                  sx={{ width: "auto", height: "auto" }}
+                variant="rounded"
+                  sx={{ width: "auto", height:"auto" }}
                   cols={3}
                   rowHeight={90}
                 >
@@ -273,8 +274,6 @@ function Modals(props) {
                       <Button onClick={() => handleChangeImg(item.img)}>
                         <ImageListItem key={item.img}>
                           <img
-                            // src={`${item.img}?w=60&h=60&fit=crop&auto=format`}
-                            // srcSet={`${item.img}?w=60&h=60&fit=crop&auto=format&dpr=2 2x`}
                             src={`${item.img}?w=120&h=120&fit=crop&auto=format`}
                             srcSet={`${item.img}?w=60&h=60&fit=crop&auto=format&dpr=2 2x`}
                             alt={item.title}

@@ -25,25 +25,26 @@ import Typography from "@mui/material/Typography";
 import ExpandMoreIcon from "@mui/icons-material/ExpandMore";
 
 export default function Project() {
-  const navigate = useNavigate()
+  const navigate = useNavigate();
   const dispatch = useDispatch();
   const token = localStorage.getItem("token");
   const decode = jwtDecode(localStorage.getItem("token"));
   const [open, setOpen] = React.useState(false);
-  const [idBoard,setIdBoard] = useState();
+  const [idBoard, setIdBoard] = useState();
   const handleClick = (data) => {
     setOpen(!open);
-  };
+  }
 
   const [workspace, setWorkSpace] = useState([]);
   const idUser = jwtDecode(token).id;
   const handleCHangPage = (data) => {
     navigate(`/member/${data}`);
   };
+
   useEffect(() => {
     getBroad(idUser)
       .then((res) => {
-        setWorkSpace([].concat(res.data.listWorkSpace).reverse());
+        setWorkSpace([].concat(res.data.listWorkSpace).reverse())
       })
       .catch((e) => console.log(e.message));
   }, []);
@@ -110,42 +111,49 @@ export default function Project() {
           {workspace.map((item, index) => (
             <>
               <div>
-                <Accordion onClick={handleClick} sx={{ boxShadow: 0 }}>
+                <Accordion onClick={handleClick} sx={{ boxShadow: 0 }}
+                >
                   <AccordionSummary
                     expandIcon={<ExpandMoreIcon />}
                     aria-controls="panel1a-content"
                     id={item._id}
                   >
-                    <ListItemButton>
-                      <Button>
+                      <ListItemButton
+                            variant="rounded"
+                      >
                         <ListItemIcon>
                           <Avatar
-                            sx={{ fontSize: 50, fontWeight: "800px" }}
-                            sizes="50px"
+                            style={{ height: 30 + "px", width: 30 + "px",fontSize:15+'px'}}
                             variant="rounded"
                             {...stringAvatar(item.name)}
                           />
                         </ListItemIcon>
-                      </Button>
-                      <ListItemText primary={item.name} />
-                    </ListItemButton>
+                      <ListItemText style={{fontSize:15+'px'}} primary={item.name} />
+                      </ListItemButton>
+                   
                   </AccordionSummary>
                   <AccordionDetails>
                     <List component="div" disablePadding>
                       <ListItemButton sx={{ pl: 4 }}>
                         <ListItemIcon>
-                          <DashboardIcon />
+                          <i
+                            class="fa-brands fa-trello ml-1"
+                            style={{ fontSize: 20 + "px", color: "black" }}
+                          ></i>
                         </ListItemIcon>
                         <ListItemText primary="Bảng" />
                       </ListItemButton>
                     </List>
                     <List component="div" disablePadding>
                       <ListItemButton
-                      onClick={()=>handleCHangPage(item._id)}
+                        onClick={() => handleCHangPage(item._id)}
                         sx={{ pl: 4 }}
                       >
                         <ListItemIcon>
-                          <GroupIcon />
+                          <i
+                            class="fa-solid fa-user-group"
+                            style={{ fontSize: 17 + "px", color: "black" }}
+                          ></i>
                         </ListItemIcon>
                         <ListItemText primary="Thành viên" />
                       </ListItemButton>
@@ -153,7 +161,7 @@ export default function Project() {
                     <List component="div" disablePadding>
                       <ListItemButton sx={{ pl: 4 }}>
                         <ListItemIcon>
-                          <SettingsIcon />
+                          <SettingsIcon style={{ color: "black" }} />
                         </ListItemIcon>
                         <ListItemText primary="Cài đặt" />
                       </ListItemButton>

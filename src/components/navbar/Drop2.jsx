@@ -34,7 +34,9 @@ export default function Drop2() {
           </button>
           <div
             id="dropdown2"
-            className=" dropdown-menu
+            className=" 
+            mt-3
+            dropdown-menu
             min-w-max
             absolute
             hidden

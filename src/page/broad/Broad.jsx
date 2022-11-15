@@ -56,6 +56,8 @@ function Broad(props) {
   const [roleMember, setRoleMember] = useState();
   const [valueMember, setValueMember] = useState();
   const [message, setMessage] = useState();
+  const [deleteUser,setDeleteUser]= useState();
+  console.log("🚀 ~ file: Broad.jsx ~ line 60 ~ Broad ~ deleteUser", deleteUser)
 
   const [stateAlert, setStateAlert] = useState({
     open: false,
@@ -67,7 +69,9 @@ function Broad(props) {
   const handleCloseAlert = () => {
     setStateAlert({ ...stateAlert, open: false });
   };
-
+  const handleDeleUser = (e)=>{
+    setDeleteUser(e)
+  }
   const name = decode.name.split("");
   const emailUser = decode["email"];
   const handleEditMode = () => {
@@ -104,12 +108,13 @@ function Broad(props) {
   }
 
   function stringAvatar(name) {
-    return {
-      sx: {
-        bgcolor: stringToColor(name),
-      },
-      children: `${name.split(" ")[0][0]}${name.split(" ")[1][0]}`,
-    };
+      return {
+        sx: {
+          bgcolor: stringToColor(name),
+        },
+        children: `${name.split(" ")[0][0]}`,
+      }
+    
   }
 
   useEffect(() => {
@@ -458,8 +463,8 @@ function Broad(props) {
                         <Avatar
                           title={user.name}
                           style={{
-                            height: 33 + "px",
-                            width: 33 + "px",
+                            height: 30 + "px",
+                            width: 30 + "px",
                             fontSize: 13 + "px",
                           }}
                           {...stringAvatar(user.name)}
@@ -525,11 +530,12 @@ function Broad(props) {
                               <div className="w-full gap-2 flex">
                                 <div className="w-3/4 dark:placeholder-gray-700 cursor:text my-auto">
                                   <input
+                                  method="post"
                                     type="text"
                                     name="email"
                                     onChange={handleShare}
                                     id="first name"
-                                    className="w-full px-3 py-2 border rounded-md dark:border-gray-700   dark:text-gray-900 "
+                                    className="w-full px-3 py-2 border rounded-md dark:border-gray-700 hover:cursor-text  dark:text-gray-900 "
                                     role="button"
                                     data-bs-toggle="dropdown"
                                     data-dropdown-toggle="dropdownSearch"
@@ -581,7 +587,8 @@ function Broad(props) {
                                         setRole(e.target.value);
                                       }}
                                     >
-                                      <option value="">Lựa chọn</option>
+                                      
+                                      <option className="mt-2" value="">Lựa chọn</option>
                                       <option value="member">Thành viên</option>
                                       <option value="admin">
                                         Quản trị viên
@@ -592,7 +599,7 @@ function Broad(props) {
                                       onChange={(e) => {
                                         setRole(e.target.value);
                                       }}
-                                    >
+                                    >npn
                                       <option value="">Lựa chọn</option>
                                       <option value="menber">Thành viên</option>
                                     </select>
@@ -766,16 +773,16 @@ function Broad(props) {
                                                               aria-labelledby="dropdownLargeButton"
                                                             >
                                                               <li>
-                                                                <a className="text-sm  block px-4 py-2 cursor-pointer">
+                                                                <a  className="text-sm  block px-4 py-2 cursor-pointer">
                                                                   <i class="fa-solid fa-table "></i>{" "}
                                                                   &ensp;Member
                                                                 </a>
                                                               </li>
                                                               <li>
                                                                 <a
-                                                                  // onClick={setEmailDeleteUser(
-                                                                  //   item.email
-                                                                  // )}
+                                                                  onClick={()=>handleDeleUser(
+                                                                    item.email
+                                                                  )}
                                                                   className="disabled text-sm block px-4 py-2 cursor-pointer"
                                                                 >
                                                                   <i class="fa-solid fa-arrow-right-from-bracket"></i>
@@ -797,13 +804,14 @@ function Broad(props) {
                                                           aria-labelledby="dropdownLargeButton"
                                                         >
                                                           <li>
-                                                            <a className="text-sm  block px-4 py-2 cursor-pointer">
+                                                            <a onClick="return false" className="text-sm  block px-4 py-2 cursor-pointer">
                                                               <i class="fa-solid fa-table "></i>{" "}
                                                               &ensp; Admin
                                                             </a>
                                                           </li>
                                                           <li>
-                                                            <a className="text-sm block px-4 py-2 cursor-pointer">
+                                                            <a 
+                                                            className="text-sm block px-4 py-2 cursor-pointer">
                                                               <i class="fa-solid fa-arrow-right-from-bracket"></i>
                                                               &ensp; Rời khỏi
                                                               bảng
