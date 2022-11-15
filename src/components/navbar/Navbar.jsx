@@ -24,7 +24,7 @@ export default function Navbar() {
   };
   const navigate = useNavigate()
   return (
-    <div className=" h-20vh w-full bg-sky-600 shadow">
+    <div className=" h-20vh w-full bg-sky-600">
       <Modals />
       <ModalSpace />
       <nav className="navbar flex items-center justify-between flex-wrap lg:px-2 text-white ">

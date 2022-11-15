@@ -48,7 +48,6 @@ export default function IsLogin() {
     setOpen(false);
   };
   let idUser = decode["id"];
-  
 
   useEffect(() => {
     getImageUser(idUser)

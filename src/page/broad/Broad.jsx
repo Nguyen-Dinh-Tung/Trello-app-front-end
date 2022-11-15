@@ -25,8 +25,11 @@ import getDataUSer from "../../api/GetDataUserInBoard";
 import Snackbar from "@mui/material/Snackbar";
 import AvatarGroup from "@mui/material/AvatarGroup";
 import Avatar from "@mui/material/Avatar";
+import DeleteUserInBoard from "../../api/DeleteUserInBoard";
+import { useNavigate } from "react-router-dom";
 
 function Broad(props) {
+  const navigate = useNavigate();
   const token = localStorage.getItem("token");
   const decode = jwtDecode(token);
   const initial = useSelector((state) => state.broad.data);
@@ -52,6 +55,9 @@ function Broad(props) {
   const [FlagModeBoard, setFlagModeBoard] = useState();
   const [roleMember, setRoleMember] = useState();
   const [valueMember, setValueMember] = useState();
+  const [message, setMessage] = useState();
+  const [deleteUser,setDeleteUser]= useState();
+  console.log("🚀 ~ file: Broad.jsx ~ line 60 ~ Broad ~ deleteUser", deleteUser)
 
   const [stateAlert, setStateAlert] = useState({
     open: false,
@@ -63,7 +69,9 @@ function Broad(props) {
   const handleCloseAlert = () => {
     setStateAlert({ ...stateAlert, open: false });
   };
-
+  const handleDeleUser = (e)=>{
+    setDeleteUser(e)
+  }
   const name = decode.name.split("");
   const emailUser = decode["email"];
   const handleEditMode = () => {
@@ -299,21 +307,56 @@ function Broad(props) {
   const handleSendEmail = () => {
     if (!role) {
       setStateAlert({ open: true, vertical: "bottom", horizontal: "center" });
+      setMessage("Các ô giá trị không được bỏ trống !");
     } else {
       sendEmailUser(member)
         .then((res) => {
-          setValueShare("");
-          setShowModal(false);
-          setFlagImg(res);
+          if (res.data.message === "Tài khoản đã tồn tại trong bảng") {
+            setStateAlert({
+              open: true,
+              vertical: "bottom",
+              horizontal: "center",
+            });
+            setMessage(res.data.message);
+          } else {
+            setValueShare("");
+            setShowModal(false);
+            setFlagImg(res);
+          }
         })
         .catch((e) => {
           console.log(e);
         });
     }
   };
-  const handleDeleteMember = (e) => {
-    console.log("🚀 ~ file: Broad.jsx ~ line 281 ~ handleDeleteMember ~ e", e);
+  const handleOutBoard = () => {
+    let data = {
+      email: emailIdUser,
+      idboard: idBroad,
+      idWorkSpace: idWorkSpace,
+    };
+    DeleteUserInBoard(data)
+      .then((res) => {
+        console.log(res);
+        navigate("/");
+      })
+      .catch((e) => console.log(e));
   };
+  // const handleDeleteUserBoard = () => {
+  //   if (emailDeleteUser) {
+  //     let data = {
+  //       email: emailDeleteUser,
+  //       idboard: idBroad,
+  //       idWorkSpace: idWorkSpace,
+  //     };
+  //     DeleteUserInBoard(data)
+  //       .then((res) => {
+  //         console.log(res);
+  //         navigate("/");
+  //       })
+  //       .catch((e) => console.log(e));
+  //   }
+  // };
 
   return (
     <DragDropContext onDragEnd={onDragEnd}>
@@ -448,7 +491,7 @@ function Broad(props) {
               anchorOrigin={{ vertical, horizontal }}
               open={open}
               onClose={handleCloseAlert}
-              message="Không được để trống ô lựa chọn"
+              message={message}
               key={vertical + horizontal}
               autoHideDuration={6000}
             />
@@ -543,7 +586,8 @@ function Broad(props) {
                                         setRole(e.target.value);
                                       }}
                                     >
-                                      <option value="">Lựa chọn</option>
+                                      
+                                      <option className="mt-2" value="">Lựa chọn</option>
                                       <option value="member">Thành viên</option>
                                       <option value="admin">
                                         Quản trị viên
@@ -554,7 +598,7 @@ function Broad(props) {
                                       onChange={(e) => {
                                         setRole(e.target.value);
                                       }}
-                                    >
+                                    >npn
                                       <option value="">Lựa chọn</option>
                                       <option value="menber">Thành viên</option>
                                     </select>
@@ -606,11 +650,25 @@ function Broad(props) {
                                       />
                                     </div>
                                     <div>
-                                      <p className="font-semibold">
-                                        {value.name}
-                                      </p>
+                                      {emailIdUser === value.email ? (
+                                        <div>
+                                          {" "}
+                                          <p className="font-semibold">
+                                            {value.name}(bạn)
+                                          </p>
+                                        </div>
+                                      ) : (
+                                        <div>
+                                          {" "}
+                                          <p className="font-semibold">
+                                            {value.name}
+                                          </p>
+                                        </div>
+                                      )}
+
                                       <p className="text-xs text-gray-600 dark:text-gray-400">
-                                        {value.email}
+                                        {value.email} . Quản trị viên không gian
+                                        làm việc
                                       </p>
                                     </div>
                                   </div>
@@ -675,41 +733,91 @@ function Broad(props) {
                                                 >
                                                   <div className="flex w-64 flew-col gap-3">
                                                     {item.role === "member" ? (
-                                                      <ul
-                                                        className="py-1 rounded-sm text-black "
-                                                        aria-labelledby="dropdownLargeButton"
-                                                      >
-                                                        <li>
-                                                          <a className="text-sm  block px-4 py-2 cursor-pointer">
-                                                            <i class="fa-solid fa-table "></i>{" "}
-                                                            &ensp;Member
-                                                          </a>
-                                                        </li>
-                                                        <li>
-                                                          <a className="disabled text-sm block px-4 py-2 cursor-pointer">
-                                                            <i class="fa-solid fa-arrow-right-from-bracket"></i>
-                                                            &ensp; Rời khỏi bảng
-                                                          </a>
-                                                        </li>
-                                                      </ul>
+                                                      <div>
+                                                        {emailIdUser ===
+                                                        item.email ? (
+                                                          <>
+                                                            {" "}
+                                                            <ul
+                                                              className="py-1 rounded-sm text-black "
+                                                              aria-labelledby="dropdownLargeButton"
+                                                            >
+                                                              <li>
+                                                                <a className="text-sm  block px-4 py-2 cursor-pointer">
+                                                                  <i class="fa-solid fa-table "></i>{" "}
+                                                                  &ensp;Member
+                                                                </a>
+                                                              </li>
+                                                              <li>
+                                                                <div
+                                                                  onClick={
+                                                                    handleOutBoard
+                                                                  }
+                                                                >
+                                                                  {" "}
+                                                                  <a className="disabled text-sm block px-4 py-2 cursor-pointer">
+                                                                    <i class="fa-solid fa-arrow-right-from-bracket"></i>
+                                                                    &ensp; Rời
+                                                                    khỏi bảng
+                                                                  </a>
+                                                                </div>
+                                                              </li>
+                                                            </ul>
+                                                          </>
+                                                        ) : (
+                                                          <div>
+                                                            {" "}
+                                                            <ul
+                                                              className="py-1 rounded-sm text-black "
+                                                              aria-labelledby="dropdownLargeButton"
+                                                            >
+                                                              <li>
+                                                                <a  className="text-sm  block px-4 py-2 cursor-pointer">
+                                                                  <i class="fa-solid fa-table "></i>{" "}
+                                                                  &ensp;Member
+                                                                </a>
+                                                              </li>
+                                                              <li>
+                                                                <a
+                                                                  onClick={()=>handleDeleUser(
+                                                                    item.email
+                                                                  )}
+                                                                  className="disabled text-sm block px-4 py-2 cursor-pointer"
+                                                                >
+                                                                  <i class="fa-solid fa-arrow-right-from-bracket"></i>
+                                                                  &ensp; Xóa
+                                                                  khỏi bảng
+                                                                </a>
+                                                              </li>
+                                                            </ul>
+                                                          </div>
+                                                        )}
+                                                      </div>
                                                     ) : (
-                                                      <ul
-                                                        className="py-1 rounded-sm text-black "
-                                                        aria-labelledby="dropdownLargeButton"
+                                                      <div
+                                                        className="disabled"
+                                                        disabled
                                                       >
-                                                        <li>
-                                                          <a className="text-sm  block px-4 py-2 cursor-pointer">
-                                                            <i class="fa-solid fa-table "></i>{" "}
-                                                            &ensp; Admin
-                                                          </a>
-                                                        </li>
-                                                        <li>
-                                                          <a className="text-sm block px-4 py-2 cursor-pointer">
-                                                            <i class="fa-solid fa-arrow-right-from-bracket"></i>
-                                                            &ensp; Rời khỏi bảng
-                                                          </a>
-                                                        </li>
-                                                      </ul>
+                                                        <ul
+                                                          className="py-1 rounded-sm text-black "
+                                                          aria-labelledby="dropdownLargeButton"
+                                                        >
+                                                          <li>
+                                                            <a onClick="return false" className="text-sm  block px-4 py-2 cursor-pointer">
+                                                              <i class="fa-solid fa-table "></i>{" "}
+                                                              &ensp; Admin
+                                                            </a>
+                                                          </li>
+                                                          <li>
+                                                            <a 
+                                                            className="text-sm block px-4 py-2 cursor-pointer">
+                                                              <i class="fa-solid fa-arrow-right-from-bracket"></i>
+                                                              &ensp; Rời khỏi
+                                                              bảng
+                                                            </a>
+                                                          </li>
+                                                        </ul>
+                                                      </div>
                                                     )}
                                                   </div>
                                                 </div>

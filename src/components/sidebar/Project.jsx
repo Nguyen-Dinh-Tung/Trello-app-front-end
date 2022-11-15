@@ -33,17 +33,18 @@ export default function Project() {
   const [idBoard, setIdBoard] = useState();
   const handleClick = (data) => {
     setOpen(!open);
-  };
+  }
 
   const [workspace, setWorkSpace] = useState([]);
   const idUser = jwtDecode(token).id;
   const handleCHangPage = (data) => {
     navigate(`/member/${data}`);
   };
+
   useEffect(() => {
     getBroad(idUser)
       .then((res) => {
-        setWorkSpace([].concat(res.data.listWorkSpace).reverse());
+        setWorkSpace([].concat(res.data.listWorkSpace).reverse())
       })
       .catch((e) => console.log(e.message));
   }, []);

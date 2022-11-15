@@ -68,7 +68,6 @@ export default function MemberList() {
   useEffect(() => {
     getDatAWorkSpace(id)
       .then((res) => {
-        console.log("🚀 ~ file: MemberList.jsx ~ line 71 ~ .then ~ res", res);
         setUserAdminWorkSpace(res.data.User_admin);
         let arr = [];
 
@@ -97,7 +96,7 @@ export default function MemberList() {
   }, [user]);
 
   return (
-    <div className="h-screen bg-white ">
+    <div className="p-10 bg-white ">
       <div className="mx-20 flex flex-col">
         <div className=" h-36 flex flex-row bg-white ">
           <div className="w-1/2 p-2 my-auto flex flex-row ">
