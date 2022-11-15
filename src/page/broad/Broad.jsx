@@ -56,6 +56,8 @@ function Broad(props) {
   const [roleMember, setRoleMember] = useState();
   const [valueMember, setValueMember] = useState();
   const [message, setMessage] = useState();
+  const [deleteUser,setDeleteUser]= useState();
+  console.log("🚀 ~ file: Broad.jsx ~ line 60 ~ Broad ~ deleteUser", deleteUser)
 
   const [stateAlert, setStateAlert] = useState({
     open: false,
@@ -67,7 +69,9 @@ function Broad(props) {
   const handleCloseAlert = () => {
     setStateAlert({ ...stateAlert, open: false });
   };
-
+  const handleDeleUser = (e)=>{
+    setDeleteUser(e)
+  }
   const name = decode.name.split("");
   const emailUser = decode["email"];
   const handleEditMode = () => {
@@ -773,9 +777,9 @@ function Broad(props) {
                                                               </li>
                                                               <li>
                                                                 <a
-                                                                  // onClick={setEmailDeleteUser(
-                                                                  //   item.email
-                                                                  // )}
+                                                                  onClick={()=>handleDeleUser(
+                                                                    item.email
+                                                                  )}
                                                                   className="disabled text-sm block px-4 py-2 cursor-pointer"
                                                                 >
                                                                   <i class="fa-solid fa-arrow-right-from-bracket"></i>
