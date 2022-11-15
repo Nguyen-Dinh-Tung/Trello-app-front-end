@@ -46,7 +46,6 @@ export default function MemberList() {
 
     return color;
   }
-
   function stringAvatar(name) {
     return {
       sx: {
@@ -55,6 +54,7 @@ export default function MemberList() {
       children: `${name.split(" ")[0][0]}`,
     };
   }
+
   function unique(arr) {
     var newArr = [];
     for (var i = 0; i < arr.length; i++) {
