@@ -212,7 +212,7 @@ function ModalDetailsItem(props) {
   const handleKeyEnter =async (event)  =>{
     let newComment = {
       ...user ,
-      content : commentContent
+      content : commentContent,
     }
     if(event.key == 'Enter' && commentContent){
       dataByStore.columnOrder.forEach(column =>{
@@ -278,7 +278,6 @@ useEffect(() =>{
         </DialogContent>
         <List  sx={{
         width: '100%',
-        maxWidth: 360,
         bgcolor: 'background.paper',
         position: 'relative',
         overflow: 'auto',

@@ -303,6 +303,7 @@ function Broad(props) {
     emailIdUser: emailIdUser,
     role: role,
   };
+  console.log("🚀 ~ file: Broad.jsx ~ line 303 ~ Broad ~ member", member);
 
   const handleSendEmail = () => {
     if (!role) {
