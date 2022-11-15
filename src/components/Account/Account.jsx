@@ -14,6 +14,8 @@ import reSetPass from "../../api/ConfirmPassWord";
 import { Loading2 } from "../../components/Loading/Loading2";
 import { Loading3 } from "../Loading/Loading3";
 import Avatar from "@mui/material/Avatar";
+import { useDispatch } from "react-redux";
+import { setUrlAvatar } from "../../redux/features/avatar.slice";
 
 
 const UpdateSchema = Yup.object().shape({
@@ -44,7 +46,7 @@ export default function Account() {
   const [loadingRspw, setLoadingRSPW] = useState(false);
   const [loading3, setLoading3] = useState(false);
   const [loading3avatar, setLoading3Avatrt] = useState(false);
-
+  const dispatch = useDispatch()
   const handleShowPass = () => {
     if (oldPasswordType === "password") {
       setOldPasswordType("text");
@@ -110,6 +112,7 @@ export default function Account() {
         } else if (res.data.message === "Unauthorized access.") {
           setAvatar(false);
         } else {
+          dispatch(setUrlAvatar(res.data.message));
           setValueAvatar(res.data.message);
           setAvatar(true);
         }
@@ -246,12 +249,12 @@ export default function Account() {
                     <div className="w-8 h-8 bg-black rounded-full" />
                   </div>
                 ) : (
-                  <div className="w-full p-8 mx-2 flex justify-center">
+                  <div className="w-full p-8 mx-2 flex justify-center ">
                     {result ? (
                       <img
                         ref={imageRef}
                         src={result}
-                        className="max-h-[75%] max-w-[75%]"
+                        className="max-h-[50%] max-w-[75%]"
                         alt=""
                       />
                     ) : (
@@ -260,7 +263,7 @@ export default function Account() {
                   </div>
                 )}
 
-                <div className=" ml-2 rounded-md border-gray-700 dark:text-gray-900">
+                <div className=" ml-2 rounded-md border-gray-700 dark:text-gray-90">
                   <input
                     type="file"
                     name="image"
@@ -272,7 +275,7 @@ export default function Account() {
                       uploader(event);
                     }}
                   />
-                  <div className="flex flex-col items-center gap-3">
+                  <div className="flex flex-col items-center gap-3 ">
                     <label
                       htmlFor="file-upload"
                       className="z-20 flex flex-col-reverse items-center justify-center w-full h-full cursor-pointer hover:text-red-800"

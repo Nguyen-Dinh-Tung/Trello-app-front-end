@@ -25,8 +25,11 @@ import getDataUSer from "../../api/GetDataUserInBoard";
 import Snackbar from "@mui/material/Snackbar";
 import AvatarGroup from "@mui/material/AvatarGroup";
 import Avatar from "@mui/material/Avatar";
+import DeleteUserInBoard from "../../api/DeleteUserInBoard";
+import { useNavigate } from "react-router-dom";
 
 function Broad(props) {
+  const navigate = useNavigate();
   const token = localStorage.getItem("token");
   const decode = jwtDecode(token);
   const initial = useSelector((state) => state.broad.data);
@@ -52,6 +55,9 @@ function Broad(props) {
   const [FlagModeBoard, setFlagModeBoard] = useState();
   const [roleMember, setRoleMember] = useState();
   const [valueMember, setValueMember] = useState();
+  const [message, setMessage] = useState();
+  const [deleteUser,setDeleteUser]= useState();
+  console.log("🚀 ~ file: Broad.jsx ~ line 60 ~ Broad ~ deleteUser", deleteUser)
 
   const [stateAlert, setStateAlert] = useState({
     open: false,
@@ -63,7 +69,9 @@ function Broad(props) {
   const handleCloseAlert = () => {
     setStateAlert({ ...stateAlert, open: false });
   };
-
+  const handleDeleUser = (e)=>{
+    setDeleteUser(e)
+  }
   const name = decode.name.split("");
   const emailUser = decode["email"];
   const handleEditMode = () => {
@@ -100,12 +108,13 @@ function Broad(props) {
   }
 
   function stringAvatar(name) {
-    return {
-      sx: {
-        bgcolor: stringToColor(name),
-      },
-      children: `${name.split(" ")[0][0]}${name.split(" ")[1][0]}`,
-    };
+      return {
+        sx: {
+          bgcolor: stringToColor(name),
+        },
+        children: `${name.split(" ")[0][0]}`,
+      }
+    
   }
 
   useEffect(() => {
@@ -299,21 +308,56 @@ function Broad(props) {
   const handleSendEmail = () => {
     if (!role) {
       setStateAlert({ open: true, vertical: "bottom", horizontal: "center" });
+      setMessage("Các ô giá trị không được bỏ trống !");
     } else {
       sendEmailUser(member)
         .then((res) => {
-          setValueShare("");
-          setShowModal(false);
-          setFlagImg(res);
+          if (res.data.message === "Tài khoản đã tồn tại trong bảng") {
+            setStateAlert({
+              open: true,
+              vertical: "bottom",
+              horizontal: "center",
+            });
+            setMessage(res.data.message);
+          } else {
+            setValueShare("");
+            setShowModal(false);
+            setFlagImg(res);
+          }
         })
         .catch((e) => {
           console.log(e);
         });
     }
   };
-  const handleDeleteMember = (e) => {
-    console.log("🚀 ~ file: Broad.jsx ~ line 281 ~ handleDeleteMember ~ e", e);
+  const handleOutBoard = () => {
+    let data = {
+      email: emailIdUser,
+      idboard: idBroad,
+      idWorkSpace: idWorkSpace,
+    };
+    DeleteUserInBoard(data)
+      .then((res) => {
+        console.log(res);
+        navigate("/");
+      })
+      .catch((e) => console.log(e));
   };
+  // const handleDeleteUserBoard = () => {
+  //   if (emailDeleteUser) {
+  //     let data = {
+  //       email: emailDeleteUser,
+  //       idboard: idBroad,
+  //       idWorkSpace: idWorkSpace,
+  //     };
+  //     DeleteUserInBoard(data)
+  //       .then((res) => {
+  //         console.log(res);
+  //         navigate("/");
+  //       })
+  //       .catch((e) => console.log(e));
+  //   }
+  // };
 
   return (
     <DragDropContext onDragEnd={onDragEnd}>
@@ -387,17 +431,25 @@ function Broad(props) {
             )}
             <div className=" w-2/12 my-auto">
               {modeBoard === "private" ? (
-                <Button sx={{ background: "blue" }} variant="contained" onClick={handleEditMode}>
+                <Button
+                  sx={{ background: "blue" }}
+                  variant="contained"
+                  onClick={handleEditMode}
+                >
                   Riêng tư
                 </Button>
               ) : (
-                <Button variant="outlined" style={{ background: "gray",color:"white" }} disabled >
+                <Button
+                  variant="outlined"
+                  style={{ background: "gray", color: "white" }}
+                  disabled
+                >
                   Công khai
                 </Button>
               )}
             </div>
-              <div className=" w-2/12 flex my-auto">
-            <AvatarGroup max={4}>
+            <div className=" w-2/12 flex my-auto">
+              <AvatarGroup max={4}>
                 {a.length > 0 &&
                   a.map((user) => (
                     <div>
@@ -411,8 +463,8 @@ function Broad(props) {
                         <Avatar
                           title={user.name}
                           style={{
-                            height: 33 + "px",
-                            width: 33 + "px",
+                            height: 30 + "px",
+                            width: 30 + "px",
                             fontSize: 13 + "px",
                           }}
                           {...stringAvatar(user.name)}
@@ -420,8 +472,8 @@ function Broad(props) {
                       )}
                     </div>
                   ))}
-            </AvatarGroup>
-              </div>
+              </AvatarGroup>
+            </div>
 
             <div className="text-center my-auto  w-1/12">
               {modeBoard === "public" ? (
@@ -440,7 +492,7 @@ function Broad(props) {
               anchorOrigin={{ vertical, horizontal }}
               open={open}
               onClose={handleCloseAlert}
-              message="Không được để trống ô lựa chọn"
+              message={message}
               key={vertical + horizontal}
               autoHideDuration={6000}
             />
@@ -478,11 +530,12 @@ function Broad(props) {
                               <div className="w-full gap-2 flex">
                                 <div className="w-3/4 dark:placeholder-gray-700 cursor:text my-auto">
                                   <input
+                                  method="post"
                                     type="text"
                                     name="email"
                                     onChange={handleShare}
                                     id="first name"
-                                    className="w-full px-3 py-2 border rounded-md dark:border-gray-700   dark:text-gray-900 "
+                                    className="w-full px-3 py-2 border rounded-md dark:border-gray-700 hover:cursor-text  dark:text-gray-900 "
                                     role="button"
                                     data-bs-toggle="dropdown"
                                     data-dropdown-toggle="dropdownSearch"
@@ -534,7 +587,8 @@ function Broad(props) {
                                         setRole(e.target.value);
                                       }}
                                     >
-                                      <option value="">Lựa chọn</option>
+                                      
+                                      <option className="mt-2" value="">Lựa chọn</option>
                                       <option value="member">Thành viên</option>
                                       <option value="admin">
                                         Quản trị viên
@@ -545,7 +599,7 @@ function Broad(props) {
                                       onChange={(e) => {
                                         setRole(e.target.value);
                                       }}
-                                    >
+                                    >npn
                                       <option value="">Lựa chọn</option>
                                       <option value="menber">Thành viên</option>
                                     </select>
@@ -573,20 +627,23 @@ function Broad(props) {
                                     <div className="relative hidden w-8 h-8 mr-3 rounded-full md:block">
                                       {!value.image ? (
                                         <Avatar
-                                        title={value.name}
-                                        style={{
-                                          height: 33 + "px",
-                                          width: 33 + "px",
-                                          fontSize: 13 + "px",
-                                        }}
-                                        {...stringAvatar(value.name)}
-                                      />
+                                          title={value.name}
+                                          style={{
+                                            height: 33 + "px",
+                                            width: 33 + "px",
+                                            fontSize: 13 + "px",
+                                          }}
+                                          {...stringAvatar(value.name)}
+                                        />
                                       ) : (
                                         <Avatar
-                                        title={value.name}
-                                        style={{ height: 30 + "px", width: 30 + "px" }}
-                                        src={`${value.image}`}
-                                      />
+                                          title={value.name}
+                                          style={{
+                                            height: 30 + "px",
+                                            width: 30 + "px",
+                                          }}
+                                          src={`${value.image}`}
+                                        />
                                       )}
                                       <div
                                         className="absolute inset-0 rounded-full shadow-inner"
@@ -594,11 +651,25 @@ function Broad(props) {
                                       />
                                     </div>
                                     <div>
-                                      <p className="font-semibold">
-                                        {value.name}
-                                      </p>
+                                      {emailIdUser === value.email ? (
+                                        <div>
+                                          {" "}
+                                          <p className="font-semibold">
+                                            {value.name}(bạn)
+                                          </p>
+                                        </div>
+                                      ) : (
+                                        <div>
+                                          {" "}
+                                          <p className="font-semibold">
+                                            {value.name}
+                                          </p>
+                                        </div>
+                                      )}
+
                                       <p className="text-xs text-gray-600 dark:text-gray-400">
-                                        {value.email}
+                                        {value.email} . Quản trị viên không gian
+                                        làm việc
                                       </p>
                                     </div>
                                   </div>
@@ -609,7 +680,7 @@ function Broad(props) {
                                   <div class="flex justify-center">
                                     <div>
                                       {valueMember &&
-                                        valueMember.map((item,index) => (
+                                        valueMember.map((item, index) => (
                                           <div>
                                             {item.email == value.email ? (
                                               <div className="bg-sky-600 w-24 text-black dropdown relative group inline-block  focus:bg-sky-500 rounded">
@@ -627,7 +698,7 @@ function Broad(props) {
             text-white pl-3  pr-4 py-1 px-2 rounded md:p-0 flex items-center justify-between w-full md:w-auto"
                                                 >
                                                   {item.role}
-                                                  
+
                                                   <svg
                                                     className="w-6 h-6 ml-1"
                                                     fill="currentColor"
@@ -663,43 +734,91 @@ function Broad(props) {
                                                 >
                                                   <div className="flex w-64 flew-col gap-3">
                                                     {item.role === "member" ? (
-                                                      <ul
-                                                        className="py-1 rounded-sm text-black "
-                                                        aria-labelledby="dropdownLargeButton"
-                                                      >
-                                                        <li>
-                                                          <a className="text-sm  block px-4 py-2 cursor-pointer">
-                                                            <i class="fa-solid fa-table "></i>{" "}
-                                                            &ensp;Member
-                                                          </a>
-                                                        </li>
-                                                        <li>
-                                                          <a className="disabled text-sm block px-4 py-2 cursor-pointer">
-                                                            <i class="fa-solid fa-arrow-right-from-bracket"></i>
-                                                            &ensp; Rời khỏi bảng
-                                                            
-                                                          </a>
-                                                        </li>
-                                                      </ul>
+                                                      <div>
+                                                        {emailIdUser ===
+                                                        item.email ? (
+                                                          <>
+                                                            {" "}
+                                                            <ul
+                                                              className="py-1 rounded-sm text-black "
+                                                              aria-labelledby="dropdownLargeButton"
+                                                            >
+                                                              <li>
+                                                                <a className="text-sm  block px-4 py-2 cursor-pointer">
+                                                                  <i class="fa-solid fa-table "></i>{" "}
+                                                                  &ensp;Member
+                                                                </a>
+                                                              </li>
+                                                              <li>
+                                                                <div
+                                                                  onClick={
+                                                                    handleOutBoard
+                                                                  }
+                                                                >
+                                                                  {" "}
+                                                                  <a className="disabled text-sm block px-4 py-2 cursor-pointer">
+                                                                    <i class="fa-solid fa-arrow-right-from-bracket"></i>
+                                                                    &ensp; Rời
+                                                                    khỏi bảng
+                                                                  </a>
+                                                                </div>
+                                                              </li>
+                                                            </ul>
+                                                          </>
+                                                        ) : (
+                                                          <div>
+                                                            {" "}
+                                                            <ul
+                                                              className="py-1 rounded-sm text-black "
+                                                              aria-labelledby="dropdownLargeButton"
+                                                            >
+                                                              <li>
+                                                                <a  className="text-sm  block px-4 py-2 cursor-pointer">
+                                                                  <i class="fa-solid fa-table "></i>{" "}
+                                                                  &ensp;Member
+                                                                </a>
+                                                              </li>
+                                                              <li>
+                                                                <a
+                                                                  onClick={()=>handleDeleUser(
+                                                                    item.email
+                                                                  )}
+                                                                  className="disabled text-sm block px-4 py-2 cursor-pointer"
+                                                                >
+                                                                  <i class="fa-solid fa-arrow-right-from-bracket"></i>
+                                                                  &ensp; Xóa
+                                                                  khỏi bảng
+                                                                </a>
+                                                              </li>
+                                                            </ul>
+                                                          </div>
+                                                        )}
+                                                      </div>
                                                     ) : (
-                                                      <ul
-                                                        className="py-1 rounded-sm text-black "
-                                                        aria-labelledby="dropdownLargeButton"
+                                                      <div
+                                                        className="disabled"
+                                                        disabled
                                                       >
-                                                        <li>
-                                                          <a className="text-sm  block px-4 py-2 cursor-pointer">
-                                                            <i class="fa-solid fa-table "></i>{" "}
-                                                            &ensp; Admin
-                                                          </a>
-                                                        </li>
-                                                        <li>
-                                                          <a className="text-sm block px-4 py-2 cursor-pointer">
-                                                            <i class="fa-solid fa-arrow-right-from-bracket"></i>
-                                                            &ensp; Rời khỏi bảng
-                                                            
-                                                          </a>
-                                                        </li>
-                                                      </ul>
+                                                        <ul
+                                                          className="py-1 rounded-sm text-black "
+                                                          aria-labelledby="dropdownLargeButton"
+                                                        >
+                                                          <li>
+                                                            <a onClick="return false" className="text-sm  block px-4 py-2 cursor-pointer">
+                                                              <i class="fa-solid fa-table "></i>{" "}
+                                                              &ensp; Admin
+                                                            </a>
+                                                          </li>
+                                                          <li>
+                                                            <a 
+                                                            className="text-sm block px-4 py-2 cursor-pointer">
+                                                              <i class="fa-solid fa-arrow-right-from-bracket"></i>
+                                                              &ensp; Rời khỏi
+                                                              bảng
+                                                            </a>
+                                                          </li>
+                                                        </ul>
+                                                      </div>
                                                     )}
                                                   </div>
                                                 </div>
