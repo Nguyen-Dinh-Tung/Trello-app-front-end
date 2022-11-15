@@ -387,17 +387,25 @@ function Broad(props) {
             )}
             <div className=" w-2/12 my-auto">
               {modeBoard === "private" ? (
-                <Button sx={{ background: "blue" }} variant="contained" onClick={handleEditMode}>
+                <Button
+                  sx={{ background: "blue" }}
+                  variant="contained"
+                  onClick={handleEditMode}
+                >
                   Riêng tư
                 </Button>
               ) : (
-                <Button variant="outlined" style={{ background: "gray",color:"white" }} disabled >
+                <Button
+                  variant="outlined"
+                  style={{ background: "gray", color: "white" }}
+                  disabled
+                >
                   Công khai
                 </Button>
               )}
             </div>
-              <div className=" w-2/12 flex my-auto">
-            <AvatarGroup max={4}>
+            <div className=" w-2/12 flex my-auto">
+              <AvatarGroup max={4}>
                 {a.length > 0 &&
                   a.map((user) => (
                     <div>
@@ -420,8 +428,8 @@ function Broad(props) {
                       )}
                     </div>
                   ))}
-            </AvatarGroup>
-              </div>
+              </AvatarGroup>
+            </div>
 
             <div className="text-center my-auto  w-1/12">
               {modeBoard === "public" ? (
@@ -478,11 +486,12 @@ function Broad(props) {
                               <div className="w-full gap-2 flex">
                                 <div className="w-3/4 dark:placeholder-gray-700 cursor:text my-auto">
                                   <input
+                                  method="post"
                                     type="text"
                                     name="email"
                                     onChange={handleShare}
                                     id="first name"
-                                    className="w-full px-3 py-2 border rounded-md dark:border-gray-700   dark:text-gray-900 "
+                                    className="w-full px-3 py-2 border rounded-md dark:border-gray-700 hover:cursor-text  dark:text-gray-900 "
                                     role="button"
                                     data-bs-toggle="dropdown"
                                     data-dropdown-toggle="dropdownSearch"
@@ -573,20 +582,23 @@ function Broad(props) {
                                     <div className="relative hidden w-8 h-8 mr-3 rounded-full md:block">
                                       {!value.image ? (
                                         <Avatar
-                                        title={value.name}
-                                        style={{
-                                          height: 33 + "px",
-                                          width: 33 + "px",
-                                          fontSize: 13 + "px",
-                                        }}
-                                        {...stringAvatar(value.name)}
-                                      />
+                                          title={value.name}
+                                          style={{
+                                            height: 33 + "px",
+                                            width: 33 + "px",
+                                            fontSize: 13 + "px",
+                                          }}
+                                          {...stringAvatar(value.name)}
+                                        />
                                       ) : (
                                         <Avatar
-                                        title={value.name}
-                                        style={{ height: 30 + "px", width: 30 + "px" }}
-                                        src={`${value.image}`}
-                                      />
+                                          title={value.name}
+                                          style={{
+                                            height: 30 + "px",
+                                            width: 30 + "px",
+                                          }}
+                                          src={`${value.image}`}
+                                        />
                                       )}
                                       <div
                                         className="absolute inset-0 rounded-full shadow-inner"
@@ -609,7 +621,7 @@ function Broad(props) {
                                   <div class="flex justify-center">
                                     <div>
                                       {valueMember &&
-                                        valueMember.map((item,index) => (
+                                        valueMember.map((item, index) => (
                                           <div>
                                             {item.email == value.email ? (
                                               <div className="bg-sky-600 w-24 text-black dropdown relative group inline-block  focus:bg-sky-500 rounded">
@@ -627,7 +639,7 @@ function Broad(props) {
             text-white pl-3  pr-4 py-1 px-2 rounded md:p-0 flex items-center justify-between w-full md:w-auto"
                                                 >
                                                   {item.role}
-                                                  
+
                                                   <svg
                                                     className="w-6 h-6 ml-1"
                                                     fill="currentColor"
@@ -677,7 +689,6 @@ function Broad(props) {
                                                           <a className="disabled text-sm block px-4 py-2 cursor-pointer">
                                                             <i class="fa-solid fa-arrow-right-from-bracket"></i>
                                                             &ensp; Rời khỏi bảng
-                                                            
                                                           </a>
                                                         </li>
                                                       </ul>
@@ -696,7 +707,6 @@ function Broad(props) {
                                                           <a className="text-sm block px-4 py-2 cursor-pointer">
                                                             <i class="fa-solid fa-arrow-right-from-bracket"></i>
                                                             &ensp; Rời khỏi bảng
-                                                            
                                                           </a>
                                                         </li>
                                                       </ul>

@@ -262,8 +262,9 @@ function Modals(props) {
               <div className="my-auto">
                 <ImageList
                 variant="rounded"
-                  sx={{ width: 305+'px', height: 285+'px' }}
-                  cols={4}
+                  sx={{ width: "auto", height:"auto" }}
+                  cols={3}
+                  rowHeight={90}
                 >
                   {itemData.map((item) => (
                     <RadioGroup
