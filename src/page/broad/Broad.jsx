@@ -108,12 +108,13 @@ function Broad(props) {
   }
 
   function stringAvatar(name) {
-    return {
-      sx: {
-        bgcolor: stringToColor(name),
-      },
-      children: `${name.split(" ")[0][0]}${name.split(" ")[1][0]}`,
-    };
+      return {
+        sx: {
+          bgcolor: stringToColor(name),
+        },
+        children: `${name.split(" ")[0][0]}`,
+      }
+    
   }
 
   useEffect(() => {
@@ -462,8 +463,8 @@ function Broad(props) {
                         <Avatar
                           title={user.name}
                           style={{
-                            height: 33 + "px",
-                            width: 33 + "px",
+                            height: 30 + "px",
+                            width: 30 + "px",
                             fontSize: 13 + "px",
                           }}
                           {...stringAvatar(user.name)}
