@@ -14,6 +14,8 @@ import reSetPass from "../../api/ConfirmPassWord";
 import { Loading2 } from "../../components/Loading/Loading2";
 import { Loading3 } from "../Loading/Loading3";
 import Avatar from "@mui/material/Avatar";
+import { useDispatch } from "react-redux";
+import { setUrlAvatar } from "../../redux/features/avatar.slice";
 
 
 const UpdateSchema = Yup.object().shape({
@@ -44,7 +46,7 @@ export default function Account() {
   const [loadingRspw, setLoadingRSPW] = useState(false);
   const [loading3, setLoading3] = useState(false);
   const [loading3avatar, setLoading3Avatrt] = useState(false);
-
+  const dispatch = useDispatch()
   const handleShowPass = () => {
     if (oldPasswordType === "password") {
       setOldPasswordType("text");
@@ -110,6 +112,7 @@ export default function Account() {
         } else if (res.data.message === "Unauthorized access.") {
           setAvatar(false);
         } else {
+          dispatch(setUrlAvatar(res.data.message));
           setValueAvatar(res.data.message);
           setAvatar(true);
         }
