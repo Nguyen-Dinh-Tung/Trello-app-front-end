@@ -110,14 +110,14 @@ export default function MenuDivider() {
                 </button>
               </a>
             </div>
-            <div className="flex w-64 flew-col gap-3">
+            <div className="flex w-64 flex-col gap-3">
               <ul
                 className="py-1 rounded-sm text-black "
                 aria-labelledby="dropdownLargeButton"
               >
                 <li>
                   <a
-                    className="text-sm  block px-4 py-2 cursor-pointer"
+                    className="text-sm block px-4 py-2 cursor-pointer mx-auto hover:text-black hover:bg-gray-300"
                     onClick={handleCreateBroad}
                   >
                     <i class="fa-solid fa-table "></i> &ensp; Tạo bảng
@@ -125,7 +125,7 @@ export default function MenuDivider() {
                 </li>
                 <li>
                   <a
-                    className="text-sm block px-4 py-2 cursor-pointer"
+                    className="text-sm block px-4 py-2 cursor-pointer hover:text-black hover:bg-gray-300"
                     onClick={handleCreateBroadWord}
                   >
                     <i class="fa-solid fa-users"></i>&ensp; Tạo không gian làm

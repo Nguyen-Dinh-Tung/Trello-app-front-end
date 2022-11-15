@@ -23,9 +23,13 @@ import { setModeBoard } from "../../redux/features/showModal.slice";
 import ModeBroad from "../../api/Modeboard";
 import getDataUSer from "../../api/GetDataUserInBoard";
 import Snackbar from "@mui/material/Snackbar";
-
+import AvatarGroup from "@mui/material/AvatarGroup";
+import Avatar from "@mui/material/Avatar";
+import DeleteUserInBoard from "../../api/DeleteUserInBoard";
+import { useNavigate } from "react-router-dom";
 
 function Broad(props) {
+  const navigate = useNavigate();
   const token = localStorage.getItem("token");
   const decode = jwtDecode(token);
   const initial = useSelector((state) => state.broad.data);
@@ -51,6 +55,7 @@ function Broad(props) {
   const [FlagModeBoard, setFlagModeBoard] = useState();
   const [roleMember, setRoleMember] = useState();
   const [valueMember, setValueMember] = useState();
+  const [message, setMessage] = useState();
 
   const [stateAlert, setStateAlert] = useState({
     open: false,
@@ -77,6 +82,35 @@ function Broad(props) {
       })
       .catch((e) => console.log(e));
   };
+
+  function stringToColor(string) {
+    let hash = 0;
+    let i;
+
+    /* eslint-disable no-bitwise */
+    for (i = 0; i < string.length; i += 1) {
+      hash = string.charCodeAt(i) + ((hash << 5) - hash);
+    }
+
+    let color = "#";
+
+    for (i = 0; i < 3; i += 1) {
+      const value = (hash >> (i * 8)) & 0xff;
+      color += `00${value.toString(16)}`.slice(-2);
+    }
+    /* eslint-enable no-bitwise */
+
+    return color;
+  }
+
+  function stringAvatar(name) {
+    return {
+      sx: {
+        bgcolor: stringToColor(name),
+      },
+      children: `${name.split(" ")[0][0]}${name.split(" ")[1][0]}`,
+    };
+  }
 
   useEffect(() => {
     getDataUSer(valueMember)
@@ -269,25 +303,63 @@ function Broad(props) {
   const handleSendEmail = () => {
     if (!role) {
       setStateAlert({ open: true, vertical: "bottom", horizontal: "center" });
+      setMessage("Các ô giá trị không được bỏ trống !");
     } else {
       sendEmailUser(member)
         .then((res) => {
-          setValueShare("");
-          setShowModal(false);
-          setFlagImg(res);
+          if (res.data.message === "Tài khoản đã tồn tại trong bảng") {
+            setStateAlert({
+              open: true,
+              vertical: "bottom",
+              horizontal: "center",
+            });
+            setMessage(res.data.message);
+          } else {
+            setValueShare("");
+            setShowModal(false);
+            setFlagImg(res);
+          }
         })
         .catch((e) => {
           console.log(e);
         });
     }
   };
-  const handleDeleteMember = (e) => {
-    console.log("🚀 ~ file: Broad.jsx ~ line 281 ~ handleDeleteMember ~ e", e);
+  const handleOutBoard = () => {
+    let data = {
+      email: emailIdUser,
+      idboard: idBroad,
+      idWorkSpace: idWorkSpace,
+    };
+    DeleteUserInBoard(data)
+      .then((res) => {
+        console.log(res);
+        navigate("/");
+      })
+      .catch((e) => console.log(e));
   };
+  // const handleDeleteUserBoard = () => {
+  //   if (emailDeleteUser) {
+  //     let data = {
+  //       email: emailDeleteUser,
+  //       idboard: idBroad,
+  //       idWorkSpace: idWorkSpace,
+  //     };
+  //     DeleteUserInBoard(data)
+  //       .then((res) => {
+  //         console.log(res);
+  //         navigate("/");
+  //       })
+  //       .catch((e) => console.log(e));
+  //   }
+  // };
 
   return (
     <DragDropContext onDragEnd={onDragEnd}>
-      <div style={{ backgroundImage: `url(${bgImg})`, backgroundSize: "cover" }} className="Broad w-full !h-screen">
+      <div
+        style={{ backgroundImage: `url(${bgImg})`, backgroundSize: "cover" }}
+        className="Broad w-full !h-screen"
+      >
         <Navbar></Navbar>
         <div>
           <div className="flex w-full ">
@@ -354,45 +426,55 @@ function Broad(props) {
             )}
             <div className=" w-2/12 my-auto">
               {modeBoard === "private" ? (
-                <Button variant="contained" onClick={handleEditMode}>
+                <Button
+                  sx={{ background: "blue" }}
+                  variant="contained"
+                  onClick={handleEditMode}
+                >
                   Riêng tư
                 </Button>
               ) : (
-                <Button variant="contained" sx={{ background: "gray" }}>
+                <Button
+                  variant="outlined"
+                  style={{ background: "gray", color: "white" }}
+                  disabled
+                >
                   Công khai
                 </Button>
               )}
             </div>
             <div className=" w-2/12 flex my-auto">
-              {a.length > 0 &&
-                a.map((user) => (
-                  <div>
-                    {user.image ? (
-                      <div title={user.name}>
-                        <img
-                          className="h-8 w-8  rounded-full "
-                          src={user.image}
+              <AvatarGroup max={4}>
+                {a.length > 0 &&
+                  a.map((user) => (
+                    <div>
+                      {user.image ? (
+                        <Avatar
+                          title={user.name}
+                          style={{ height: 30 + "px", width: 30 + "px" }}
+                          src={`${user.image}`}
                         />
-                      </div>
-                    ) : (
-                      <div title={user.name}>
-                        <span
-                          className={`px-2 py-0.5 rounded-full text-sm bg-gray-500 hover:bg-gray-400 font-bold text-white`}
-                        >
-                          {name[0]}
-                        </span>
-                      </div>
-                    )}
-                  </div>
-                ))}
+                      ) : (
+                        <Avatar
+                          title={user.name}
+                          style={{
+                            height: 33 + "px",
+                            width: 33 + "px",
+                            fontSize: 13 + "px",
+                          }}
+                          {...stringAvatar(user.name)}
+                        />
+                      )}
+                    </div>
+                  ))}
+              </AvatarGroup>
             </div>
 
             <div className="text-center my-auto  w-1/12">
               {modeBoard === "public" ? (
                 <div>
-                  {" "}
                   <a
-                    className="bg-sky-500 py-1 px-1  rounded cursor-pointer text-white hover:bg-sky-400"
+                    className="bg-sky-500 py-1 px-1 hover:cursor-pointer rounded text-white hover:bg-sky-400"
                     onClick={handlShowModalShare}
                   >
                     <i class="fa-solid fa-user-plus "></i> Chia sẻ
@@ -405,7 +487,7 @@ function Broad(props) {
               anchorOrigin={{ vertical, horizontal }}
               open={open}
               onClose={handleCloseAlert}
-              message="Không được để trống ô lựa chọn"
+              message={message}
               key={vertical + horizontal}
               autoHideDuration={6000}
             />
@@ -418,13 +500,15 @@ function Broad(props) {
                     <div className="border-0 rounded-lg shadow-lg relative flex flex-col w-full bg-white outline-none focus:outline-none">
                       {/*header*/}
                       <div className="flex items-start justify-between p-3 border-b border-solid border-slate-200 rounded-t">
-                        <h6 className="text-2xl font-semibold ">Chia sẻ bảng</h6>
+                        <h6 className="text-2xl font-semibold ">
+                          Chia sẻ bảng
+                        </h6>
                         <a
                           onClick={() => {
                             setShowModal(false);
                           }}
                         >
-                          <i class="fa-solid fa-x"></i>
+                          <i class="fa-solid fa-x hover:cursor-pointer hover:text-gray-300 text-400"></i>
                         </a>
                       </div>
                       <div
@@ -499,7 +583,9 @@ function Broad(props) {
                                     >
                                       <option value="">Lựa chọn</option>
                                       <option value="member">Thành viên</option>
-                                      <option value="admin">Quản trị viên</option>
+                                      <option value="admin">
+                                        Quản trị viên
+                                      </option>
                                     </select>
                                   ) : (
                                     <select
@@ -514,7 +600,7 @@ function Broad(props) {
                                 </div>
                                 <a
                                   onClick={handleSendEmail}
-                                  className="w-1/8 bg-sky-500 text-center text-white"
+                                  className="w-1/8 bg-sky-500 hover:cursor-pointer text-center hover:bg-sky-400 text-white rounded-sm"
                                 >
                                   Chia sẻ
                                 </a>
@@ -533,18 +619,23 @@ function Broad(props) {
                                     {/* Avatar with inset shadow */}
                                     <div className="relative hidden w-8 h-8 mr-3 rounded-full md:block">
                                       {!value.image ? (
-                                        <img
-                                          className="object-cover w-full h-full rounded-full"
-                                          src="https://images.unsplash.com/flagged/photo-1570612861542-284f4c12e75f?ixlib=rb-1.2.1&q=80&fm=jpg&crop=entropy&cs=tinysrgb&w=200&fit=max&ixid=eyJhcHBfaWQiOjE3Nzg0fQ"
-                                          alt
-                                          loading="lazy"
+                                        <Avatar
+                                          title={value.name}
+                                          style={{
+                                            height: 33 + "px",
+                                            width: 33 + "px",
+                                            fontSize: 13 + "px",
+                                          }}
+                                          {...stringAvatar(value.name)}
                                         />
                                       ) : (
-                                        <img
-                                          className="object-cover w-full h-full rounded-full"
-                                          src={value.image}
-                                          alt
-                                          loading="lazy"
+                                        <Avatar
+                                          title={value.name}
+                                          style={{
+                                            height: 30 + "px",
+                                            width: 30 + "px",
+                                          }}
+                                          src={`${value.image}`}
                                         />
                                       )}
                                       <div
@@ -553,11 +644,25 @@ function Broad(props) {
                                       />
                                     </div>
                                     <div>
-                                      <p className="font-semibold">
-                                        {value.name}
-                                      </p>
+                                      {emailIdUser === value.email ? (
+                                        <div>
+                                          {" "}
+                                          <p className="font-semibold">
+                                            {value.name}(bạn)
+                                          </p>
+                                        </div>
+                                      ) : (
+                                        <div>
+                                          {" "}
+                                          <p className="font-semibold">
+                                            {value.name}
+                                          </p>
+                                        </div>
+                                      )}
+
                                       <p className="text-xs text-gray-600 dark:text-gray-400">
-                                        {value.email}
+                                        {value.email} . Quản trị viên không gian
+                                        làm việc
                                       </p>
                                     </div>
                                   </div>
@@ -568,13 +673,13 @@ function Broad(props) {
                                   <div class="flex justify-center">
                                     <div>
                                       {valueMember &&
-                                        valueMember.map((item) => (
+                                        valueMember.map((item, index) => (
                                           <div>
                                             {item.email == value.email ? (
-                                              <div className="bg-600 dropdown relative group inline-block hover:bg-sky-500 focus:bg-sky-500 rounded">
+                                              <div className="bg-sky-600 w-24 text-black dropdown relative group inline-block  focus:bg-sky-500 rounded">
                                                 <button
                                                   data-bs-toggle="dropdown"
-                                                  data-dropdown-toggle="dropdown4"
+                                                  data-dropdown-toggle={index}
                                                   className=" dropdown
             px-6
             py-2.5
@@ -583,9 +688,10 @@ function Broad(props) {
             flex
             items-center
             whitespace-nowrap
-            text-white pl-3  pr-4 py-1 px-2  focus:bg-sky-500 rounded md:p-0 flex items-center justify-between w-full md:w-auto"
+            text-white pl-3  pr-4 py-1 px-2 rounded md:p-0 flex items-center justify-between w-full md:w-auto"
                                                 >
                                                   {item.role}
+
                                                   <svg
                                                     className="w-6 h-6 ml-1"
                                                     fill="currentColor"
@@ -600,7 +706,7 @@ function Broad(props) {
                                                   </svg>
                                                 </button>
                                                 <div
-                                                  id="dropdown4"
+                                                  id={index}
                                                   className=" dropdown-menu
             min-w-max
             absolute
@@ -621,43 +727,90 @@ function Broad(props) {
                                                 >
                                                   <div className="flex w-64 flew-col gap-3">
                                                     {item.role === "member" ? (
-                                                      <ul
-                                                        className="py-1 rounded-sm text-black "
-                                                        aria-labelledby="dropdownLargeButton"
-                                                      >
-                                                        <li>
-                                                          <a className="text-sm  block px-4 py-2 cursor-pointer">
-                                                            <i class="fa-solid fa-table "></i>{" "}
-                                                            &ensp; Member
-                                                          </a>
-                                                        </li>
-                                                        <li>
-                                                          <a className="disabled text-sm block px-4 py-2 cursor-pointer">
-                                                            <i class="fa-solid fa-arrow-right-from-bracket"></i>
-                                                            &ensp; Rời khỏi bảng +{" "}
-                                                            {value.email}
-                                                          </a>
-                                                        </li>
-                                                      </ul>
+                                                      <div>
+                                                        {emailIdUser ===
+                                                        item.email ? (
+                                                          <>
+                                                            {" "}
+                                                            <ul
+                                                              className="py-1 rounded-sm text-black "
+                                                              aria-labelledby="dropdownLargeButton"
+                                                            >
+                                                              <li>
+                                                                <a className="text-sm  block px-4 py-2 cursor-pointer">
+                                                                  <i class="fa-solid fa-table "></i>{" "}
+                                                                  &ensp;Member
+                                                                </a>
+                                                              </li>
+                                                              <li>
+                                                                <div
+                                                                  onClick={
+                                                                    handleOutBoard
+                                                                  }
+                                                                >
+                                                                  {" "}
+                                                                  <a className="disabled text-sm block px-4 py-2 cursor-pointer">
+                                                                    <i class="fa-solid fa-arrow-right-from-bracket"></i>
+                                                                    &ensp; Rời
+                                                                    khỏi bảng
+                                                                  </a>
+                                                                </div>
+                                                              </li>
+                                                            </ul>
+                                                          </>
+                                                        ) : (
+                                                          <div>
+                                                            {" "}
+                                                            <ul
+                                                              className="py-1 rounded-sm text-black "
+                                                              aria-labelledby="dropdownLargeButton"
+                                                            >
+                                                              <li>
+                                                                <a className="text-sm  block px-4 py-2 cursor-pointer">
+                                                                  <i class="fa-solid fa-table "></i>{" "}
+                                                                  &ensp;Member
+                                                                </a>
+                                                              </li>
+                                                              <li>
+                                                                <a
+                                                                  // onClick={setEmailDeleteUser(
+                                                                  //   item.email
+                                                                  // )}
+                                                                  className="disabled text-sm block px-4 py-2 cursor-pointer"
+                                                                >
+                                                                  <i class="fa-solid fa-arrow-right-from-bracket"></i>
+                                                                  &ensp; Xóa
+                                                                  khỏi bảng
+                                                                </a>
+                                                              </li>
+                                                            </ul>
+                                                          </div>
+                                                        )}
+                                                      </div>
                                                     ) : (
-                                                      <ul
-                                                        className="py-1 rounded-sm text-black "
-                                                        aria-labelledby="dropdownLargeButton"
+                                                      <div
+                                                        className="disabled"
+                                                        disabled
                                                       >
-                                                        <li>
-                                                          <a className="text-sm  block px-4 py-2 cursor-pointer">
-                                                            <i class="fa-solid fa-table "></i>{" "}
-                                                            &ensp; Admin
-                                                          </a>
-                                                        </li>
-                                                        <li>
-                                                          <a className="text-sm block px-4 py-2 cursor-pointer">
-                                                            <i class="fa-solid fa-arrow-right-from-bracket"></i>
-                                                            &ensp; Rời khỏi bảng +{" "}
-                                                            {value.email}
-                                                          </a>
-                                                        </li>
-                                                      </ul>
+                                                        <ul
+                                                          className="py-1 rounded-sm text-black "
+                                                          aria-labelledby="dropdownLargeButton"
+                                                        >
+                                                          <li>
+                                                            <a className="text-sm  block px-4 py-2 cursor-pointer">
+                                                              <i class="fa-solid fa-table "></i>{" "}
+                                                              &ensp; Admin
+                                                            </a>
+                                                          </li>
+                                                          <li>
+                                                            <a className="text-sm block px-4 py-2 cursor-pointer">
+                                                              <i class="fa-solid fa-arrow-right-from-bracket"></i>
+                                                              &ensp; Rời khỏi
+                                                              bảng
+                                                            </a>
+                                                          </li>
+                                                        </ul>
+                                                      </div>
                                                     )}
                                                   </div>
                                                 </div>

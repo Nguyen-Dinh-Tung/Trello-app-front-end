@@ -106,8 +106,8 @@ export default function MemberList() {
               <div>
                 {data ? (
                   <Avatar
-                    variant="square"
-                    sx={{ height: 56, width: 56 }}
+                  style={{ height: 65 + "px", width: 65 + "px",fontSize:35+'px'}}
+                    variant="rounded"
                     {...stringAvatar(data.name)}
                   />
                 ) : (
