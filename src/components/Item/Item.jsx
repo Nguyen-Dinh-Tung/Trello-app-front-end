@@ -212,7 +212,7 @@ function ModalDetailsItem(props) {
   const handleKeyEnter =async (event)  =>{
     let newComment = {
       ...user ,
-      content : commentContent
+      content : commentContent,
     }
     if(event.key == 'Enter' && commentContent){
       dataByStore.columnOrder.forEach(column =>{

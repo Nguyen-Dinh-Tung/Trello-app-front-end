@@ -34,7 +34,8 @@ function Column(props) {
         id : '' ,
         text : '',
         listComment : [],
-        listCheckBox : []
+        listCheckBox : [],
+        urlImage : ''
       };
       if(valueItem){
         const iTemId = uuidv4() ;
@@ -42,7 +43,8 @@ function Column(props) {
           id : iTemId ,
           text : valueItem,
           listComment : [],
-          listCheckBox : []
+          listCheckBox : [] ,
+          urlImage : ''
         }
       }
       if(item.id !== '' && item.text){
