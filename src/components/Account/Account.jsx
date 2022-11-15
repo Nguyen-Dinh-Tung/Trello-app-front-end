@@ -249,12 +249,12 @@ export default function Account() {
                     <div className="w-8 h-8 bg-black rounded-full" />
                   </div>
                 ) : (
-                  <div className="w-full p-8 mx-2 flex justify-center">
+                  <div className="w-full p-8 mx-2 flex justify-center ">
                     {result ? (
                       <img
                         ref={imageRef}
                         src={result}
-                        className="max-h-[75%] max-w-[75%]"
+                        className="max-h-[50%] max-w-[75%]"
                         alt=""
                       />
                     ) : (
@@ -263,7 +263,7 @@ export default function Account() {
                   </div>
                 )}
 
-                <div className=" ml-2 rounded-md border-gray-700 dark:text-gray-900">
+                <div className=" ml-2 rounded-md border-gray-700 dark:text-gray-90">
                   <input
                     type="file"
                     name="image"
@@ -275,7 +275,7 @@ export default function Account() {
                       uploader(event);
                     }}
                   />
-                  <div className="flex flex-col items-center gap-3">
+                  <div className="flex flex-col items-center gap-3 ">
                     <label
                       htmlFor="file-upload"
                       className="z-20 flex flex-col-reverse items-center justify-center w-full h-full cursor-pointer hover:text-red-800"
