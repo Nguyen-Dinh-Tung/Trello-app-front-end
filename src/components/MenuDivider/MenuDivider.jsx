@@ -67,7 +67,7 @@ export default function MenuDivider() {
           bg-white
           py-2
           shadow
-
+          mt-3
           list-none
           text-left
           rounded-lg

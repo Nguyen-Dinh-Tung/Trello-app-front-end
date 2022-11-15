@@ -80,7 +80,9 @@ export default function Drop1() {
           </button>
           <div
             id="dropdown1"
-            className=" dropdown-menu
+            className=" 
+            mt-3
+            dropdown-menu
             min-w-max
             absolute
             hidden
@@ -138,14 +140,13 @@ export default function Drop1() {
                     key={index}
                     className="text-sm  block px-4 py-2 flex hover"
                   >
-                    <Button>
+                    <button className="px-3 py-2 flex gap-2 hover:bg-gray-300 hover:rounded">
                       <Avatar
-                        sx={{ borderRadius: 10 }}
                         variant="rounded"
                         {...stringAvatar(item.name)}
                       />
-                      <span className=" my-auto ml-2 text-lg">{item.name}</span>
-                    </Button>
+                      <span className=" my-auto ml-2 text-sm font-bold">{item.name}</span>
+                    </button>
                   </li>
                 ))}
               </ul>

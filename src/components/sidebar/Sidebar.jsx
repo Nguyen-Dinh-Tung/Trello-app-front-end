@@ -6,21 +6,35 @@ import Avatar from "@mui/material/Avatar";
 import { Button } from "@mui/material";
 import Member from "../../api/DataMember";
 import jwtDecode from "jwt-decode";
-import { useLocation } from "react-router-dom";
+import { useLocation, useNavigate } from "react-router-dom";
 import getBroad from "../../api/GetBroad";
+import getDatAWorkSpace from "../../api/GetDataAWorkSpace";
 
 export default function Sidebar(props) {
   let decode = jwtDecode(localStorage.getItem("token"));
   const dataWorkSpace = [].concat(props.WorkSpace).reverse();
 
   const columnsOrder = [].concat(props.columnsOrder).reverse();
-
+  const [idWorkspace, setIdWorkspace] = useState();
+  console.log(
+    "🚀 ~ file: Sidebar.jsx ~ line 19 ~ Sidebar ~ idWorkspace",
+    idWorkspace
+  );
+  const navigate = useNavigate();
   const [member, setmember] = useState();
-  // useEffect(() => {
-  //   getBroad(decode.id)
-  //     .then((res) => console.log(res))
-  //     .catch((e) => console.log(e));
-  // });
+
+  const handleGetIdWorkspace = (id) => {
+    setIdWorkspace(id);
+    navigate(`/member/${id}`);
+
+  };
+  useEffect(() => {
+    getDatAWorkSpace(idWorkspace)
+      .then((res) => {
+        console.log(res)
+      })
+      .catch((e) => console.log(e));
+  }, [idWorkspace]);
   function stringToColor(string) {
     let hash = 0;
     let i;
@@ -51,7 +65,7 @@ export default function Sidebar(props) {
     };
   }
   return (
-    <div className="flex flex-cols gap-12 justify-center mt-8">
+    <div className="flex flex-cols gap-12 justify-center mt-8 mb-10">
       <Project />
 
       {/* oulet */}
@@ -64,13 +78,18 @@ export default function Sidebar(props) {
           {dataWorkSpace.map((item, index) => (
             <div>
               <div className="flex grid grid-cols-3">
-                <div className="col-span-1">
-                  <Button>
-                    <Avatar variant="rounded" {...stringAvatar(item.name)} />
-                  </Button>
-                <span className="my-auto text-3xl font-bold">{item.name}</span>
+                <div className=" flex gap-2">
+                  <div className="my-auto">
+                    <Avatar
+                      style={{ height: 40 + "px", width: 40 + "px" }}
+                      variant="rounded"
+                      {...stringAvatar(item.name)}
+                    />
+                  </div>
+
+                  <span className="my-auto text-lg font-bold">{item.name}</span>
                 </div>
-                
+
                 <div className=" col-span-2 ml-40  flex flex-row gap-3 mb-6">
                   <div className="flex hover:bg-slate-300 bg-slate-200 mt-2 p-1 px-2 rounded cursor-pointer inline-block">
                     <span className="block mr-1">
@@ -78,7 +97,11 @@ export default function Sidebar(props) {
                     </span>
                     <span> Bảng </span>
                   </div>
-                  <div className="flex hover:bg-slate-300 bg-slate-200 mt-2 p-1 px-2 rounded cursor-pointer">
+                  <div
+                    type="button"
+                    onClick={() => handleGetIdWorkspace(item._id)}
+                    className="flex hover:bg-slate-300 bg-slate-200 mt-2 p-1 px-2 rounded cursor-pointer"
+                  >
                     <span className="block mr-1">
                       <i class="fa-solid fa-user-group"></i>
                     </span>
@@ -98,7 +121,6 @@ export default function Sidebar(props) {
                     })
                   ) : (
                     <MediaCard>Trello</MediaCard>
-
                   )}
                 </div>
               </div>

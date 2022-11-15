@@ -57,6 +57,7 @@ function Broad(props) {
   const [valueMember, setValueMember] = useState();
   const [message, setMessage] = useState();
   const [flagDeleteUserInBoard, setFlagDeleteUserInBoard] = useState();
+  const [deleteUser, setDeleteUser] = useState();
 
   const [stateAlert, setStateAlert] = useState({
     open: false,
@@ -68,7 +69,9 @@ function Broad(props) {
   const handleCloseAlert = () => {
     setStateAlert({ ...stateAlert, open: false });
   };
-
+  const handleDeleUser = (e) => {
+    setDeleteUser(e);
+  };
   const name = decode.name.split("");
   const emailUser = decode["email"];
   const handleEditMode = () => {
@@ -109,7 +112,7 @@ function Broad(props) {
       sx: {
         bgcolor: stringToColor(name),
       },
-      children: `${name.split(" ")[0][0]}${name.split(" ")[1][0]}`,
+      children: `${name.split(" ")[0][0]}`,
     };
   }
 
@@ -354,6 +357,21 @@ function Broad(props) {
       })
       .catch((e) => console.log(e));
   };
+  // const handleDeleteUserBoard = () => {
+  //   if (emailDeleteUser) {
+  //     let data = {
+  //       email: emailDeleteUser,
+  //       idboard: idBroad,
+  //       idWorkSpace: idWorkSpace,
+  //     };
+  //     DeleteUserInBoard(data)
+  //       .then((res) => {
+  //         console.log(res);
+  //         navigate("/");
+  //       })
+  //       .catch((e) => console.log(e));
+  //   }
+  // };
 
   return (
     <DragDropContext onDragEnd={onDragEnd}>
@@ -459,8 +477,8 @@ function Broad(props) {
                         <Avatar
                           title={user.name}
                           style={{
-                            height: 33 + "px",
-                            width: 33 + "px",
+                            height: 30 + "px",
+                            width: 30 + "px",
                             fontSize: 13 + "px",
                           }}
                           {...stringAvatar(user.name)}
@@ -526,11 +544,12 @@ function Broad(props) {
                               <div className="w-full gap-2 flex">
                                 <div className="w-3/4 dark:placeholder-gray-700 cursor:text my-auto">
                                   <input
+                                    method="post"
                                     type="text"
                                     name="email"
                                     onChange={handleShare}
                                     id="first name"
-                                    className="w-full px-3 py-2 border rounded-md dark:border-gray-700   dark:text-gray-900 "
+                                    className="w-full px-3 py-2 border rounded-md dark:border-gray-700 hover:cursor-text  dark:text-gray-900 "
                                     role="button"
                                     data-bs-toggle="dropdown"
                                     data-dropdown-toggle="dropdownSearch"
@@ -582,7 +601,9 @@ function Broad(props) {
                                         setRole(e.target.value);
                                       }}
                                     >
-                                      <option value="">Lựa chọn</option>
+                                      <option className="mt-2" value="">
+                                        Lựa chọn
+                                      </option>
                                       <option value="member">Thành viên</option>
                                       <option value="admin">
                                         Quản trị viên
@@ -594,6 +615,7 @@ function Broad(props) {
                                         setRole(e.target.value);
                                       }}
                                     >
+                                      npn
                                       <option value="">Lựa chọn</option>
                                       <option value="menber">Thành viên</option>
                                     </select>
